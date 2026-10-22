@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>نئودیتا | تحلیل داده، داشبورد و راه‌حل‌های هوش مصنوعی برای کسب‌وکارها</title>
+<title>نئودیتا | تحلیل داده، داشبورد و راهکارهای هوش مصنوعی برای سازمان‌ها</title>
 <meta name="description" content="نئودیتا به کسب‌وکارها کمک می‌کند با تحلیل داده، داشبوردهای مدیریتی، چت‌بات هوشمند سازمانی (RAG)، ایجنت‌ها و اتوماسیون و بینایی ماشین، تصمیم‌های بهتری بگیرند." />
 <meta name="theme-color" content="#f6f8fc" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="نئودیتا" />
 <meta property="og:locale" content="fa_IR" />
-<meta property="og:title" content="نئودیتا | تحلیل داده و هوش مصنوعی برای کسب‌وکارها" />
+<meta property="og:title" content="نئودیتا | تحلیل داده و راهکارهای هوش مصنوعی برای سازمان‌ها" />
 <meta property="og:description" content="داشبورد و تحلیل داده، چت‌بات هوشمند سازمانی (RAG)، ایجنت‌ها و اتوماسیون، بینایی ماشین و شمارش هوشمند در صنعت." />
 <link rel="icon" href="logo/5.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="logo/apple-touch-icon.png" />
@@ -60,6 +60,10 @@
   <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
   <symbol id="i-up" viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></symbol>
   <symbol id="i-down" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+  <symbol id="i-server" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01M11 7.5h6M11 16.5h6"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14.5v2.5"/></symbol>
+  <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M3 3l18 18"/><path d="M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17.6 17.6 0 0 1-3.2 4.2M6.6 6.6C3.9 8.4 2 12 2 12s3.6 7 10 7a9.7 9.7 0 0 0 5.4-1.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
   <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
   <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4"/></symbol>
 </svg>
@@ -80,7 +84,7 @@
     <span class="brand__tag">تحلیل داده و هوش مصنوعی</span>
   </a>
   <div class="head-actions">
-    <a class="btn btn--primary btn--sm head-cta" href="#contact" data-goto="contact">درخواست مشاوره</a>
+    <a class="btn btn--primary btn--sm head-cta" href="#contact" data-goto="contact">درخواست مشاوره رایگان</a>
     <button class="theme-btn" id="themeBtn" type="button" aria-label="تغییر به پوسته‌ی تیره">
       <svg class="ico ico--moon" aria-hidden="true"><use href="#i-moon"/></svg>
       <svg class="ico ico--sun" aria-hidden="true"><use href="#i-sun"/></svg>
@@ -116,7 +120,7 @@
   <!-- ۰ | خانه -->
   <section class="slide slide--hero" id="hero" data-title="خانه" aria-labelledby="t-hero">
     <div class="slide__inner hero">
-      <p class="eyebrow anim">تحلیل داده و هوش مصنوعی برای کسب‌وکارها</p>
+      <p class="eyebrow anim">تحلیل داده و راهکارهای هوش مصنوعی برای سازمان‌ها</p>
       <h1 class="hero__title anim" id="t-hero">
         <span class="sr-only">داده‌هایتان را به تصمیم‌های هوشمند تبدیل کنید</span>
         <span aria-hidden="true">
@@ -126,18 +130,22 @@
         </span>
       </h1>
       <p class="hero__lead anim">
-        نئودیتا کنار تیم شما می‌نشیند تا داده‌های پراکنده‌ی سازمان را تحلیل کند، آن‌ها را در داشبوردهای
-        روشن و قابل‌فهم نشان دهد و هوش مصنوعی را دقیقاً همان‌جایی وارد کسب‌وکارتان کند که بیشترین اثر را دارد.
+        نئودیتا با تحلیل داده، داشبوردهای مدیریتی و راهکارهای هوش مصنوعی به سازمان‌ها کمک می‌کند
+        سریع‌تر و دقیق‌تر تصمیم بگیرند.
       </p>
       <ul class="hero__chips anim" aria-label="خدمات نئودیتا">
-        <li>داشبورد و تحلیل داده</li><li>چت‌بات هوشمند (RAG)</li><li>ایجنت و اتوماسیون</li>
-        <li>بینایی ماشین</li><li>پیش‌بینی و یادگیری ماشین</li><li>مهندسی داده</li>
+        <li><a href="#dashboard" data-goto="dashboard">داشبورد و تحلیل داده</a></li>
+        <li><a href="#chatbot" data-goto="chatbot">چت‌بات هوشمند (RAG)</a></li>
+        <li><a href="#agents" data-goto="agents">ایجنت و اتوماسیون</a></li>
+        <li><a href="#vision" data-goto="vision">بینایی ماشین</a></li>
+        <li><a href="#services" data-goto="services" data-highlight="forecast">پیش‌بینی و یادگیری ماشین</a></li>
+        <li><a href="#services" data-goto="services" data-highlight="data-eng">مهندسی داده</a></li>
       </ul>
       <div class="hero__cta anim">
         <a class="btn btn--primary btn--lg" href="#dashboard" data-goto="dashboard">
           خدمات ما را ببینید <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg>
         </a>
-        <a class="btn btn--ghost btn--lg" href="#contact" data-goto="contact">درخواست مشاوره</a>
+        <a class="btn btn--ghost btn--lg" href="#contact" data-goto="contact">درخواست مشاوره رایگان</a>
       </div>
     </div>
     <div class="scroll-hint anim" aria-hidden="true">
@@ -200,12 +208,12 @@
     </div>
   </section>
 
-  <!-- ۲ | چت‌بات هوشمند (RAG) -->
-  <section class="slide" id="chatbot" data-title="چت‌بات هوشمند (RAG)" aria-labelledby="t-chatbot">
+  <!-- ۲ | چت‌بات هوشمند سازمانی (RAG) -->
+  <section class="slide" id="chatbot" data-title="چت‌بات هوشمند سازمانی" aria-labelledby="t-chatbot">
     <div class="slide__inner grid">
       <div class="copy">
         <p class="eyebrow anim"><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg> خدمت ۰۲</p>
-        <h2 class="anim" id="t-chatbot">چت‌بات هوشمند با RAG</h2>
+        <h2 class="anim" id="t-chatbot">چت‌بات هوشمند سازمانی (RAG)</h2>
         <p class="anim">
           دستیاری که اسناد، آیین‌نامه‌ها، کاتالوگ محصولات و سوابق سازمان شما را می‌شناسد و به هر پرسش
           با استناد به همان منابع پاسخ می‌دهد؛ نه با حدس و گمان. برای پشتیبانی مشتری، آموزش کارکنان
@@ -245,12 +253,12 @@
     </div>
   </section>
 
-  <!-- ۳ | ایجنت‌ها و اتوماسیون -->
-  <section class="slide" id="agents" data-title="ایجنت‌ها و اتوماسیون" aria-labelledby="t-agents">
+  <!-- ۳ | ایجنت‌ها و اتوماسیون فرایندها -->
+  <section class="slide" id="agents" data-title="ایجنت‌ها و اتوماسیون فرایندها" aria-labelledby="t-agents">
     <div class="slide__inner grid">
       <div class="copy">
         <p class="eyebrow anim"><svg class="ico" aria-hidden="true"><use href="#i-flow"/></svg> خدمت ۰۳</p>
-        <h2 class="anim" id="t-agents">ایجنت‌های هوشمند و اتوماسیون</h2>
+        <h2 class="anim" id="t-agents">ایجنت‌های هوشمند و اتوماسیون فرایندها</h2>
         <p class="anim">
           بخش بزرگی از وقت تیم‌ها صرف کارهای تکراری می‌شود: خواندن ایمیل‌ها، ورود اطلاعات، پیگیری سفارش‌ها
           و تهیه‌ی گزارش. ایجنت‌های هوش مصنوعی این کارها را دقیق و بی‌وقفه انجام می‌دهند و هر جا تصمیم
@@ -306,16 +314,16 @@
     <div class="slide__inner grid">
       <div class="copy">
         <p class="eyebrow anim"><svg class="ico" aria-hidden="true"><use href="#i-scan"/></svg> خدمت ۰۴</p>
-        <h2 class="anim" id="t-vision">بینایی ماشین و شمارش هوشمند در صنعت</h2>
+        <h2 class="anim" id="t-vision">بینایی ماشین (شمارش، کنترل کیفیت و ایمنی)</h2>
         <p class="anim">
-          دوربین‌های خط تولید و انبار شما می‌توانند کاری بیش از ضبط تصویر انجام دهند. با مدل‌های بینایی ماشین،
-          محصولات روی نوار نقاله شمرده می‌شوند، قطعه‌های معیوب در همان لحظه تشخیص داده می‌شوند و ورود و خروج
-          کالا و خودرو بدون دخالت انسان ثبت می‌شود.
+          دوربین‌هایی که همین حالا در خط تولید، انبار و کارگاه دارید، می‌توانند چشم همیشه‌بیدار سازمان شوند.
+          مدل‌های بینایی ماشین محصولات و کالاها را بی‌وقفه می‌شمارند، قطعه‌های معیوب را در همان لحظه شناسایی
+          می‌کنند و رعایت اصول ایمنی را در سراسر محیط کار پایش می‌کنند.
         </p>
         <ul class="bullets">
-          <li class="anim">شمارش خودکار محصول، کارتن و پالت</li>
-          <li class="anim">کنترل کیفیت و تشخیص عیب در لحظه</li>
-          <li class="anim">پایش ایمنی: کلاه و جلیقه‌ی ایمنی و ورود به محدوده‌ی ممنوع</li>
+          <li class="anim">شمارش: محصول، کارتن، پالت و ورود و خروج خودرو</li>
+          <li class="anim">کنترل کیفیت: تشخیص عیب، شکستگی و نقص بسته‌بندی در لحظه</li>
+          <li class="anim">ایمنی: پایش کلاه و جلیقه‌ی ایمنی و هشدار ورود به محدوده‌ی خطر</li>
         </ul>
       </div>
       <div class="visual card cam anim" role="img"
@@ -348,12 +356,12 @@
         <p class="anim">علاوه بر چهار خدمت اصلی، در این زمینه‌ها هم کنار سازمان‌ها هستیم:</p>
       </header>
       <ul class="tiles">
-        <li class="tile anim">
+        <li class="tile anim" data-key="forecast">
           <span class="tile__ico"><svg class="ico" aria-hidden="true"><use href="#i-trend"/></svg></span>
           <h3>پیش‌بینی و یادگیری ماشین</h3>
           <p>پیش‌بینی فروش و تقاضا، شناسایی مشتریانی که در حال رفتن هستند، قیمت‌گذاری هوشمند و مدل‌های اختصاصی روی داده‌های خودتان.</p>
         </li>
-        <li class="tile anim">
+        <li class="tile anim" data-key="data-eng">
           <span class="tile__ico"><svg class="ico" aria-hidden="true"><use href="#i-db"/></svg></span>
           <h3>مهندسی و یکپارچه‌سازی داده</h3>
           <p>طراحی انبار داده، ساخت جریان‌های خودکار انتقال داده (ETL) و یکپارچه کردن داده‌های پراکنده‌ی سازمان در یک منبع قابل‌اعتماد.</p>
@@ -447,7 +455,87 @@
     </div>
   </section>
 
-  <!-- ۸ | تماس -->
+  <!-- ۸ | امنیت و محرمانگی داده -->
+  <section class="slide" id="security" data-title="امنیت و محرمانگی داده" aria-labelledby="t-security">
+    <div class="slide__inner grid">
+      <div class="copy">
+        <p class="eyebrow anim"><svg class="ico" aria-hidden="true"><use href="#i-shield"/></svg> امنیت و محرمانگی داده</p>
+        <h2 class="anim" id="t-security">داده‌های شما، فقط برای کار شما</h2>
+        <p class="anim">
+          برای شرکتی که با داده کار می‌کند، اعتماد مهم‌ترین سرمایه است. این تعهدها در قرارداد هر پروژه
+          نوشته می‌شوند و از روز اول، پیش از دیدن حتی یک فایل، رعایت می‌شوند.
+        </p>
+        <p class="promise anim">
+          <svg class="ico" aria-hidden="true"><use href="#i-shield"/></svg>
+          <span>داده‌های شما هرگز برای هیچ منظوری جز پروژه‌ی خودتان استفاده نمی‌شود؛ نه برای آموزش مدل‌های دیگر و نه برای هیچ مشتری دیگری.</span>
+        </p>
+      </div>
+      <ul class="assure">
+        <li class="assure__item anim">
+          <span class="assure__ico"><svg class="ico" aria-hidden="true"><use href="#i-invoice"/></svg></span>
+          <div><h3>قرارداد محرمانگی پیش از هر پروژه</h3>
+          <p>پیش از آنکه داده‌ای از سازمان شما به دست ما برسد، قرارداد محرمانگی (NDA) امضا می‌شود.</p></div>
+        </li>
+        <li class="assure__item anim">
+          <span class="assure__ico"><svg class="ico" aria-hidden="true"><use href="#i-server"/></svg></span>
+          <div><h3>استقرار روی سرورهای خودتان</h3>
+          <p>در صورت نیاز، کل راهکار روی زیرساخت داخلی سازمان (On-premise) نصب می‌شود و داده از شبکه‌ی شما بیرون نمی‌رود.</p></div>
+        </li>
+        <li class="assure__item anim">
+          <span class="assure__ico"><svg class="ico" aria-hidden="true"><use href="#i-lock"/></svg></span>
+          <div><h3>کنترل دسترسی</h3>
+          <p>هر کاربر فقط به داده‌ها و بخش‌هایی دسترسی دارد که برای کارش لازم است؛ دسترسی‌ها بر اساس نقش تعریف می‌شوند.</p></div>
+        </li>
+        <li class="assure__item anim">
+          <span class="assure__ico"><svg class="ico" aria-hidden="true"><use href="#i-eye-off"/></svg></span>
+          <div><h3>بدون هیچ استفاده‌ی دیگر</h3>
+          <p>داده‌های شما فقط در همان پروژه به کار می‌رود و برای هیچ هدف دیگری استفاده نمی‌شود.</p></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ۹ | سوالات متداول (داده‌ی ساختاریافته‌ی FAQPage را app.js از همین متن‌ها می‌سازد) -->
+  <section class="slide" id="faq" data-title="سوالات متداول" aria-labelledby="t-faq">
+    <div class="slide__inner wide">
+      <header class="slide__head">
+        <p class="eyebrow anim">سوالات متداول</p>
+        <h2 class="anim" id="t-faq">پاسخ پرسش‌هایی که معمولاً از ما می‌پرسند</h2>
+      </header>
+      <div class="faq">
+        <div class="faq__col">
+          <details class="faq__item anim" name="faq">
+            <summary>آیا داده‌های ما امن است؟ روی سرورهای خودمان پیاده می‌شود؟<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="faq__a"><p>بله. پیش از شروع هر پروژه قرارداد محرمانگی (NDA) امضا می‌کنیم و در صورت نیاز، کل راهکار، از پایگاه داده تا مدل‌های هوش مصنوعی، روی سرورهای خود سازمان شما نصب می‌شود تا داده‌ای از شبکه‌ی داخلی‌تان خارج نشود. جزئیات بیشتر در بخش <a href="#security" data-goto="security">امنیت و محرمانگی داده</a> آمده است.</p></div>
+          </details>
+          <details class="faq__item anim" name="faq">
+            <summary>یک پروژه چقدر زمان می‌برد؟<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="faq__a"><p>به دامنه‌ی کار بستگی دارد. یک داشبورد یا نمونه‌ی اولیه‌ی چت‌بات معمولاً در چند هفته آماده می‌شود و پروژه‌های بزرگ‌تر، مثل یکپارچه‌سازی داده‌های سازمان یا بینایی ماشین در خط تولید، چند ماه زمان می‌برند. زمان‌بندی دقیق پس از جلسه‌ی شناخت و بررسی داده‌ها اعلام می‌شود.</p></div>
+          </details>
+          <details class="faq__item anim" name="faq">
+            <summary>هزینه چطور محاسبه می‌شود؟<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="faq__a"><p>هزینه بر اساس دامنه‌ی کار، حجم و وضعیت داده‌ها، زیرساخت مورد نیاز و میزان پشتیبانی پس از تحویل تعیین می‌شود. پس از جلسه‌ی مشاوره‌ی رایگان، پیشنهادی مکتوب با مراحل کار، زمان‌بندی و هزینه‌ی هر مرحله دریافت می‌کنید تا پیش از هر تعهدی تصویر روشنی داشته باشید.</p></div>
+          </details>
+        </div>
+        <div class="faq__col">
+          <details class="faq__item anim" name="faq">
+            <summary>داده‌های ما مرتب نیست؛ باز هم می‌توانید کمک کنید؟<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="faq__a"><p>بله؛ در بیشتر سازمان‌ها همین‌طور است. پاک‌سازی و ساختاردهی داده‌ها بخشی از کار ماست: داده‌ها را از فایل‌های اکسل، نرم‌افزارهای مالی و فروش و سامانه‌های مختلف جمع می‌کنیم، خطاها و تکرارها را برطرف می‌کنیم و همه را در یک منبع قابل‌اعتماد کنار هم می‌گذاریم.</p></div>
+          </details>
+          <details class="faq__item anim" name="faq">
+            <summary>چت‌بات فارسی را چقدر خوب می‌فهمد؟<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="faq__a"><p>چت‌بات‌های ما برای زبان فارسی ساخته و آزموده می‌شوند: نوشتار رسمی و محاوره‌ای، غلط‌های املایی رایج، نیم‌فاصله و اصطلاحات تخصصی حوزه‌ی کار شما. پیش از تحویل، دقت پاسخ‌ها با مجموعه‌ای از پرسش‌های واقعی سازمان خودتان سنجیده می‌شود و هر پاسخ به سند و بند مربوطش ارجاع می‌دهد.</p></div>
+          </details>
+          <details class="faq__item anim" name="faq">
+            <summary>بعد از تحویل پشتیبانی دارید؟<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="faq__a"><p>بله. پس از راه‌اندازی، عملکرد سامانه را پایش می‌کنیم، مشکلات را برطرف می‌کنیم، مدل‌ها را با داده‌های تازه به‌روز نگه می‌داریم و تیم شما را آموزش می‌دهیم. شرایط و مدت پشتیبانی در قرارداد هر پروژه مشخص می‌شود.</p></div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ۱۰ | تماس -->
   <section class="slide slide--end" id="contact" data-title="شروع همکاری" aria-labelledby="t-contact">
     <div class="slide__inner end">
       <p class="eyebrow anim">قدم بعدی</p>
@@ -458,8 +546,8 @@
       </p>
       <!-- نشانی ایمیل موقت است؛ پیش از انتشار با نشانی واقعی جایگزین شود -->
       <div class="end__cta anim">
-        <a class="btn btn--primary btn--lg" href="mailto:info@neodata.ir?subject=%D8%AF%D8%B1%D8%AE%D9%88%D8%A7%D8%B3%D8%AA%20%D9%85%D8%B4%D8%A7%D9%88%D8%B1%D9%87">
-          <svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg> درخواست جلسه‌ی مشاوره
+        <a class="btn btn--primary btn--lg" href="mailto:info@neodata.ir?subject=%D8%AF%D8%B1%D8%AE%D9%88%D8%A7%D8%B3%D8%AA%20%D9%85%D8%B4%D8%A7%D9%88%D8%B1%D9%87%20%D8%B1%D8%A7%DB%8C%DA%AF%D8%A7%D9%86">
+          <svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg> درخواست مشاوره رایگان
         </a>
         <a class="btn btn--ghost btn--lg" href="#dashboard" data-goto="dashboard">مرور دوباره‌ی خدمات</a>
       </div>

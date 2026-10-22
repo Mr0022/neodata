@@ -372,7 +372,7 @@
     const make = () => ({
       x: Math.random() * w, y: Math.random() * h,
       vx: (Math.random() - 0.5) * 0.22, vy: (Math.random() - 0.5) * 0.22,
-      r: Math.random() * 1.3 + 0.7,
+      r: Math.random() * 1.8 + 1.8,             // شعاع ۱٫۸ تا ۳٫۶ پیکسل
       z: Math.random() * 0.7 + 0.3,            // عمق: نقطه‌های نزدیک‌تر تندتر جریان می‌گیرند
       violet: Math.random() < 0.3,
     });

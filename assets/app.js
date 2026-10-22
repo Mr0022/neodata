@@ -449,30 +449,50 @@
   demos.hero = (function () {
     const rotator = $('#rotator');
     const words = $$('span', rotator);
+    const ROT_OUT = cssMs('--rot-out');
+    const ROT_RESIZE = cssMs('--rot-resize');
+    const T = timeline();
     let i = 0, timer = 0;
 
-    // پهنای قاب همان پهنای واژه‌ی جاری است تا میان واژه و بقیه‌ی عنوان فاصله نیفتد.
-    // روی گوشی واژه سطر خودش را دارد (display: grid) و پهنا لازم نیست
-    const fit = () => {
-      rotator.style.width = getComputedStyle(rotator).display === 'grid' ? '' : words[i].offsetWidth + 'px';
-    };
+    // روی گوشی واژه سطر خودش را دارد (display: grid) و پهنای قاب اهمیتی ندارد
+    const inline = () => getComputedStyle(rotator).display !== 'grid';
+    const widthOf = (k) => words[k].offsetWidth;
+    // پهنای قاب همان پهنای واژه‌ی جاری است تا میان واژه و بقیه‌ی عنوان فاصله نیفتد
+    const fit = () => { rotator.style.width = inline() ? widthOf(i) + 'px' : ''; };
     fit();
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
     window.addEventListener('resize', fit);
 
+    /* سه مرحله‌ی پشت‌سرهم، تا هیچ‌گاه دو واژه با هم دیده نشوند و واژه‌ی پیدا از قابش
+       پهن‌تر نباشد (وگرنه روی «را به» یا «تبدیل کنید» می‌افتاد) */
     const tick = () => {
       const prev = words[i];
-      i = (i + 1) % words.length;
+      const next = (i + 1) % words.length;
+      const grows = inline() && widthOf(next) > widthOf(i);
+      i = next;
       prev.classList.remove('is-on');
-      prev.classList.add('is-out');
-      words[i].classList.remove('is-out');
-      words[i].classList.add('is-on');
-      fit();
-      setTimeout(() => prev.classList.remove('is-out'), 700);
+      prev.classList.add('is-out');                              // ۱) محو کامل واژه‌ی قبلی
+      T.after(ROT_OUT, () => {
+        prev.classList.remove('is-out');
+        fit();                                                   // ۲) قاب به پهنای واژه‌ی تازه
+        // قاب بزرگ می‌شود: واژه پس از باز شدن کامل قاب می‌آید؛ کوچک می‌شود: همان لحظه،
+        // چون واژه‌ی تازه از قابِ در حال جمع‌شدن باریک‌تر است
+        T.after(grows ? ROT_RESIZE : 0, () => words[i].classList.add('is-on'));   // ۳) ظهور
+      });
     };
+
+    /** حالت پایدار: فقط واژه‌ی جاری پیداست (پس از قطع شدن یک چرخش در میانه) */
+    const settle = () => {
+      words.forEach((w, k) => { w.classList.remove('is-out'); w.classList.toggle('is-on', k === i); });
+      fit();
+    };
+
     return {
-      enter() { clearInterval(timer); if (!reduceMotion) timer = setInterval(tick, 2600); },
-      leave() { clearInterval(timer); },
+      enter() {
+        clearInterval(timer); T.clear(); settle();
+        if (!reduceMotion) timer = setInterval(tick, 2800);
+      },
+      leave() { clearInterval(timer); T.clear(); },
     };
   })();
 

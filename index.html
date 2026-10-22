@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="no-js">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>نئودیتا | تحلیل داده، داشبورد و راه‌حل‌های هوش مصنوعی برای کسب‌وکارها</title>
+<meta name="description" content="نئودیتا به کسب‌وکارها کمک می‌کند با تحلیل داده، داشبوردهای مدیریتی، چت‌بات هوشمند سازمانی (RAG)، ایجنت‌ها و اتوماسیون و بینایی ماشین، تصمیم‌های بهتری بگیرند." />
+<meta name="theme-color" content="#070b16" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="نئودیتا" />
+<meta property="og:locale" content="fa_IR" />
+<meta property="og:title" content="نئودیتا | تحلیل داده و هوش مصنوعی برای کسب‌وکارها" />
+<meta property="og:description" content="داشبورد و تحلیل داده، چت‌بات هوشمند سازمانی (RAG)، ایجنت‌ها و اتوماسیون، بینایی ماشین و شمارش هوشمند در صنعت." />
+<link rel="icon" href="logo/neodata-mark.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="logo/neodata-mark.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/styles.css?v=1" />
+<!-- پیش از نخستین رنگ‌آمیزی: صفحه به حالت «صحنه» می‌رود تا بخش‌ها روی هم چیده شوند.
+     اگر app.js بار نشد، صفحه به حالت ساده (بخش‌ها زیر هم) برمی‌گردد تا خالی نماند. -->
+<script>
+  document.documentElement.classList.replace('no-js', 'js');
+  setTimeout(function () {
+    if (!window.neodataReady) document.documentElement.classList.replace('js', 'no-js');
+  }, 6000);
+</script>
+</head>
+<body>
+
+<!-- آیکون‌ها: یک بار تعریف، همه‌جا با <use> -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7.5 16v-5"/><path d="M12 16V7"/><path d="M16.5 16v-8"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></symbol>
+  <symbol id="i-flow" viewBox="0 0 24 24"><circle cx="5" cy="6" r="2.5"/><circle cx="19" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.5 6h9M6.3 8.2l4.4 7.6M17.7 8.2l-4.4 7.6"/></symbol>
+  <symbol id="i-scan" viewBox="0 0 24 24"><path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M7 12s2-3.5 5-3.5 5 3.5 5 3.5-2 3.5-5 3.5S7 12 7 12z"/><circle cx="12" cy="12" r="1.2"/></symbol>
+  <symbol id="i-trend" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></symbol>
+  <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M8 13h8M8 17h5"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.6.5 1.1 1.3 1.1 2.2h5c0-.9.5-1.7 1.1-2.2A6 6 0 0 0 12 3z"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="i-lang" viewBox="0 0 24 24"><path d="M4 5h9M8.5 3v2M6 5c.5 3 2.6 5.6 5.5 7M11 5c-.6 3.4-3 6.4-6.5 8"/><path d="M13 21l4-9 4 9M14.5 18h5"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+  <symbol id="i-buoy" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M5.6 5.6l3.6 3.6M14.8 14.8l3.6 3.6M18.4 5.6l-3.6 3.6M9.2 14.8l-3.6 3.6"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 15l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></symbol>
+  <symbol id="i-crm" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="11.5" r="2"/><path d="M8.5 17c.6-1.6 2-2.5 3.5-2.5s2.9.9 3.5 2.5"/></symbol>
+  <symbol id="i-invoice" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M9 15l2 2 4-4"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M3 3l7 18 3-8 8-3z"/><path d="M13 13L3 3"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+</svg>
+
+<!-- پس‌زمینه‌ی ثابت: رنگ آن در همه‌ی بخش‌ها یکی است و فقط شبکه‌ی داده با هر جابه‌جایی کمی جریان می‌گیرد -->
+<div class="backdrop" aria-hidden="true">
+  <canvas id="net"></canvas>
+</div>
+
+<!-- نوار پیشرفت -->
+<div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+<!-- هدر -->
+<header class="site-head">
+  <a class="brand" href="#hero" data-goto="hero">
+    <img class="brand__mark" src="logo/neodata-mark.svg" alt="" width="40" height="40" />
+    <span class="brand__text">
+      <strong>نئودیتا</strong>
+      <small>تحلیل داده و هوش مصنوعی</small>
+    </span>
+  </a>
+  <div class="head-actions">
+    <a class="btn btn--primary btn--sm head-cta" href="#contact" data-goto="contact">درخواست مشاوره</a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menuPanel">
+      <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+      <em class="sr-only">فهرست بخش‌ها</em>
+    </button>
+  </div>
+</header>
+
+<!-- منوی تمام‌صفحه (فهرستش از روی بخش‌ها ساخته می‌شود) -->
+<nav class="menu-panel" id="menuPanel" aria-label="فهرست بخش‌ها">
+  <ol id="menuList"></ol>
+</nav>
+
+<!-- ناوبری نقطه‌ای کناری -->
+<nav class="dots" id="dots" aria-label="پیمایش بخش‌ها"></nav>
+
+<!-- شماره‌ی بخش و دکمه‌های قبلی/بعدی -->
+<div class="pager" id="pager">
+  <button type="button" id="prevBtn" aria-label="بخش قبلی"><svg class="ico" aria-hidden="true"><use href="#i-up"/></svg></button>
+  <span class="pager__num" aria-hidden="true"><b id="pagerNum">۰۱</b><span>/</span><span id="pagerTotal">۰۹</span></span>
+  <button type="button" id="nextBtn" aria-label="بخش بعدی"><svg class="ico" aria-hidden="true"><use href="#i-down"/></svg></button>
+  <span class="pager__title" id="pagerTitle" aria-hidden="true"></span>
+</div>
+
+<!-- اعلام بخش جاری برای صفحه‌خوان‌ها -->
+<p class="sr-only" id="announcer" aria-live="polite"></p>
+
+<main id="stage">
+
+  <!-- ۰ | خانه -->
+  <section class="slide slide--hero" id="hero" data-title="خانه" aria-labelledby="t-hero">
+    <div class="slide__inner hero">
+      <p class="eyebrow anim">تحلیل داده و هوش مصنوعی برای کسب‌وکارها</p>
+      <h1 class="hero__title anim" id="t-hero">
+        <span class="sr-only">داده‌هایتان را به تصمیم‌های هوشمند تبدیل کنید</span>
+        <span aria-hidden="true">
+          <span class="hero__line">داده‌هایتان را به</span>
+          <span class="rotator" id="rotator"><span class="is-on">تصمیم</span><span>داشبورد زنده</span><span>دستیار هوشمند</span><span>پیش‌بینی دقیق</span><span>سود بیشتر</span></span>
+          <span class="hero__end">تبدیل کنید</span>
+        </span>
+      </h1>
+      <p class="hero__lead anim">
+        نئودیتا کنار تیم شما می‌نشیند تا داده‌های پراکنده‌ی سازمان را تحلیل کند، آن‌ها را در داشبوردهای
+        روشن و قابل‌فهم نشان دهد و هوش مصنوعی را دقیقاً همان‌جایی وارد کسب‌وکارتان کند که بیشترین اثر را دارد.
+      </p>
+      <ul class="hero__chips anim" aria-label="خدمات نئودیتا">
+        <li>داشبورد و تحلیل داده</li><li>چت‌بات هوشمند (RAG)</li><li>ایجنت و اتوماسیون</li>
+        <li>بینایی ماشین</li><li>پیش‌بینی و یادگیری ماشین</li><li>مهندسی داده</li>
+      </ul>
+      <div class="hero__cta anim">
+        <a class="btn btn--primary btn--lg" href="#dashboard" data-goto="dashboard">
+          خدمات ما را ببینید <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg>
+        </a>
+        <a class="btn btn--ghost btn--lg" href="#contact" data-goto="contact">درخواست مشاوره</a>
+      </div>
+    </div>
+    <div class="scroll-hint anim" aria-hidden="true">
+      <i></i>
+      <span class="hint--pointer">برای دیدن ادامه اسکرول کنید</span>
+      <span class="hint--touch">برای دیدن ادامه، صفحه را به بالا بکشید</span>
+    </div>
+  </section>
+
+  <!-- ۱ | داشبورد و تحلیل داده -->
+  <section class="slide" id="dashboard" data-title="داشبورد و تحلیل داده" aria-labelledby="t-dashboard">
+    <div class="slide__inner grid">
+      <div class="copy">
+        <p class="eyebrow anim"><svg class="ico" aria-hidden="true"><use href="#i-chart"/></svg> خدمت ۰۱</p>
+        <h2 class="anim" id="t-dashboard">داشبورد و تحلیل داده</h2>
+        <p class="anim">
+          اعداد پراکنده در فایل‌های اکسل، نرم‌افزار حسابداری و سیستم فروش، وقتی کنار هم قرار بگیرند
+          تصویر روشنی از کسب‌وکار می‌سازند. ما داده‌ها را از منابع مختلف جمع می‌کنیم، پاک‌سازی می‌کنیم
+          و در داشبوردهایی نشان می‌دهیم که مدیر در یک نگاه بفهمد کجا ایستاده و قدم بعدی کدام است.
+        </p>
+        <ul class="bullets">
+          <li class="anim">اتصال به منابع داده‌ی موجود: پایگاه داده، اکسل، نرم‌افزارهای مالی و فروش</li>
+          <li class="anim">شاخص‌های کلیدی عملکرد (KPI) و گزارش‌های خودکار دوره‌ای</li>
+          <li class="anim">تحلیل عمیق روند فروش، رفتار مشتری، سبد کالا و سودآوری</li>
+        </ul>
+      </div>
+      <figure class="visual card dash anim" aria-label="نمونه‌ی نمایشی داشبورد فروش">
+        <div class="card__bar">
+          <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+          <b>داشبورد فروش</b>
+          <span class="tag">نمونه‌ی نمایشی</span>
+        </div>
+        <div class="kpis">
+          <div class="kpi">
+            <span class="kpi__label">فروش این ماه</span>
+            <strong class="kpi__value"><span data-count="18.4" data-decimals="1">۱۸٫۴</span><small>میلیارد تومان</small></strong>
+            <em class="delta delta--up"><span aria-hidden="true">▲</span> ۱۲٪ نسبت به ماه قبل</em>
+          </div>
+          <div class="kpi">
+            <span class="kpi__label">سفارش‌ها</span>
+            <strong class="kpi__value"><span data-count="2384">۲٬۳۸۴</span></strong>
+            <em class="delta delta--up"><span aria-hidden="true">▲</span> ۸٪ نسبت به ماه قبل</em>
+          </div>
+          <div class="kpi">
+            <span class="kpi__label">بازگشت مشتری</span>
+            <strong class="kpi__value"><span data-count="64" data-suffix="٪">۶۴٪</span></strong>
+            <em class="delta delta--down"><span aria-hidden="true">▼</span> ۳٪ نسبت به ماه قبل</em>
+          </div>
+        </div>
+        <!-- ستون‌ها از روی data-values ساخته می‌شوند؛ فروردین در سمت راست -->
+        <div class="chart" id="salesChart"
+             data-values="9.8,11.2,10.6,12.9,13.4,12.1,14.8,15.6,14.9,16.7,16.4,18.4"
+             data-labels="فروردین,اردیبهشت,خرداد,تیر,مرداد,شهریور,مهر,آبان,آذر,دی,بهمن,اسفند"
+             data-max="20" data-unit="میلیارد تومان"
+             role="img" aria-label="نمودار ستونی فروش ماهانه (داده‌ی نمایشی): از ۹٫۸ میلیارد تومان در فروردین تا ۱۸٫۴ میلیارد تومان در اسفند">
+          <div class="chart__head"><b>فروش ماهانه</b><span>میلیارد تومان</span></div>
+          <div class="chart__plot"></div>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ۲ | چت‌بات هوشمند (RAG) -->
+  <section class="slide" id="chatbot" data-title="چت‌بات هوشمند (RAG)" aria-labelledby="t-chatbot">
+    <div class="slide__inner grid">
+      <div class="copy">
+        <p class="eyebrow anim"><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg> خدمت ۰۲</p>
+        <h2 class="anim" id="t-chatbot">چت‌بات هوشمند با RAG</h2>
+        <p class="anim">
+          دستیاری که اسناد، آیین‌نامه‌ها، کاتالوگ محصولات و سوابق سازمان شما را می‌شناسد و به هر پرسش
+          با استناد به همان منابع پاسخ می‌دهد؛ نه با حدس و گمان. برای پشتیبانی مشتری، آموزش کارکنان
+          و جست‌وجوی سریع در دانش داخلی سازمان.
+        </p>
+        <ul class="bullets">
+          <li class="anim">پاسخ مستند، همراه با ارجاع به سند و بند مربوط</li>
+          <li class="anim">درک کامل زبان فارسی و اسناد فارسی</li>
+          <li class="anim">قابل استقرار روی سرورهای داخلی سازمان و اتصال به وب‌سایت و پیام‌رسان‌ها</li>
+        </ul>
+      </div>
+      <div class="visual card chat anim" role="img"
+           aria-label="نمونه‌ی گفتگو: کاربر درباره‌ی شرایط مرجوعی کالا می‌پرسد و دستیار پس از جست‌وجو در اسناد سازمان، با ارجاع به آیین‌نامه‌ی فروش پاسخ می‌دهد">
+        <div class="chat__head">
+          <span class="avatar"><svg class="ico"><use href="#i-spark"/></svg></span>
+          <span class="chat__who"><b>دستیار هوشمند</b><small>متصل به اسناد داخلی سازمان</small></span>
+          <span class="tag">نمونه‌ی نمایشی</span>
+        </div>
+        <div class="chat__body" id="chatBody">
+          <div class="msg msg--user" data-step="user">شرایط مرجوعی کالا چیست؟</div>
+          <div class="msg msg--search" data-step="search">
+            <span class="msg__status"><svg class="ico"><use href="#i-search"/></svg><span data-done="۳ منبع مرتبط پیدا شد">جست‌وجو در اسناد سازمان…</span></span>
+            <span class="sources">
+              <span class="src"><svg class="ico"><use href="#i-doc"/></svg>آیین‌نامه‌ی فروش</span>
+              <span class="src"><svg class="ico"><use href="#i-doc"/></svg>پرسش‌های متداول</span>
+              <span class="src"><svg class="ico"><use href="#i-doc"/></svg>شرایط گارانتی</span>
+            </span>
+          </div>
+          <div class="msg msg--bot" data-step="bot">
+            <span class="typing"><i></i><i></i><i></i></span>
+            <p class="stream">طبق آیین‌نامه‌ی فروش، کالا تا ۷ روز پس از تحویل قابل مرجوعی است، به شرط آنکه بسته‌بندی آن سالم باشد. اگر کالا ایراد فنی داشته باشد، هزینه‌ی ارسال هم بر عهده‌ی شرکت است.</p>
+            <span class="cites"><span>آیین‌نامه‌ی فروش، بند ۴</span><span>شرایط گارانتی، بند ۲</span></span>
+          </div>
+        </div>
+        <div class="chat__input"><span>پرسش خود را بنویسید…</span><svg class="ico"><use href="#i-send"/></svg></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ۳ | ایجنت‌ها و اتوماسیون -->
+  <section class="slide" id="agents" data-title="ایجنت‌ها و اتوماسیون" aria-labelledby="t-agents">
+    <div class="slide__inner grid">
+      <div class="copy">
+        <p class="eyebrow anim"><svg class="ico" aria-hidden="true"><use href="#i-flow"/></svg> خدمت ۰۳</p>
+        <h2 class="anim" id="t-agents">ایجنت‌های هوشمند و اتوماسیون</h2>
+        <p class="anim">
+          بخش بزرگی از وقت تیم‌ها صرف کارهای تکراری می‌شود: خواندن ایمیل‌ها، ورود اطلاعات، پیگیری سفارش‌ها
+          و تهیه‌ی گزارش. ایجنت‌های هوش مصنوعی این کارها را دقیق و بی‌وقفه انجام می‌دهند و هر جا تصمیم
+          انسانی لازم باشد، کار را به همکاران شما می‌سپارند.
+        </p>
+        <ul class="bullets">
+          <li class="anim">خودکارسازی فرایندهای تکراری اداری، مالی و فروش</li>
+          <li class="anim">ایجنت‌هایی که با ابزارهای فعلی شما کار می‌کنند: CRM، ERP، ایمیل و پیام‌رسان</li>
+          <li class="anim">نظارت انسانی در نقاط حساس تصمیم‌گیری</li>
+        </ul>
+      </div>
+      <div class="visual card flow anim" role="img"
+           aria-label="نمونه‌ی کار یک ایجنت ثبت سفارش: دریافت ایمیل سفارش، استخراج اقلام، بررسی موجودی انبار، ثبت در CRM و ارسال پیش‌فاکتور برای تأیید کارشناس فروش">
+        <div class="card__bar">
+          <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+          <b>ایجنت ثبت سفارش</b>
+          <span class="flow__status" id="flowStatus" data-run="در حال اجرا" data-done="انجام شد">انجام شد</span>
+        </div>
+        <ol class="flow__steps" id="flowSteps">
+          <li class="fstep is-done">
+            <span class="fstep__ico"><svg class="ico"><use href="#i-mail"/></svg></span>
+            <span class="fstep__text"><b>ایمیل سفارش جدید رسید</b><small>سه قلم کالا از یک مشتری قدیمی</small></span>
+            <span class="fstep__state"><svg class="ico"><use href="#i-check"/></svg></span>
+          </li>
+          <li class="fstep is-done">
+            <span class="fstep__ico"><svg class="ico"><use href="#i-spark"/></svg></span>
+            <span class="fstep__text"><b>اقلام و مشخصات مشتری استخراج شد</b><small>کد کالا، تعداد و نشانی ارسال</small></span>
+            <span class="fstep__state"><svg class="ico"><use href="#i-check"/></svg></span>
+          </li>
+          <li class="fstep is-done">
+            <span class="fstep__ico"><svg class="ico"><use href="#i-box"/></svg></span>
+            <span class="fstep__text"><b>موجودی انبار بررسی شد</b><small>هر سه قلم موجود است</small></span>
+            <span class="fstep__state"><svg class="ico"><use href="#i-check"/></svg></span>
+          </li>
+          <li class="fstep is-done">
+            <span class="fstep__ico"><svg class="ico"><use href="#i-crm"/></svg></span>
+            <span class="fstep__text"><b>سفارش در CRM ثبت شد</b><small>پرونده‌ی مشتری به‌روز شد</small></span>
+            <span class="fstep__state"><svg class="ico"><use href="#i-check"/></svg></span>
+          </li>
+          <li class="fstep is-done">
+            <span class="fstep__ico"><svg class="ico"><use href="#i-invoice"/></svg></span>
+            <span class="fstep__text"><b>پیش‌فاکتور برای تأیید کارشناس ارسال شد</b><small>تصمیم نهایی با انسان است</small></span>
+            <span class="fstep__state"><svg class="ico"><use href="#i-check"/></svg></span>
+          </li>
+        </ol>
+        <p class="flow__foot is-shown" id="flowFoot"><svg class="ico"><use href="#i-check"/></svg> بدون حتی یک بار ورود دستی اطلاعات</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ۴ | بینایی ماشین -->
+  <section class="slide" id="vision" data-title="بینایی ماشین" aria-labelledby="t-vision">
+    <div class="slide__inner grid">
+      <div class="copy">
+        <p class="eyebrow anim"><svg class="ico" aria-hidden="true"><use href="#i-scan"/></svg> خدمت ۰۴</p>
+        <h2 class="anim" id="t-vision">بینایی ماشین و شمارش هوشمند در صنعت</h2>
+        <p class="anim">
+          دوربین‌های خط تولید و انبار شما می‌توانند کاری بیش از ضبط تصویر انجام دهند. با مدل‌های بینایی ماشین،
+          محصولات روی نوار نقاله شمرده می‌شوند، قطعه‌های معیوب در همان لحظه تشخیص داده می‌شوند و ورود و خروج
+          کالا و خودرو بدون دخالت انسان ثبت می‌شود.
+        </p>
+        <ul class="bullets">
+          <li class="anim">شمارش خودکار محصول، کارتن و پالت</li>
+          <li class="anim">کنترل کیفیت و تشخیص عیب در لحظه</li>
+          <li class="anim">پایش ایمنی: کلاه و جلیقه‌ی ایمنی و ورود به محدوده‌ی ممنوع</li>
+        </ul>
+      </div>
+      <div class="visual card cam anim" role="img"
+           aria-label="نمونه‌ی شبیه‌سازی‌شده: دوربین خط بسته‌بندی کارتن‌های روی نوار نقاله را تشخیص می‌دهد، می‌شمارد و کارتن‌های معیوب را جدا علامت می‌زند">
+        <div class="cam__view" id="camView">
+          <div class="cam__hud">
+            <span class="rec"><i></i>زنده</span>
+            <span>دوربین ۰۲ · خط بسته‌بندی</span>
+          </div>
+          <div class="cam__count"><small>شمارش امروز</small><b id="camCount">۱٬۲۴۸</b></div>
+          <div class="cam__line" id="camLine"></div>
+          <div class="cam__belt"></div>
+          <div class="cam__items" id="camItems"></div>
+        </div>
+        <div class="cam__stats">
+          <span><i class="dot dot--ok"></i>سالم <b id="camOk">۱٬۲۳۹</b></span>
+          <span><i class="dot dot--bad"></i>معیوب <b id="camBad">۹</b></span>
+          <span class="tag">شبیه‌سازی</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ۵ | خدمات دیگر -->
+  <section class="slide" id="services" data-title="خدمات دیگر" aria-labelledby="t-services">
+    <div class="slide__inner wide">
+      <header class="slide__head">
+        <p class="eyebrow anim">و بیشتر</p>
+        <h2 class="anim" id="t-services">هر جا داده هست، راهی برای هوشمندتر شدن هست</h2>
+        <p class="anim">علاوه بر چهار خدمت اصلی، در این زمینه‌ها هم کنار سازمان‌ها هستیم:</p>
+      </header>
+      <ul class="tiles">
+        <li class="tile anim">
+          <span class="tile__ico"><svg class="ico" aria-hidden="true"><use href="#i-trend"/></svg></span>
+          <h3>پیش‌بینی و یادگیری ماشین</h3>
+          <p>پیش‌بینی فروش و تقاضا، شناسایی مشتریانی که در حال رفتن هستند، قیمت‌گذاری هوشمند و مدل‌های اختصاصی روی داده‌های خودتان.</p>
+        </li>
+        <li class="tile anim">
+          <span class="tile__ico"><svg class="ico" aria-hidden="true"><use href="#i-db"/></svg></span>
+          <h3>مهندسی و یکپارچه‌سازی داده</h3>
+          <p>طراحی انبار داده، ساخت جریان‌های خودکار انتقال داده (ETL) و یکپارچه کردن داده‌های پراکنده‌ی سازمان در یک منبع قابل‌اعتماد.</p>
+        </li>
+        <li class="tile anim">
+          <span class="tile__ico"><svg class="ico" aria-hidden="true"><use href="#i-doc"/></svg></span>
+          <h3>پردازش اسناد و متن فارسی</h3>
+          <p>استخراج خودکار اطلاعات از فاکتورها، قراردادها و فرم‌ها؛ دسته‌بندی متن و تحلیل نظرات و بازخورد مشتریان.</p>
+        </li>
+        <li class="tile anim">
+          <span class="tile__ico"><svg class="ico" aria-hidden="true"><use href="#i-bulb"/></svg></span>
+          <h3>مشاوره و آموزش</h3>
+          <p>تدوین نقشه‌ی راه داده و هوش مصنوعی سازمان، انتخاب پروژه‌های پربازده و آموزش تیم‌های داخلی.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ۶ | روش کار -->
+  <section class="slide" id="process" data-title="روش کار ما" aria-labelledby="t-process">
+    <div class="slide__inner wide">
+      <header class="slide__head">
+        <p class="eyebrow anim">روش کار ما</p>
+        <h2 class="anim" id="t-process">از اولین گفتگو تا نتیجه‌ی واقعی</h2>
+        <p class="anim">هر پروژه با یک مسئله‌ی مشخص کسب‌وکار شروع می‌شود، نه با یک فناوری.</p>
+      </header>
+      <div class="steps">
+        <div class="steps__line anim" aria-hidden="true"><i></i></div>
+        <ol class="steps__list">
+          <li class="step anim">
+            <span class="step__num">۱</span>
+            <h3>شناخت و کشف</h3>
+            <p>با تیم شما گفتگو می‌کنیم، مسئله را دقیق تعریف می‌کنیم و داده‌های موجود را ارزیابی می‌کنیم.</p>
+          </li>
+          <li class="step anim">
+            <span class="step__num">۲</span>
+            <h3>نمونه‌ی اولیه</h3>
+            <p>در زمانی کوتاه، نمونه‌ای کارا روی داده‌های واقعی خودتان می‌سازیم تا ارزش راه‌حل پیش از سرمایه‌گذاری کامل دیده شود.</p>
+          </li>
+          <li class="step anim">
+            <span class="step__num">۳</span>
+            <h3>ساخت و یکپارچه‌سازی</h3>
+            <p>راه‌حل نهایی را می‌سازیم و به سامانه‌ها و فرایندهای فعلی سازمان متصل می‌کنیم.</p>
+          </li>
+          <li class="step anim">
+            <span class="step__num">۴</span>
+            <h3>استقرار و پشتیبانی</h3>
+            <p>پس از راه‌اندازی، نتیجه را می‌سنجیم، مدل‌ها را به‌روز نگه می‌داریم و تیم شما را آموزش می‌دهیم.</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ۷ | چرا نئودیتا -->
+  <section class="slide" id="why" data-title="چرا نئودیتا" aria-labelledby="t-why">
+    <div class="slide__inner wide">
+      <header class="slide__head">
+        <p class="eyebrow anim">چرا نئودیتا</p>
+        <h2 class="anim" id="t-why">هوش مصنوعی‌ای که به کار کسب‌وکار شما بیاید</h2>
+      </header>
+      <ul class="features">
+        <li class="feature anim">
+          <span class="feature__ico"><svg class="ico" aria-hidden="true"><use href="#i-shield"/></svg></span>
+          <div><h3>امنیت داده در اولویت</h3>
+          <p>امکان اجرای کامل مدل‌ها روی زیرساخت داخلی سازمان؛ داده‌های شما از سازمان بیرون نمی‌رود.</p></div>
+        </li>
+        <li class="feature anim">
+          <span class="feature__ico"><svg class="ico" aria-hidden="true"><use href="#i-lang"/></svg></span>
+          <div><h3>مسلط به زبان فارسی</h3>
+          <p>راه‌حل‌هایی که برای متن، اسناد و گفتگوی فارسی ساخته و آزموده می‌شوند؛ جایی که ابزارهای آماده اغلب کم می‌آورند.</p></div>
+        </li>
+        <li class="feature anim">
+          <span class="feature__ico"><svg class="ico" aria-hidden="true"><use href="#i-target"/></svg></span>
+          <div><h3>نتیجه‌ی قابل‌اندازه‌گیری</h3>
+          <p>هر پروژه با یک شاخص روشن موفقیت شروع می‌شود: ساعت کار کمتر، خطای کمتر یا فروش بیشتر.</p></div>
+        </li>
+        <li class="feature anim">
+          <span class="feature__ico"><svg class="ico" aria-hidden="true"><use href="#i-buoy"/></svg></span>
+          <div><h3>همراهی پس از تحویل</h3>
+          <p>پروژه با تحویل تمام نمی‌شود؛ پشتیبانی، نگهداری و بهبود مداوم بخشی از کار ماست.</p></div>
+        </li>
+      </ul>
+      <div class="industries anim">
+        <p>در هر صنعتی که داده تولید می‌شود، جای هوش مصنوعی هست:</p>
+        <ul>
+          <li>صنعت و تولید</li><li>فروشگاهی و پخش</li><li>مالی و بیمه</li><li>سلامت</li>
+          <li>لجستیک و انبار</li><li>پشتیبانی مشتری</li><li>آموزش</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ۸ | تماس -->
+  <section class="slide slide--end" id="contact" data-title="شروع همکاری" aria-labelledby="t-contact">
+    <div class="slide__inner end">
+      <p class="eyebrow anim">قدم بعدی</p>
+      <h2 class="anim" id="t-contact">بیایید درباره‌ی داده‌هایتان صحبت کنیم</h2>
+      <p class="anim">
+        در جلسه‌ی آشنایی، نیاز کسب‌وکارتان را می‌شنویم، داده‌های موجود را بررسی می‌کنیم و پیشنهاد می‌دهیم
+        کدام راه‌حل بیشترین بازده را برای شما دارد.
+      </p>
+      <!-- نشانی ایمیل موقت است؛ پیش از انتشار با نشانی واقعی جایگزین شود -->
+      <div class="end__cta anim">
+        <a class="btn btn--primary btn--lg" href="mailto:info@neodata.ir?subject=%D8%AF%D8%B1%D8%AE%D9%88%D8%A7%D8%B3%D8%AA%20%D9%85%D8%B4%D8%A7%D9%88%D8%B1%D9%87">
+          <svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg> درخواست جلسه‌ی مشاوره
+        </a>
+        <a class="btn btn--ghost btn--lg" href="#dashboard" data-goto="dashboard">مرور دوباره‌ی خدمات</a>
+      </div>
+      <p class="end__mail anim">یا مستقیم بنویسید: <a href="mailto:info@neodata.ir" dir="ltr">info@neodata.ir</a></p>
+      <div class="end__sign anim">
+        <img src="logo/neodata-mark.svg" alt="" width="34" height="34" />
+        <span><b>نئودیتا</b> · تحلیل داده و هوش مصنوعی</span>
+      </div>
+      <p class="end__copy anim">© ۱۴۰۵ نئودیتا · همه‌ی حقوق محفوظ است</p>
+    </div>
+  </section>
+
+</main>
+
+<script src="assets/app.js?v=1"></script>
+</body>
+</html>

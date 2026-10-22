@@ -6,19 +6,50 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 :root {
-  --bg: #070b16;                     /* رنگ پس‌زمینه: در همه‌ی بخش‌ها یکی است */
-  --surface: #0e1526;
-  --line: rgba(148, 170, 220, .15);
-  --line-soft: rgba(148, 170, 220, .08);
-  --ink: #e9eef8;
-  --ink-soft: #a9b3c8;
-  --ink-mute: #7a86a0;
-  --accent: #34e0c2;
-  --accent-2: #7b8cff;
-  --accent-ink: #04211c;             /* متن روی رنگ اصلی */
-  --series: #1aa98f;                 /* ستون‌های نمودار (بررسی‌شده روی سطح کارت) */
-  --good: #3ddc97;
-  --bad: #ff6b6b;
+  /* ---- پوسته‌ی روشن (پیش‌فرض). رنگ غالب: آبی نشان نئودیتا ---- */
+  color-scheme: light;
+  --bg: #f6f8fc;                     /* رنگ پس‌زمینه: در همه‌ی بخش‌ها یکی است */
+  --surface-2: #f2f5fb;              /* زمینه‌ی ملایم درون کارت‌ها */
+  --control: #ffffff;                /* دکمه‌های ساده، چیپ‌ها */
+  --line: rgba(22, 34, 84, .12);
+  --line-soft: rgba(22, 34, 84, .07);
+  --dot: rgba(22, 34, 84, .22);
+  --ink: #0f1a3d;
+  --ink-soft: #46516d;
+  --ink-mute: #69728c;
+  --accent: #2d3be8;                 /* آبی نشان */
+  --accent-2: #3b82f6;               /* همراه روشن‌تر برای گرادیان‌ها */
+  --accent-soft: rgba(45, 59, 232, .07);
+  --accent-line: rgba(45, 59, 232, .24);
+  --accent-glow: rgba(45, 59, 232, .3);
+  --on-accent: #ffffff;              /* متن و آیکون روی آبی */
+  --btn-bg: #2d3be8;
+  --btn-bg-hover: #2230cf;
+  --bubble: rgba(45, 59, 232, .09);
+  --card-bg: #ffffff;
+  --card-shadow: 0 24px 60px -30px rgba(15, 26, 61, .28), 0 2px 6px rgba(15, 26, 61, .04);
+  --card-edge: linear-gradient(140deg, rgba(45, 59, 232, .32), transparent 30%, transparent 70%, rgba(59, 130, 246, .28));
+  --tile-shadow: 0 12px 32px -20px rgba(15, 26, 61, .22);
+  --chart-bg: #ffffff;
+  --series: #6f7cf0;                 /* ستون‌های نمودار (بررسی‌شده روی سطح کارت) */
+  --series-current: #2d3be8;
+  --good: #128a53;
+  --good-soft: rgba(18, 138, 83, .09);
+  --good-line: rgba(18, 138, 83, .28);
+  --bad: #d33a3a;
+  --head-from: rgba(246, 248, 252, .95);
+  --overlay: rgba(246, 248, 252, .96);
+  --glow-1: rgba(45, 59, 232, .08);
+  --glow-2: rgba(59, 130, 246, .07);
+  --grid-line: rgba(22, 34, 84, .05);
+  --check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232d3be8' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E");
+  /* شبکه‌ی پس‌زمینه (app.js می‌خواند): رنگ‌ها به‌صورت «r, g, b» */
+  --net-a: 45, 59, 232;
+  --net-b: 59, 130, 246;
+  --net-line: 45, 59, 232;
+  --net-alpha: .45;
+  --net-line-alpha: .13;
+
   --radius: 22px;
   --head-h: 72px;
   --ease-out: cubic-bezier(.16, 1, .3, 1);
@@ -39,9 +70,53 @@
   --brand: #2d3be8;                  /* آبی نشان نئودیتا */
 }
 
+/* ---- پوسته‌ی تیره. آبی روشن‌تر نشان (#7A86FF در logo/12.svg) روی زمینه‌ی تیره ---- */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #070b16;
+  --surface-2: rgba(255, 255, 255, .04);
+  --control: rgba(255, 255, 255, .05);
+  --line: rgba(148, 170, 220, .15);
+  --line-soft: rgba(148, 170, 220, .08);
+  --dot: rgba(148, 170, 220, .3);
+  --ink: #e9eef8;
+  --ink-soft: #a9b3c8;
+  --ink-mute: #7a86a0;
+  --accent: #7a86ff;
+  --accent-2: #5fb0ff;
+  --accent-soft: rgba(122, 134, 255, .1);
+  --accent-line: rgba(122, 134, 255, .32);
+  --accent-glow: rgba(122, 134, 255, .5);
+  --on-accent: #ffffff;
+  --btn-bg: #3d4cf0;
+  --btn-bg-hover: #4d5bff;
+  --bubble: rgba(122, 134, 255, .18);
+  --card-bg: linear-gradient(180deg, rgba(19, 28, 49, .94), rgba(12, 18, 33, .96));
+  --card-shadow: 0 40px 90px -40px rgba(0, 0, 0, .85), inset 0 1px 0 rgba(255, 255, 255, .04);
+  --card-edge: linear-gradient(140deg, rgba(122, 134, 255, .55), transparent 32%, transparent 68%, rgba(95, 176, 255, .4));
+  --tile-shadow: none;
+  --chart-bg: rgba(255, 255, 255, .02);
+  --series: #4a58e0;
+  --series-current: #8f99ff;
+  --good: #3ddc97;
+  --good-soft: rgba(61, 220, 151, .1);
+  --good-line: rgba(61, 220, 151, .25);
+  --bad: #ff6b6b;
+  --head-from: rgba(7, 11, 22, .92);
+  --overlay: rgba(7, 11, 22, .94);
+  --glow-1: rgba(45, 59, 232, .2);
+  --glow-2: rgba(95, 176, 255, .09);
+  --grid-line: rgba(148, 170, 220, .045);
+  --check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237a86ff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E");
+  --net-a: 122, 134, 255;
+  --net-b: 95, 176, 255;
+  --net-line: 130, 150, 230;
+  --net-alpha: .7;
+  --net-line-alpha: .2;
+}
+
 html {
   background: var(--bg);
-  color-scheme: dark;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -58,7 +133,7 @@ h1, h2, h3 { margin: 0 0 .45em; font-weight: 900; line-height: 1.45; letter-spac
 p { margin: 0 0 1em; text-wrap: pretty; }
 ul, ol { margin: 0; padding: 0; list-style: none; }
 button { font: inherit; color: inherit; }
-::selection { background: rgba(52, 224, 194, .35); color: #fff; }
+::selection { background: var(--accent-line); color: var(--ink); }
 
 a:focus-visible, button:focus-visible {
   outline: 2px solid var(--accent);
@@ -82,16 +157,16 @@ a:focus-visible, button:focus-visible {
 .backdrop {
   position: fixed; inset: 0; z-index: 0; pointer-events: none;
   background:
-    radial-gradient(900px 620px at 88% -8%, rgba(52, 224, 194, .12), transparent 62%),
-    radial-gradient(820px 620px at 4% 108%, rgba(123, 140, 255, .14), transparent 60%),
+    radial-gradient(900px 620px at 88% -8%, var(--glow-1), transparent 62%),
+    radial-gradient(820px 620px at 4% 108%, var(--glow-2), transparent 60%),
     var(--bg);
 }
 /* شبکه‌ی کم‌رنگ که به سمت لبه‌ها محو می‌شود */
 .backdrop::before {
   content: ""; position: absolute; inset: 0;
   background-image:
-    linear-gradient(rgba(148, 170, 220, .045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(148, 170, 220, .045) 1px, transparent 1px);
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 56px 56px;
   -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 45%, #000 15%, transparent 80%);
           mask-image: radial-gradient(ellipse 75% 65% at 50% 45%, #000 15%, transparent 80%);
@@ -105,31 +180,37 @@ a:focus-visible, button:focus-visible {
   height: var(--head-h);
   display: flex; align-items: center; justify-content: space-between; gap: 12px;
   padding: 0 clamp(16px, 4vw, 44px);
-  background: linear-gradient(180deg, rgba(7, 11, 22, .92) 30%, rgba(7, 11, 22, 0));
+  background: linear-gradient(180deg, var(--head-from) 30%, transparent);
 }
 
-.brand { display: flex; align-items: center; gap: 11px; color: inherit; text-decoration: none; }
-/* نشان (logo/5.svg) گوشه‌ی گرد خودش را دارد؛ border-radius فقط برای اینکه سایه هم‌شکل نشان باشد */
-.brand__mark {
-  width: 40px; height: 40px; display: block; border-radius: 23%;
-  box-shadow: 0 8px 24px -8px rgba(45, 59, 232, .75);
-  transition: rotate .4s var(--ease-out);
+.brand { display: flex; align-items: center; gap: 14px; color: inherit; text-decoration: none; }
+/* نشان افقی (نسبت ۴۷۱ به ۹۸): logo/4.svg در پوسته‌ی روشن، logo/12.svg در پوسته‌ی تیره */
+.brand__logo { display: block; height: 28px; width: auto; }
+.brand__tag {
+  padding-inline-start: 14px; border-inline-start: 1px solid var(--line);
+  font-size: 12px; font-weight: 500; line-height: 1.5; color: var(--ink-mute);
 }
-.brand:hover .brand__mark { rotate: -8deg; }
-.brand__text { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; line-height: 1.35; }
-/* نوشته‌نشان (logo/7.svg) با نسبت ۶۳۷ به ۷۱ */
-.brand__word { display: block; height: 14px; width: auto; }
-.brand__text small { font-size: 11.5px; color: var(--ink-mute); }
+
+/* هر نشان دو نسخه دارد و فقط نسخه‌ی پوسته‌ی جاری دیده می‌شود */
+.logo--dark { display: none; }
+:root[data-theme="dark"] .logo--light { display: none; }
+:root[data-theme="dark"] .logo--dark { display: block; }
 
 .head-actions { display: flex; align-items: center; gap: 10px; }
 
-.menu-btn {
+.menu-btn, .theme-btn {
   width: 44px; height: 44px; padding: 0; border-radius: 13px; cursor: pointer;
-  background: rgba(255, 255, 255, .05); border: 1px solid var(--line);
+  background: var(--control); border: 1px solid var(--line);
   display: grid; place-content: center; gap: 5px;
   transition: background .25s ease, border-color .25s ease;
 }
-.menu-btn:hover { background: rgba(255, 255, 255, .09); border-color: rgba(52, 224, 194, .4); }
+.menu-btn:hover, .theme-btn:hover { background: var(--accent-soft); border-color: var(--accent-line); }
+/* دکمه‌ی پوسته: در پوسته‌ی روشن ماه (رفتن به تیره)، در تیره خورشید */
+.theme-btn { color: var(--ink); }
+.theme-btn .ico { width: 20px; height: 20px; }
+.theme-btn .ico--sun { display: none; }
+:root[data-theme="dark"] .theme-btn .ico--sun { display: block; }
+:root[data-theme="dark"] .theme-btn .ico--moon { display: none; }
 .menu-btn span {
   display: block; width: 18px; height: 2px; border-radius: 2px; background: var(--ink);
   transition: transform .3s ease, opacity .2s ease;
@@ -142,7 +223,7 @@ a:focus-visible, button:focus-visible {
 .menu-panel {
   position: fixed; inset: 0; z-index: 29;
   display: grid; place-items: center;
-  background: rgba(7, 11, 22, .94);
+  background: var(--overlay);
   -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
   opacity: 0; visibility: hidden; pointer-events: none;
   transition: opacity .3s ease, visibility 0s linear .3s;
@@ -166,7 +247,7 @@ a:focus-visible, button:focus-visible {
 
 .progress {
   position: fixed; inset: 0 0 auto 0; z-index: 31; height: 3px;
-  background: rgba(148, 170, 220, .08);
+  background: var(--line-soft);
 }
 .progress span {
   display: block; height: 100%; width: 0;
@@ -182,7 +263,7 @@ a:focus-visible, button:focus-visible {
 .dots button {
   position: relative; width: 9px; height: 9px; padding: 0;
   border: 0; border-radius: 50%; cursor: pointer;
-  background: rgba(148, 170, 220, .3);
+  background: var(--dot);
   transition: scale .3s var(--ease-out), background .3s ease;
 }
 /* ناحیه‌ی کلیک بزرگ‌تر از خود نقطه */
@@ -197,7 +278,7 @@ a:focus-visible, button:focus-visible {
 }
 .dots button:hover::after, .dots button:focus-visible::after { opacity: 1; }
 .dots button:hover { scale: 1.4; }
-.dots button.is-active { background: var(--accent); scale: 1.6; box-shadow: 0 0 12px rgba(52, 224, 194, .7); }
+.dots button.is-active { background: var(--accent); scale: 1.6; box-shadow: 0 0 12px var(--accent-glow); }
 
 .pager {
   position: fixed; z-index: 20;
@@ -208,10 +289,10 @@ a:focus-visible, button:focus-visible {
 .pager button {
   width: 34px; height: 34px; padding: 0; display: grid; place-items: center;
   border-radius: 50%; cursor: pointer;
-  background: rgba(255, 255, 255, .04); border: 1px solid var(--line);
+  background: var(--control); border: 1px solid var(--line);
   transition: border-color .2s ease, background .2s ease, opacity .2s ease;
 }
-.pager button:hover:not(:disabled) { border-color: rgba(52, 224, 194, .5); background: rgba(52, 224, 194, .08); }
+.pager button:hover:not(:disabled) { border-color: var(--accent-line); background: var(--accent-soft); }
 .pager button:disabled { opacity: .3; cursor: default; }
 .pager .ico { width: 16px; height: 16px; }
 .pager__num { display: inline-flex; gap: 5px; font-weight: 700; min-width: 54px; justify-content: center; }
@@ -237,7 +318,7 @@ html.js #stage { position: fixed; inset: 0; }
 html.js .slide {
   position: absolute; inset: 0; min-height: 0;
   overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain;
-  scrollbar-width: thin; scrollbar-color: rgba(148, 170, 220, .22) transparent;
+  scrollbar-width: thin; scrollbar-color: var(--line) transparent;
   visibility: hidden;
 }
 html.js .slide:focus { outline: none; }
@@ -292,8 +373,8 @@ html.js .slide.is-leaving[data-dir="prev"] .anim { animation-name: out-prev; }
   margin: 0 0 14px; padding: 5px 14px;
   font-size: 13px; font-weight: 800; line-height: 1.7;
   color: var(--accent);
-  background: rgba(52, 224, 194, .08);
-  border: 1px solid rgba(52, 224, 194, .24);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
   border-radius: 999px;
 }
 .eyebrow .ico { width: 16px; height: 16px; }
@@ -306,13 +387,13 @@ html.js .slide.is-leaving[data-dir="prev"] .anim { animation-name: out-prev; }
 }
 .btn .ico { width: 18px; height: 18px; }
 .btn--primary {
-  color: var(--accent-ink);
-  background: linear-gradient(225deg, var(--accent), #74ecd7 50%, #9aa7ff);
-  box-shadow: 0 12px 30px -12px rgba(52, 224, 194, .6);
+  color: var(--on-accent);
+  background: var(--btn-bg);
+  box-shadow: 0 12px 28px -12px var(--accent-glow);
 }
-.btn--primary:hover { translate: 0 -2px; box-shadow: 0 18px 40px -14px rgba(52, 224, 194, .75); }
-.btn--ghost { color: var(--ink); background: rgba(255, 255, 255, .04); border-color: var(--line); }
-.btn--ghost:hover { border-color: rgba(52, 224, 194, .5); background: rgba(52, 224, 194, .08); }
+.btn--primary:hover { translate: 0 -2px; background: var(--btn-bg-hover); box-shadow: 0 18px 36px -14px var(--accent-glow); }
+.btn--ghost { color: var(--ink); background: var(--control); border-color: var(--line); }
+.btn--ghost:hover { border-color: var(--accent-line); background: var(--accent-soft); }
 .btn--sm { padding: 8px 16px; font-size: 13.5px; }
 .btn--lg { padding: 14px 28px; font-size: 16px; }
 
@@ -320,14 +401,14 @@ html.js .slide.is-leaving[data-dir="prev"] .anim { animation-name: out-prev; }
   position: relative;
   padding: 16px;
   border-radius: var(--radius);
-  background: linear-gradient(180deg, rgba(19, 28, 49, .94), rgba(12, 18, 33, .96));
+  background: var(--card-bg);
   border: 1px solid var(--line);
-  box-shadow: 0 40px 90px -40px rgba(0, 0, 0, .85), inset 0 1px 0 rgba(255, 255, 255, .04);
+  box-shadow: var(--card-shadow);
 }
 /* لبه‌ی نورانی کارت */
 .card::before {
   content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 1px;
-  background: linear-gradient(140deg, rgba(52, 224, 194, .5), transparent 32%, transparent 68%, rgba(123, 140, 255, .5));
+  background: var(--card-edge);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
           mask-composite: exclude;
@@ -335,7 +416,7 @@ html.js .slide.is-leaving[data-dir="prev"] .anim { animation-name: out-prev; }
 }
 .card__bar { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 14px; }
 .lights { display: inline-flex; gap: 5px; }
-.lights i { width: 8px; height: 8px; border-radius: 50%; background: rgba(148, 170, 220, .22); }
+.lights i { width: 8px; height: 8px; border-radius: 50%; background: var(--line); }
 .tag {
   margin-inline-start: auto;
   padding: 1px 9px; border-radius: 999px; border: 1px solid var(--line);
@@ -382,7 +463,7 @@ html.no-js .rotator > span:not(.is-on) { display: none; }
 .hero__chips li {
   padding: 4px 14px; border-radius: 999px;
   font-size: 13.5px; color: var(--ink-soft);
-  background: rgba(255, 255, 255, .03); border: 1px solid var(--line);
+  background: var(--control); border: 1px solid var(--line);
 }
 .hero__cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
 
@@ -393,7 +474,7 @@ html.no-js .rotator > span:not(.is-on) { display: none; }
 }
 .scroll-hint i {
   position: relative; width: 22px; height: 34px;
-  border: 2px solid rgba(148, 170, 220, .35); border-radius: 12px;
+  border: 2px solid var(--dot); border-radius: 12px;
 }
 .scroll-hint i::after {
   content: ""; position: absolute; top: 6px; left: 50%; width: 4px; height: 7px; margin-left: -2px;
@@ -424,12 +505,12 @@ html.no-js .rotator > span:not(.is-on) { display: none; }
   padding: 9px 44px 9px 14px;
   border-radius: 14px;
   font-size: 14.5px; line-height: 1.8;
-  background: rgba(255, 255, 255, .03); border: 1px solid var(--line-soft);
+  background: var(--control); border: 1px solid var(--line-soft);
 }
 .bullets li::before {
   content: ""; position: absolute; right: 13px; top: 50%; translate: 0 -50%;
   width: 20px; height: 20px; border-radius: 50%;
-  background: rgba(52, 224, 194, .14) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2334e0c2' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 12px no-repeat;
+  background: var(--accent-soft) var(--check) center / 12px no-repeat;
 }
 
 .slide__head { max-width: 780px; margin: 0 auto clamp(22px, 4.5vh, 46px); text-align: center; }
@@ -443,7 +524,7 @@ html.no-js .rotator > span:not(.is-on) { display: none; }
 .kpi {
   min-width: 0; display: flex; flex-direction: column; gap: 1px;
   padding: 10px 12px; border-radius: 14px;
-  background: rgba(255, 255, 255, .03); border: 1px solid var(--line-soft);
+  background: var(--surface-2); border: 1px solid var(--line-soft);
 }
 .kpi__label { font-size: 12px; color: var(--ink-mute); }
 .kpi__value {
@@ -457,7 +538,7 @@ html.no-js .rotator > span:not(.is-on) { display: none; }
 
 .chart {
   padding: 12px 12px 6px; border-radius: 14px;
-  background: rgba(255, 255, 255, .02); border: 1px solid var(--line-soft);
+  background: var(--chart-bg); border: 1px solid var(--line-soft);
 }
 .chart__head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 10px; font-size: 13px; }
 .chart__head span { font-size: 11px; color: var(--ink-mute); }
@@ -465,7 +546,7 @@ html.no-js .rotator > span:not(.is-on) { display: none; }
 .chart__plot { position: relative; height: 170px; margin: 0 26px 24px 0; }
 .chart__grid span {
   position: absolute; left: 0; right: 0; height: 1px;
-  background: rgba(148, 170, 220, .1);
+  background: var(--line-soft);
 }
 .chart__grid span::after {
   content: attr(data-tick);
@@ -477,7 +558,7 @@ html.no-js .rotator > span:not(.is-on) { display: none; }
 .chart__col { position: relative; flex: 1; display: flex; align-items: flex-end; justify-content: center; }
 .chart__col::before {          /* پس‌زمینه‌ی ستونِ زیر نشانگر */
   content: ""; position: absolute; inset: 0 1px; border-radius: 6px;
-  background: rgba(148, 170, 220, .06); opacity: 0; transition: opacity .2s ease;
+  background: var(--accent-soft); opacity: 0; transition: opacity .2s ease;
 }
 .chart__col:hover::before { opacity: 1; }
 .chart__col i {
@@ -487,7 +568,7 @@ html.no-js .rotator > span:not(.is-on) { display: none; }
   border-radius: 4px 4px 0 0;
   transform-origin: 50% 100%;
 }
-.chart__col.is-current i { background: var(--accent); }
+.chart__col.is-current i { background: var(--series-current); }
 .chart__col b {
   position: absolute; top: calc(100% + 5px);
   font-size: 10.5px; font-weight: 500; line-height: 1.5; color: var(--ink-mute); white-space: nowrap;
@@ -524,7 +605,7 @@ html.js .slide.is-active .chart__col em {
 }
 .avatar {
   width: 36px; height: 36px; flex: none; display: grid; place-items: center; border-radius: 50%;
-  color: var(--accent-ink); background: linear-gradient(225deg, var(--accent), var(--accent-2));
+  color: var(--on-accent); background: linear-gradient(225deg, var(--btn-bg), var(--accent-2));
 }
 .avatar .ico { width: 19px; height: 19px; }
 .chat__who { display: flex; flex-direction: column; line-height: 1.5; }
@@ -541,7 +622,7 @@ html.js .slide.is-active .chart__col em {
 /* مثل پیام‌رسان‌های راست‌چین: پیام کاربر سمت چپ، پاسخ دستیار سمت راست */
 .msg--user {
   align-self: flex-end;
-  background: rgba(123, 140, 255, .2); border: 1px solid rgba(123, 140, 255, .32);
+  background: var(--bubble); border: 1px solid var(--accent-line);
   border-bottom-left-radius: 5px;
 }
 .msg--search {
@@ -558,13 +639,13 @@ html.js .slide.is-active .chart__col em {
   display: inline-flex; align-items: center; gap: 5px;
   padding: 1px 9px; border-radius: 8px;
   font-size: 11.5px; color: var(--ink);
-  background: rgba(52, 224, 194, .08); border: 1px solid rgba(52, 224, 194, .22);
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
   transition: opacity .35s ease, scale .45s var(--ease-out);
 }
 .src .ico { width: 13px; height: 13px; color: var(--accent); }
 .msg--bot {
   align-self: flex-start;
-  background: rgba(255, 255, 255, .04); border: 1px solid var(--line-soft);
+  background: var(--surface-2); border: 1px solid var(--line-soft);
   border-bottom-right-radius: 5px;
 }
 .stream { margin: 0; }
@@ -572,7 +653,7 @@ html.js .slide.is-active .chart__col em {
 .cites span {
   padding: 0 8px; border-radius: 6px;
   font-size: 11px; line-height: 1.9; color: var(--accent);
-  background: rgba(52, 224, 194, .08);
+  background: var(--accent-soft);
 }
 .typing { display: none; gap: 4px; padding: 8px 2px; }
 .typing i { width: 6px; height: 6px; border-radius: 50%; background: var(--ink-soft); animation: blink 1s infinite; }
@@ -599,7 +680,7 @@ html.js .slide.is-active .chart__col em {
   display: flex; align-items: center; justify-content: space-between; gap: 10px;
   margin: 0 16px 16px; padding: 9px 14px; border-radius: 14px;
   font-size: 13px; color: var(--ink-mute);
-  background: rgba(255, 255, 255, .03); border: 1px solid var(--line);
+  background: var(--surface-2); border: 1px solid var(--line);
 }
 .chat__input .ico { width: 18px; height: 18px; color: var(--accent); }
 
@@ -610,10 +691,10 @@ html.js .slide.is-active .chart__col em {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 1px 10px; border-radius: 999px;
   font-size: 11.5px; font-weight: 700; color: var(--good);
-  background: rgba(61, 220, 151, .1);
+  background: var(--good-soft);
 }
 .flow__status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
-.flow__status.is-run { color: var(--accent); background: rgba(52, 224, 194, .1); }
+.flow__status.is-run { color: var(--accent); background: var(--accent-soft); }
 .flow__status.is-run::before { animation: blink 1s infinite; }
 
 .flow__steps { display: grid; gap: 6px; }
@@ -631,7 +712,7 @@ html.js .slide.is-active .chart__col em {
 .fstep.is-done + .fstep::before { background: var(--accent); }
 .fstep__ico {
   width: 40px; height: 40px; display: grid; place-items: center; border-radius: 12px;
-  color: var(--ink-mute); background: rgba(255, 255, 255, .04); border: 1px solid var(--line);
+  color: var(--ink-mute); background: var(--surface-2); border: 1px solid var(--line);
   transition: color .3s ease, border-color .3s ease, box-shadow .3s ease;
 }
 .fstep__ico .ico { width: 19px; height: 19px; }
@@ -642,12 +723,12 @@ html.js .slide.is-active .chart__col em {
   width: 24px; height: 24px; display: grid; place-items: center; border-radius: 50%;
   border: 2px solid var(--line); transition: background .3s ease, border-color .3s ease;
 }
-.fstep__state .ico { width: 14px; height: 14px; stroke-width: 3; opacity: 0; color: var(--accent-ink); }
+.fstep__state .ico { width: 14px; height: 14px; stroke-width: 3; opacity: 0; color: var(--on-accent); }
 .fstep:not(.is-run):not(.is-done) { opacity: .5; }
-.fstep.is-run { background: rgba(52, 224, 194, .06); }
-.fstep.is-run .fstep__ico { color: var(--accent); border-color: rgba(52, 224, 194, .55); box-shadow: 0 0 0 4px rgba(52, 224, 194, .1); }
+.fstep.is-run { background: var(--accent-soft); }
+.fstep.is-run .fstep__ico { color: var(--accent); border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
 .fstep.is-run .fstep__state { border-color: var(--accent); border-top-color: transparent; animation: spin .8s linear infinite; }
-.fstep.is-done .fstep__ico { color: var(--accent); border-color: rgba(52, 224, 194, .3); }
+.fstep.is-done .fstep__ico { color: var(--accent); border-color: var(--accent-line); }
 .fstep.is-done .fstep__state { background: var(--accent); border-color: var(--accent); }
 .fstep.is-done .fstep__state .ico { opacity: 1; }
 @keyframes spin { to { rotate: 360deg; } }
@@ -656,7 +737,7 @@ html.js .slide.is-active .chart__col em {
   display: flex; align-items: center; gap: 8px;
   margin: 10px 0 0; padding: 8px 14px; border-radius: 12px;
   font-size: 13px; color: var(--ink);
-  background: rgba(61, 220, 151, .08); border: 1px solid rgba(61, 220, 151, .25);
+  background: var(--good-soft); border: 1px solid var(--good-line);
   opacity: 0; translate: 0 6px; transition: opacity .4s ease, translate .5s var(--ease-out);
 }
 .flow__foot .ico { color: var(--good); stroke-width: 2.6; }
@@ -664,8 +745,12 @@ html.js .slide.is-active .chart__col em {
 
 /* ---------------- ۴ | بینایی ماشین ---------------- */
 
-.cam { padding: 12px; }
+/* تصویر دوربین در هر دو پوسته تیره است و رنگ‌های خودش را دارد */
+.cam { padding: 12px; --detect: #8f99ff; --detect-ink: #0a0f2e; }
 .cam__view {
+  --ink: #e9eef8; --ink-soft: #a9b3c8; --ink-mute: #7a86a0;
+  --line: rgba(148, 170, 220, .15); --bad: #ff6b6b;
+  color: var(--ink);
   position: relative; overflow: hidden;
   aspect-ratio: 16 / 10; border-radius: 14px;
   background: radial-gradient(120% 90% at 50% 0%, #1b2643, #0a0f1d 72%);
@@ -703,13 +788,13 @@ html.js .slide.is-active .chart__col em {
 @keyframes belt { to { background-position: -28px 0, 0 0; } }
 .cam__line {
   position: absolute; z-index: 2; top: 24%; bottom: 6%; left: 50%; width: 2px; margin-left: -1px;
-  background: repeating-linear-gradient(180deg, var(--accent) 0 7px, transparent 7px 13px);
+  background: repeating-linear-gradient(180deg, var(--detect) 0 7px, transparent 7px 13px);
   opacity: .65;
 }
 .cam__line.flash { animation: flash .5s ease-out; }
 .cam__line.flash--bad { --flash: var(--bad); }
 @keyframes flash {
-  from { opacity: 1; box-shadow: 0 0 18px 3px var(--flash, var(--accent)); }
+  from { opacity: 1; box-shadow: 0 0 18px 3px var(--flash, var(--detect)); }
   to   { opacity: .65; box-shadow: none; }
 }
 .cam__items { position: absolute; inset: 0; z-index: 1; }
@@ -731,18 +816,18 @@ html.js .slide.is-active .chart__col em {
 }
 .item__bb {
   position: absolute; inset: 4% 1% -5%;
-  border: 1.5px solid var(--accent); border-radius: 4px;
+  border: 1.5px solid var(--detect); border-radius: 4px;
   transition: box-shadow .3s ease;
 }
 .item__bb b {
   position: absolute; bottom: 100%; right: -1.5px;
   padding: 0 5px; border-radius: 4px 4px 0 0;
   font-size: 10px; font-weight: 700; line-height: 1.7; white-space: nowrap;
-  color: var(--accent-ink); background: var(--accent);
+  color: var(--detect-ink); background: var(--detect);
 }
 .item--bad .item__bb { border-color: var(--bad); }
 .item--bad .item__bb b { color: #2b0606; background: var(--bad); }
-.item.is-counted .item__bb { box-shadow: 0 0 0 3px rgba(52, 224, 194, .2); }
+.item.is-counted .item__bb { box-shadow: 0 0 0 3px rgba(143, 153, 255, .25); }
 .item--bad.is-counted .item__bb { box-shadow: 0 0 0 3px rgba(255, 107, 107, .25); }
 
 .cam__stats {
@@ -752,7 +837,7 @@ html.js .slide.is-active .chart__col em {
 .cam__stats span { display: inline-flex; align-items: center; gap: 6px; }
 .cam__stats b { color: var(--ink); }
 .dot { width: 8px; height: 8px; border-radius: 50%; }
-.dot--ok { background: var(--accent); }
+.dot--ok { background: var(--detect); }
 .dot--bad { background: var(--bad); }
 
 /* ---------------- ۵ | خدمات دیگر ---------------- */
@@ -761,15 +846,16 @@ html.js .slide.is-active .chart__col em {
 .tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
 .tile, .feature {
   border-radius: 20px;
-  background: linear-gradient(180deg, rgba(19, 28, 49, .9), rgba(12, 18, 33, .92));
+  background: var(--card-bg);
   border: 1px solid var(--line);
+  box-shadow: var(--tile-shadow);
   transition: translate .3s var(--ease-out), border-color .3s ease;
 }
 .tile { padding: 22px 20px; }
-.tile:hover, .feature:hover { translate: 0 -4px; border-color: rgba(52, 224, 194, .4); }
+.tile:hover, .feature:hover { translate: 0 -4px; border-color: var(--accent-line); }
 .tile__ico, .feature__ico {
   width: 46px; height: 46px; flex: none; display: grid; place-items: center; border-radius: 14px;
-  color: var(--accent); background: rgba(52, 224, 194, .1); border: 1px solid rgba(52, 224, 194, .2);
+  color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-line);
 }
 .tile__ico { margin-bottom: 16px; }
 .tile__ico .ico, .feature__ico .ico { width: 23px; height: 23px; }
@@ -802,8 +888,8 @@ html.js .slide.is-active .steps__line i {
   width: 56px; height: 56px; margin: 0 auto 16px;
   display: grid; place-items: center; border-radius: 50%;
   font-size: 21px; font-weight: 900; color: var(--accent);
-  background: var(--bg); border: 2px solid rgba(52, 224, 194, .6);
-  box-shadow: 0 0 0 7px var(--bg), 0 0 32px -4px rgba(52, 224, 194, .55);
+  background: var(--bg); border: 2px solid var(--accent);
+  box-shadow: 0 0 0 7px var(--bg), 0 0 32px -4px var(--accent-glow);
 }
 .step h3 { font-size: 18px; }
 .step p { margin: 0; font-size: 14.5px; line-height: 1.9; color: var(--ink-soft); }
@@ -818,7 +904,7 @@ html.js .slide.is-active .steps__line i {
 .industries li {
   padding: 4px 14px; border-radius: 999px;
   font-size: 13.5px; color: var(--ink);
-  background: rgba(123, 140, 255, .08); border: 1px solid rgba(123, 140, 255, .25);
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
 }
 
 /* ---------------- ۸ | تماس ---------------- */
@@ -830,16 +916,14 @@ html.js .slide.is-active .steps__line i {
 .end > .end__mail { font-size: 14px; color: var(--ink-mute); }
 .end__mail a { color: var(--accent); text-decoration: none; font-weight: 700; }
 .end__mail a:hover { text-decoration: underline; }
-.end__sign { display: inline-flex; align-items: center; gap: 12px; margin-top: 30px; color: var(--ink-soft); }
-.end__sign > img { display: block; border-radius: 23%; box-shadow: 0 10px 28px -10px rgba(45, 59, 232, .8); }
-.end__brand { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; font-size: 12.5px; line-height: 1.4; }
-.end__brand img { display: block; height: 16px; width: auto; }
+.end__sign { display: inline-flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 30px; font-size: 12.5px; line-height: 1.5; color: var(--ink-mute); }
+.end__sign img { height: 34px; width: auto; }
 .end > .end__copy { margin: 6px 0 0; font-size: 12px; color: var(--ink-mute); }
 
 /* ---------------- بدون جاوااسکریپت ----------------
    بخش‌ها زیر هم و با اسکرول عادی دیده می‌شوند */
 
-html.no-js .menu-btn, html.no-js .dots, html.no-js .pager, html.no-js .progress { display: none; }
+html.no-js .menu-btn, html.no-js .theme-btn, html.no-js .dots, html.no-js .pager, html.no-js .progress { display: none; }
 
 /* ---------------- واکنش‌گرایی ---------------- */
 
@@ -858,6 +942,7 @@ html.no-js .menu-btn, html.no-js .dots, html.no-js .pager, html.no-js .progress 
 }
 
 @media (max-width: 1100px) {
+  .brand__tag { display: none; }
   .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
@@ -893,8 +978,9 @@ html.no-js .menu-btn, html.no-js .dots, html.no-js .pager, html.no-js .progress 
 
 @media (max-width: 600px) {
   .head-cta { display: none; }
-  .brand__mark { width: 36px; height: 36px; }
-  .brand__word { height: 12px; }
+  .brand__logo { height: 24px; }
+  .brand__tag { display: none; }
+  .head-actions { gap: 8px; }
 
   /* روی گوشی، کشیدن انگشت راه اصلی جابه‌جایی است و نوار بالا جای بخش را نشان می‌دهد؛
      دکمه‌های شناور روی محتوا می‌افتادند */

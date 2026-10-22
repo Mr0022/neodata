@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>نئودیتا | تحلیل داده، داشبورد و راه‌حل‌های هوش مصنوعی برای کسب‌وکارها</title>
 <meta name="description" content="نئودیتا به کسب‌وکارها کمک می‌کند با تحلیل داده، داشبوردهای مدیریتی، چت‌بات هوشمند سازمانی (RAG)، ایجنت‌ها و اتوماسیون و بینایی ماشین، تصمیم‌های بهتری بگیرند." />
-<meta name="theme-color" content="#070b16" />
+<meta name="theme-color" content="#f6f8fc" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="نئودیتا" />
 <meta property="og:locale" content="fa_IR" />
@@ -24,6 +24,13 @@
   setTimeout(function () {
     if (!window.neodataReady) document.documentElement.classList.replace('js', 'no-js');
   }, 6000);
+  // پوسته: روشن پیش‌فرض است؛ اگر بازدیدکننده قبلاً تیره را انتخاب کرده، همان پیش از نخستین رنگ‌آمیزی اعمال می‌شود
+  (function () {
+    var theme = 'light';
+    try { if (localStorage.getItem('neodata-theme') === 'dark') theme = 'dark'; } catch (e) {}
+    document.documentElement.setAttribute('data-theme', theme);
+    if (theme === 'dark') document.querySelector('meta[name="theme-color"]').setAttribute('content', '#070b16');
+  })();
 </script>
 </head>
 <body>
@@ -53,6 +60,8 @@
   <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
   <symbol id="i-up" viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></symbol>
   <symbol id="i-down" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4"/></symbol>
 </svg>
 
 <!-- پس‌زمینه‌ی ثابت: رنگ آن در همه‌ی بخش‌ها یکی است و فقط شبکه‌ی داده با هر جابه‌جایی کمی جریان می‌گیرد -->
@@ -66,14 +75,16 @@
 <!-- هدر -->
 <header class="site-head">
   <a class="brand" href="#hero" data-goto="hero">
-    <img class="brand__mark" src="logo/5.svg" alt="" width="40" height="40" />
-    <span class="brand__text">
-      <img class="brand__word" src="logo/7.svg" alt="نئودیتا" width="125" height="14" />
-      <small>تحلیل داده و هوش مصنوعی</small>
-    </span>
+    <img class="brand__logo logo--light" src="logo/4.svg" alt="نئودیتا" width="135" height="28" />
+    <img class="brand__logo logo--dark" src="logo/12.svg" alt="نئودیتا" width="135" height="28" />
+    <span class="brand__tag">تحلیل داده و هوش مصنوعی</span>
   </a>
   <div class="head-actions">
     <a class="btn btn--primary btn--sm head-cta" href="#contact" data-goto="contact">درخواست مشاوره</a>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="تغییر به پوسته‌ی تیره">
+      <svg class="ico ico--moon" aria-hidden="true"><use href="#i-moon"/></svg>
+      <svg class="ico ico--sun" aria-hidden="true"><use href="#i-sun"/></svg>
+    </button>
     <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menuPanel">
       <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
       <em class="sr-only">فهرست بخش‌ها</em>
@@ -454,11 +465,9 @@
       </div>
       <p class="end__mail anim">یا مستقیم بنویسید: <a href="mailto:info@neodata.ir" dir="ltr">info@neodata.ir</a></p>
       <div class="end__sign anim">
-        <img src="logo/5.svg" alt="" width="46" height="46" />
-        <span class="end__brand">
-          <img src="logo/7.svg" alt="نئودیتا" width="143" height="16" />
-          <span>تحلیل داده و هوش مصنوعی</span>
-        </span>
+        <img class="logo--light" src="logo/4.svg" alt="نئودیتا" width="164" height="34" />
+        <img class="logo--dark" src="logo/12.svg" alt="نئودیتا" width="164" height="34" />
+        <span>تحلیل داده و هوش مصنوعی</span>
       </div>
       <p class="end__copy anim">© ۱۴۰۵ نئودیتا · همه‌ی حقوق محفوظ است</p>
     </div>

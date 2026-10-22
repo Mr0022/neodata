@@ -358,6 +358,15 @@
     const LINK = 150;                          // بیشینه‌ی فاصله‌ی دو نقطه‌ی متصل
     const MOUSE_LINK = 190;
     let w = 0, h = 0, pts = [], raf = 0, flow = 0;
+    // رنگ‌ها از متغیرهای CSS پوسته‌ی جاری خوانده می‌شوند (--net-a و …)
+    let colA = '', colB = '', colLine = '', nodeAlpha = 0, lineAlpha = 0;
+    function readColors() {
+      const cs = getComputedStyle(root);
+      const v = (name) => cs.getPropertyValue(name).trim();
+      colA = v('--net-a'); colB = v('--net-b'); colLine = v('--net-line');
+      nodeAlpha = parseFloat(v('--net-alpha')) || 0.6;
+      lineAlpha = parseFloat(v('--net-line-alpha')) || 0.15;
+    }
     const mouse = { x: -1e4, y: -1e4 };
 
     const make = () => ({
@@ -401,18 +410,18 @@
           const dx = a.x - b.x, dy = a.y - b.y;
           const d2 = dx * dx + dy * dy;
           if (d2 > LINK * LINK) continue;
-          ctx.strokeStyle = `rgba(120, 190, 225, ${((1 - Math.sqrt(d2) / LINK) * 0.2).toFixed(3)})`;
+          ctx.strokeStyle = `rgba(${colLine}, ${((1 - Math.sqrt(d2) / LINK) * lineAlpha).toFixed(3)})`;
           ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
         }
         const mx = a.x - mouse.x, my = a.y - mouse.y;
         const md2 = mx * mx + my * my;
         if (md2 < MOUSE_LINK * MOUSE_LINK) {
-          ctx.strokeStyle = `rgba(52, 224, 194, ${((1 - Math.sqrt(md2) / MOUSE_LINK) * 0.35).toFixed(3)})`;
+          ctx.strokeStyle = `rgba(${colA}, ${((1 - Math.sqrt(md2) / MOUSE_LINK) * lineAlpha * 1.8).toFixed(3)})`;
           ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
         }
       }
       for (const p of pts) {
-        ctx.fillStyle = p.violet ? 'rgba(123, 140, 255, .75)' : 'rgba(52, 224, 194, .7)';
+        ctx.fillStyle = `rgba(${p.violet ? colB : colA}, ${nodeAlpha})`;
         ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
       }
     }
@@ -421,6 +430,7 @@
     const start = () => { if (!raf && !reduceMotion) raf = requestAnimationFrame(loop); };
     const stop = () => { cancelAnimationFrame(raf); raf = 0; };
 
+    readColors();
     resize();
     draw();
     start();
@@ -439,8 +449,33 @@
 
     return {
       kick(dir) { if (!reduceMotion) flow += dir * 9; },
+      recolor() { readColors(); draw(); },
     };
   })();
+
+  /* ---------------------------------------------------------
+     پوسته‌ی روشن / تیره
+
+     روشن پیش‌فرض است. اسکریپت درون <head> انتخاب قبلی را پیش از نخستین
+     رنگ‌آمیزی اعمال می‌کند؛ اینجا فقط دکمه، رنگ نوار مرورگر و رنگ‌های بوم
+     با پوسته هم‌گام می‌شوند.
+     --------------------------------------------------------- */
+
+  const themeBtn = $('#themeBtn');
+  const themeMeta = $('meta[name="theme-color"]');
+
+  function applyTheme(theme, remember) {
+    root.setAttribute('data-theme', theme);
+    themeBtn.setAttribute('aria-label', theme === 'dark' ? 'تغییر به پوسته‌ی روشن' : 'تغییر به پوسته‌ی تیره');
+    if (themeMeta) themeMeta.setAttribute('content', getComputedStyle(root).getPropertyValue('--bg').trim());
+    if (remember) {
+      try { localStorage.setItem('neodata-theme', theme); } catch (_) { /* حالت خصوصی */ }
+    }
+    if (net) net.recolor();
+  }
+  applyTheme(root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light', false);
+  themeBtn.addEventListener('click', () =>
+    applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark', true));
 
   /* ---------------------------------------------------------
      خانه: واژه‌ی چرخان عنوان

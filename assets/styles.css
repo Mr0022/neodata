@@ -1017,7 +1017,14 @@ html.js .slide.is-active .chart__col em {
 
 /* ---------------- ۶ | روش کار ---------------- */
 
-.steps { position: relative; }
+/* چهار گام یکی‌یکی ظاهر می‌شوند و خط پیشرفت هم‌زمان از هر گام به گام بعد کشیده می‌شود:
+   هر گام --step-gap پس از گام قبلی شروع می‌شود و همان‌قدر طول می‌کشد، پس کل نمایش
+   ۴ × --step-gap (۲ ثانیه) است. خط با سرعت ثابت درست وقتی به هر شماره می‌رسد که گامش ظاهر می‌شود. */
+.steps {
+  position: relative;
+  --steps-start: calc(var(--in-delay) + 250ms);
+  --step-gap: 500ms;
+}
 .steps__line {
   position: absolute; top: 27px; right: 12.5%; left: 12.5%; height: 2px;
   background: var(--line);
@@ -1029,11 +1036,30 @@ html.js .slide.is-active .chart__col em {
 }
 html.js .steps__line i { transform: scaleX(0); }
 html.js .slide.is-active .steps__line i {
-  animation: draw-x 1.5s var(--ease-out) both;
-  animation-delay: calc(var(--in-delay) + 250ms);
+  animation: draw-x calc(var(--step-gap) * 3) linear both;
+  animation-delay: var(--steps-start);
 }
 @keyframes draw-x { from { transform: scaleX(0); } to { transform: none; } }
 @keyframes draw-y { from { transform: scaleY(0); } to { transform: none; } }
+
+/* ترتیب هر گام (--k) برای زمان‌بندی ظهورش */
+.steps__list > :nth-child(2) { --k: 1; }
+.steps__list > :nth-child(3) { --k: 2; }
+.steps__list > :nth-child(4) { --k: 3; }
+html.js .slide.is-active .step.anim {
+  animation: step-in var(--step-gap) var(--ease-out) both;
+  animation-delay: calc(var(--steps-start) + var(--k, 0) * var(--step-gap));
+}
+/* شماره‌ی گام هنگام رسیدن خط کمی بزرگ می‌شود و سر جایش می‌نشیند */
+html.js .slide.is-active .step.anim .step__num {
+  animation: step-num var(--step-gap) var(--ease-out) both;
+  animation-delay: calc(var(--steps-start) + var(--k, 0) * var(--step-gap));
+}
+@keyframes step-in {
+  from { opacity: 0; transform: translate3d(0, 22px, 0); filter: blur(8px); }
+  to   { opacity: 1; transform: none; filter: none; }
+}
+@keyframes step-num { from { scale: .55; } 60% { scale: 1.1; } to { scale: 1; } }
 
 .steps__list { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; }
 .step { text-align: center; padding: 0 4px; }
@@ -1390,6 +1416,9 @@ html.no-js .menu-btn, html.no-js .theme-btn, html.no-js .dots, html.no-js .pager
   html.js .slide.is-leaving[data-dir="prev"] .anim { animation-name: fade-out; }
   html.js .slide.is-active .chart__col i,
   html.js .slide.is-active .steps__line i { animation: none; transform: none; }
+  /* گام‌های روش کار همچنان یکی‌یکی می‌آیند، اما فقط با محو، بی‌حرکت */
+  html.js .slide.is-active .step.anim { animation-name: fade-in; }
+  html.js .slide.is-active .step.anim .step__num { animation: none; }
   .scroll-hint i::after, .cam__belt, .rec i, .typing i, .flow__status::before { animation: none; }
   .page-hero > * { animation-name: fade-in; }
   .progress span, .rotator, .rotator > span { transition: none; }

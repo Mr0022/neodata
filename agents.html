@@ -61,6 +61,7 @@
   <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M3 3l18 18"/><path d="M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17.6 17.6 0 0 1-3.2 4.2M6.6 6.6C3.9 8.4 2 12 2 12s3.6 7 10 7a9.7 9.7 0 0 0 5.4-1.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></symbol>
   <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
   <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></symbol>
   <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5.2 3.5h3.3l1.7 4.3-2.2 1.4a11.5 11.5 0 0 0 6.8 6.8l1.4-2.2 4.3 1.7v3.3a1.7 1.7 0 0 1-1.8 1.7C10.9 20.1 3.9 13.1 3.5 5.3a1.7 1.7 0 0 1 1.7-1.8z"/></symbol>
   <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></symbol>
   <symbol id="i-trend-down" viewBox="0 0 24 24"><path d="M3 7l6 6 4-4 8 8"/><path d="M15 17h6v-6"/></symbol>
@@ -163,6 +164,32 @@
       <a class="btn btn--primary btn--lg" href="consult.html">درخواست مشاوره رایگان <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       <a class="btn btn--ghost btn--lg" href="index.html#agents">نمونه‌ی تعاملی را ببینید</a>
     </div>
+  </section>
+
+  <!-- نگاه کلی: یک شکل تعاملی ساده (assets/viz.js)؛ بی‌جاوااسکریپت هم کامل دیده می‌شود -->
+  <section aria-labelledby="t-viz">
+    <header class="slide__head" data-reveal>
+      <p class="eyebrow">نگاه کلی</p>
+      <h2 id="t-viz">کار روزمره خودکار، تصمیم حساس با شما</h2>
+      <p>ایجنت کارهای تکراری را انجام می‌دهد و هر جا تصمیم حساسی لازم باشد، آن را به همکاران شما می‌سپارد.</p>
+    </header>
+    <figure class="viz card" data-viz="route" data-reveal>
+      <div class="viz__bar">
+        <div class="seg" role="group" aria-label="نوع کار">
+          <button type="button" aria-pressed="true" data-route="routine" data-note="کارهای روزمره، مثل ثبت سفارش یا به‌روز کردن پرونده‌ی مشتری، خودکار و بی‌وقفه انجام می‌شوند.">کار روزمره</button>
+          <button type="button" aria-pressed="false" data-route="sensitive" data-note="تصمیم‌های حساس، مثل تأیید پیش‌فاکتور یا پرداخت، پیش از اجرا به همکار شما سپرده می‌شوند.">تصمیم حساس</button>
+        </div>
+        <span class="tag">شبیه‌سازی</span>
+      </div>
+      <div class="viz-route wired" data-route="routine" data-wires="in:agent:r-all agent:sys:r-routine agent:human:r-sensitive human:sys:r-sensitive">
+        <svg class="wires" aria-hidden="true"></svg>
+        <div class="node viz-route__box" data-node="in"><b>ورودی‌ها</b><span class="viz-chips"><span>ایمیل</span><span>فرم</span><span>پیام‌رسان</span></span></div>
+        <div class="node viz-route__agent" data-node="agent"><svg class="ico" aria-hidden="true"><use href="#i-spark"/></svg><span><b>ایجنت هوشمند</b><small>می‌خواند، بررسی می‌کند، آماده می‌کند</small></span></div>
+        <div class="node" data-node="human"><svg class="ico" aria-hidden="true"><use href="#i-user"/></svg><span><b>تأیید انسانی</b><small>فقط برای تصمیم‌های حساس</small></span></div>
+        <div class="node viz-route__box" data-node="sys"><b>سامانه‌ها</b><span class="viz-chips"><span>CRM</span><span>ERP</span><span>گزارش</span></span></div>
+      </div>
+      <p class="viz__note" aria-live="polite">کارهای روزمره، مثل ثبت سفارش یا به‌روز کردن پرونده‌ی مشتری، خودکار و بی‌وقفه انجام می‌شوند.</p>
+    </figure>
   </section>
 
   <!-- چه مشکلی را حل می‌کند -->
@@ -354,5 +381,6 @@
 </footer>
 
 <script src="assets/site.js?v=1"></script>
+<script src="assets/viz.js?v=1"></script>
 </body>
 </html>

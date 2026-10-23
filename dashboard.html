@@ -61,6 +61,7 @@
   <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M3 3l18 18"/><path d="M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17.6 17.6 0 0 1-3.2 4.2M6.6 6.6C3.9 8.4 2 12 2 12s3.6 7 10 7a9.7 9.7 0 0 0 5.4-1.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></symbol>
   <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
   <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></symbol>
   <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5.2 3.5h3.3l1.7 4.3-2.2 1.4a11.5 11.5 0 0 0 6.8 6.8l1.4-2.2 4.3 1.7v3.3a1.7 1.7 0 0 1-1.8 1.7C10.9 20.1 3.9 13.1 3.5 5.3a1.7 1.7 0 0 1 1.7-1.8z"/></symbol>
   <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></symbol>
   <symbol id="i-trend-down" viewBox="0 0 24 24"><path d="M3 7l6 6 4-4 8 8"/><path d="M15 17h6v-6"/></symbol>
@@ -163,6 +164,64 @@
       <a class="btn btn--primary btn--lg" href="consult.html">درخواست مشاوره رایگان <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       <a class="btn btn--ghost btn--lg" href="index.html#dashboard">نمونه‌ی تعاملی را ببینید</a>
     </div>
+  </section>
+
+  <!-- نگاه کلی: یک شکل تعاملی ساده (assets/viz.js)؛ بی‌جاوااسکریپت هم کامل دیده می‌شود -->
+  <section aria-labelledby="t-viz">
+    <header class="slide__head" data-reveal>
+      <p class="eyebrow">نگاه کلی</p>
+      <h2 id="t-viz">از داده‌های پراکنده تا یک داشبورد</h2>
+      <p>داده‌ها از نرم‌افزارهایی که امروز دارید جمع می‌شوند و در یک نگاه دیده می‌شوند.</p>
+    </header>
+    <figure class="viz card" data-viz="dash" data-series="{&quot;months&quot;: [&quot;فروردین&quot;, &quot;اردیبهشت&quot;, &quot;خرداد&quot;, &quot;تیر&quot;, &quot;مرداد&quot;, &quot;شهریور&quot;, &quot;مهر&quot;, &quot;آبان&quot;, &quot;آذر&quot;, &quot;دی&quot;, &quot;بهمن&quot;, &quot;اسفند&quot;], &quot;metrics&quot;: [{&quot;name&quot;: &quot;فروش&quot;, &quot;unit&quot;: &quot;میلیارد تومان&quot;, &quot;dec&quot;: 1, &quot;max&quot;: 20, &quot;values&quot;: [9.8, 11.2, 10.6, 12.9, 13.4, 12.1, 14.8, 15.6, 14.9, 16.7, 16.4, 18.4]}, {&quot;name&quot;: &quot;سود&quot;, &quot;unit&quot;: &quot;میلیارد تومان&quot;, &quot;dec&quot;: 1, &quot;max&quot;: 3.5, &quot;values&quot;: [1.4, 1.7, 1.5, 2.0, 2.1, 1.8, 2.4, 2.6, 2.3, 2.8, 2.7, 3.1]}, {&quot;name&quot;: &quot;سفارش‌ها&quot;, &quot;unit&quot;: &quot;سفارش&quot;, &quot;dec&quot;: 0, &quot;max&quot;: 2500, &quot;values&quot;: [1450, 1610, 1540, 1790, 1860, 1720, 2010, 2130, 2050, 2260, 2210, 2384]}]}" data-reveal>
+      <div class="viz__bar">
+        <b>منابع داده ← داشبورد مدیریتی</b>
+        <span class="tag">نمونه‌ی نمایشی</span>
+      </div>
+      <div class="viz-dash wired" data-wires="s0:panel s1:panel s2:panel s3:panel">
+        <svg class="wires" aria-hidden="true"></svg>
+        <ul class="viz-dash__sources" aria-label="منابع داده">
+        <li class="node" data-node="s0"><svg class="ico" aria-hidden="true"><use href="#i-doc"/></svg><span>اکسل</span></li>
+        <li class="node" data-node="s1"><svg class="ico" aria-hidden="true"><use href="#i-invoice"/></svg><span>حسابداری</span></li>
+        <li class="node" data-node="s2"><svg class="ico" aria-hidden="true"><use href="#i-chart"/></svg><span>فروش</span></li>
+        <li class="node" data-node="s3"><svg class="ico" aria-hidden="true"><use href="#i-box"/></svg><span>انبار</span></li>
+        </ul>
+        <div class="viz-dash__panel node" data-node="panel">
+          <div class="viz-dash__top">
+            <p class="viz-dash__kpi">
+              <span class="viz-dash__label">فروش اسفند</span>
+              <strong class="viz-dash__value">۱۸٫۴</strong>
+              <small class="viz-dash__unit">میلیارد تومان</small>
+              <em class="viz-dash__delta">▲ ۱۲٪ نسبت به ماه قبل</em>
+            </p>
+            <div class="seg" role="group" aria-label="شاخص نمودار">
+            <button type="button" aria-pressed="true">فروش</button>
+            <button type="button" aria-pressed="false">سود</button>
+            <button type="button" aria-pressed="false">سفارش‌ها</button>
+            </div>
+          </div>
+          <div class="viz-dash__chart" role="img" aria-label="فروش ماهانه (نمونه‌ی نمایشی): از ۹٫۸ در فروردین تا ۱۸٫۴ میلیارد تومان در اسفند">
+            <div class="viz-dash__cols">
+            <span class="viz-dash__col" style="--v: 0.490" data-tip="فروردین · ۹٫۸ میلیارد تومان"><i></i></span>
+            <span class="viz-dash__col" style="--v: 0.560" data-tip="اردیبهشت · ۱۱٫۲ میلیارد تومان"><i></i></span>
+            <span class="viz-dash__col" style="--v: 0.530" data-tip="خرداد · ۱۰٫۶ میلیارد تومان"><i></i></span>
+            <span class="viz-dash__col" style="--v: 0.645" data-tip="تیر · ۱۲٫۹ میلیارد تومان"><i></i></span>
+            <span class="viz-dash__col" style="--v: 0.670" data-tip="مرداد · ۱۳٫۴ میلیارد تومان"><i></i></span>
+            <span class="viz-dash__col" style="--v: 0.605" data-tip="شهریور · ۱۲٫۱ میلیارد تومان"><i></i></span>
+            <span class="viz-dash__col" style="--v: 0.740" data-tip="مهر · ۱۴٫۸ میلیارد تومان"><i></i></span>
+            <span class="viz-dash__col" style="--v: 0.780" data-tip="آبان · ۱۵٫۶ میلیارد تومان"><i></i></span>
+            <span class="viz-dash__col" style="--v: 0.745" data-tip="آذر · ۱۴٫۹ میلیارد تومان"><i></i></span>
+            <span class="viz-dash__col" style="--v: 0.835" data-tip="دی · ۱۶٫۷ میلیارد تومان"><i></i></span>
+            <span class="viz-dash__col" style="--v: 0.820" data-tip="بهمن · ۱۶٫۴ میلیارد تومان"><i></i></span>
+            <span class="viz-dash__col" style="--v: 0.920" data-tip="اسفند · ۱۸٫۴ میلیارد تومان"><i></i></span>
+            </div>
+            <div class="viz-dash__months" aria-hidden="true"><span style="grid-column: 1">فروردین</span><span style="grid-column: 4">تیر</span><span style="grid-column: 7">مهر</span><span style="grid-column: 10">دی</span><span style="grid-column: 12">اسفند</span></div>
+            <div class="viz-dash__tip" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+      <figcaption class="viz__cap">داده‌ها از نرم‌افزارهایی که دارید جمع می‌شوند و در یک داشبورد کنار هم دیده می‌شوند. شاخص را عوض کنید یا نشانگر را روی ستون‌ها ببرید.</figcaption>
+    </figure>
   </section>
 
   <!-- چه مشکلی را حل می‌کند -->
@@ -337,5 +396,6 @@
 </footer>
 
 <script src="assets/site.js?v=1"></script>
+<script src="assets/viz.js?v=1"></script>
 </body>
 </html>

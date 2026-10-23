@@ -61,6 +61,7 @@
   <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M3 3l18 18"/><path d="M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17.6 17.6 0 0 1-3.2 4.2M6.6 6.6C3.9 8.4 2 12 2 12s3.6 7 10 7a9.7 9.7 0 0 0 5.4-1.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></symbol>
   <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
   <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></symbol>
   <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5.2 3.5h3.3l1.7 4.3-2.2 1.4a11.5 11.5 0 0 0 6.8 6.8l1.4-2.2 4.3 1.7v3.3a1.7 1.7 0 0 1-1.8 1.7C10.9 20.1 3.9 13.1 3.5 5.3a1.7 1.7 0 0 1 1.7-1.8z"/></symbol>
   <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></symbol>
   <symbol id="i-trend-down" viewBox="0 0 24 24"><path d="M3 7l6 6 4-4 8 8"/><path d="M15 17h6v-6"/></symbol>
@@ -163,6 +164,34 @@
       <a class="btn btn--primary btn--lg" href="consult.html">درخواست مشاوره رایگان <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       <a class="btn btn--ghost btn--lg" href="tel:+989124140730"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg> تماس: <span dir="ltr">۰۹۱۲ ۴۱۴۰ ۷۳۰</span></a>
     </div>
+  </section>
+
+  <!-- نگاه کلی: یک شکل تعاملی ساده (assets/viz.js)؛ بی‌جاوااسکریپت هم کامل دیده می‌شود -->
+  <section aria-labelledby="t-viz">
+    <header class="slide__head" data-reveal>
+      <p class="eyebrow">نگاه کلی</p>
+      <h2 id="t-viz">از کلاف درهم تا یک منبع</h2>
+      <p>داده‌های سازمان را پیش و پس از یکپارچه‌سازی مقایسه کنید.</p>
+    </header>
+    <figure class="viz card" data-viz="integrate" data-reveal>
+      <div class="viz__bar">
+        <div class="seg" role="group" aria-label="وضعیت داده‌ها">
+          <button type="button" aria-pressed="false" data-state="before" data-note="پیش از یکپارچه‌سازی: هر گزارش از چند فایل و نرم‌افزار جدا ساخته می‌شود و پیوندها دستی و شکننده‌اند.">پیش از یکپارچه‌سازی</button>
+          <button type="button" aria-pressed="true" data-state="after" data-note="پس از یکپارچه‌سازی: داده‌ها خودکار در یک انبار داده جمع می‌شوند و همه‌ی گزارش‌ها از همان یک منبع ساخته می‌شوند.">پس از یکپارچه‌سازی</button>
+        </div>
+      </div>
+      <div class="viz-int wired" data-state="after" data-wires="n0:n3:w-before:wire--straight n1:n4:w-before:wire--straight n2:n5:w-before:wire--straight n0:n2:w-before:wire--straight n1:n5:w-before:wire--straight n3:n5:w-before:wire--straight n2:n4:w-before:wire--straight n0:n4:w-before:wire--straight n0:hub:w-after:wire--straight n1:hub:w-after:wire--straight n2:hub:w-after:wire--straight n3:hub:w-after:wire--straight n4:hub:w-after:wire--straight n5:hub:w-after:wire--straight">
+        <svg class="wires" aria-hidden="true"></svg>
+        <div class="node viz-int__node" data-node="n0" style="left: 50.0%; top: 12.0%"><svg class="ico" aria-hidden="true"><use href="#i-doc"/></svg><span>اکسل</span></div>
+        <div class="node viz-int__node" data-node="n1" style="left: 84.6%; top: 31.0%"><svg class="ico" aria-hidden="true"><use href="#i-invoice"/></svg><span>حسابداری</span></div>
+        <div class="node viz-int__node" data-node="n2" style="left: 84.6%; top: 69.0%"><svg class="ico" aria-hidden="true"><use href="#i-chart"/></svg><span>فروش</span></div>
+        <div class="node viz-int__node" data-node="n3" style="left: 50.0%; top: 88.0%"><svg class="ico" aria-hidden="true"><use href="#i-box"/></svg><span>انبار</span></div>
+        <div class="node viz-int__node" data-node="n4" style="left: 15.4%; top: 69.0%"><svg class="ico" aria-hidden="true"><use href="#i-crm"/></svg><span>CRM</span></div>
+        <div class="node viz-int__node" data-node="n5" style="left: 15.4%; top: 31.0%"><svg class="ico" aria-hidden="true"><use href="#i-trend"/></svg><span>گزارش‌ها</span></div>
+        <div class="node viz-int__hub" data-node="hub"><svg class="ico" aria-hidden="true"><use href="#i-db"/></svg><span><b>انبار داده</b><small>یک منبع قابل‌اعتماد</small></span></div>
+      </div>
+      <p class="viz__note" aria-live="polite">پس از یکپارچه‌سازی: داده‌ها خودکار در یک انبار داده جمع می‌شوند و همه‌ی گزارش‌ها از همان یک منبع ساخته می‌شوند.</p>
+    </figure>
   </section>
 
   <!-- چه مشکلی را حل می‌کند -->
@@ -350,5 +379,6 @@
 </footer>
 
 <script src="assets/site.js?v=1"></script>
+<script src="assets/viz.js?v=1"></script>
 </body>
 </html>

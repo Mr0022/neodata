@@ -61,6 +61,7 @@
   <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M3 3l18 18"/><path d="M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17.6 17.6 0 0 1-3.2 4.2M6.6 6.6C3.9 8.4 2 12 2 12s3.6 7 10 7a9.7 9.7 0 0 0 5.4-1.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></symbol>
   <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
   <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></symbol>
   <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5.2 3.5h3.3l1.7 4.3-2.2 1.4a11.5 11.5 0 0 0 6.8 6.8l1.4-2.2 4.3 1.7v3.3a1.7 1.7 0 0 1-1.8 1.7C10.9 20.1 3.9 13.1 3.5 5.3a1.7 1.7 0 0 1 1.7-1.8z"/></symbol>
   <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></symbol>
   <symbol id="i-trend-down" viewBox="0 0 24 24"><path d="M3 7l6 6 4-4 8 8"/><path d="M15 17h6v-6"/></symbol>
@@ -163,6 +164,37 @@
       <a class="btn btn--primary btn--lg" href="consult.html">درخواست مشاوره رایگان <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       <a class="btn btn--ghost btn--lg" href="tel:+989124140730"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg> تماس: <span dir="ltr">۰۹۱۲ ۴۱۴۰ ۷۳۰</span></a>
     </div>
+  </section>
+
+  <!-- نگاه کلی: یک شکل تعاملی ساده (assets/viz.js)؛ بی‌جاوااسکریپت هم کامل دیده می‌شود -->
+  <section aria-labelledby="t-viz">
+    <header class="slide__head" data-reveal>
+      <p class="eyebrow">نگاه کلی</p>
+      <h2 id="t-viz">گذشته‌ی داده‌ها، تصویری از آینده</h2>
+      <p>مدل از روند و فصل‌های گذشته یاد می‌گیرد و ماه‌های پیش رو را با یک بازه‌ی محتمل پیش‌بینی می‌کند.</p>
+    </header>
+    <figure class="viz card" data-viz="forecast" data-chart="{&quot;labels&quot;: [&quot;اردیبهشت ۱۴۰۴&quot;, &quot;خرداد ۱۴۰۴&quot;, &quot;تیر ۱۴۰۴&quot;, &quot;مرداد ۱۴۰۴&quot;, &quot;شهریور ۱۴۰۴&quot;, &quot;مهر ۱۴۰۴&quot;, &quot;آبان ۱۴۰۴&quot;, &quot;آذر ۱۴۰۴&quot;, &quot;دی ۱۴۰۴&quot;, &quot;بهمن ۱۴۰۴&quot;, &quot;اسفند ۱۴۰۴&quot;, &quot;فروردین ۱۴۰۵&quot;, &quot;اردیبهشت ۱۴۰۵&quot;, &quot;خرداد ۱۴۰۵&quot;, &quot;تیر ۱۴۰۵&quot;, &quot;مرداد ۱۴۰۵&quot;, &quot;شهریور ۱۴۰۵&quot;, &quot;مهر ۱۴۰۵&quot;, &quot;آبان ۱۴۰۵&quot;, &quot;آذر ۱۴۰۵&quot;, &quot;دی ۱۴۰۵&quot;, &quot;بهمن ۱۴۰۵&quot;, &quot;اسفند ۱۴۰۵&quot;, &quot;فروردین ۱۴۰۶&quot;], &quot;values&quot;: [12.2, 10.8, 10.7, 9.9, 10.5, 10.0, 11.3, 12.6, 12.9, 14.2, 13.9, 14.7, 13.8, 13.5, 12.3, 12.5, 11.8, 12.6, 13.2, 14.2, 15.2, 16.0, 16.4, 16.4], &quot;lo&quot;: [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 12.4, 13.1, 13.8, 14.3, 14.4, 14.1], &quot;hi&quot;: [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 14.0, 15.3, 16.6, 17.7, 18.4, 18.7], &quot;actual&quot;: 18, &quot;min&quot;: 8, &quot;max&quot;: 20, &quot;unit&quot;: &quot;میلیارد تومان&quot;}" data-reveal>
+      <div class="viz__bar">
+        <label class="viz-range"><span>افق پیش‌بینی: <b>۳ ماه</b></span><input type="range" min="1" max="6" step="1" value="3" /></label>
+        <span class="tag">نمونه‌ی نمایشی</span>
+      </div>
+      <div class="viz-fc" role="img" aria-label="فروش ماهانه (نمونه‌ی نمایشی): فروش واقعی از اردیبهشت ۱۴۰۴ تا مهر ۱۴۰۵ و پیش‌بینی شش ماه بعد، با بازه‌ای که هرچه دورتر می‌رود پهن‌تر می‌شود">
+        <svg class="viz-fc__plot" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true">
+          <defs><clipPath id="fc-clip"><rect class="viz-fc__clip" x="0" y="-20" width="1000" height="340"/></clipPath></defs>
+          <g class="viz-fc__grid"><line x1="0" x2="1000" y1="0" y2="0"/><line x1="0" x2="1000" y1="75" y2="75"/><line x1="0" x2="1000" y1="150" y2="150"/><line x1="0" x2="1000" y1="225" y2="225"/><line x1="0" x2="1000" y1="300" y2="300"/></g>
+          <g clip-path="url(#fc-clip)"><path class="viz-fc__band" d="M260.9 185.0L217.4 150.0L173.9 117.5L130.4 85.0L87.0 57.5L43.5 40.0L0.0 32.5L0.0 147.5L43.5 140.0L87.0 142.5L130.4 155.0L173.9 172.5L217.4 190.0Z"/><path class="viz-fc__pred" d="M260.9 185.0L217.4 170.0L173.9 145.0L130.4 120.0L87.0 100.0L43.5 90.0L0.0 90.0"/></g>
+          <line class="viz-fc__now" x1="260.9" x2="260.9" y1="0" y2="300"/>
+          <path class="viz-fc__actual" d="M1000.0 195.0L956.5 230.0L913.0 232.5L869.6 252.5L826.1 237.5L782.6 250.0L739.1 217.5L695.7 185.0L652.2 177.5L608.7 145.0L565.2 152.5L521.7 132.5L478.3 155.0L434.8 162.5L391.3 192.5L347.8 187.5L304.3 205.0L260.9 185.0"/>
+        </svg>
+        <span class="viz-fc__today" style="left: 26.09%">امروز</span>
+        <div class="viz-fc__labels" aria-hidden="true"><span data-i="2" class="is-minor" style="left: 91.30%">تیر ۰۴</span><span data-i="5" style="left: 78.26%">مهر ۰۴</span><span data-i="8" class="is-minor" style="left: 65.22%">دی ۰۴</span><span data-i="11" style="left: 52.17%">فروردین ۰۵</span><span data-i="14" class="is-minor" style="left: 39.13%">تیر ۰۵</span><span data-i="17" style="left: 26.09%">مهر ۰۵</span><span data-i="20" class="is-minor" style="left: 13.04%">دی ۰۵</span><span data-i="23" class="is-edge" style="left: 0.00%">فروردین ۰۶</span></div>
+        <span class="viz-fc__guide" aria-hidden="true"></span>
+        <span class="viz-fc__dot" aria-hidden="true"></span>
+        <div class="viz-fc__tip" aria-hidden="true"></div>
+      </div>
+      <ul class="viz-legend"><li class="is-actual">فروش واقعی</li><li class="is-pred">پیش‌بینی</li><li class="is-band">بازه‌ی محتمل</li></ul>
+      <figcaption class="viz__cap">فروش تا امروز و پیش‌بینی ماه‌های آینده؛ هرچه آینده دورتر باشد، بازه‌ی محتمل پهن‌تر می‌شود. افق را عوض کنید یا نشانگر را روی نمودار ببرید.</figcaption>
+    </figure>
   </section>
 
   <!-- چه مشکلی را حل می‌کند -->
@@ -335,5 +367,6 @@
 </footer>
 
 <script src="assets/site.js?v=1"></script>
+<script src="assets/viz.js?v=1"></script>
 </body>
 </html>

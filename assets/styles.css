@@ -141,7 +141,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 button { font: inherit; color: inherit; }
 ::selection { background: var(--accent-line); color: var(--ink); }
 
-a:focus-visible, button:focus-visible {
+a:focus-visible, button:focus-visible, input:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
   border-radius: 10px;
@@ -1344,6 +1344,234 @@ body > .site-foot {
 .end__more { margin: 34px 0 0; font-size: 13.5px; font-weight: 700; color: var(--ink-mute); }
 .chip-links { margin: 10px 0 0; }
 
+/* ---------------- شکل‌ها و نمودارهای صفحه‌های خدمت (assets/viz.js) ----------------
+   «نگاه کلی» هر خدمت در یک شکل ساده. نسخه‌ی بی‌جاوااسکریپت هر شکل در HTML کامل است؛
+   viz.js حرکت و تعامل را اضافه می‌کند. همه‌ی رنگ‌ها از متغیرهای پوسته‌اند. */
+
+.viz { max-width: 1000px; margin: 0 auto; padding: clamp(16px, 2.6vw, 28px); }
+.viz__bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-bottom: 20px; }
+.viz__bar > b { font-size: 15px; }
+.viz__bar .tag { margin-inline-start: auto; }
+.viz__cap, .viz__note { margin: 18px 0 0; text-align: center; font-size: 13.5px; line-height: 1.9; color: var(--ink-mute); }
+.viz__note { min-height: 3.8em; font-weight: 600; color: var(--ink-soft); }
+.viz__replay {
+  padding: 3px 12px; border-radius: 999px; cursor: pointer;
+  font-size: 12.5px; font-weight: 700; color: var(--ink-soft);
+  background: var(--control); border: 1px solid var(--line);
+  transition: color .2s ease, border-color .2s ease;
+}
+.viz__replay:hover { color: var(--accent); border-color: var(--accent-line); }
+
+/* دکمه‌های حالت (شاخص، نوع کار، کاربرد، …) */
+.seg {
+  display: inline-flex; flex-wrap: wrap; gap: 2px; padding: 4px; border-radius: 999px;
+  background: var(--surface-2); border: 1px solid var(--line);
+}
+.seg button {
+  padding: 6px 14px; border: 0; border-radius: 999px; background: none; cursor: pointer;
+  font-size: 13.5px; font-weight: 700; line-height: 1.6; color: var(--ink-soft);
+  transition: color .25s ease, background .25s ease;
+}
+.seg button:hover { color: var(--ink); }
+.seg button[aria-pressed="true"] { color: var(--on-accent); background: var(--btn-bg); box-shadow: 0 6px 16px -8px var(--accent-glow); }
+
+/* گره‌ها و سیم‌های میانشان؛ viz.js سیم‌ها را از روی data-wires می‌کشد */
+.wired { position: relative; --wire-dir: x; }
+.wires { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.wire { fill: none; stroke: var(--line); stroke-width: 2; stroke-linecap: round; transition: stroke .35s ease, opacity .45s ease; }
+.wire.is-live { stroke: var(--accent); stroke-dasharray: 7 7; animation: wire-flow .9s linear infinite; }
+@keyframes wire-flow { to { stroke-dashoffset: -14; } }
+.node {
+  position: relative; z-index: 1;
+  display: flex; align-items: center; gap: 10px; padding: 10px 14px;
+  border-radius: 14px; background: var(--card-bg); border: 1px solid var(--line);
+  font-size: 14px; font-weight: 700; line-height: 1.6; color: var(--ink); text-align: start;
+  transition: border-color .3s ease, box-shadow .3s ease, opacity .35s ease;
+}
+.node > .ico { width: 20px; height: 20px; color: var(--accent); }
+.node small { display: block; font-size: 12px; font-weight: 500; color: var(--ink-mute); }
+.viz-chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+.viz-chips span {
+  padding: 0 8px; border-radius: 999px; font-size: 12px; font-weight: 600; color: var(--ink-soft);
+  background: var(--surface-2); border: 1px solid var(--line-soft);
+}
+
+/* داشبورد: منابع در یک ستون، داشبورد در ستون دیگر */
+.viz-dash { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 64px; align-items: center; }
+.viz-dash__sources { display: grid; gap: 14px; }
+.viz-dash__panel { display: block; padding: 16px 16px 8px; }
+.viz-dash__top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; margin-bottom: 14px; }
+.viz-dash__kpi { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 8px; margin: 0; }
+.viz-dash__label { width: 100%; font-size: 12.5px; font-weight: 600; color: var(--ink-mute); }
+.viz-dash__value { font-size: 28px; font-weight: 900; line-height: 1.35; }
+.viz-dash__unit { font-size: 12px; font-weight: 500; color: var(--ink-mute); }
+.viz-dash__delta { font-style: normal; font-size: 12px; font-weight: 700; color: var(--good); }
+.viz-dash__chart { position: relative; height: 150px; margin-bottom: 30px; }
+.viz-dash__cols { position: absolute; inset: 0; display: flex; align-items: stretch; gap: 6px; border-bottom: 1px solid var(--line); }
+.viz-dash__col { flex: 1; display: flex; align-items: flex-end; justify-content: center; }
+.viz-dash__col i {
+  width: 100%; max-width: 26px; height: calc(var(--v) * 100%);
+  border-radius: 5px 5px 0 0; background: var(--series);
+  transition: height .7s var(--ease-out), background .2s ease;
+}
+.viz-dash__col:last-child i, .viz-dash__col:hover i { background: var(--series-current); }
+.viz-dash__months {
+  position: absolute; top: calc(100% + 6px); left: 0; right: 0;
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 6px;
+  font-size: 11px; color: var(--ink-mute);
+}
+.viz-dash__months span { justify-self: center; white-space: nowrap; }
+.viz-dash__tip, .viz-fc__tip {
+  position: absolute; z-index: 2; translate: -50% 0;
+  padding: 3px 10px; border-radius: 8px;
+  font-size: 12px; font-weight: 700; line-height: 1.7; white-space: nowrap;
+  background: var(--ink); color: var(--bg);
+  pointer-events: none; opacity: 0; transition: opacity .15s ease;
+}
+.viz-dash__tip.is-on { opacity: 1; }
+
+/* چت‌بات: چهار گام در یک ردیف و صحنه‌ی هر گام زیرشان */
+.viz-flow__steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px; }
+.viz-flow__step { width: 100%; height: 100%; flex-direction: column; justify-content: flex-start; gap: 8px; padding: 14px 10px; text-align: center; cursor: pointer; }
+.viz-flow__ico {
+  width: 44px; height: 44px; flex: none; display: grid; place-items: center; border-radius: 13px;
+  color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-line);
+  transition: color .3s ease, background .3s ease;
+}
+.viz-flow__ico .ico { width: 22px; height: 22px; }
+.viz-flow__txt b { display: block; font-size: 14.5px; }
+.viz-flow__step.is-done { border-color: var(--accent-line); }
+.viz-flow__step.is-on { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+.viz-flow__step.is-on .viz-flow__ico { color: var(--on-accent); background: var(--btn-bg); border-color: transparent; }
+.viz-flow__stage {
+  display: grid; place-items: center; min-height: 150px; margin-top: 22px; padding: 18px;
+  border-radius: 16px; background: var(--surface-2); border: 1px dashed var(--line);
+}
+.viz-flow__scene { display: none; flex-direction: column; align-items: center; gap: 10px; width: 100%; max-width: 560px; }
+.viz-flow__scene.is-on { display: flex; animation: fade-in .45s ease; }
+.viz-flow__scene .msg { align-self: center; max-width: 100%; margin: 0; }
+.viz-flow__hint { font-size: 12.5px; color: var(--ink-mute); text-align: center; }
+.viz-docs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.viz-docs .src { padding: 4px 10px; font-size: 13px; transition: opacity .4s ease, background .4s ease, border-color .4s ease; }
+.viz-flow__scene.is-on .viz-docs--scan .src { animation: doc-scan 1.6s ease-in-out infinite; animation-delay: calc(var(--k) * .18s); }
+@keyframes doc-scan { 0%, 100% { background: var(--accent-soft); } 30% { background: var(--accent-line); } }
+.viz-docs .src.is-out { opacity: .35; }
+.viz-docs .src.is-pick { color: var(--on-accent); background: var(--btn-bg); border-color: transparent; }
+.viz-docs .src.is-pick .ico { color: inherit; }
+
+/* ایجنت: ورودی‌ها ← ایجنت ← سامانه‌ها، و شاخه‌ی تأیید انسانی زیر آن */
+.viz-route { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 44px; row-gap: 28px; align-items: center; }
+.viz-route [data-node="in"] { grid-area: 1 / 1; }
+.viz-route [data-node="agent"] { grid-area: 1 / 2; }
+.viz-route [data-node="human"] { grid-area: 2 / 3; }
+.viz-route [data-node="sys"] { grid-area: 1 / 4; }
+.viz-route__box { display: block; }
+.viz-route__agent { border-color: var(--accent-line); }
+.viz-route__agent > .ico {
+  width: 24px; height: 24px; padding: 8px; box-sizing: content-box; border-radius: 12px;
+  color: var(--on-accent); background: var(--btn-bg);
+}
+.viz-route[data-route="routine"] [data-node="human"] { opacity: .45; }
+.viz-route[data-route="sensitive"] [data-node="human"] { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+
+/* بینایی ماشین: تصویر دوربین در هر دو پوسته تیره است، مثل نمایش صفحه‌ی اصلی */
+.viz-cam {
+  position: relative; overflow: hidden; border-radius: 16px;
+  background: radial-gradient(120% 90% at 50% 0%, #1b2643, #0a0f1d 72%);
+}
+.viz-cam svg { display: block; width: 100%; height: auto; }
+.viz-cam text { font-size: 15px; font-weight: 800; }
+.viz-cam [data-show] { opacity: 0; transition: opacity .45s ease; }
+.viz-cam[data-mode="count"] [data-show~="count"],
+.viz-cam[data-mode="qc"] [data-show~="qc"],
+.viz-cam[data-mode="safety"] [data-show~="safety"] { opacity: 1; }
+.cam-stripes { animation: cam-belt 1.1s linear infinite; }
+@keyframes cam-belt { to { transform: translateX(-28px); } }
+.cam-line { stroke: #8f99ff; stroke-width: 2; stroke-dasharray: 7 6; animation: cam-scan 2.4s ease-in-out infinite; }
+@keyframes cam-scan { 50% { opacity: .35; } }
+.cam-mark rect { fill: none; stroke: var(--c); stroke-width: 2.5; }
+/* برچسب کادر: هاله‌ی هم‌رنگ کادر پشت متن، بی‌نیاز به اندازه‌گیری متن */
+.cam-mark text { fill: #0a0f2e; stroke: var(--c); stroke-width: 9px; stroke-linejoin: round; paint-order: stroke; }
+.cam-alert rect { animation: cam-alert 1.2s ease-in-out infinite; }
+@keyframes cam-alert { 50% { stroke-opacity: .3; } }
+.cam-badge { fill: #e9eef8; stroke: rgba(7, 11, 22, .85); stroke-width: 12px; stroke-linejoin: round; paint-order: stroke; }
+.cam-zone { fill: #ff8a8a; }
+.cam-hud text { fill: #a9b3c8; font-size: 13px; font-weight: 700; }
+
+/* پیش‌بینی: زمان از راست به چپ؛ آینده سمت چپ، با بازه‌ی محتمل */
+.viz-range { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; font-size: 13.5px; font-weight: 700; color: var(--ink-soft); }
+.viz-range b { color: var(--accent); }
+.viz-range input { width: 150px; accent-color: var(--accent); cursor: pointer; }
+.viz-fc { position: relative; height: 250px; margin: 26px 0 34px; touch-action: pan-y; cursor: crosshair; }
+.viz-fc__plot { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.viz-fc__plot path, .viz-fc__plot line { vector-effect: non-scaling-stroke; }
+.viz-fc__grid line { stroke: var(--line-soft); stroke-width: 1; }
+.viz-fc__band { fill: var(--accent-soft); stroke: var(--accent-line); stroke-width: 1; }
+.viz-fc__actual { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.viz-fc__pred { fill: none; stroke: var(--accent-2); stroke-width: 2.5; stroke-dasharray: 7 6; stroke-linejoin: round; }
+.viz-fc__now { stroke: var(--ink-mute); stroke-width: 1; stroke-dasharray: 3 4; }
+.viz-fc__today { position: absolute; top: 0; translate: -50% -120%; font-size: 11.5px; font-weight: 700; color: var(--ink-mute); white-space: nowrap; }
+.viz-fc__labels span {
+  position: absolute; top: calc(100% + 8px); translate: -50% 0;
+  font-size: 11px; color: var(--ink-mute); white-space: nowrap; transition: opacity .3s ease;
+}
+.viz-fc__labels span.is-edge { translate: 0 0; }
+.viz-fc__labels span.is-off { opacity: .3; }
+.viz-fc__guide { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--accent-line); opacity: 0; pointer-events: none; }
+.viz-fc__dot {
+  position: absolute; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%;
+  background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); opacity: 0; pointer-events: none;
+}
+.viz-fc__tip { translate: -50% calc(-100% - 12px); }
+.viz-fc.is-hover .viz-fc__guide, .viz-fc.is-hover .viz-fc__dot, .viz-fc.is-hover .viz-fc__tip { opacity: 1; }
+.viz-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; font-size: 12.5px; color: var(--ink-soft); }
+.viz-legend li { display: inline-flex; align-items: center; gap: 6px; }
+.viz-legend li::before { content: ""; width: 18px; height: 3px; border-radius: 2px; background: var(--accent); }
+.viz-legend .is-pred::before { background: repeating-linear-gradient(90deg, var(--accent-2) 0 5px, transparent 5px 8px); }
+.viz-legend .is-band::before { height: 10px; background: var(--accent-soft); border: 1px solid var(--accent-line); }
+
+/* مهندسی داده: گره‌ها روی یک بیضی، انبار داده در مرکز */
+.viz-int { position: relative; aspect-ratio: 2.1 / 1; min-height: 300px; }
+.viz-int__node { position: absolute; translate: -50% -50%; padding: 8px 12px; font-size: 13.5px; white-space: nowrap; }
+.viz-int__node > .ico { width: 18px; height: 18px; }
+.viz-int__hub {
+  position: absolute; left: 50%; top: 50%; translate: -50% -50%; padding: 12px 16px;
+  border-color: var(--accent); box-shadow: 0 0 0 6px var(--accent-soft), 0 18px 40px -20px var(--accent-glow);
+  transition: opacity .45s ease, scale .55s var(--ease-out);
+}
+.viz-int__hub > .ico { width: 26px; height: 26px; }
+.viz-int .w-before { stroke: var(--bad); stroke-dasharray: 3 5; opacity: .55; }
+.viz-int .w-after { opacity: 0; }
+.viz-int[data-state="after"] .w-before { opacity: 0; }
+.viz-int[data-state="after"] .w-after { opacity: 1; }
+.viz-int[data-state="before"] .viz-int__hub { opacity: 0; scale: .6; }
+
+/* بدون جاوااسکریپت: دکمه‌ها کاری نمی‌کنند و پنهان‌اند؛ همه‌ی صحنه‌های چت‌بات زیر هم دیده می‌شوند */
+html.no-js .seg, html.no-js .viz__replay, html.no-js .viz-range { display: none; }
+html.no-js .viz-flow__scene { display: flex; }
+
+/* گوشی: گره‌ها زیر هم و سیم‌ها عمودی */
+@media (max-width: 700px) {
+  .viz-dash { --wire-dir: y; grid-template-columns: minmax(0, 1fr); gap: 44px; }
+  .viz-dash__sources { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+  .viz-dash__sources .node { flex-direction: column; justify-content: center; gap: 4px; padding: 8px 4px; font-size: 12px; text-align: center; }
+  .viz-flow { --wire-dir: y; }
+  .viz-flow__steps { grid-template-columns: minmax(0, 1fr); gap: 26px; }
+  .viz-flow__step { flex-direction: row; padding: 10px 12px; text-align: start; }
+  .viz-route { --wire-dir: y; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); column-gap: 14px; row-gap: 34px; }
+  .viz-route [data-node="agent"] { grid-area: 2 / 1; }
+  .viz-route [data-node="human"] { grid-area: 3 / 2; }
+  .viz-route [data-node="sys"] { grid-area: 4 / 1; }
+  .viz-int { aspect-ratio: 1 / 1.05; min-height: 0; }
+  .viz-int__node { padding: 6px 9px; font-size: 12px; }
+  .viz-int__node > .ico { display: none; }
+  .viz-int__hub { padding: 10px 12px; }
+  .viz-fc { height: 200px; }
+  .viz-fc__labels span.is-minor { display: none; }
+  .viz-cam text { font-size: 21px; }
+  .viz-cam .cam-hud text { font-size: 18px; }
+}
+
 /* ---------------- حریم خصوصی (privacy.html) ---------------- */
 
 .prose { max-width: 780px; margin: 0 auto; }
@@ -1500,4 +1728,6 @@ html.no-js .menu-btn, html.no-js .theme-btn, html.no-js .dots, html.no-js .pager
   .progress span, .rotator, .rotator > span { transition: none; }
   .menu-panel__list > li, .menu-panel .menu-panel__cta { translate: none; }
   .menu-panel__group { transition: none; }
+  .wire.is-live, .cam-stripes, .cam-line, .cam-alert rect,
+  .viz-flow__scene.is-on .viz-docs--scan .src, .viz-flow__scene.is-on { animation: none; }
 }

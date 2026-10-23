@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NeoData business card · Mehran Afshar</title>
+<!--
+  NeoData business card — Mehran Afshar
+  Trim size 85 × 55 mm, with 3 mm bleed on every side (each page is 91 × 61 mm).
+  Keep text inside the safe area (.safe): 3 mm bleed + 4.5 mm from the trim edge.
+  Page 1: front (name and contact details) · Page 2: back (logo on blue).
+  Export: print to PDF with "Background graphics" on and no margins, or use the PDF next to this file.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  @page { size: 91mm 61mm; margin: 0; }
+
+  :root {
+    --blue: #2D3BE8;          /* NeoData brand blue (logo/4.svg) */
+    --blue-tint: #EEF0FD;     /* the brand mark as a faint pattern */
+    --ink: #0F1A3D;
+    --ink-soft: #46516D;
+    --paper: #FFFFFF;
+    --bleed: 3mm;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #E9ECF3; }
+  body {
+    font-family: Manrope, "Segoe UI", system-ui, sans-serif;
+    color: var(--ink);
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* on screen: both sides, one under the other; in print: one side per page */
+  .sheet { display: grid; gap: 10mm; justify-content: center; padding: 10mm; }
+  @media print {
+    html, body { background: none; }
+    .sheet { display: block; padding: 0; }
+  }
+
+  .card {
+    position: relative; overflow: hidden;
+    width: 91mm; height: 61mm;          /* trim size + bleed */
+    background: var(--paper);
+    break-after: page;
+  }
+  .card:last-child { break-after: auto; }
+  .safe { position: absolute; inset: calc(var(--bleed) + 4.5mm); }
+
+  /* ---------- front ---------- */
+
+  /* the logo mark, large and faint, standing on the blue bottom edge */
+  .card--front .pattern {
+    position: absolute; right: calc(var(--bleed) + 4.5mm); bottom: calc(var(--bleed) + 1.6mm);
+    height: 34mm; width: 34mm; fill: var(--blue-tint);
+  }
+  .card--front .brand { display: flex; flex-direction: column; align-items: flex-start; gap: 1.8mm; }
+  .card--front .brand .logo { height: 7mm; width: auto; display: block; }
+  .card--front .tag { font-size: 6.3pt; font-weight: 600; letter-spacing: .01em; line-height: 1; color: var(--ink-soft); }
+  .card--front .person { position: absolute; left: 0; bottom: 0; }
+  .card--front .name {
+    margin: 0; font-size: 14.5pt; font-weight: 800; letter-spacing: -.01em; line-height: 1.1;
+  }
+  .card--front .rule { width: 9mm; height: .7mm; margin: 2.4mm 0 3mm; border-radius: .4mm; background: var(--blue); }
+  .card--front .contact { margin: 0; padding: 0; list-style: none; display: grid; gap: 1.3mm; }
+  .card--front .contact li {
+    display: flex; align-items: center; gap: 1.8mm;
+    font-size: 7.2pt; font-weight: 600; line-height: 1; color: var(--ink-soft);
+  }
+  .card--front .contact svg {
+    width: 2.9mm; height: 2.9mm; flex: none;
+    fill: none; stroke: var(--blue); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+  }
+  /* thin blue edge at the bottom ties the front to the blue back */
+  .card--front .edge {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    height: calc(var(--bleed) + 1.6mm); background: var(--blue);
+  }
+
+  /* ---------- back: just the logo on brand blue ---------- */
+
+  .card--back { background: var(--blue); display: grid; place-items: center; }
+  .card--back .logo { height: 25mm; width: auto; display: block; }
+</style>
+</head>
+<body>
+<main class="sheet">
+
+  <!-- front -->
+  <section class="card card--front" aria-label="Front">
+    <svg class="pattern" viewBox="0 0 98 98" aria-hidden="true"><rect x="0" y="0" width="14" height="98"></rect><rect x="21" y="0" width="14" height="47"></rect><rect x="42" y="25.5" width="14" height="47"></rect><rect x="63" y="51" width="14" height="47"></rect><rect x="84" y="0" width="14" height="98"></rect></svg>
+    <div class="safe">
+      <div class="brand">
+        <svg class="logo" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 471.29 98"><g fill="#2D3BE8"><rect x="0" y="0" width="14" height="98"></rect><rect x="21" y="0" width="14" height="47"></rect><rect x="42" y="25.5" width="14" height="47"></rect><rect x="63" y="51" width="14" height="47"></rect><rect x="84" y="0" width="14" height="98"></rect></g><path fill="#2D3BE8" transform="translate(138 67.29)" d="M0 0L0 -36.64L7.84 -36.64L25.01 -17.6Q25.49 -17.12 26.19 -16.35Q26.88 -15.57 27.55 -14.77Q28.21 -13.97 28.64 -13.33L29.01 -13.33Q28.96 -14.35 28.96 -15.6Q28.96 -16.85 28.96 -17.76L28.96 -36.64L37.07 -36.64L37.07 0L29.28 0L12 -19.25Q11.09 -20.27 10.03 -21.49Q8.96 -22.72 8.37 -23.52L8.05 -23.52Q8.05 -22.77 8.08 -21.52Q8.11 -20.27 8.11 -18.88L8.11 0ZM53.5 0L53.5 -36.64L86.88 -36.64L86.88 -29.76L62.14 -29.76L62.14 -22.08L84.06 -22.08L84.06 -15.31L62.14 -15.31L62.14 -6.93L87.26 -6.93L87.26 0ZM121.86 0.64Q115.24 0.64 110.5 -1.52Q105.75 -3.68 103.19 -7.92Q100.63 -12.16 100.63 -18.29Q100.63 -24.59 103.19 -28.8Q105.75 -33.01 110.5 -35.15Q115.24 -37.28 121.86 -37.28Q128.52 -37.28 133.27 -35.15Q138.02 -33.01 140.58 -28.8Q143.14 -24.59 143.14 -18.29Q143.14 -12.16 140.58 -7.92Q138.02 -3.68 133.27 -1.52Q128.52 0.64 121.86 0.64ZM121.86 -6.29Q124.74 -6.29 127.03 -7.01Q129.32 -7.73 130.95 -9.17Q132.58 -10.61 133.46 -12.75Q134.34 -14.88 134.34 -17.6L134.34 -19.09Q134.34 -21.76 133.46 -23.92Q132.58 -26.08 130.95 -27.52Q129.32 -28.96 127.03 -29.65Q124.74 -30.35 121.86 -30.35Q119.03 -30.35 116.74 -29.65Q114.44 -28.96 112.82 -27.52Q111.19 -26.08 110.34 -23.92Q109.48 -21.76 109.48 -19.09L109.48 -17.6Q109.48 -14.88 110.34 -12.75Q111.19 -10.61 112.82 -9.17Q114.44 -7.73 116.74 -7.01Q119.03 -6.29 121.86 -6.29ZM157.99 0L157.99 -36.64L175.38 -36.64Q181.62 -36.64 186.04 -34.59Q190.47 -32.53 192.84 -28.48Q195.22 -24.43 195.22 -18.29Q195.22 -12.21 192.84 -8.16Q190.47 -4.11 186.04 -2.05Q181.62 0 175.38 0ZM166.52 -6.93L175.11 -6.93Q177.67 -6.93 179.75 -7.63Q181.83 -8.32 183.32 -9.65Q184.82 -10.99 185.59 -12.99Q186.36 -14.99 186.36 -17.6L186.36 -19.04Q186.36 -21.65 185.59 -23.63Q184.82 -25.6 183.32 -26.93Q181.83 -28.27 179.75 -28.99Q177.67 -29.71 175.11 -29.71L166.52 -29.71ZM204.78 0L220.88 -36.64L230.96 -36.64L247.12 0L237.79 0L234.91 -6.88L216.51 -6.88L213.58 0ZM219.34 -13.65L232.08 -13.65L228.51 -22.35Q228.24 -22.88 227.87 -23.81Q227.5 -24.75 227.12 -25.87Q226.75 -26.99 226.4 -27.89Q226.06 -28.8 225.84 -29.33L225.52 -29.33Q225.15 -28.32 224.64 -26.96Q224.14 -25.6 223.68 -24.35Q223.23 -23.09 222.91 -22.29ZM264.72 0L264.72 -29.44L250.8 -29.44L250.8 -36.64L287.23 -36.64L287.23 -29.44L273.31 -29.44L273.31 0ZM290.94 0L307.05 -36.64L317.13 -36.64L333.29 0L323.95 0L321.07 -6.88L302.67 -6.88L299.74 0ZM305.5 -13.65L318.25 -13.65L314.67 -22.35Q314.41 -22.88 314.03 -23.81Q313.66 -24.75 313.29 -25.87Q312.91 -26.99 312.57 -27.89Q312.22 -28.8 312.01 -29.33L311.69 -29.33Q311.31 -28.32 310.81 -26.96Q310.3 -25.6 309.85 -24.35Q309.39 -23.09 309.07 -22.29Z"></path></svg>
+        <span class="tag">Data Analytics &amp; AI Solutions</span>
+      </div>
+      <div class="person">
+        <h1 class="name">Mehran Afshar</h1>
+        <div class="rule"></div>
+        <ul class="contact">
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.2 3.5h3.3l1.7 4.3-2.2 1.4a11.5 11.5 0 0 0 6.8 6.8l1.4-2.2 4.3 1.7v3.3a1.7 1.7 0 0 1-1.8 1.7C10.9 20.1 3.9 13.1 3.5 5.3a1.7 1.7 0 0 1 1.7-1.8z"/></svg>
+            +98 901 192 2823
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            info@neodata.ir
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="edge"></div>
+  </section>
+
+  <!-- back -->
+  <section class="card card--back" aria-label="Back">
+    <svg class="logo" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 142.35 143.04"><g fill="#F7F7F2"><rect x="22.17" y="0" width="14" height="98"></rect><rect x="43.17" y="0" width="14" height="47"></rect><rect x="64.17" y="25.5" width="14" height="47"></rect><rect x="85.17" y="51" width="14" height="47"></rect><rect x="106.17" y="0" width="14" height="98"></rect></g><path fill="#F7F7F2" transform="translate(0 142.79)" d="M0 0L0 -14.53L3.11 -14.53L9.92 -6.98Q10.11 -6.79 10.39 -6.48Q10.66 -6.18 10.93 -5.86Q11.19 -5.54 11.36 -5.29L11.51 -5.29Q11.49 -5.69 11.49 -6.19Q11.49 -6.68 11.49 -7.04L11.49 -14.53L14.7 -14.53L14.7 0L11.61 0L4.76 -7.64Q4.4 -8.04 3.98 -8.52Q3.55 -9.01 3.32 -9.33L3.19 -9.33Q3.19 -9.03 3.2 -8.54Q3.22 -8.04 3.22 -7.49L3.22 0ZM22.91 0L22.91 -14.53L36.15 -14.53L36.15 -11.8L26.34 -11.8L26.34 -8.76L35.03 -8.76L35.03 -6.07L26.34 -6.07L26.34 -2.75L36.3 -2.75L36.3 0ZM51.72 0.25Q49.09 0.25 47.21 -0.6Q45.33 -1.46 44.31 -3.14Q43.3 -4.82 43.3 -7.26Q43.3 -9.75 44.31 -11.42Q45.33 -13.09 47.21 -13.94Q49.09 -14.79 51.72 -14.79Q54.36 -14.79 56.24 -13.94Q58.13 -13.09 59.14 -11.42Q60.16 -9.75 60.16 -7.26Q60.16 -4.82 59.14 -3.14Q58.13 -1.46 56.24 -0.6Q54.36 0.25 51.72 0.25ZM51.72 -2.5Q52.86 -2.5 53.77 -2.78Q54.68 -3.07 55.32 -3.64Q55.97 -4.21 56.32 -5.06Q56.67 -5.9 56.67 -6.98L56.67 -7.57Q56.67 -8.63 56.32 -9.49Q55.97 -10.34 55.32 -10.92Q54.68 -11.49 53.77 -11.76Q52.86 -12.04 51.72 -12.04Q50.6 -12.04 49.69 -11.76Q48.78 -11.49 48.13 -10.92Q47.49 -10.34 47.15 -9.49Q46.81 -8.63 46.81 -7.57L46.81 -6.98Q46.81 -5.9 47.15 -5.06Q47.49 -4.21 48.13 -3.64Q48.78 -3.07 49.69 -2.78Q50.6 -2.5 51.72 -2.5ZM67.74 0L67.74 -14.53L74.64 -14.53Q77.11 -14.53 78.87 -13.72Q80.62 -12.9 81.56 -11.3Q82.51 -9.69 82.51 -7.26Q82.51 -4.84 81.56 -3.24Q80.62 -1.63 78.87 -0.81Q77.11 0 74.64 0ZM71.13 -2.75L74.53 -2.75Q75.55 -2.75 76.37 -3.03Q77.2 -3.3 77.79 -3.83Q78.38 -4.36 78.69 -5.15Q78.99 -5.94 78.99 -6.98L78.99 -7.55Q78.99 -8.59 78.69 -9.37Q78.38 -10.15 77.79 -10.68Q77.2 -11.21 76.37 -11.5Q75.55 -11.78 74.53 -11.78L71.13 -11.78ZM87.99 0L94.38 -14.53L98.38 -14.53L104.79 0L101.09 0L99.94 -2.73L92.64 -2.73L91.48 0ZM93.77 -5.42L98.82 -5.42L97.4 -8.86Q97.3 -9.08 97.15 -9.45Q97 -9.82 96.85 -10.26Q96.71 -10.7 96.57 -11.06Q96.43 -11.42 96.35 -11.63L96.22 -11.63Q96.07 -11.23 95.87 -10.69Q95.67 -10.15 95.49 -9.66Q95.31 -9.16 95.18 -8.84ZM113.46 0L113.46 -11.68L107.94 -11.68L107.94 -14.53L122.39 -14.53L122.39 -11.68L116.87 -11.68L116.87 0ZM125.55 0L131.94 -14.53L135.94 -14.53L142.35 0L138.64 0L137.5 -2.73L130.2 -2.73L129.04 0ZM131.33 -5.42L136.38 -5.42L134.96 -8.86Q134.86 -9.08 134.71 -9.45Q134.56 -9.82 134.41 -10.26Q134.27 -10.7 134.13 -11.06Q133.99 -11.42 133.91 -11.63L133.78 -11.63Q133.63 -11.23 133.43 -10.69Q133.23 -10.15 133.05 -9.66Q132.87 -9.16 132.74 -8.84Z"></path></svg>
+  </section>
+
+</main>
+</body>
+</html>

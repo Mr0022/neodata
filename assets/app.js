@@ -60,18 +60,17 @@
   });
 
   /* ---------------------------------------------------------
-     ناوبری: نقطه‌ها، منو، شماره‌ی بخش، نوار پیشرفت
+     ناوبری: نقطه‌ها، شماره‌ی بخش، نوار پیشرفت
+     (نوار ناوبری بالا و منوی تمام‌صفحه در site.js‌اند)
      --------------------------------------------------------- */
 
   const dotsNav   = $('#dots');
-  const menuList  = $('#menuList');
-  const menuPage  = $('.menu-panel__page', menuList);
   const pager     = $('#pager');
   const prevBtn   = $('#prevBtn');
   const nextBtn   = $('#nextBtn');
   const bar       = $('#progressBar');
   const announcer = $('#announcer');
-  const dotEls = [], menuEls = [];
+  const dotEls = [];
 
   $('#pagerTotal').textContent = pad2(slides.length);
 
@@ -85,16 +84,6 @@
     dot.addEventListener('click', () => show(i));
     dotsNav.appendChild(dot);
     dotEls.push(dot);
-
-    const li = document.createElement('li');
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.textContent = label;
-    btn.dataset.num = pad2(i + 1);
-    btn.addEventListener('click', () => { closeMenu(); show(i, { focus: true }); });
-    li.appendChild(btn);
-    menuList.insertBefore(li, menuPage);   // پیوند صفحه‌ی «درباره‌ی ما» پایین فهرست می‌ماند
-    menuEls.push(btn);
   });
 
   prevBtn.addEventListener('click', () => show(index - 1));
@@ -103,10 +92,10 @@
   function updateChrome(announce) {
     const s = slides[index];
     dotEls.forEach((d, k) => d.classList.toggle('is-active', k === index));
-    [dotEls, menuEls].forEach((list) => list.forEach((el, k) => {
+    dotEls.forEach((el, k) => {
       if (k === index) el.setAttribute('aria-current', 'true');
       else el.removeAttribute('aria-current');
-    }));
+    });
     site.setActive(s.id);
     bar.style.width = ((index + 1) / slides.length) * 100 + '%';
     $('#pagerNum').textContent = pad2(index + 1);
@@ -189,9 +178,11 @@
     const i = indexOf(el.dataset.goto);
     if (i < 0) return;
     e.preventDefault();
+    // از منوی تمام‌صفحه آمده: فوکوس صفحه‌کلید به بخش تازه می‌رود، نه به منوی بسته‌شده
+    const fromMenu = menuOpen();
     closeMenu();
     site.closeSub();
-    show(i);
+    show(i, { focus: fromMenu });
     // چیپ‌های «پیش‌بینی» و «مهندسی داده» در خانه به بخش «خدمات دیگر» می‌روند و کارت خودشان
     // را پس از ظاهر شدن، لحظه‌ای برجسته می‌کنند
     const key = el.dataset.highlight;

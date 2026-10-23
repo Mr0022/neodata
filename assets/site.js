@@ -204,33 +204,109 @@
     subLinks[k < 0 ? (step > 0 ? 0 : n - 1) : (k + step + n) % n].focus();
   });
 
-  /** پیوندهایی که data-sections آن‌ها id را دارد «جاری» می‌شوند و نشانگر به زیرشان می‌لغزد */
+  /** پیوندهایی که data-sections آن‌ها id را دارد «جاری» می‌شوند */
+  const markCurrent = (els, id, current) => els.forEach((n) => {
+    const on = n.dataset.sections.split(' ').includes(id);
+    n.classList.toggle('is-active', on);
+    if (on && n.tagName === 'A') n.setAttribute('aria-current', current);
+    else n.removeAttribute('aria-current');
+  });
+
+  /** پیوند جاری در نوار ناوبری (نشانگر به زیرش می‌لغزد) و در منوی تمام‌صفحه */
   function setActive(id, current = 'true') {
-    navEls.forEach((n) => {
-      const on = n.dataset.sections.split(' ').includes(id);
-      n.classList.toggle('is-active', on);
-      if (on && n.tagName === 'A') n.setAttribute('aria-current', current);
-      else n.removeAttribute('aria-current');
-    });
+    markCurrent(navEls, id, current);
+    markCurrent(menuEls, id, current);
     setSub(false);
     placeIndicator();
   }
 
   /* ---------------------------------------------------------
-     منوی تمام‌صفحه (روی صفحه‌هایی که کپسول ناوبری جا نمی‌شود)
+     منوی تمام‌صفحه (گوشی و تبلت، جایی که کپسول ناوبری جا نمی‌شود)
+
+     فهرستش از روی همان نوار ناوبری بالا ساخته می‌شود تا این دو هیچ‌گاه از هم
+     جدا نشوند: همان پیوندها به همان ترتیب، «خدمات» به‌صورت گروهی که باز و
+     بسته می‌شود، و دکمه‌ی مشاوره‌ی هدر در پایان.
      --------------------------------------------------------- */
 
   const menuBtn   = $('#menuBtn');
   const menuPanel = $('#menuPanel');
+
+  /** پیوندی تازه به همان مقصد (در صفحه‌ی اصلی، با همان data-goto که app.js به آن گوش می‌دهد) */
+  const copyLink = (src, className) => {
+    const a = document.createElement('a');
+    a.setAttribute('href', src.getAttribute('href'));
+    if (src.dataset.goto) a.dataset.goto = src.dataset.goto;
+    a.className = className;
+    return a;
+  };
+
+  /** گروه «خدمات» را باز یا بسته می‌کند؛ گزینه‌های گروه بسته با Tab هم در دسترس نیستند */
+  function setGroup(toggle, open) {
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.nextElementSibling.inert = !open;
+  }
+
+  const menuInner = document.createElement('div');
+  menuInner.className = 'menu-panel__inner';
+  const menuList = document.createElement('ul');
+  menuList.className = 'menu-panel__list';
+  $$('.topnav__list > li', topnav).forEach((li, k) => {
+    const item = document.createElement('li');
+    item.style.setProperty('--k', String(k));
+    const src = li.firstElementChild;
+    if (li !== subItem) {
+      const a = copyLink(src, 'menu-panel__link');
+      a.dataset.sections = src.dataset.sections;
+      a.textContent = src.textContent.trim();
+      item.appendChild(a);
+    } else {
+      const toggle = document.createElement('button');
+      toggle.type = 'button';
+      toggle.className = 'menu-panel__link menu-panel__toggle';
+      toggle.dataset.sections = src.dataset.sections;
+      toggle.setAttribute('aria-controls', 'menuServices');
+      toggle.innerHTML = '<span></span><svg class="ico" aria-hidden="true"><use href="#i-down"/></svg>';
+      toggle.firstChild.textContent = src.textContent.trim();
+      // زیرمجموعه‌ها همان گزینه‌های زیرمنوی خدمات‌اند، با آیکون و عنوان (کارت مشاوره‌اش پایین منو دکمه است)
+      const group = document.createElement('div');
+      group.className = 'menu-panel__group';
+      group.id = 'menuServices';
+      const ul = document.createElement('ul');
+      subLinks.filter((s) => !s.classList.contains('topnav__sub-cta')).forEach((s) => {
+        const a = copyLink(s, 'menu-panel__sublink');
+        a.dataset.sections = s.getAttribute('href').split('#')[1];
+        a.append($('.topnav__sub-ico', s).cloneNode(true), $('b', s).textContent);
+        const sl = document.createElement('li');
+        sl.appendChild(a);
+        ul.appendChild(sl);
+      });
+      group.appendChild(ul);
+      toggle.addEventListener('click', () => setGroup(toggle, toggle.getAttribute('aria-expanded') !== 'true'));
+      item.append(toggle, group);
+      setGroup(toggle, false);
+    }
+    menuList.appendChild(item);
+  });
+  const headCta = $('.head-cta');
+  const menuCta = copyLink(headCta, 'btn btn--primary btn--lg menu-panel__cta');
+  menuCta.textContent = headCta.textContent.trim();
+  if (headCta.hasAttribute('aria-current')) menuCta.setAttribute('aria-current', 'page');
+  menuCta.style.setProperty('--k', String(menuList.children.length));
+  menuInner.append(menuList, menuCta);
+  menuPanel.appendChild(menuInner);
+  const menuEls = $$('[data-sections]', menuPanel);
+
   const menuOpen = () => menuPanel.classList.contains('is-open');
   // هر چه پشت منوست، تا وقتی منو باز است در دسترس نیست
   const behindMenu = $$('main, #dots, #pager, #topnav');
 
   function openMenu() {
+    // گروهی که بخش جاری در آن است باز است، بقیه بسته
+    $$('.menu-panel__toggle', menuPanel).forEach((t) => setGroup(t, t.classList.contains('is-active')));
     menuPanel.classList.add('is-open');
     menuBtn.setAttribute('aria-expanded', 'true');
     behindMenu.forEach((el) => { el.inert = true; });
-    ($('[aria-current]', menuPanel) || $('button, a', menuPanel)).focus({ preventScroll: true });
+    ($('[aria-current]', menuPanel) || $('a, button', menuPanel)).focus({ preventScroll: true });
   }
   function closeMenu() {
     if (!menuOpen()) return;
@@ -239,7 +315,12 @@
     behindMenu.forEach((el) => { el.inert = false; });
   }
   menuBtn.addEventListener('click', () => (menuOpen() ? closeMenu() : openMenu()));
-  menuPanel.addEventListener('click', (e) => { if (e.target === menuPanel) closeMenu(); });
+  menuPanel.addEventListener('click', (e) => {
+    if (e.target === menuPanel || e.target === menuInner) { closeMenu(); return; }
+    // پیوند همین صفحه فقط منو را می‌بندد
+    const here = e.target.closest('a[aria-current="page"]');
+    if (here) { e.preventDefault(); closeMenu(); }
+  });
 
   document.addEventListener('keydown', (e) => {
     if (e.key !== 'Escape') return;

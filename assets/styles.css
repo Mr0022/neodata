@@ -235,10 +235,11 @@ a:focus-visible, button:focus-visible {
 .menu-btn[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
 .menu-btn[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* منوی تمام‌صفحه */
+/* منوی تمام‌صفحه (گوشی و تبلت): همان پیوندهای نوار ناوبری بالا که site.js از روی آن می‌سازد؛
+   «خدمات» گروهی است که باز و بسته می‌شود و دکمه‌ی مشاوره در پایان می‌آید */
 .menu-panel {
   position: fixed; inset: 0; z-index: 29;
-  display: grid; place-items: center;
+  overflow-y: auto; overscroll-behavior: contain;
   background: var(--overlay);
   -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
   opacity: 0; visibility: hidden; pointer-events: none;
@@ -248,19 +249,57 @@ a:focus-visible, button:focus-visible {
   opacity: 1; visibility: visible; pointer-events: auto;
   transition: opacity .3s ease, visibility 0s;
 }
-.menu-panel ol { padding: calc(var(--head-h) + 10px) 24px 24px; max-height: 100dvh; overflow: auto; }
-.menu-panel :is(button, a) {
-  display: flex; align-items: baseline; gap: 16px;
-  padding: 6px 0; border: 0; background: none; cursor: pointer; text-decoration: none;
-  font-size: clamp(20px, 3.4vw, 32px); font-weight: 900; color: var(--ink-soft);
-  transition: color .2s ease, translate .25s var(--ease-out);
+.menu-panel__inner {
+  width: min(520px, 100%); margin: 0 auto;
+  padding: calc(var(--head-h) + 12px) 20px calc(28px + env(safe-area-inset-bottom));
 }
-.menu-panel :is(button, a)::before { content: attr(data-num); font-size: .5em; font-weight: 700; color: var(--ink-mute); }
-.menu-panel :is(button, a):hover, .menu-panel :is(button, a):focus-visible { color: var(--ink); translate: -8px 0; }
-.menu-panel :is(button, a)[aria-current] { color: var(--accent); }
-/* صفحه‌های جدا (مشاوره، درباره‌ی ما) زیر فهرست بخش‌ها، با خطی جدا و بی‌شماره */
-.menu-panel li:not(.menu-panel__page) + .menu-panel__page { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); }
-.menu-panel__page a::before { content: none; }
+/* با باز شدن منو، ردیف‌ها یکی‌یکی از پایین بالا می‌آیند (--k ترتیب ردیف است) */
+.menu-panel__list > li, .menu-panel .menu-panel__cta {
+  opacity: 0; translate: 0 14px;
+  transition: opacity .35s ease, translate .5s var(--ease-out), background .25s ease, box-shadow .25s ease;
+}
+.menu-panel.is-open .menu-panel__list > li, .menu-panel.is-open .menu-panel__cta {
+  opacity: 1; translate: 0 0;
+  transition-delay: calc(60ms + var(--k, 0) * 35ms);
+}
+.menu-panel__list > li { border-bottom: 1px solid var(--line-soft); }
+.menu-panel__link {
+  width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  margin: 4px 0; padding: 12px 14px; border: 0; border-radius: 14px; background: none; cursor: pointer;
+  font-size: clamp(19px, 5vw, 22px); font-weight: 800; line-height: 1.6; text-align: start;
+  color: var(--ink); text-decoration: none;
+  transition: color .2s ease, background .2s ease;
+}
+.menu-panel__link:hover { background: var(--accent-soft); }
+.menu-panel__link.is-active { color: var(--accent); background: var(--accent-soft); }
+.menu-panel__toggle .ico {
+  width: 22px; height: 22px; stroke-width: 2.2; color: var(--ink-mute);
+  transition: rotate .35s var(--ease-out), color .2s ease;
+}
+.menu-panel__toggle[aria-expanded="true"] .ico { rotate: 180deg; color: var(--accent); }
+/* باز و بسته شدن نرم گروه: ردیف شبکه از صفر تا اندازه‌ی محتوا */
+.menu-panel__group {
+  display: grid; grid-template-rows: 0fr;
+  transition: grid-template-rows .4s var(--ease-out);
+}
+.menu-panel__toggle[aria-expanded="true"] + .menu-panel__group { grid-template-rows: 1fr; }
+.menu-panel__group > ul { min-height: 0; overflow: hidden; }
+.menu-panel__group li:last-child { padding-bottom: 10px; }
+.menu-panel__sublink {
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 12px; border-radius: 12px;
+  font-size: 16px; font-weight: 700; line-height: 1.6; color: var(--ink-soft); text-decoration: none;
+  transition: color .2s ease, background .2s ease;
+}
+.menu-panel__sublink:hover { color: var(--ink); background: var(--accent-soft); }
+.menu-panel__sublink[aria-current] { color: var(--accent); background: var(--accent-soft); }
+.menu-panel__sublink .topnav__sub-ico { width: 36px; height: 36px; border-radius: 11px; }
+/* حلقه‌ی فوکوس صفحه‌کلید درون ردیف، با همان گردی ردیف */
+.menu-panel__link:focus-visible { outline-offset: -2px; border-radius: 14px; }
+.menu-panel__sublink:focus-visible { outline-offset: -2px; border-radius: 12px; }
+.menu-panel__sublink .topnav__sub-ico .ico { width: 18px; height: 18px; }
+.menu-panel__cta { width: 100%; margin-top: 22px; }
+.menu-panel__cta[aria-current="page"] { box-shadow: 0 0 0 4px var(--accent-line); }
 
 /* ---------------- ناوبری بالا ----------------
    کپسول شیشه‌ای وسط هدر؛ زبانه‌ی آبی زیر پیوند بخش جاری می‌لغزد.
@@ -1354,4 +1393,6 @@ html.no-js .menu-btn, html.no-js .theme-btn, html.no-js .dots, html.no-js .pager
   .scroll-hint i::after, .cam__belt, .rec i, .typing i, .flow__status::before { animation: none; }
   .page-hero > * { animation-name: fade-in; }
   .progress span, .rotator, .rotator > span { transition: none; }
+  .menu-panel__list > li, .menu-panel .menu-panel__cta { translate: none; }
+  .menu-panel__group { transition: none; }
 }

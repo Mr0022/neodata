@@ -63,7 +63,6 @@
   <symbol id="i-server" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01M11 7.5h6M11 16.5h6"/></symbol>
   <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14.5v2.5"/></symbol>
   <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M3 3l18 18"/><path d="M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17.6 17.6 0 0 1-3.2 4.2M6.6 6.6C3.9 8.4 2 12 2 12s3.6 7 10 7a9.7 9.7 0 0 0 5.4-1.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></symbol>
-  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
   <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
   <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4"/></symbol>
 </svg>
@@ -126,7 +125,7 @@
       <li><a class="topnav__link" href="#process" data-goto="process" data-sections="process">روش کار</a></li>
       <li><a class="topnav__link" href="#why" data-goto="why" data-sections="why">چرا نئودیتا</a></li>
       <li><a class="topnav__link" href="#security" data-goto="security" data-sections="security">امنیت داده</a></li>
-      <li><a class="topnav__link" href="#faq" data-goto="faq" data-sections="faq">سوالات متداول</a></li>
+      <li><a class="topnav__link" href="faq.html" data-sections="faq">سوالات متداول</a></li>
       <li><a class="topnav__link" href="about.html" data-sections="about">درباره‌ی ما</a></li>
     </ul>
   </nav>
@@ -148,6 +147,7 @@
 <nav class="menu-panel" id="menuPanel" aria-label="فهرست بخش‌ها">
   <ol id="menuList">
     <li class="menu-panel__page"><a href="consult.html">درخواست مشاوره رایگان</a></li>
+    <li class="menu-panel__page"><a href="faq.html">سوالات متداول</a></li>
     <li class="menu-panel__page"><a href="about.html">درباره‌ی ما</a></li>
   </ol>
 </nav>
@@ -546,47 +546,7 @@
     </div>
   </section>
 
-  <!-- ۹ | سوالات متداول (داده‌ی ساختاریافته‌ی FAQPage را app.js از همین متن‌ها می‌سازد) -->
-  <section class="slide" id="faq" data-title="سوالات متداول" aria-labelledby="t-faq">
-    <div class="slide__inner wide">
-      <header class="slide__head">
-        <p class="eyebrow anim">سوالات متداول</p>
-        <h2 class="anim" id="t-faq">پاسخ پرسش‌هایی که معمولاً از ما می‌پرسند</h2>
-      </header>
-      <div class="faq">
-        <div class="faq__col">
-          <details class="faq__item anim" name="faq">
-            <summary>آیا داده‌های ما امن است؟ روی سرورهای خودمان پیاده می‌شود؟<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-            <div class="faq__a"><p>بله. پیش از شروع هر پروژه قرارداد محرمانگی (NDA) امضا می‌کنیم و در صورت نیاز، کل راهکار، از پایگاه داده تا مدل‌های هوش مصنوعی، روی سرورهای خود سازمان شما نصب می‌شود تا داده‌ای از شبکه‌ی داخلی‌تان خارج نشود. جزئیات بیشتر در بخش <a href="#security" data-goto="security">امنیت و محرمانگی داده</a> آمده است.</p></div>
-          </details>
-          <details class="faq__item anim" name="faq">
-            <summary>یک پروژه چقدر زمان می‌برد؟<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-            <div class="faq__a"><p>به دامنه‌ی کار بستگی دارد. یک داشبورد یا نمونه‌ی اولیه‌ی چت‌بات معمولاً در چند هفته آماده می‌شود و پروژه‌های بزرگ‌تر، مثل یکپارچه‌سازی داده‌های سازمان یا بینایی ماشین در خط تولید، چند ماه زمان می‌برند. زمان‌بندی دقیق پس از جلسه‌ی شناخت و بررسی داده‌ها اعلام می‌شود.</p></div>
-          </details>
-          <details class="faq__item anim" name="faq">
-            <summary>هزینه چطور محاسبه می‌شود؟<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-            <div class="faq__a"><p>هزینه بر اساس دامنه‌ی کار، حجم و وضعیت داده‌ها، زیرساخت مورد نیاز و میزان پشتیبانی پس از تحویل تعیین می‌شود. پس از جلسه‌ی مشاوره‌ی رایگان، پیشنهادی مکتوب با مراحل کار، زمان‌بندی و هزینه‌ی هر مرحله دریافت می‌کنید تا پیش از هر تعهدی تصویر روشنی داشته باشید.</p></div>
-          </details>
-        </div>
-        <div class="faq__col">
-          <details class="faq__item anim" name="faq">
-            <summary>داده‌های ما مرتب نیست؛ باز هم می‌توانید کمک کنید؟<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-            <div class="faq__a"><p>بله؛ در بیشتر سازمان‌ها همین‌طور است. پاک‌سازی و ساختاردهی داده‌ها بخشی از کار ماست: داده‌ها را از فایل‌های اکسل، نرم‌افزارهای مالی و فروش و سامانه‌های مختلف جمع می‌کنیم، خطاها و تکرارها را برطرف می‌کنیم و همه را در یک منبع قابل‌اعتماد کنار هم می‌گذاریم.</p></div>
-          </details>
-          <details class="faq__item anim" name="faq">
-            <summary>چت‌بات فارسی را چقدر خوب می‌فهمد؟<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-            <div class="faq__a"><p>چت‌بات‌های ما برای زبان فارسی ساخته و آزموده می‌شوند: نوشتار رسمی و محاوره‌ای، غلط‌های املایی رایج، نیم‌فاصله و اصطلاحات تخصصی حوزه‌ی کار شما. پیش از تحویل، دقت پاسخ‌ها با مجموعه‌ای از پرسش‌های واقعی سازمان خودتان سنجیده می‌شود و هر پاسخ به سند و بند مربوطش ارجاع می‌دهد.</p></div>
-          </details>
-          <details class="faq__item anim" name="faq">
-            <summary>بعد از تحویل پشتیبانی دارید؟<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-            <div class="faq__a"><p>بله. پس از راه‌اندازی، عملکرد سامانه را پایش می‌کنیم، مشکلات را برطرف می‌کنیم، مدل‌ها را با داده‌های تازه به‌روز نگه می‌داریم و تیم شما را آموزش می‌دهیم. شرایط و مدت پشتیبانی در قرارداد هر پروژه مشخص می‌شود.</p></div>
-          </details>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ۱۰ | تماس -->
+  <!-- ۹ | تماس -->
   <section class="slide slide--end" id="contact" data-title="شروع همکاری" aria-labelledby="t-contact">
     <div class="slide__inner end">
       <p class="eyebrow anim">قدم بعدی</p>

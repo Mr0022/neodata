@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="no-js">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>سوالات متداول | نئودیتا</title>
+<meta name="description" content="پاسخ پرسش‌های رایج درباره‌ی همکاری با نئودیتا: شروع کار و جلسه‌ی مشاوره‌ی رایگان، زمان و هزینه، امنیت داده، اتصال به نرم‌افزارهای فعلی، ابزارهای طراحی داشبورد (Power BI، پایتون و R) و پشتیبانی." />
+<meta name="theme-color" content="#f6f8fc" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="نئودیتا" />
+<meta property="og:locale" content="fa_IR" />
+<meta property="og:title" content="سوالات متداول | نئودیتا" />
+<meta property="og:description" content="شروع همکاری، زمان و هزینه، امنیت داده، ابزارها و پشتیبانی؛ پاسخ پرسش‌هایی که معمولاً از نئودیتا می‌پرسند." />
+<link rel="icon" href="logo/5.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="logo/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/styles.css?v=1" />
+<!-- صفحه‌ی معمولی با اسکرول عادی (بدون حالت «صحنه»ی صفحه‌ی اصلی).
+     پوسته پیش از نخستین رنگ‌آمیزی اعمال می‌شود تا صفحه چشمک نزند. -->
+<script>
+  document.documentElement.classList.remove('no-js');
+  (function () {
+    var theme = 'light';
+    try { if (localStorage.getItem('neodata-theme') === 'dark') theme = 'dark'; } catch (e) {}
+    document.documentElement.setAttribute('data-theme', theme);
+    if (theme === 'dark') document.querySelector('meta[name="theme-color"]').setAttribute('content', '#070b16');
+  })();
+</script>
+</head>
+<body data-page="faq">
+
+<!-- آیکون‌ها: یک بار تعریف، همه‌جا با <use> (زیرمجموعه‌ای از آیکون‌های index.html، به‌اضافه‌ی تلفن و ساعت) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7.5 16v-5"/><path d="M12 16V7"/><path d="M16.5 16v-8"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+  <symbol id="i-flow" viewBox="0 0 24 24"><circle cx="5" cy="6" r="2.5"/><circle cx="19" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.5 6h9M6.3 8.2l4.4 7.6M17.7 8.2l-4.4 7.6"/></symbol>
+  <symbol id="i-invoice" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M9 15l2 2 4-4"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5.2 3.5h3.3l1.7 4.3-2.2 1.4a11.5 11.5 0 0 0 6.8 6.8l1.4-2.2 4.3 1.7v3.3a1.7 1.7 0 0 1-1.8 1.7C10.9 20.1 3.9 13.1 3.5 5.3a1.7 1.7 0 0 1 1.7-1.8z"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-scan" viewBox="0 0 24 24"><path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M7 12s2-3.5 5-3.5 5 3.5 5 3.5-2 3.5-5 3.5S7 12 7 12z"/><circle cx="12" cy="12" r="1.2"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 15l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4"/></symbol>
+</svg>
+
+<!-- پس‌زمینه‌ی ثابت: همان شبکه‌ی داده‌ی صفحه‌ی اصلی -->
+<div class="backdrop" aria-hidden="true">
+  <canvas id="net"></canvas>
+</div>
+
+<!-- هدر: همان هدر صفحه‌ی اصلی؛ پیوندهای بخش‌ها به صفحه‌ی اصلی می‌روند -->
+<header class="site-head">
+  <a class="brand" href="index.html">
+    <img class="brand__logo logo--light" src="logo/4.svg" alt="نئودیتا" width="135" height="28" />
+    <img class="brand__logo logo--dark" src="logo/12.svg" alt="نئودیتا" width="135" height="28" />
+    <span class="brand__tag">تحلیل داده و هوش مصنوعی</span>
+  </a>
+
+  <!-- ناوبری بالا: هر پیوند با data-sections می‌گوید در کدام بخش‌ها «جاری» است -->
+  <nav class="topnav" id="topnav" aria-label="ناوبری اصلی">
+    <span class="topnav__ind" aria-hidden="true"></span>
+    <ul class="topnav__list">
+      <li><a class="topnav__link" href="index.html" data-sections="hero">خانه</a></li>
+      <li class="topnav__has-sub">
+        <button class="topnav__link" type="button" aria-expanded="false" aria-controls="navServices" data-sections="dashboard chatbot agents vision services">
+          خدمات <svg class="ico topnav__caret" aria-hidden="true"><use href="#i-down"/></svg>
+        </button>
+        <div class="topnav__sub" id="navServices">
+          <ul class="topnav__sub-list">
+            <li><a href="index.html#dashboard">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-chart"/></svg></span>
+              <span class="topnav__sub-text"><b>داشبورد و تحلیل داده</b><small>شاخص‌ها و گزارش‌های مدیریتی در یک نگاه</small></span>
+            </a></li>
+            <li><a href="index.html#chatbot">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg></span>
+              <span class="topnav__sub-text"><b>چت‌بات هوشمند سازمانی</b><small>پاسخ مستند از اسناد خود سازمان</small></span>
+            </a></li>
+            <li><a href="index.html#agents">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-flow"/></svg></span>
+              <span class="topnav__sub-text"><b>ایجنت‌ها و اتوماسیون</b><small>خودکارسازی کارهای تکراری</small></span>
+            </a></li>
+            <li><a href="index.html#vision">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-scan"/></svg></span>
+              <span class="topnav__sub-text"><b>بینایی ماشین</b><small>شمارش، کنترل کیفیت و ایمنی</small></span>
+            </a></li>
+            <li><a href="index.html#services">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-spark"/></svg></span>
+              <span class="topnav__sub-text"><b>خدمات دیگر</b><small>پیش‌بینی، مهندسی داده و اسناد فارسی</small></span>
+            </a></li>
+            <li><a class="topnav__sub-cta" href="consult.html">
+              <b>نمی‌دانید از کجا شروع کنید؟</b>
+              <small>در مشاوره‌ی رایگان با هم پیدایش می‌کنیم</small>
+              <span>درخواست مشاوره <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+            </a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a class="topnav__link" href="index.html#process" data-sections="process">روش کار</a></li>
+      <li><a class="topnav__link" href="index.html#why" data-sections="why">چرا نئودیتا</a></li>
+      <li><a class="topnav__link" href="index.html#security" data-sections="security">امنیت داده</a></li>
+      <li><a class="topnav__link" href="faq.html" data-sections="faq">سوالات متداول</a></li>
+      <li><a class="topnav__link" href="about.html" data-sections="about">درباره‌ی ما</a></li>
+    </ul>
+  </nav>
+
+  <div class="head-actions">
+    <a class="btn btn--primary btn--sm head-cta" href="consult.html">درخواست مشاوره رایگان</a>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="تغییر به پوسته‌ی تیره">
+      <svg class="ico ico--moon" aria-hidden="true"><use href="#i-moon"/></svg>
+      <svg class="ico ico--sun" aria-hidden="true"><use href="#i-sun"/></svg>
+    </button>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menuPanel">
+      <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+      <em class="sr-only">فهرست صفحه‌ها</em>
+    </button>
+  </div>
+</header>
+
+<!-- منوی تمام‌صفحه (روی صفحه‌های باریک، جای نوار ناوبری) -->
+<nav class="menu-panel" id="menuPanel" aria-label="فهرست صفحه‌ها">
+  <ol>
+    <li><a href="index.html" data-num="۰۱">خانه</a></li>
+    <li><a href="index.html#dashboard" data-num="۰۲">خدمات</a></li>
+    <li><a href="index.html#process" data-num="۰۳">روش کار ما</a></li>
+    <li><a href="index.html#why" data-num="۰۴">چرا نئودیتا</a></li>
+    <li><a href="index.html#security" data-num="۰۵">امنیت و محرمانگی داده</a></li>
+    <li><a href="index.html#contact" data-num="۰۶">شروع همکاری</a></li>
+    <li class="menu-panel__page"><a href="consult.html">درخواست مشاوره رایگان</a></li>
+    <li class="menu-panel__page"><a href="faq.html" aria-current="page">سوالات متداول</a></li>
+    <li class="menu-panel__page"><a href="about.html">درباره‌ی ما</a></li>
+  </ol>
+</nav>
+
+<main class="page" id="main">
+
+  <!-- آغاز -->
+  <section class="page-hero" aria-labelledby="t-faq">
+    <p class="eyebrow">سوالات متداول</p>
+    <h1 id="t-faq"><span class="grad">پاسخ</span> پرسش‌هایی که معمولاً از ما می‌پرسند</h1>
+    <p class="page-hero__lead">
+      از شروع همکاری و هزینه تا امنیت داده و ابزارهایی که به کار می‌بریم. اگر پاسخ پرسشتان اینجا نیست،
+      در ساعات اداری با ما تماس بگیرید.
+    </p>
+    <nav class="faq-nav" aria-label="دسته‌های پرسش‌ها">
+      <a href="#faq-start">شروع همکاری</a>
+      <a href="#faq-cost">زمان و هزینه</a>
+      <a href="#faq-data">داده و امنیت</a>
+      <a href="#faq-tools">ابزارها و پشتیبانی</a>
+    </nav>
+  </section>
+
+  <!-- پرسش‌ها: همه در یک ستون، در چهار دسته (داده‌ی ساختاریافته‌ی FAQPage را site.js از همین متن‌ها می‌سازد) -->
+  <section class="faq" aria-label="پرسش‌ها و پاسخ‌ها">
+
+    <section class="faq__group" id="faq-start" aria-labelledby="t-faq-start" data-reveal>
+      <h2 class="faq__title" id="t-faq-start"><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg> شروع همکاری</h2>
+      <details class="faq__item" name="faq">
+        <summary>همکاری با شما چطور شروع می‌شود؟<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <div class="faq__a"><p>با یک جلسه‌ی آشنایی رایگان. در این جلسه نیازهای کسب‌وکارتان را می‌شناسیم، سپس راه‌حل‌های داده‌محور پیشنهاد می‌دهیم و پس از تأیید شما و امضای قرارداد، خدمات را در زمان مشخص‌شده ارائه می‌کنیم. جزئیات هر گام در صفحه‌ی <a href="consult.html">درخواست مشاوره رایگان</a> آمده است.</p></div>
+      </details>
+      <details class="faq__item" name="faq">
+        <summary>جلسه‌ی مشاوره‌ی اول واقعاً رایگان است؟<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <div class="faq__a"><p>بله. جلسه‌ی آشنایی رایگان است و هیچ تعهدی برای شما ایجاد نمی‌کند. تا پیشنهاد ما را تأیید نکنید و قرارداد امضا نشود، هزینه‌ای در کار نیست.</p></div>
+      </details>
+      <details class="faq__item" name="faq">
+        <summary>برای جلسه‌ی آشنایی چه چیزهایی آماده کنیم؟<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <div class="faq__a"><p>لازم نیست چیز خاصی آماده کنید. کافی است بگویید چه مسئله‌ای را می‌خواهید حل کنید و داده‌هایتان امروز کجا نگه‌داری می‌شود؛ مثلاً در فایل‌های اکسل، نرم‌افزار حسابداری یا سامانه‌ی فروش. اگر نمونه‌ای از گزارش‌های فعلی‌تان را دارید، نشان دادنش در جلسه کمک می‌کند تصویر دقیق‌تری از نیازتان بگیریم.</p></div>
+      </details>
+      <details class="faq__item" name="faq">
+        <summary>فقط با سازمان‌های بزرگ کار می‌کنید؟<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <div class="faq__a"><p>نه. نئودیتا را راه انداختیم تا هر کسب‌وکاری، کوچک یا بزرگ، بتواند از داده‌هایش برای کاهش هزینه و رقابت با دیگر سازمان‌ها استفاده کند. دامنه‌ی هر پروژه را به اندازه‌ی نیاز و بودجه‌ی شما تعریف می‌کنیم و می‌توان از یک پروژه‌ی کوچک و پربازده شروع کرد.</p></div>
+      </details>
+    </section>
+
+    <section class="faq__group" id="faq-cost" aria-labelledby="t-faq-cost" data-reveal>
+      <h2 class="faq__title" id="t-faq-cost"><svg class="ico" aria-hidden="true"><use href="#i-invoice"/></svg> زمان و هزینه</h2>
+      <details class="faq__item" name="faq">
+        <summary>یک پروژه چقدر زمان می‌برد؟<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <div class="faq__a"><p>به دامنه‌ی کار بستگی دارد. یک داشبورد یا نمونه‌ی اولیه‌ی چت‌بات معمولاً در چند هفته آماده می‌شود و پروژه‌های بزرگ‌تر، مثل یکپارچه‌سازی داده‌های سازمان یا بینایی ماشین در خط تولید، چند ماه زمان می‌برند. زمان‌بندی دقیق پس از جلسه‌ی شناخت و بررسی داده‌ها اعلام می‌شود.</p></div>
+      </details>
+      <details class="faq__item" name="faq">
+        <summary>هزینه چطور محاسبه می‌شود؟<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <div class="faq__a"><p>هزینه بر اساس دامنه‌ی کار، حجم و وضعیت داده‌ها، زیرساخت مورد نیاز و میزان پشتیبانی پس از تحویل تعیین می‌شود. پس از <a href="consult.html">جلسه‌ی مشاوره‌ی رایگان</a>، پیشنهادی مکتوب با مراحل کار، زمان‌بندی و هزینه‌ی هر مرحله دریافت می‌کنید تا پیش از هر تعهدی تصویر روشنی داشته باشید.</p></div>
+      </details>
+    </section>
+
+    <section class="faq__group" id="faq-data" aria-labelledby="t-faq-data" data-reveal>
+      <h2 class="faq__title" id="t-faq-data"><svg class="ico" aria-hidden="true"><use href="#i-shield"/></svg> داده و امنیت</h2>
+      <details class="faq__item" name="faq">
+        <summary>آیا داده‌های ما امن است؟ روی سرورهای خودمان پیاده می‌شود؟<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <div class="faq__a"><p>بله. پیش از شروع هر پروژه قرارداد محرمانگی (NDA) امضا می‌کنیم و در صورت نیاز، کل راهکار، از پایگاه داده تا مدل‌های هوش مصنوعی، روی سرورهای خود سازمان شما نصب می‌شود تا داده‌ای از شبکه‌ی داخلی‌تان خارج نشود. جزئیات بیشتر در بخش <a href="index.html#security">امنیت و محرمانگی داده</a> آمده است.</p></div>
+      </details>
+      <details class="faq__item" name="faq">
+        <summary>داده‌های ما مرتب نیست؛ باز هم می‌توانید کمک کنید؟<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <div class="faq__a"><p>بله؛ در بیشتر سازمان‌ها همین‌طور است. پاک‌سازی و ساختاردهی داده‌ها بخشی از کار ماست: داده‌ها را از فایل‌های اکسل، نرم‌افزارهای مالی و فروش و سامانه‌های مختلف جمع می‌کنیم، خطاها و تکرارها را برطرف می‌کنیم و همه را در یک منبع قابل‌اعتماد کنار هم می‌گذاریم.</p></div>
+      </details>
+      <details class="faq__item" name="faq">
+        <summary>به نرم‌افزارهایی که الان داریم وصل می‌شوید؟<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <div class="faq__a"><p>بله؛ کار ما معمولاً روی همان ابزارهایی انجام می‌شود که امروز دارید: پایگاه‌های داده، فایل‌های اکسل، نرم‌افزارهای حسابداری و فروش، CRM و ERP. لازم نیست سامانه‌های فعلی‌تان را کنار بگذارید. راه اتصال به هر نرم‌افزار در جلسه‌ی آشنایی و پس از بررسی امکانات آن مشخص می‌شود.</p></div>
+      </details>
+    </section>
+
+    <section class="faq__group" id="faq-tools" aria-labelledby="t-faq-tools" data-reveal>
+      <h2 class="faq__title" id="t-faq-tools"><svg class="ico" aria-hidden="true"><use href="#i-chart"/></svg> ابزارها و پشتیبانی</h2>
+      <details class="faq__item" name="faq">
+        <summary>برای طراحی داشبورد از چه نرم‌افزاری استفاده می‌کنید؟<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <div class="faq__a"><p>بسته به نیاز کارفرما، داشبوردها را با Power BI یا به‌صورت کدنویسی‌شده با پایتون و R طراحی می‌کنیم. Power BI برای گزارش‌های مدیریتی و سازمان‌هایی که با ابزارهای مایکروسافت کار می‌کنند گزینه‌ای سریع و آشناست؛ داشبوردهای کدنویسی‌شده با پایتون و R وقتی مناسب‌ترند که تحلیل‌های خاص، مدل‌های پیش‌بینی یا ظاهر و رفتاری کاملاً سفارشی لازم باشد. انتخاب نهایی را با توجه به زیرساخت، کاربران و بودجه‌ی شما با هم انجام می‌دهیم.</p></div>
+      </details>
+      <details class="faq__item" name="faq">
+        <summary>چت‌بات فارسی را چقدر خوب می‌فهمد؟<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <div class="faq__a"><p>چت‌بات‌های ما برای زبان فارسی ساخته و آزموده می‌شوند: نوشتار رسمی و محاوره‌ای، غلط‌های املایی رایج، نیم‌فاصله و اصطلاحات تخصصی حوزه‌ی کار شما. پیش از تحویل، دقت پاسخ‌ها با مجموعه‌ای از پرسش‌های واقعی سازمان خودتان سنجیده می‌شود و هر پاسخ به سند و بند مربوطش ارجاع می‌دهد.</p></div>
+      </details>
+      <details class="faq__item" name="faq">
+        <summary>بعد از تحویل پشتیبانی دارید؟<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <div class="faq__a"><p>بله. پس از راه‌اندازی، عملکرد سامانه را پایش می‌کنیم، مشکلات را برطرف می‌کنیم، مدل‌ها را با داده‌های تازه به‌روز نگه می‌داریم و تیم شما را آموزش می‌دهیم. شرایط و مدت پشتیبانی در قرارداد هر پروژه مشخص می‌شود.</p></div>
+      </details>
+    </section>
+
+  </section>
+
+  <!-- پرسش دیگری دارید؟ -->
+  <section class="end" aria-labelledby="t-more" data-reveal>
+    <p class="eyebrow">پرسش دیگری دارید؟</p>
+    <h2 id="t-more">پاسخ پرسشتان را پیدا نکردید؟</h2>
+    <p>در ساعات اداری با شماره‌ی پشتیبانی تماس بگیرید یا پرسشتان را در جلسه‌ی مشاوره‌ی رایگان مطرح کنید.</p>
+    <div class="end__cta">
+      <a class="btn btn--primary btn--lg" href="tel:+989011922823">
+        <svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg> تماس: <span dir="ltr">۰۹۰۱ ۱۹۲ ۲۸۲۳</span>
+      </a>
+      <a class="btn btn--ghost btn--lg" href="consult.html">درخواست مشاوره رایگان</a>
+    </div>
+    <div class="end__sign">
+      <img class="logo--light" src="logo/4.svg" alt="نئودیتا" width="164" height="34" />
+      <img class="logo--dark" src="logo/12.svg" alt="نئودیتا" width="164" height="34" />
+      <span>تحلیل داده و هوش مصنوعی</span>
+    </div>
+    <p class="end__copy">© ۱۴۰۵ نئودیتا · همه‌ی حقوق محفوظ است</p>
+  </section>
+
+</main>
+
+<script src="assets/site.js?v=1"></script>
+</body>
+</html>

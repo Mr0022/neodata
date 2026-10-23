@@ -248,7 +248,32 @@
   });
 
   /* ---------------------------------------------------------
-     صفحه‌های اسکرول‌دار (مثل «درباره‌ی ما»)
+     سوالات متداول (faq.html): هر بار فقط یک پاسخ باز است (مرورگرهایی که صفت name
+     روی <details> را نمی‌شناسند)، و داده‌ی ساختاریافته‌ی FAQPage از همان
+     متن‌های دیده‌شده ساخته می‌شود تا این دو هرگز از هم فاصله نگیرند
+     --------------------------------------------------------- */
+
+  const faqItems = $$('.faq__item');
+  faqItems.forEach((d) => d.addEventListener('toggle', () => {
+    if (d.open) faqItems.forEach((o) => { if (o !== d) o.open = false; });
+  }));
+  if (faqItems.length) {
+    const ld = document.createElement('script');
+    ld.type = 'application/ld+json';
+    ld.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqItems.map((d) => ({
+        '@type': 'Question',
+        name: $('summary', d).textContent.trim(),
+        acceptedAnswer: { '@type': 'Answer', text: $('.faq__a', d).textContent.replace(/\s+/g, ' ').trim() },
+      })),
+    });
+    document.head.appendChild(ld);
+  }
+
+  /* ---------------------------------------------------------
+     صفحه‌های اسکرول‌دار (مشاوره، سوالات متداول، درباره‌ی ما)
 
      هدر پس از کمی اسکرول زمینه‌ی شیشه‌ای می‌گیرد تا متن زیرش خوانا بماند،
      و عنصرهای [data-reveal] وقتی به صفحه می‌رسند آرام ظاهر می‌شوند.

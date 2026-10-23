@@ -564,15 +564,16 @@ html.no-js .rotator > span:not(.is-on) { display: none; }
   max-width: 760px; margin: 0 auto 26px;
   color: var(--ink-soft); font-size: clamp(15.5px, 1.35vw, 19px);
 }
-.hero__chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 30px; }
+.hero__chips, .faq-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 30px; }
+.faq-nav { margin: 26px 0 0; }
 /* هر چیپ پیوندی است به بخش همان خدمت */
-.hero__chips a {
+.hero__chips a, .faq-nav a {
   display: block; padding: 4px 14px; border-radius: 999px;
   font-size: 13.5px; color: var(--ink-soft); text-decoration: none;
   background: var(--control); border: 1px solid var(--line);
   transition: color .2s ease, background .2s ease, border-color .2s ease, translate .25s var(--ease-out);
 }
-.hero__chips a:hover, .hero__chips a:focus-visible {
+.hero__chips a:hover, .hero__chips a:focus-visible, .faq-nav a:hover, .faq-nav a:focus-visible {
   color: var(--accent); background: var(--accent-soft); border-color: var(--accent-line); translate: 0 -2px;
 }
 .hero__cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
@@ -1044,11 +1045,19 @@ html.js .slide.is-active .steps__line i {
 .assure__item h3 { font-size: 16.5px; margin-bottom: .2em; }
 .assure__item p { margin: 0; font-size: 14px; line-height: 1.85; color: var(--ink-soft); }
 
-/* ---------------- ۹ | سوالات متداول ---------------- */
+/* ---------------- سوالات متداول (faq.html) ----------------
+   همه‌ی پرسش‌ها زیر هم در یک ستون، در چند دسته */
 
-/* دو ستون مستقل (هر کدام سه پرسش) تا باز شدن یک پاسخ، پرسش‌های ستون دیگر را جابه‌جا نکند */
-.faq { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; align-items: start; }
-.faq__col { display: grid; gap: 12px; }
+.faq { display: grid; gap: clamp(30px, 5vh, 48px); max-width: 860px; margin: 0 auto; }
+.faq__group { display: grid; gap: 10px; scroll-margin-top: calc(var(--head-h) + 20px); }
+.faq__title {
+  display: flex; align-items: center; gap: 10px; margin: 0 0 4px;
+  font-size: clamp(19px, 1.8vw, 23px);
+}
+.faq__title .ico {
+  width: 22px; height: 22px; padding: 7px; box-sizing: content-box; border-radius: 12px;
+  color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-line);
+}
 .faq__item {
   border-radius: 16px;
   background: var(--card-bg); border: 1px solid var(--line); box-shadow: var(--tile-shadow);
@@ -1264,7 +1273,7 @@ html.no-js .menu-btn, html.no-js .theme-btn, html.no-js .dots, html.no-js .pager
   .features { grid-template-columns: minmax(0, 1fr); gap: 10px; margin-bottom: 20px; }
   .story, .consult, .mission { grid-template-columns: minmax(0, 1fr); }
   .mission { gap: 12px; }
-  .faq, .faq__col { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .faq__group { gap: 8px; }
   .assure { gap: 8px; }
   .assure__item { padding: 12px 14px; gap: 12px; }
   .promise { margin-top: 10px; padding: 11px 13px; font-size: 13.5px; }
@@ -1291,7 +1300,7 @@ html.no-js .menu-btn, html.no-js .theme-btn, html.no-js .dots, html.no-js .pager
   .hero__end { display: block; }
   .hero__lead { font-size: 14.5px; margin-bottom: 18px; }
   .hero__chips { gap: 6px; margin-bottom: 22px; }
-  .hero__chips a { font-size: 12px; padding: 3px 11px; }
+  .hero__chips a, .faq-nav a { font-size: 12px; padding: 3px 11px; }
   .btn--lg { padding: 12px 22px; font-size: 14.5px; }
 
   .card { padding: 12px; border-radius: 18px; }

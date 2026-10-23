@@ -94,8 +94,64 @@
     menuEls.push(btn);
   });
 
+  /* ناوبری بالا: پیوند جاری، نشانگر لغزان زیر آن، و زیرمنوی خدمات */
+  const topnav  = $('#topnav');
+  const navEls  = $$('[data-sections]', topnav);
+  const navInd  = $('.topnav__ind', topnav);
+  const subItem = $('.topnav__has-sub', topnav);
+  const subBtn  = $('button', subItem);
+  const subLinks = $$('.topnav__sub a', subItem);
+  let subOpenedAt = 0, subHoverTimer = 0;
+
+  /** نشانگر به اندازه و جای پیوند جاری درمی‌آید؛ اگر پیوند پنهان است، نشانگر هم */
+  function placeIndicator() {
+    const el = navEls.find((n) => n.classList.contains('is-active'));
+    if (!el || !el.offsetWidth) { navInd.style.opacity = '0'; return; }
+    const box = topnav.getBoundingClientRect();
+    const r = el.getBoundingClientRect();
+    navInd.style.setProperty('--x', (r.left - box.left - topnav.clientLeft) + 'px');
+    navInd.style.setProperty('--y', (r.top - box.top - topnav.clientTop) + 'px');
+    navInd.style.setProperty('--w', r.width + 'px');
+    navInd.style.setProperty('--h', r.height + 'px');
+    navInd.style.opacity = '';
+    // نخستین بار بدون لغزش، از آن پس با لغزش
+    if (!navInd.classList.contains('is-ready')) requestAnimationFrame(() => navInd.classList.add('is-ready'));
+  }
+  window.addEventListener('resize', placeIndicator);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeIndicator);
+
+  const subOpen = () => subItem.classList.contains('is-open');
+  function setSub(open) {
+    subItem.classList.toggle('is-open', open);
+    subBtn.setAttribute('aria-expanded', String(open));
+    if (open) subOpenedAt = performance.now();
+  }
+  // کلیک باز و بسته می‌کند؛ اما کلیکی که بلافاصله پس از باز شدن با نشانگر برسد، آن را نمی‌بندد
+  subBtn.addEventListener('click', () => setSub(!subOpen() || performance.now() - subOpenedAt < 400));
+  subItem.addEventListener('pointerenter', (e) => {
+    if (e.pointerType !== 'mouse') return;
+    clearTimeout(subHoverTimer);
+    if (!subOpen()) setSub(true);
+  });
+  subItem.addEventListener('pointerleave', (e) => {
+    if (e.pointerType !== 'mouse') return;
+    subHoverTimer = setTimeout(() => setSub(false), 220);
+  });
+  document.addEventListener('pointerdown', (e) => { if (subOpen() && !subItem.contains(e.target)) setSub(false); });
+  subItem.addEventListener('focusout', (e) => { if (!subItem.contains(e.relatedTarget)) setSub(false); });
+  // کلیدهای جهت درون زیرمنو میان گزینه‌ها می‌چرخند، نه میان بخش‌ها
+  subItem.addEventListener('keydown', (e) => {
+    const step = { ArrowDown: 1, ArrowUp: -1 }[e.key];
+    if (!step) return;
+    e.preventDefault();
+    if (!subOpen()) setSub(true);
+    const n = subLinks.length;
+    const k = subLinks.indexOf(document.activeElement);
+    subLinks[k < 0 ? (step > 0 ? 0 : n - 1) : (k + step + n) % n].focus();
+  });
+
   const menuOpen = () => menuPanel.classList.contains('is-open');
-  const behindMenu = [stage, dotsNav, pager];
+  const behindMenu = [stage, dotsNav, pager, topnav];
 
   function openMenu() {
     menuPanel.classList.add('is-open');
@@ -122,6 +178,14 @@
       if (k === index) el.setAttribute('aria-current', 'true');
       else el.removeAttribute('aria-current');
     }));
+    navEls.forEach((n) => {
+      const on = n.dataset.sections.split(' ').includes(s.id);
+      n.classList.toggle('is-active', on);
+      if (on && n.tagName === 'A') n.setAttribute('aria-current', 'true');
+      else n.removeAttribute('aria-current');
+    });
+    setSub(false);
+    placeIndicator();
     bar.style.width = ((index + 1) / slides.length) * 100 + '%';
     $('#pagerNum').textContent = pad2(index + 1);
     $('#pagerTitle').textContent = s.dataset.title || '';
@@ -204,6 +268,7 @@
     if (i < 0) return;
     e.preventDefault();
     closeMenu();
+    setSub(false);
     show(i);
     // چیپ‌های «پیش‌بینی» و «مهندسی داده» در خانه به بخش «خدمات دیگر» می‌روند و کارت خودشان
     // را پس از ظاهر شدن، لحظه‌ای برجسته می‌کنند
@@ -354,6 +419,7 @@
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && menuOpen()) { closeMenu(); menuBtn.focus(); return; }
+    if (e.key === 'Escape' && subOpen()) { setSub(false); subBtn.focus(); return; }
     if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || menuOpen()) return;
     if (e.target.closest && e.target.closest('input, textarea, select, [contenteditable="true"]')) return;
 

@@ -83,6 +83,53 @@
     <img class="brand__logo logo--dark" src="logo/12.svg" alt="نئودیتا" width="135" height="28" />
     <span class="brand__tag">تحلیل داده و هوش مصنوعی</span>
   </a>
+
+  <!-- ناوبری بالا: هر پیوند با data-sections می‌گوید در کدام بخش‌ها «جاری» است -->
+  <nav class="topnav" id="topnav" aria-label="ناوبری اصلی">
+    <span class="topnav__ind" aria-hidden="true"></span>
+    <ul class="topnav__list">
+      <li><a class="topnav__link" href="#hero" data-goto="hero" data-sections="hero">خانه</a></li>
+      <li class="topnav__has-sub">
+        <button class="topnav__link" type="button" aria-expanded="false" aria-controls="navServices" data-sections="dashboard chatbot agents vision services">
+          خدمات <svg class="ico topnav__caret" aria-hidden="true"><use href="#i-down"/></svg>
+        </button>
+        <div class="topnav__sub" id="navServices">
+          <ul class="topnav__sub-list">
+            <li><a href="#dashboard" data-goto="dashboard">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-chart"/></svg></span>
+              <span class="topnav__sub-text"><b>داشبورد و تحلیل داده</b><small>شاخص‌ها و گزارش‌های مدیریتی در یک نگاه</small></span>
+            </a></li>
+            <li><a href="#chatbot" data-goto="chatbot">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg></span>
+              <span class="topnav__sub-text"><b>چت‌بات هوشمند سازمانی</b><small>پاسخ مستند از اسناد خود سازمان</small></span>
+            </a></li>
+            <li><a href="#agents" data-goto="agents">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-flow"/></svg></span>
+              <span class="topnav__sub-text"><b>ایجنت‌ها و اتوماسیون</b><small>خودکارسازی کارهای تکراری</small></span>
+            </a></li>
+            <li><a href="#vision" data-goto="vision">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-scan"/></svg></span>
+              <span class="topnav__sub-text"><b>بینایی ماشین</b><small>شمارش، کنترل کیفیت و ایمنی</small></span>
+            </a></li>
+            <li><a href="#services" data-goto="services">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-spark"/></svg></span>
+              <span class="topnav__sub-text"><b>خدمات دیگر</b><small>پیش‌بینی، مهندسی داده و اسناد فارسی</small></span>
+            </a></li>
+            <li><a class="topnav__sub-cta" href="#contact" data-goto="contact">
+              <b>نمی‌دانید از کجا شروع کنید؟</b>
+              <small>در مشاوره‌ی رایگان با هم پیدایش می‌کنیم</small>
+              <span>درخواست مشاوره <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+            </a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a class="topnav__link" href="#process" data-goto="process" data-sections="process">روش کار</a></li>
+      <li><a class="topnav__link" href="#why" data-goto="why" data-sections="why">چرا نئودیتا</a></li>
+      <li><a class="topnav__link" href="#security" data-goto="security" data-sections="security">امنیت داده</a></li>
+      <li><a class="topnav__link" href="#faq" data-goto="faq" data-sections="faq">سوالات متداول</a></li>
+    </ul>
+  </nav>
+
   <div class="head-actions">
     <a class="btn btn--primary btn--sm head-cta" href="#contact" data-goto="contact">درخواست مشاوره رایگان</a>
     <button class="theme-btn" id="themeBtn" type="button" aria-label="تغییر به پوسته‌ی تیره">

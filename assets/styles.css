@@ -39,6 +39,9 @@
   --bad: #d33a3a;
   --head-from: rgba(246, 248, 252, .95);
   --overlay: rgba(246, 248, 252, .96);
+  --nav-glass: rgba(255, 255, 255, .74);  /* زمینه‌ی شیشه‌ای نوار ناوبری */
+  --nav-pop: #ffffff;                     /* زیرمنو */
+  --nav-shadow: 0 14px 40px -22px rgba(15, 26, 61, .38), 0 1px 3px rgba(15, 26, 61, .06);
   --glow-1: rgba(45, 59, 232, .08);
   --glow-2: rgba(59, 130, 246, .07);
   --grid-line: rgba(22, 34, 84, .05);
@@ -104,6 +107,9 @@
   --bad: #ff6b6b;
   --head-from: rgba(7, 11, 22, .92);
   --overlay: rgba(7, 11, 22, .94);
+  --nav-glass: rgba(16, 23, 42, .68);
+  --nav-pop: #0e1426;
+  --nav-shadow: 0 20px 50px -24px rgba(0, 0, 0, .9), inset 0 1px 0 rgba(255, 255, 255, .05);
   --glow-1: rgba(45, 59, 232, .2);
   --glow-2: rgba(95, 176, 255, .09);
   --grid-line: rgba(148, 170, 220, .045);
@@ -197,6 +203,7 @@ a:focus-visible, button:focus-visible {
 :root[data-theme="dark"] .logo--dark { display: block; }
 
 .head-actions { display: flex; align-items: center; gap: 10px; }
+.head-cta, .brand__tag { white-space: nowrap; }
 
 .menu-btn, .theme-btn {
   width: 44px; height: 44px; padding: 0; border-radius: 13px; cursor: pointer;
@@ -242,6 +249,92 @@ a:focus-visible, button:focus-visible {
 .menu-panel button::before { content: attr(data-num); font-size: .5em; font-weight: 700; color: var(--ink-mute); }
 .menu-panel button:hover, .menu-panel button:focus-visible { color: var(--ink); translate: -8px 0; }
 .menu-panel button[aria-current="true"] { color: var(--accent); }
+
+/* ---------------- ناوبری بالا ----------------
+   کپسول شیشه‌ای وسط هدر؛ زبانه‌ی آبی زیر پیوند بخش جاری می‌لغزد.
+   روی صفحه‌های باریک‌تر جا نمی‌شود و منوی تمام‌صفحه جایش را می‌گیرد. */
+
+.topnav {
+  position: absolute; left: 50%; translate: -50% 0;
+  display: none; padding: 5px; border-radius: 999px;
+  background: var(--nav-glass); border: 1px solid var(--line); box-shadow: var(--nav-shadow);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4); backdrop-filter: blur(16px) saturate(1.4);
+}
+@media (min-width: 1121px) {
+  .topnav { display: block; }
+  .menu-btn { display: none; }
+}
+.topnav__list { position: relative; z-index: 1; display: flex; align-items: center; gap: 2px; }
+.topnav__link {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 7px 15px; border: 0; border-radius: 999px; background: none; cursor: pointer;
+  font-size: 14px; font-weight: 700; line-height: 1.6; color: var(--ink-soft);
+  text-decoration: none; white-space: nowrap;
+  transition: color .25s ease, background .25s ease;
+}
+.topnav__link:not(.is-active):hover { color: var(--ink); background: var(--accent-soft); }
+.topnav__link.is-active { color: var(--on-accent); }
+.topnav__caret {
+  width: 14px; height: 14px; stroke-width: 2.2; margin-inline-start: -2px;
+  transition: rotate .3s var(--ease-out);
+}
+.topnav__has-sub.is-open .topnav__caret { rotate: 180deg; }
+
+/* زبانه‌ی آبی زیر پیوند جاری؛ app.js جا و اندازه‌اش را می‌دهد (--x، --y، --w، --h) */
+.topnav__ind {
+  position: absolute; z-index: 0; left: 0; top: 0;
+  width: var(--w, 0); height: var(--h, 0); translate: var(--x, 0) var(--y, 0);
+  border-radius: 999px; background: var(--btn-bg); box-shadow: 0 8px 20px -8px var(--accent-glow);
+  pointer-events: none;
+}
+.topnav__ind.is-ready {
+  transition: translate .55s var(--ease-out), width .55s var(--ease-out), height .55s var(--ease-out), opacity .3s ease;
+}
+
+/* زیرمنوی خدمات */
+.topnav__has-sub { position: relative; }
+.topnav__sub {
+  position: absolute; top: calc(100% + 14px); left: 50%; translate: -50% 8px;
+  width: 580px; padding: 10px;
+  border-radius: 20px; background: var(--nav-pop); border: 1px solid var(--line); box-shadow: var(--card-shadow);
+  opacity: 0; visibility: hidden;
+  transition: opacity .2s ease, translate .35s var(--ease-out), visibility 0s linear .35s;
+}
+/* پل نامرئی میان دکمه و زیرمنو تا نشانگر در راه، زیرمنو را نبندد */
+.topnav__sub::before { content: ""; position: absolute; left: 0; right: 0; bottom: 100%; height: 18px; }
+.topnav__has-sub.is-open .topnav__sub,
+html.no-js .topnav__has-sub:hover .topnav__sub,
+html.no-js .topnav__has-sub:focus-within .topnav__sub {
+  opacity: 1; visibility: visible; translate: -50% 0;
+  transition: opacity .2s ease, translate .35s var(--ease-out), visibility 0s;
+}
+.topnav__sub-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; }
+.topnav__sub-list a {
+  height: 100%;
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 10px 12px; border-radius: 14px;
+  color: var(--ink); text-decoration: none;
+  transition: background .2s ease;
+}
+.topnav__sub-list a:hover, .topnav__sub-list a:focus-visible { background: var(--accent-soft); }
+.topnav__sub-ico {
+  width: 38px; height: 38px; flex: none; display: grid; place-items: center; border-radius: 11px;
+  color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-line);
+}
+.topnav__sub-ico .ico { width: 19px; height: 19px; }
+.topnav__sub-text { display: flex; flex-direction: column; line-height: 1.6; }
+.topnav__sub-text b, .topnav__sub-cta b { font-size: 14px; font-weight: 800; }
+.topnav__sub-text small, .topnav__sub-cta small { font-size: 12px; color: var(--ink-mute); }
+.topnav__sub-list .topnav__sub-cta {
+  flex-direction: column; gap: 0; line-height: 1.6;
+  background: var(--accent-soft); border: 1px dashed var(--accent-line);
+}
+.topnav__sub-cta span {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 4px;
+  font-size: 12.5px; font-weight: 800; color: var(--accent);
+}
+.topnav__sub-cta .ico { width: 15px; height: 15px; transition: translate .25s var(--ease-out); }
+.topnav__sub-cta:hover .ico { translate: -3px 0; }
 
 /* ---------------- نوار پیشرفت، نقطه‌ها، شماره‌ی بخش ---------------- */
 
@@ -1004,8 +1097,12 @@ html.no-js .menu-btn, html.no-js .theme-btn, html.no-js .dots, html.no-js .pager
   .scroll-hint { display: none; }
 }
 
-@media (max-width: 1100px) {
+/* زیر این پهنا شعار کنار نشان با کپسول ناوبری برخورد می‌کند */
+@media (max-width: 1280px) {
   .brand__tag { display: none; }
+}
+
+@media (max-width: 1100px) {
   .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 

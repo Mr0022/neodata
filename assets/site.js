@@ -150,7 +150,9 @@
      --------------------------------------------------------- */
 
   const topnav  = $('#topnav');
-  const navEls  = $$('[data-sections]', topnav);
+  // پیوندهای سطح اول (نشانگر لغزان زیر این‌ها می‌رود) و پیوندهای زیرمنوی خدمات
+  const navEls  = $$('.topnav__list > li > [data-sections]', topnav);
+  const subNavEls = $$('.topnav__sub [data-sections]', topnav);
   const navInd  = $('.topnav__ind', topnav);
   const subItem = $('.topnav__has-sub', topnav);
   const subBtn  = $('button', subItem);
@@ -212,9 +214,10 @@
     else n.removeAttribute('aria-current');
   });
 
-  /** پیوند جاری در نوار ناوبری (نشانگر به زیرش می‌لغزد) و در منوی تمام‌صفحه */
+  /** پیوند جاری در نوار ناوبری (نشانگر به زیرش می‌لغزد)، در زیرمنوی خدمات و در منوی تمام‌صفحه */
   function setActive(id, current = 'true') {
     markCurrent(navEls, id, current);
+    markCurrent(subNavEls, id, current);
     markCurrent(menuEls, id, current);
     setSub(false);
     placeIndicator();
@@ -274,7 +277,7 @@
       const ul = document.createElement('ul');
       subLinks.filter((s) => !s.classList.contains('topnav__sub-cta')).forEach((s) => {
         const a = copyLink(s, 'menu-panel__sublink');
-        a.dataset.sections = s.getAttribute('href').split('#')[1];
+        a.dataset.sections = s.dataset.sections;
         a.append($('.topnav__sub-ico', s).cloneNode(true), $('b', s).textContent);
         const sl = document.createElement('li');
         sl.appendChild(a);

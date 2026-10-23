@@ -35,7 +35,8 @@
 </head>
 <body>
 
-<!-- آیکون‌ها: یک بار تعریف، همه‌جا با <use> -->
+<!-- آیکون‌ها: یک بار تعریف، همه‌جا با <use>. فهرست کامل آیکون‌های سایت همین‌جاست؛ tools/sync-layout.py
+     آن را به صفحه‌های دیگر هم می‌برد، پس آیکون تازه را فقط اینجا اضافه کنید -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7.5 16v-5"/><path d="M12 16V7"/><path d="M16.5 16v-8"/></symbol>
   <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></symbol>
@@ -64,6 +65,10 @@
   <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14.5v2.5"/></symbol>
   <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M3 3l18 18"/><path d="M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17.6 17.6 0 0 1-3.2 4.2M6.6 6.6C3.9 8.4 2 12 2 12s3.6 7 10 7a9.7 9.7 0 0 0 5.4-1.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></symbol>
   <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5.2 3.5h3.3l1.7 4.3-2.2 1.4a11.5 11.5 0 0 0 6.8 6.8l1.4-2.2 4.3 1.7v3.3a1.7 1.7 0 0 1-1.8 1.7C10.9 20.1 3.9 13.1 3.5 5.3a1.7 1.7 0 0 1 1.7-1.8z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></symbol>
+  <symbol id="i-trend-down" viewBox="0 0 24 24"><path d="M3 7l6 6 4-4 8 8"/><path d="M15 17h6v-6"/></symbol>
   <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4"/></symbol>
 </svg>
 
@@ -83,36 +88,45 @@
     <span class="brand__tag">تحلیل داده و هوش مصنوعی</span>
   </a>
 
-  <!-- ناوبری بالا: هر پیوند با data-sections می‌گوید در کدام بخش‌ها «جاری» است -->
+  <!-- ناوبری بالا: هر پیوند با data-sections می‌گوید در کدام بخش‌ها یا صفحه‌ها «جاری» است.
+       این نوار و پانویس در همه‌ی صفحه‌ها یکی‌اند: فقط در index.html ویرایششان کنید و سپس python3 tools/sync-layout.py را اجرا کنید -->
   <nav class="topnav" id="topnav" aria-label="ناوبری اصلی">
     <span class="topnav__ind" aria-hidden="true"></span>
     <ul class="topnav__list">
       <li><a class="topnav__link" href="#hero" data-goto="hero" data-sections="hero">خانه</a></li>
       <li class="topnav__has-sub">
-        <button class="topnav__link" type="button" aria-expanded="false" aria-controls="navServices" data-sections="dashboard chatbot agents vision services">
+        <button class="topnav__link" type="button" aria-expanded="false" aria-controls="navServices" data-sections="dashboard chatbot agents vision forecasting data-engineering services">
           خدمات <svg class="ico topnav__caret" aria-hidden="true"><use href="#i-down"/></svg>
         </button>
         <div class="topnav__sub" id="navServices">
           <ul class="topnav__sub-list">
-            <li><a href="#dashboard" data-goto="dashboard">
+            <li><a href="dashboard.html" data-sections="dashboard">
               <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-chart"/></svg></span>
               <span class="topnav__sub-text"><b>داشبورد و تحلیل داده</b><small>شاخص‌ها و گزارش‌های مدیریتی در یک نگاه</small></span>
             </a></li>
-            <li><a href="#chatbot" data-goto="chatbot">
+            <li><a href="chatbot.html" data-sections="chatbot">
               <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg></span>
               <span class="topnav__sub-text"><b>چت‌بات هوشمند سازمانی</b><small>پاسخ مستند از اسناد خود سازمان</small></span>
             </a></li>
-            <li><a href="#agents" data-goto="agents">
+            <li><a href="agents.html" data-sections="agents">
               <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-flow"/></svg></span>
               <span class="topnav__sub-text"><b>ایجنت‌ها و اتوماسیون</b><small>خودکارسازی کارهای تکراری</small></span>
             </a></li>
-            <li><a href="#vision" data-goto="vision">
+            <li><a href="vision.html" data-sections="vision">
               <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-scan"/></svg></span>
               <span class="topnav__sub-text"><b>بینایی ماشین</b><small>شمارش، کنترل کیفیت و ایمنی</small></span>
             </a></li>
-            <li><a href="#services" data-goto="services">
+            <li><a href="forecasting.html" data-sections="forecasting">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-trend"/></svg></span>
+              <span class="topnav__sub-text"><b>پیش‌بینی و یادگیری ماشین</b><small>پیش‌بینی فروش و تقاضا، مدل‌های اختصاصی</small></span>
+            </a></li>
+            <li><a href="data-engineering.html" data-sections="data-engineering">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-db"/></svg></span>
+              <span class="topnav__sub-text"><b>مهندسی و یکپارچه‌سازی داده</b><small>انبار داده و جریان‌های خودکار داده</small></span>
+            </a></li>
+            <li><a href="#services" data-goto="services" data-sections="services">
               <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-spark"/></svg></span>
-              <span class="topnav__sub-text"><b>خدمات دیگر</b><small>پیش‌بینی، مهندسی داده و اسناد فارسی</small></span>
+              <span class="topnav__sub-text"><b>خدمات دیگر</b><small>اسناد فارسی، مشاوره و آموزش</small></span>
             </a></li>
             <li><a class="topnav__sub-cta" href="consult.html">
               <b>نمی‌دانید از کجا شروع کنید؟</b>
@@ -216,6 +230,7 @@
           <li class="anim">شاخص‌های کلیدی عملکرد (KPI) و گزارش‌های خودکار دوره‌ای</li>
           <li class="anim">تحلیل عمیق روند فروش، رفتار مشتری، سبد کالا و سودآوری</li>
         </ul>
+        <a class="more anim" href="dashboard.html">جزئیات بیشتر درباره‌ی داشبورد و تحلیل داده <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
       <figure class="visual card dash anim" aria-label="نمونه‌ی نمایشی داشبورد فروش">
         <div class="card__bar">
@@ -269,6 +284,7 @@
           <li class="anim">درک کامل زبان فارسی و اسناد فارسی</li>
           <li class="anim">قابل استقرار روی سرورهای داخلی سازمان و اتصال به وب‌سایت و پیام‌رسان‌ها</li>
         </ul>
+        <a class="more anim" href="chatbot.html">جزئیات بیشتر درباره‌ی چت‌بات هوشمند سازمانی <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
       <div class="visual card chat anim" role="img"
            aria-label="نمونه‌ی گفتگو: کاربر درباره‌ی شرایط مرجوعی کالا می‌پرسد و دستیار پس از جست‌وجو در اسناد سازمان، با ارجاع به آیین‌نامه‌ی فروش پاسخ می‌دهد">
@@ -314,6 +330,7 @@
           <li class="anim">ایجنت‌هایی که با ابزارهای فعلی شما کار می‌کنند: CRM، ERP، ایمیل و پیام‌رسان</li>
           <li class="anim">نظارت انسانی در نقاط حساس تصمیم‌گیری</li>
         </ul>
+        <a class="more anim" href="agents.html">جزئیات بیشتر درباره‌ی ایجنت‌ها و اتوماسیون <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
       <div class="visual card flow anim" role="img"
            aria-label="نمونه‌ی کار یک ایجنت ثبت سفارش: دریافت ایمیل سفارش، استخراج اقلام، بررسی موجودی انبار، ثبت در CRM و ارسال پیش‌فاکتور برای تأیید کارشناس فروش">
@@ -370,6 +387,7 @@
           <li class="anim">کنترل کیفیت: تشخیص عیب، شکستگی و نقص بسته‌بندی در لحظه</li>
           <li class="anim">ایمنی: پایش کلاه و جلیقه‌ی ایمنی و هشدار ورود به محدوده‌ی خطر</li>
         </ul>
+        <a class="more anim" href="vision.html">جزئیات بیشتر درباره‌ی بینایی ماشین <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
       <div class="visual card cam anim" role="img"
            aria-label="نمونه‌ی شبیه‌سازی‌شده: دوربین خط بسته‌بندی کارتن‌های روی نوار نقاله را تشخیص می‌دهد، می‌شمارد و کارتن‌های معیوب را جدا علامت می‌زند">
@@ -403,12 +421,12 @@
       <ul class="tiles">
         <li class="tile anim" data-key="forecast">
           <span class="tile__ico"><svg class="ico" aria-hidden="true"><use href="#i-trend"/></svg></span>
-          <h3>پیش‌بینی و یادگیری ماشین</h3>
+          <h3><a href="forecasting.html">پیش‌بینی و یادگیری ماشین</a></h3>
           <p>پیش‌بینی فروش و تقاضا، شناسایی مشتریانی که در حال رفتن هستند، قیمت‌گذاری هوشمند و مدل‌های اختصاصی روی داده‌های خودتان.</p>
         </li>
         <li class="tile anim" data-key="data-eng">
           <span class="tile__ico"><svg class="ico" aria-hidden="true"><use href="#i-db"/></svg></span>
-          <h3>مهندسی و یکپارچه‌سازی داده</h3>
+          <h3><a href="data-engineering.html">مهندسی و یکپارچه‌سازی داده</a></h3>
           <p>طراحی انبار داده، ساخت جریان‌های خودکار انتقال داده (ETL) و یکپارچه کردن داده‌های پراکنده‌ی سازمان در یک منبع قابل‌اعتماد.</p>
         </li>
         <li class="tile anim">
@@ -555,18 +573,48 @@
         </a>
         <a class="btn btn--ghost btn--lg" href="#dashboard" data-goto="dashboard">مرور دوباره‌ی خدمات</a>
       </div>
-      <!-- نشانی ایمیل موقت است؛ پیش از انتشار با نشانی واقعی جایگزین شود -->
-      <p class="end__mail anim">
-        یا مستقیم تماس بگیرید: <a href="tel:+989124140730" dir="ltr">۰۹۱۲ ۴۱۴۰ ۷۳۰</a> (پاسخ‌گویی در ساعات اداری)
-        · ایمیل: <a href="mailto:info@neodata.ir" dir="ltr">info@neodata.ir</a>
-      </p>
-      <div class="end__sign anim">
-        <img class="logo--light" src="logo/4.svg" alt="نئودیتا" width="164" height="34" />
-        <img class="logo--dark" src="logo/12.svg" alt="نئودیتا" width="164" height="34" />
-        <span>تحلیل داده و هوش مصنوعی</span>
-      </div>
-      <p class="end__copy anim">© ۱۴۰۵ نئودیتا · همه‌ی حقوق محفوظ است</p>
     </div>
+    <!-- پانویس سایت: در همه‌ی صفحه‌ها یکی است (نشانی ایمیل موقت است؛ پیش از انتشار با نشانی واقعی جایگزین شود) -->
+    <footer class="site-foot anim">
+      <div class="site-foot__grid">
+        <div class="site-foot__brand">
+          <a href="index.html" aria-label="نئودیتا، صفحه‌ی اصلی">
+            <img class="logo--light" src="logo/4.svg" alt="" width="135" height="28" />
+            <img class="logo--dark" src="logo/12.svg" alt="" width="135" height="28" />
+          </a>
+          <p>تحلیل داده و راهکارهای هوش مصنوعی برای سازمان‌ها؛ برای هزینه‌ی کمتر و رقابت بهتر با دیگر سازمان‌ها.</p>
+        </div>
+        <nav aria-labelledby="f-services">
+          <h2 id="f-services">خدمات</h2>
+          <ul>
+            <li><a href="dashboard.html">داشبورد و تحلیل داده</a></li>
+            <li><a href="chatbot.html">چت‌بات هوشمند سازمانی</a></li>
+            <li><a href="agents.html">ایجنت‌ها و اتوماسیون</a></li>
+            <li><a href="vision.html">بینایی ماشین</a></li>
+            <li><a href="forecasting.html">پیش‌بینی و یادگیری ماشین</a></li>
+            <li><a href="data-engineering.html">مهندسی و یکپارچه‌سازی داده</a></li>
+          </ul>
+        </nav>
+        <nav aria-labelledby="f-company">
+          <h2 id="f-company">نئودیتا</h2>
+          <ul>
+            <li><a href="about.html">درباره‌ی ما</a></li>
+            <li><a href="faq.html">سوالات متداول</a></li>
+            <li><a href="consult.html">درخواست مشاوره رایگان</a></li>
+            <li><a href="privacy.html">حریم خصوصی</a></li>
+          </ul>
+        </nav>
+        <div>
+          <h2>تماس</h2>
+          <ul class="site-foot__contact">
+            <li><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg><a href="tel:+989124140730" dir="ltr">۰۹۱۲ ۴۱۴۰ ۷۳۰</a></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>پاسخ‌گویی در ساعات اداری</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg><a href="mailto:info@neodata.ir" dir="ltr">info@neodata.ir</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="site-foot__bottom">© ۱۴۰۵ نئودیتا · همه‌ی حقوق محفوظ است</p>
+    </footer>
   </section>
 
 </main>

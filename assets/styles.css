@@ -368,6 +368,8 @@ html.no-js .topnav__has-sub:focus-within .topnav__sub {
   transition: background .2s ease;
 }
 .topnav__sub-list a:hover, .topnav__sub-list a:focus-visible { background: var(--accent-soft); }
+.topnav__sub-list a[aria-current] { background: var(--accent-soft); }
+.topnav__sub-list a[aria-current] b { color: var(--accent); }
 .topnav__sub-ico {
   width: 38px; height: 38px; flex: none; display: grid; place-items: center; border-radius: 11px;
   color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-line);
@@ -603,16 +605,17 @@ html.no-js .rotator > span:not(.is-on) { display: none; }
   max-width: 760px; margin: 0 auto 26px;
   color: var(--ink-soft); font-size: clamp(15.5px, 1.35vw, 19px);
 }
-.hero__chips, .faq-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 30px; }
+.hero__chips, .faq-nav, .chip-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 30px; }
 .faq-nav { margin: 26px 0 0; }
 /* هر چیپ پیوندی است به بخش همان خدمت */
-.hero__chips a, .faq-nav a {
+.hero__chips a, .faq-nav a, .chip-links a {
   display: block; padding: 4px 14px; border-radius: 999px;
   font-size: 13.5px; color: var(--ink-soft); text-decoration: none;
   background: var(--control); border: 1px solid var(--line);
   transition: color .2s ease, background .2s ease, border-color .2s ease, translate .25s var(--ease-out);
 }
-.hero__chips a:hover, .hero__chips a:focus-visible, .faq-nav a:hover, .faq-nav a:focus-visible {
+.hero__chips a:hover, .hero__chips a:focus-visible, .faq-nav a:hover, .faq-nav a:focus-visible,
+.chip-links a:hover, .chip-links a:focus-visible {
   color: var(--accent); background: var(--accent-soft); border-color: var(--accent-line); translate: 0 -2px;
 }
 .hero__cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
@@ -1011,6 +1014,12 @@ html.js .slide.is-active .chart__col em {
 /* کارتی که از چیپ‌های خانه به آن رسیده‌اند لحظه‌ای برجسته می‌شود */
 .tile { transition: translate .3s var(--ease-out), border-color .4s ease, box-shadow .4s ease; }
 .tile.is-highlight { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft), var(--tile-shadow); }
+.tile { position: relative; }
+.tile h3 a { color: inherit; text-decoration: none; }
+.tile h3 a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.tile h3 a:focus-visible { outline: none; }
+.tile:has(h3 a:focus-visible) { outline: 2px solid var(--accent); outline-offset: 3px; }
+.tile:has(h3 a):hover h3 { color: var(--accent); }
 .tile__ico .ico, .feature__ico .ico { width: 23px; height: 23px; }
 .tile h3, .feature h3 { font-size: 17px; margin-bottom: .35em; }
 .tile p, .feature p { margin: 0; font-size: 14px; line-height: 1.9; color: var(--ink-soft); }
@@ -1154,13 +1163,45 @@ html.js .slide.is-active .step.anim .step__num {
 .end { max-width: 840px; text-align: center; }
 .end h2 { font-size: clamp(30px, 4.3vw, 56px); }
 .end > p { max-width: 650px; margin-inline: auto; font-size: clamp(15.5px, 1.35vw, 18.5px); color: var(--ink-soft); }
-.end__cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 28px 0 16px; }
-.end > .end__mail { font-size: 14px; color: var(--ink-mute); }
-.end__mail a { color: var(--accent); text-decoration: none; font-weight: 700; }
-.end__mail a:hover { text-decoration: underline; }
-.end__sign { display: inline-flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 30px; font-size: 12.5px; line-height: 1.5; color: var(--ink-mute); }
-.end__sign img { height: 34px; width: auto; }
-.end > .end__copy { margin: 6px 0 0; font-size: 12px; color: var(--ink-mute); }
+.end__cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 28px 0 0; }
+.slide--end .site-foot { flex: none; margin-top: 28px; }
+
+/* پیوند «جزئیات بیشتر» هر بخش خدمت به صفحه‌ی آن خدمت */
+.more {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 16px;
+  font-size: 15px; font-weight: 800; color: var(--accent); text-decoration: none;
+}
+.more .ico { width: 18px; height: 18px; transition: translate .25s var(--ease-out); }
+.more:hover .ico { translate: -4px 0; }
+
+/* ---------------- پانویس سایت (در همه‌ی صفحه‌ها یکی) ---------------- */
+
+.site-foot {
+  width: min(1180px, 100%); margin: 0 auto; padding: 32px 0 0;
+  border-top: 1px solid var(--line);
+  font-size: 14px; line-height: 1.8; color: var(--ink-soft); text-align: start;
+}
+/* روی صفحه‌های اسکرول‌دار پانویس بیرون از <main> است و حاشیه‌ی کناری خودش را می‌خواهد */
+body > .site-foot {
+  position: relative; z-index: 1;
+  width: min(1180px, calc(100% - 2 * clamp(18px, 5.5vw, 84px)));
+  margin-bottom: 28px;
+}
+.site-foot__grid { display: grid; grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr)); gap: 28px; }
+.site-foot__brand a { display: inline-block; }
+/* فقط اندازه؛ کدام نسخه‌ی نشان دیده شود را قاعده‌های .logo--light و .logo--dark تعیین می‌کنند */
+.site-foot__brand img { height: 28px; width: auto; }
+.site-foot__brand p { max-width: 320px; margin: 12px 0 0; font-size: 13.5px; line-height: 1.9; color: var(--ink-mute); }
+.site-foot h2 { margin: 0 0 10px; font-size: 14.5px; font-weight: 800; line-height: 1.6; color: var(--ink); }
+.site-foot ul { display: grid; gap: 6px; }
+.site-foot a { color: var(--ink-soft); text-decoration: none; transition: color .2s ease; }
+.site-foot a:hover { color: var(--accent); }
+.site-foot__contact li { display: flex; align-items: center; gap: 8px; }
+.site-foot__contact .ico { width: 16px; height: 16px; color: var(--accent); }
+.site-foot__bottom {
+  margin: 24px 0 0; padding: 16px 0 0; border-top: 1px solid var(--line-soft);
+  font-size: 12.5px; color: var(--ink-mute);
+}
 
 /* ---------------- صفحه‌ی «درباره‌ی ما» ----------------
    صفحه‌ای جدا با اسکرول عادی؛ پس‌زمینه، هدر و ناوبری همان صفحه‌ی اصلی‌اند */
@@ -1201,7 +1242,7 @@ html.js .slide.is-active .step.anim .step__num {
 .page-hero__note .ico { width: 17px; height: 17px; color: var(--accent); }
 
 /* داستان (درباره‌ی ما) و جلسه‌ی آشنایی (مشاوره): متن در یک ستون، کارت در ستون دیگر */
-.story, .consult {
+.story, .consult, .split {
   display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
   gap: clamp(28px, 5vw, 72px); align-items: center;
 }
@@ -1276,9 +1317,42 @@ html.js .slide.is-active .step.anim .step__num {
 .contact-card__mail a { color: var(--accent); font-weight: 700; text-decoration: none; }
 .contact-card__mail a:hover { text-decoration: underline; }
 
-.page-foot { padding-block: 8px 16px; text-align: center; }
-.page-foot .end__sign { margin-top: 0; }
-.page-foot .end__copy { margin: 6px 0 0; font-size: 12px; color: var(--ink-mute); }
+
+/* ---------------- صفحه‌های خدمت (dashboard.html و …) ---------------- */
+
+/* کارت کنار «چه چیزی تحویل می‌گیرید»: ابزارها یا توضیح کوتاه یک مفهوم */
+.note-card { padding: clamp(20px, 2.4vw, 28px); }
+.note-card__ico {
+  width: 48px; height: 48px; margin-bottom: 14px; display: grid; place-items: center; border-radius: 14px;
+  color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-line);
+}
+.note-card__ico .ico { width: 24px; height: 24px; }
+.note-card h3 { margin: 0 0 .4em; font-size: 18px; }
+.note-card p { margin: 0 0 .8em; font-size: 14.5px; line-height: 1.95; color: var(--ink-soft); }
+.note-card p:last-child { margin-bottom: 0; }
+.tools { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 14px; }
+.tools li {
+  padding: 4px 14px; border-radius: 999px; direction: ltr;
+  font-size: 14px; font-weight: 800; color: var(--accent);
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+}
+.journey--card { margin: 0; }
+.service-faq { max-width: 860px; margin: 0 auto; display: grid; gap: 10px; }
+.service-faq__all { margin: 8px 0 0; text-align: center; font-size: 14.5px; }
+.service-faq__all a { color: var(--accent); font-weight: 800; text-decoration: none; }
+.service-faq__all a:hover { text-decoration: underline; }
+.end__more { margin: 34px 0 0; font-size: 13.5px; font-weight: 700; color: var(--ink-mute); }
+.chip-links { margin: 10px 0 0; }
+
+/* ---------------- حریم خصوصی (privacy.html) ---------------- */
+
+.prose { max-width: 780px; margin: 0 auto; }
+.prose h2 { margin: 1.6em 0 .5em; font-size: clamp(19px, 1.8vw, 23px); }
+.prose h2:first-child { margin-top: 0; }
+.prose p, .prose li { font-size: 15.5px; line-height: 2; color: var(--ink-soft); }
+.prose ul { display: grid; gap: 6px; margin: 0 0 1em; padding-inline-start: 1.2em; list-style: disc; }
+.prose a { color: var(--accent); font-weight: 700; }
+.prose__updated { font-size: 13.5px; color: var(--ink-mute); }
 
 /* ---------------- بدون جاوااسکریپت ----------------
    بخش‌ها زیر هم و با اسکرول عادی دیده می‌شوند */
@@ -1336,7 +1410,9 @@ html.no-js .menu-btn, html.no-js .theme-btn, html.no-js .dots, html.no-js .pager
   .step p { font-size: 13.5px; }
 
   .features { grid-template-columns: minmax(0, 1fr); gap: 10px; margin-bottom: 20px; }
-  .story, .consult, .mission { grid-template-columns: minmax(0, 1fr); }
+  .story, .consult, .split, .mission { grid-template-columns: minmax(0, 1fr); }
+  .site-foot__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 20px; }
+  .site-foot__brand { grid-column: 1 / -1; }
   .mission { gap: 12px; }
   .faq__group { gap: 8px; }
   .assure { gap: 8px; }
@@ -1365,7 +1441,7 @@ html.no-js .menu-btn, html.no-js .theme-btn, html.no-js .dots, html.no-js .pager
   .hero__end { display: block; }
   .hero__lead { font-size: 14.5px; margin-bottom: 18px; }
   .hero__chips { gap: 6px; margin-bottom: 22px; }
-  .hero__chips a, .faq-nav a { font-size: 12px; padding: 3px 11px; }
+  .hero__chips a, .faq-nav a, .chip-links a { font-size: 12px; padding: 3px 11px; }
   .btn--lg { padding: 12px 22px; font-size: 14.5px; }
 
   .card { padding: 12px; border-radius: 18px; }

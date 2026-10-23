@@ -189,6 +189,13 @@ a:focus-visible, button:focus-visible {
   background: linear-gradient(180deg, var(--head-from) 30%, transparent);
 }
 
+.site-head { transition: box-shadow .3s ease; }
+/* صفحه‌های اسکرول‌دار (درباره‌ی ما): پس از کمی اسکرول، هدر زمینه‌ی شیشه‌ای می‌گیرد تا متن زیرش خوانا بماند */
+.site-head.is-scrolled {
+  background: var(--nav-glass); box-shadow: 0 1px 0 var(--line);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4); backdrop-filter: blur(16px) saturate(1.4);
+}
+
 .brand { display: flex; align-items: center; gap: 14px; color: inherit; text-decoration: none; }
 /* نشان افقی (نسبت ۴۷۱ به ۹۸): logo/4.svg در پوسته‌ی روشن، logo/12.svg در پوسته‌ی تیره */
 .brand__logo { display: block; height: 28px; width: auto; }
@@ -240,15 +247,18 @@ a:focus-visible, button:focus-visible {
   transition: opacity .3s ease, visibility 0s;
 }
 .menu-panel ol { padding: calc(var(--head-h) + 10px) 24px 24px; max-height: 100dvh; overflow: auto; }
-.menu-panel button {
+.menu-panel :is(button, a) {
   display: flex; align-items: baseline; gap: 16px;
-  padding: 6px 0; border: 0; background: none; cursor: pointer;
+  padding: 6px 0; border: 0; background: none; cursor: pointer; text-decoration: none;
   font-size: clamp(20px, 3.4vw, 32px); font-weight: 900; color: var(--ink-soft);
   transition: color .2s ease, translate .25s var(--ease-out);
 }
-.menu-panel button::before { content: attr(data-num); font-size: .5em; font-weight: 700; color: var(--ink-mute); }
-.menu-panel button:hover, .menu-panel button:focus-visible { color: var(--ink); translate: -8px 0; }
-.menu-panel button[aria-current="true"] { color: var(--accent); }
+.menu-panel :is(button, a)::before { content: attr(data-num); font-size: .5em; font-weight: 700; color: var(--ink-mute); }
+.menu-panel :is(button, a):hover, .menu-panel :is(button, a):focus-visible { color: var(--ink); translate: -8px 0; }
+.menu-panel :is(button, a)[aria-current] { color: var(--accent); }
+/* صفحه‌های جدا (مثل «درباره‌ی ما») زیر فهرست بخش‌ها، با خطی جدا و بی‌شماره */
+.menu-panel__page { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); }
+.menu-panel__page a::before { content: none; }
 
 /* ---------------- ناوبری بالا ----------------
    کپسول شیشه‌ای وسط هدر؛ زبانه‌ی آبی زیر پیوند بخش جاری می‌لغزد.
@@ -260,7 +270,7 @@ a:focus-visible, button:focus-visible {
   background: var(--nav-glass); border: 1px solid var(--line); box-shadow: var(--nav-shadow);
   -webkit-backdrop-filter: blur(16px) saturate(1.4); backdrop-filter: blur(16px) saturate(1.4);
 }
-@media (min-width: 1121px) {
+@media (min-width: 1201px) {
   .topnav { display: block; }
   .menu-btn { display: none; }
 }
@@ -1076,6 +1086,79 @@ html.js .slide.is-active .steps__line i {
 .end__sign img { height: 34px; width: auto; }
 .end > .end__copy { margin: 6px 0 0; font-size: 12px; color: var(--ink-mute); }
 
+/* ---------------- صفحه‌ی «درباره‌ی ما» ----------------
+   صفحه‌ای جدا با اسکرول عادی؛ پس‌زمینه، هدر و ناوبری همان صفحه‌ی اصلی‌اند */
+
+.page {
+  position: relative; z-index: 1;
+  padding: calc(var(--head-h) + 12px) clamp(18px, 5.5vw, 84px) 24px;
+}
+.page > section { width: min(1180px, 100%); margin: 0 auto; padding-block: clamp(44px, 9vh, 96px); }
+
+/* عنصرهای [data-reveal] وقتی به صفحه می‌رسند آرام ظاهر می‌شوند (site.js کلاس is-in را می‌دهد) */
+.reveal-ready [data-reveal] {
+  opacity: 0; translate: 0 28px;
+  transition: opacity .8s ease, translate .9s var(--ease-out);
+  transition-delay: var(--d, 0ms);
+}
+.reveal-ready [data-reveal].is-in { opacity: 1; translate: 0 0; }
+
+.grad {
+  padding: 0 .06em .08em;
+  background: linear-gradient(270deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+.page-hero { text-align: center; }
+.page-hero > * { animation: in-next var(--in-ms) var(--ease-out) both; }
+.page-hero > :nth-child(2) { animation-delay: 90ms; }
+.page-hero > :nth-child(3) { animation-delay: 180ms; }
+.page-hero h1 { max-width: 900px; margin-inline: auto; font-size: clamp(34px, 5vw, 66px); line-height: 1.4; }
+.page-hero__lead { max-width: 780px; margin: 0 auto; color: var(--ink-soft); font-size: clamp(16px, 1.4vw, 19.5px); }
+
+/* داستان: متن در یک ستون، مسیر «نیاز ← نئودیتا ← هدف» در ستون دیگر */
+.story {
+  display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+  gap: clamp(28px, 5vw, 72px); align-items: center;
+}
+.journey { display: grid; gap: 4px; padding: 18px; }
+.journey li {
+  position: relative;
+  display: grid; grid-template-columns: 48px minmax(0, 1fr); align-items: center; gap: 14px;
+  padding: 12px 8px;
+}
+/* خط میان گام‌ها */
+.journey li + li::before {
+  content: ""; position: absolute; right: 31px; top: -12px; width: 2px; height: 26px;
+  background: linear-gradient(180deg, var(--accent-line), var(--accent));
+}
+.journey__ico {
+  width: 48px; height: 48px; display: grid; place-items: center; border-radius: 14px;
+  color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-line);
+}
+.journey__ico .ico { width: 23px; height: 23px; }
+.journey li:last-child .journey__ico {
+  color: var(--on-accent); background: var(--btn-bg); border-color: transparent;
+  box-shadow: 0 10px 24px -10px var(--accent-glow);
+}
+.journey small { display: block; font-size: 12px; font-weight: 700; line-height: 1.6; color: var(--accent); }
+.journey b { display: block; font-size: 16px; font-weight: 800; line-height: 1.7; }
+.journey p { margin: 0; font-size: 13.5px; line-height: 1.8; color: var(--ink-soft); }
+
+/* مأموریت: کاهش هزینه و توان رقابت */
+.mission { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.mission__card { padding: clamp(20px, 2.4vw, 30px); }
+.mission__head { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+.mission__ico {
+  width: 52px; height: 52px; flex: none; display: grid; place-items: center; border-radius: 15px;
+  color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-line);
+}
+.mission__ico .ico { width: 26px; height: 26px; }
+.mission__card h3 { margin: 0; font-size: clamp(19px, 1.7vw, 23px); }
+.mission__card > p { color: var(--ink-soft); font-size: 15px; }
+
+.page .features { margin-bottom: 0; }
+
 /* ---------------- بدون جاوااسکریپت ----------------
    بخش‌ها زیر هم و با اسکرول عادی دیده می‌شوند */
 
@@ -1098,7 +1181,7 @@ html.no-js .menu-btn, html.no-js .theme-btn, html.no-js .dots, html.no-js .pager
 }
 
 /* زیر این پهنا شعار کنار نشان با کپسول ناوبری برخورد می‌کند */
-@media (max-width: 1280px) {
+@media (max-width: 1360px) {
   .brand__tag { display: none; }
 }
 
@@ -1132,6 +1215,8 @@ html.no-js .menu-btn, html.no-js .theme-btn, html.no-js .dots, html.no-js .pager
   .step p { font-size: 13.5px; }
 
   .features { grid-template-columns: minmax(0, 1fr); gap: 10px; margin-bottom: 20px; }
+  .story, .mission { grid-template-columns: minmax(0, 1fr); }
+  .mission { gap: 12px; }
   .faq, .faq__col { grid-template-columns: minmax(0, 1fr); gap: 8px; }
   .assure { gap: 8px; }
   .assure__item { padding: 12px 14px; gap: 12px; }
@@ -1211,5 +1296,6 @@ html.no-js .menu-btn, html.no-js .theme-btn, html.no-js .dots, html.no-js .pager
   html.js .slide.is-active .chart__col i,
   html.js .slide.is-active .steps__line i { animation: none; transform: none; }
   .scroll-hint i::after, .cam__belt, .rec i, .typing i, .flow__status::before { animation: none; }
+  .page-hero > * { animation-name: fade-in; }
   .progress span, .rotator, .rotator > span { transition: none; }
 }

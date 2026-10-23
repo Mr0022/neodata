@@ -210,6 +210,8 @@ a:focus-visible, button:focus-visible {
 :root[data-theme="dark"] .logo--dark { display: block; }
 
 .head-actions { display: flex; align-items: center; gap: 10px; }
+/* دکمه‌ی مشاوره روی صفحه‌ی «درخواست مشاوره رایگان» نشان می‌دهد که همین صفحه است */
+.head-cta[aria-current="page"] { box-shadow: 0 0 0 4px var(--accent-line); }
 .head-cta, .brand__tag { white-space: nowrap; }
 
 .menu-btn, .theme-btn {
@@ -256,8 +258,8 @@ a:focus-visible, button:focus-visible {
 .menu-panel :is(button, a)::before { content: attr(data-num); font-size: .5em; font-weight: 700; color: var(--ink-mute); }
 .menu-panel :is(button, a):hover, .menu-panel :is(button, a):focus-visible { color: var(--ink); translate: -8px 0; }
 .menu-panel :is(button, a)[aria-current] { color: var(--accent); }
-/* صفحه‌های جدا (مثل «درباره‌ی ما») زیر فهرست بخش‌ها، با خطی جدا و بی‌شماره */
-.menu-panel__page { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); }
+/* صفحه‌های جدا (مشاوره، درباره‌ی ما) زیر فهرست بخش‌ها، با خطی جدا و بی‌شماره */
+.menu-panel li:not(.menu-panel__page) + .menu-panel__page { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); }
 .menu-panel__page a::before { content: none; }
 
 /* ---------------- ناوبری بالا ----------------
@@ -1113,11 +1115,19 @@ html.js .slide.is-active .steps__line i {
 .page-hero > * { animation: in-next var(--in-ms) var(--ease-out) both; }
 .page-hero > :nth-child(2) { animation-delay: 90ms; }
 .page-hero > :nth-child(3) { animation-delay: 180ms; }
+.page-hero > :nth-child(4) { animation-delay: 270ms; }
+.page-hero > :nth-child(5) { animation-delay: 360ms; }
 .page-hero h1 { max-width: 900px; margin-inline: auto; font-size: clamp(34px, 5vw, 66px); line-height: 1.4; }
 .page-hero__lead { max-width: 780px; margin: 0 auto; color: var(--ink-soft); font-size: clamp(16px, 1.4vw, 19.5px); }
+.page-hero__cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 28px; }
+.page-hero__note {
+  display: inline-flex; align-items: center; gap: 6px; margin: 14px 0 0;
+  font-size: 14px; color: var(--ink-mute);
+}
+.page-hero__note .ico { width: 17px; height: 17px; color: var(--accent); }
 
-/* داستان: متن در یک ستون، مسیر «نیاز ← نئودیتا ← هدف» در ستون دیگر */
-.story {
+/* داستان (درباره‌ی ما) و جلسه‌ی آشنایی (مشاوره): متن در یک ستون، کارت در ستون دیگر */
+.story, .consult {
   display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
   gap: clamp(28px, 5vw, 72px); align-items: center;
 }
@@ -1158,6 +1168,43 @@ html.js .slide.is-active .steps__line i {
 .mission__card > p { color: var(--ink-soft); font-size: 15px; }
 
 .page .features { margin-bottom: 0; }
+/* روی گوشی فهرست‌های درون .copy در صفحه‌ی اصلی پنهان‌اند؛ اینجا بخشی از متن‌اند */
+@media (max-width: 600px) {
+  .page .copy .bullets { display: flex; }
+}
+
+/* ---------------- صفحه‌ی «درخواست مشاوره رایگان» ---------------- */
+
+.contact-card {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: clamp(24px, 3vw, 36px); text-align: center;
+}
+.contact-card__ico {
+  width: 62px; height: 62px; margin-bottom: 10px; display: grid; place-items: center; border-radius: 18px;
+  color: var(--on-accent); background: linear-gradient(225deg, var(--btn-bg), var(--accent-2));
+  box-shadow: 0 14px 30px -12px var(--accent-glow);
+}
+.contact-card__ico .ico { width: 28px; height: 28px; }
+.contact-card__title { margin: 0; font-size: 15px; font-weight: 700; color: var(--ink-mute); }
+.contact-card__phone {
+  font-size: clamp(30px, 3.2vw, 42px); font-weight: 900; line-height: 1.5; letter-spacing: .02em;
+  color: var(--ink); text-decoration: none; transition: color .2s ease;
+}
+.contact-card__phone:hover { color: var(--accent); }
+.contact-card__hours {
+  display: inline-flex; align-items: center; gap: 6px; margin: 2px 0 18px; padding: 3px 12px;
+  border-radius: 999px; font-size: 13px; font-weight: 700; line-height: 1.8;
+  color: var(--good); background: var(--good-soft); border: 1px solid var(--good-line);
+}
+.contact-card__hours .ico { width: 16px; height: 16px; }
+.contact-card .btn { width: 100%; }
+.contact-card__mail { margin: 12px 0 0; font-size: 13.5px; color: var(--ink-mute); }
+.contact-card__mail a { color: var(--accent); font-weight: 700; text-decoration: none; }
+.contact-card__mail a:hover { text-decoration: underline; }
+
+.page-foot { padding-block: 8px 16px; text-align: center; }
+.page-foot .end__sign { margin-top: 0; }
+.page-foot .end__copy { margin: 6px 0 0; font-size: 12px; color: var(--ink-mute); }
 
 /* ---------------- بدون جاوااسکریپت ----------------
    بخش‌ها زیر هم و با اسکرول عادی دیده می‌شوند */
@@ -1215,7 +1262,7 @@ html.no-js .menu-btn, html.no-js .theme-btn, html.no-js .dots, html.no-js .pager
   .step p { font-size: 13.5px; }
 
   .features { grid-template-columns: minmax(0, 1fr); gap: 10px; margin-bottom: 20px; }
-  .story, .mission { grid-template-columns: minmax(0, 1fr); }
+  .story, .consult, .mission { grid-template-columns: minmax(0, 1fr); }
   .mission { gap: 12px; }
   .faq, .faq__col { grid-template-columns: minmax(0, 1fr); gap: 8px; }
   .assure { gap: 8px; }

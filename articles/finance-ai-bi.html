@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="no-js">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>هوش مصنوعی و هوش تجاری برای تیم‌های مالی: گزارش‌گری خودکار، بودجه و جریان نقدی | نئودیتا</title>
+<meta name="description" content="چطور هوش تجاری و هوش مصنوعی گزارش‌گری مالی، تحلیل هزینه‌ها، پایش بودجه، پیش‌بینی جریان نقدی و تحلیل انحراف را در تیم مالی خودکار می‌کنند؛ با شکل‌ها و نمودارهای تعاملی." />
+<meta name="theme-color" content="#f6f8fc" />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="نئودیتا" />
+<meta property="og:locale" content="fa_IR" />
+<meta property="og:title" content="هوش مصنوعی و هوش تجاری برای تیم‌های مالی: گزارش‌گری خودکار، بودجه و جریان نقدی | نئودیتا" />
+<meta property="og:description" content="چطور هوش تجاری و هوش مصنوعی گزارش‌گری مالی، تحلیل هزینه‌ها، پایش بودجه، پیش‌بینی جریان نقدی و تحلیل انحراف را در تیم مالی خودکار می‌کنند؛ با شکل‌ها و نمودارهای تعاملی." />
+<link rel="icon" href="../logo/5.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="../logo/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/styles.css?v=1" />
+<!-- صفحه‌ی معمولی با اسکرول عادی (بدون حالت «صحنه»ی صفحه‌ی اصلی).
+     پوسته پیش از نخستین رنگ‌آمیزی اعمال می‌شود تا صفحه چشمک نزند. -->
+<script>
+  document.documentElement.classList.remove('no-js');
+  (function () {
+    var theme = 'light';
+    try { if (localStorage.getItem('neodata-theme') === 'dark') theme = 'dark'; } catch (e) {}
+    document.documentElement.setAttribute('data-theme', theme);
+    if (theme === 'dark') document.querySelector('meta[name="theme-color"]').setAttribute('content', '#070b16');
+  })();
+</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "هوش مصنوعی و هوش تجاری برای تیم‌های مالی: گزارش‌گری خودکار، بودجه و جریان نقدی", "description": "چطور هوش تجاری و هوش مصنوعی گزارش‌گری مالی، تحلیل هزینه‌ها، پایش بودجه، پیش‌بینی جریان نقدی و تحلیل انحراف را در تیم مالی خودکار می‌کنند؛ با شکل‌ها و نمودارهای تعاملی.", "datePublished": "2026-10-24", "dateModified": "2026-10-24", "inLanguage": "fa-IR", "author": {"@type": "Organization", "name": "نئودیتا"}, "publisher": {"@type": "Organization", "name": "نئودیتا"}}</script>
+</head>
+<body data-section="articles">
+
+<!-- آیکون‌ها: یک بار تعریف، همه‌جا با <use> (زیرمجموعه‌ای از آیکون‌های index.html) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7.5 16v-5"/><path d="M12 16V7"/><path d="M16.5 16v-8"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></symbol>
+  <symbol id="i-flow" viewBox="0 0 24 24"><circle cx="5" cy="6" r="2.5"/><circle cx="19" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.5 6h9M6.3 8.2l4.4 7.6M17.7 8.2l-4.4 7.6"/></symbol>
+  <symbol id="i-scan" viewBox="0 0 24 24"><path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M7 12s2-3.5 5-3.5 5 3.5 5 3.5-2 3.5-5 3.5S7 12 7 12z"/><circle cx="12" cy="12" r="1.2"/></symbol>
+  <symbol id="i-trend" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></symbol>
+  <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M8 13h8M8 17h5"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.6.5 1.1 1.3 1.1 2.2h5c0-.9.5-1.7 1.1-2.2A6 6 0 0 0 12 3z"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="i-lang" viewBox="0 0 24 24"><path d="M4 5h9M8.5 3v2M6 5c.5 3 2.6 5.6 5.5 7M11 5c-.6 3.4-3 6.4-6.5 8"/><path d="M13 21l4-9 4 9M14.5 18h5"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+  <symbol id="i-buoy" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M5.6 5.6l3.6 3.6M14.8 14.8l3.6 3.6M18.4 5.6l-3.6 3.6M9.2 14.8l-3.6 3.6"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 15l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></symbol>
+  <symbol id="i-crm" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="11.5" r="2"/><path d="M8.5 17c.6-1.6 2-2.5 3.5-2.5s2.9.9 3.5 2.5"/></symbol>
+  <symbol id="i-invoice" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M9 15l2 2 4-4"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M3 3l7 18 3-8 8-3z"/><path d="M13 13L3 3"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+  <symbol id="i-server" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01M11 7.5h6M11 16.5h6"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14.5v2.5"/></symbol>
+  <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M3 3l18 18"/><path d="M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17.6 17.6 0 0 1-3.2 4.2M6.6 6.6C3.9 8.4 2 12 2 12s3.6 7 10 7a9.7 9.7 0 0 0 5.4-1.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5.2 3.5h3.3l1.7 4.3-2.2 1.4a11.5 11.5 0 0 0 6.8 6.8l1.4-2.2 4.3 1.7v3.3a1.7 1.7 0 0 1-1.8 1.7C10.9 20.1 3.9 13.1 3.5 5.3a1.7 1.7 0 0 1 1.7-1.8z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></symbol>
+  <symbol id="i-trend-down" viewBox="0 0 24 24"><path d="M3 7l6 6 4-4 8 8"/><path d="M15 17h6v-6"/></symbol>
+  <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M18.5 7V5.5A1.5 1.5 0 0 0 17 4H5.5a2.5 2.5 0 0 0 0 5H19a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5.5A2.5 2.5 0 0 1 3 17.5v-11"/><path d="M16.5 14.5h.01"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><path d="M2.5 6.5h11v9.5h-11z"/><path d="M13.5 9.5h4.2l3 3.4v3.1h-7.2"/><circle cx="7" cy="17.5" r="2"/><circle cx="17" cy="17.5" r="2"/></symbol>
+  <symbol id="i-factory" viewBox="0 0 24 24"><path d="M3 21V4h4v8l5-3v3l5-3v3l4-2v11z"/><path d="M8 17h2M13 17h2M18 17h.01"/></symbol>
+  <symbol id="i-warehouse" viewBox="0 0 24 24"><path d="M3 21V9l9-5 9 5v12"/><path d="M7 21v-8h10v8"/><path d="M7 17h10"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4"/></symbol>
+</svg>
+
+<!-- پس‌زمینه‌ی ثابت: همان شبکه‌ی داده‌ی صفحه‌ی اصلی -->
+<div class="backdrop" aria-hidden="true">
+  <canvas id="net"></canvas>
+</div>
+
+<!-- هدر: همان هدر صفحه‌ی اصلی؛ پیوندهای بخش‌ها به صفحه‌ی اصلی می‌روند -->
+<header class="site-head">
+  <a class="brand" href="../">
+    <img class="brand__logo logo--light" src="../logo/4.svg" alt="نئودیتا" width="135" height="28" />
+    <img class="brand__logo logo--dark" src="../logo/12.svg" alt="نئودیتا" width="135" height="28" />
+    <span class="brand__tag">تحلیل داده و هوش مصنوعی</span>
+  </a>
+
+  <!-- ناوبری بالا: هر پیوند با data-sections می‌گوید در کدام بخش‌ها یا صفحه‌ها «جاری» است.
+       این نوار و پانویس در همه‌ی صفحه‌ها یکی‌اند: فقط در index.html ویرایششان کنید و سپس python3 tools/sync-layout.py را اجرا کنید -->
+  <nav class="topnav" id="topnav" aria-label="ناوبری اصلی">
+    <span class="topnav__ind" aria-hidden="true"></span>
+    <ul class="topnav__list">
+      <li><a class="topnav__link" href="../" data-sections="hero">خانه</a></li>
+      <li class="topnav__has-sub">
+        <button class="topnav__link" type="button" aria-expanded="false" aria-controls="navServices" data-sections="dashboard chatbot agents vision forecasting data-engineering services">
+          خدمات <svg class="ico topnav__caret" aria-hidden="true"><use href="#i-down"/></svg>
+        </button>
+        <div class="topnav__sub" id="navServices">
+          <ul class="topnav__sub-list">
+            <li><a href="../dashboard" data-sections="dashboard">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-chart"/></svg></span>
+              <span class="topnav__sub-text"><b>داشبورد و تحلیل داده</b><small>شاخص‌ها و گزارش‌های مدیریتی در یک نگاه</small></span>
+            </a></li>
+            <li><a href="../chatbot" data-sections="chatbot">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg></span>
+              <span class="topnav__sub-text"><b>چت‌بات هوشمند سازمانی</b><small>پاسخ مستند از اسناد خود سازمان</small></span>
+            </a></li>
+            <li><a href="../agents" data-sections="agents">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-flow"/></svg></span>
+              <span class="topnav__sub-text"><b>ایجنت‌ها و اتوماسیون</b><small>خودکارسازی کارهای تکراری</small></span>
+            </a></li>
+            <li><a href="../vision" data-sections="vision">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-scan"/></svg></span>
+              <span class="topnav__sub-text"><b>بینایی ماشین</b><small>شمارش، کنترل کیفیت و ایمنی</small></span>
+            </a></li>
+            <li><a href="../forecasting" data-sections="forecasting">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-trend"/></svg></span>
+              <span class="topnav__sub-text"><b>پیش‌بینی و یادگیری ماشین</b><small>پیش‌بینی فروش و تقاضا، مدل‌های اختصاصی</small></span>
+            </a></li>
+            <li><a href="../data-engineering" data-sections="data-engineering">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-db"/></svg></span>
+              <span class="topnav__sub-text"><b>مهندسی و یکپارچه‌سازی داده</b><small>انبار داده و جریان‌های خودکار داده</small></span>
+            </a></li>
+            <li><a href="../#services" data-sections="services">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-spark"/></svg></span>
+              <span class="topnav__sub-text"><b>خدمات دیگر</b><small>اسناد فارسی، مشاوره و آموزش</small></span>
+            </a></li>
+            <li><a class="topnav__sub-cta" href="../consult">
+              <b>نمی‌دانید از کجا شروع کنید؟</b>
+              <small>در مشاوره‌ی رایگان با هم پیدایش می‌کنیم</small>
+              <span>درخواست مشاوره <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+            </a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a class="topnav__link" href="../#process" data-sections="process">روش کار</a></li>
+      <li><a class="topnav__link" href="./" data-sections="articles">مقالات</a></li>
+      <li><a class="topnav__link" href="../faq" data-sections="faq">سوالات متداول</a></li>
+      <li><a class="topnav__link" href="../about" data-sections="about">درباره‌ی ما</a></li>
+    </ul>
+  </nav>
+
+  <div class="head-actions">
+    <a class="btn btn--primary btn--sm head-cta" href="../consult">درخواست مشاوره رایگان</a>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="تغییر به پوسته‌ی تیره">
+      <svg class="ico ico--moon" aria-hidden="true"><use href="#i-moon"/></svg>
+      <svg class="ico ico--sun" aria-hidden="true"><use href="#i-sun"/></svg>
+    </button>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menuPanel">
+      <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+      <em class="sr-only">منوی ناوبری</em>
+    </button>
+  </div>
+</header>
+
+<!-- منوی تمام‌صفحه برای گوشی و تبلت؛ فهرستش را site.js از روی نوار ناوبری بالا می‌سازد -->
+<nav class="menu-panel" id="menuPanel" aria-label="منوی ناوبری"></nav>
+
+<main class="page" id="main">
+
+  <article class="article" aria-labelledby="t-article">
+    <!-- آغاز -->
+    <header class="page-hero">
+      <p class="eyebrow"><svg class="ico" aria-hidden="true"><use href="#i-wallet"/></svg> <a href="./">مقالات</a> · مالی و حسابداری</p>
+      <h1 id="t-article">هوش مصنوعی و هوش تجاری برای تیم‌های مالی <span class="grad">از بستن دفاتر تا پیش‌بینی نقدینگی</span></h1>
+      <p class="page-hero__lead">تیم مالی بیشتر وقتش را صرف جمع‌آوری، تطبیق و آماده کردن عددها می‌کند و فرصت کمی برای تحلیل آن‌ها می‌ماند. هوش تجاری داده‌های مالی را یکپارچه و گزارش‌ها را خودکار می‌کند؛ هوش مصنوعی کارهای تکراری مثل دسته‌بندی هزینه و تطبیق را برمی‌دارد و نگاه را به آینده می‌برد: پیش‌بینی نقدینگی و هشدار پیش از آنکه دیر شود. این مقاله پنج کاربرد اصلی را با نمونه‌های تعاملی مرور می‌کند.</p>
+      <p class="article__meta"><span><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg> ۷ دقیقه مطالعه</span><span><time datetime="2026-10-24">۲ آبان ۱۴۰۵</time></span><span>نئودیتا</span></p>
+    </header>
+
+    <nav class="toc card" aria-labelledby="t-toc" data-reveal>
+      <h2 id="t-toc">در این مقاله</h2>
+      <ol>
+        <li><a href="#reporting">گزارش‌گری مالی خودکار</a></li>
+        <li><a href="#expenses">تحلیل هزینه‌ها</a></li>
+        <li><a href="#budget">پایش بودجه</a></li>
+        <li><a href="#cashflow">پیش‌بینی جریان نقدی</a></li>
+        <li><a href="#variance">تحلیل انحراف</a></li>
+        <li><a href="#start">از کجا شروع کنیم؟</a></li>
+      </ol>
+    </nav>
+
+    <!-- متن مقاله؛ شکل‌ها با assets/viz.js تعاملی می‌شوند و بی‌جاوااسکریپت هم کامل دیده می‌شوند -->
+    <div class="article__body">
+    <h2 id="reporting">گزارش‌گری مالی خودکار</h2>
+<p>در بسیاری از سازمان‌ها، گزارش ماهانه یعنی چند روز کار دستی: خروجی گرفتن از نرم‌افزار حسابداری، دانلود گردش حساب بانک‌ها، کپی کردن در اکسل، تطبیق ردیف‌به‌ردیف و در آخر ساختن جدول‌ها و نمودارها. هر ماه همین کار تکرار می‌شود و هر بار جا برای خطا دارد. وقتی این زنجیره خودکار شود، بستن دفاتر از چند روز به یکی دو روز می‌رسد. دو حالت را مقایسه کنید:</p>
+    <figure class="viz card" data-viz="close" data-reveal>
+      <div class="viz__bar">
+        <div class="seg" role="group" aria-label="روش بستن دفاتر">
+          <button type="button" aria-pressed="true" data-note="بستن دستی: دفاتر روز کاری هشتم بسته می‌شود. بیشتر وقت صرف جمع‌آوری و تطبیق می‌شود و برای بررسی و تحلیل فقط روز آخر می‌ماند.">بستن دستی</button>
+          <button type="button" aria-pressed="false" data-note="بستن خودکار: دفاتر روز کاری سوم بسته می‌شود. گردش حساب‌ها هر روز خودکار می‌رسد، بیشتر ردیف‌ها خودکار تطبیق می‌شوند و گزارش‌ها خودشان ساخته می‌شوند؛ کارشناس فقط موارد ناجور را بررسی می‌کند.">بستن خودکار</button>
+        </div>
+        <span class="tag">نمونه‌ی نمایشی</span>
+      </div>
+      <div class="viz-gantt" data-mode="manual" role="img" aria-label="زمان‌بندی بستن دفاتر ماهانه: در حالت دستی تا پایان روز کاری هشتم، و در حالت خودکار تا پایان روز کاری سوم">
+        <p class="viz-gantt__days" aria-hidden="true"><span>روز کاری ماه بعد</span></p>
+        <ol class="viz-gantt__axis" aria-hidden="true"><li>۱</li><li>۲</li><li>۳</li><li>۴</li><li>۵</li><li>۶</li><li>۷</li><li>۸</li><li>۹</li><li>۱۰</li></ol>
+        <ul class="viz-gantt__rows">
+        <li data-manual="0 1" data-auto="0 0.3" data-robot>
+          <span class="viz-gantt__name">گردش حساب بانک‌ها</span>
+          <span class="viz-gantt__track"><i style="--s: 0; --l: 1"></i></span>
+        </li>
+        <li data-manual="1 2" data-auto="0.3 0.4" data-robot>
+          <span class="viz-gantt__name">تطبیق بانکی</span>
+          <span class="viz-gantt__track"><i style="--s: 1; --l: 2"></i></span>
+        </li>
+        <li data-manual="1 2.5" data-auto="0.3 0.5" data-robot>
+          <span class="viz-gantt__name">تطبیق دریافتنی و پرداختنی</span>
+          <span class="viz-gantt__track"><i style="--s: 1; --l: 2.5"></i></span>
+        </li>
+        <li data-manual="3.5 1.5" data-auto="0.8 1">
+          <span class="viz-gantt__name">اسناد اصلاحی و تعدیلات</span>
+          <span class="viz-gantt__track"><i style="--s: 3.5; --l: 1.5"></i></span>
+        </li>
+        <li data-manual="5 2" data-auto="1.8 0.2" data-robot>
+          <span class="viz-gantt__name">تهیه‌ی گزارش‌های مالی</span>
+          <span class="viz-gantt__track"><i style="--s: 5; --l: 2"></i></span>
+        </li>
+        <li data-manual="7 1" data-auto="2 1">
+          <span class="viz-gantt__name">بررسی و تحلیل</span>
+          <span class="viz-gantt__track"><i style="--s: 7; --l: 1"></i></span>
+        </li>
+        </ul>
+        <div class="viz-gantt__lane" aria-hidden="true"><span class="viz-gantt__end" style="--s: 8"><b>بستن دفاتر: روز ۸</b></span></div>
+      </div>
+      <ul class="viz-legend viz-gantt__legend"><li class="is-manual">کار دستی</li><li class="is-robot">کار خودکار</li></ul>
+      <p class="viz__note" aria-live="polite">بستن دستی: دفاتر روز کاری هشتم بسته می‌شود. بیشتر وقت صرف جمع‌آوری و تطبیق می‌شود و برای بررسی و تحلیل فقط روز آخر می‌ماند.</p>
+    </figure>
+    <p>در حالت خودکار، داده‌ها هر شب از منابع به انبار داده‌ی مالی می‌رسند (همان زنجیره‌ای که در مقاله‌ی <a href="business-intelligence">هوش تجاری چیست؟</a> آمده) و چند کار دیگر دستی انجام نمی‌شود:</p>
+    <ul>
+      <li><b>تطبیق خودکار:</b> قاعده‌ها و مدل‌های یادگیری ماشین، ردیف‌های بانک را با اسناد حسابداری جفت می‌کنند؛ حتی وقتی شرح‌ها یکی نیستند یا یک واریز چند فاکتور را با هم تسویه کرده است. کارشناس فقط موارد ناجور را بررسی می‌کند.</li>
+      <li><b>گزارش‌های همیشه به‌روز:</b> صورت سود و زیان، ترازنامه و جریان وجوه نقد، به تفکیک شرکت، شعبه و مرکز هزینه، هر روز با داده‌ی تازه ساخته می‌شوند؛ نه یک بار در ماه.</li>
+      <li><b>یک تعریف برای هر عدد:</b> «سود عملیاتی» یا «هزینه‌ی سربار» یک بار در مدل معنایی تعریف می‌شود و همه‌ی گزارش‌ها از همان تعریف استفاده می‌کنند.</li>
+      <li><b>پیش‌نویس توضیح گزارش:</b> مدل زبانی از روی عددها متن تحلیلی می‌نویسد، مثلاً اینکه هزینه‌ی حمل چقدر و چرا بیشتر شده، و کارشناس آن را بازبینی و تأیید می‌کند.</li>
+    </ul>
+
+    <h2 id="expenses">تحلیل هزینه‌ها</h2>
+<p>داده‌ی هزینه معمولاً نامرتب است: شرح‌های آزاد و ناهمسان، کدگذاری‌هایی که هر کس به سلیقه‌ی خودش زده، و هزاران ردیف که کسی فرصت نگاه کردن به همه‌شان را ندارد. هوش مصنوعی اینجا دو کار می‌کند. اول <b>دسته‌بندی خودکار</b>: از روی شرح، نام تأمین‌کننده و سابقه‌ی پرداخت‌ها، هر ردیف را در دسته‌ی درست می‌گذارد. دوم <b>کشف ناهنجاری</b>: ردیف‌هایی را که با الگوی معمول نمی‌خوانند، برای بررسی علامت می‌زند. نمونه‌ی زیر را دنبال کنید:</p>
+    <figure class="viz card" data-viz="expense" data-reveal>
+      <div class="viz__bar">
+        <b>تراکنش‌های هفته‌ی دوم مهر، میلیون تومان</b>
+        <span class="viz-exp__count">۷ از ۷ تراکنش · ۴ هشدار</span>
+        <button type="button" class="viz__replay viz-exp__next">گام بعد</button>
+        <button type="button" class="viz__replay viz-exp__reset">از اول</button>
+      </div>
+      <div class="viz-exp">
+        <div>
+          <p class="viz-exp__cols" aria-hidden="true"><span>شرح</span><span>مبلغ</span><span>دسته</span></p>
+          <ol class="viz-exp__list">
+          <li class="viz-exp__row is-done" data-cat="حمل‌ونقل" data-amt="4.8" data-note="واژه‌ی «حمل محموله» و سابقه‌ی همین تأمین‌کننده: دسته‌ی حمل‌ونقل. چیز غیرعادی‌ای نیست.">
+            <span class="viz-exp__desc"><b>باربری سریع‌السیر</b><small>حمل محموله به شیراز · ۸ مهر</small></span>
+            <span class="viz-exp__amt">۴٫۸</span>
+            <span class="viz-exp__cat">حمل‌ونقل</span>
+          </li>
+          <li class="viz-exp__row is-done" data-cat="نرم‌افزار و اشتراک" data-amt="32" data-note="اشتراک سالانه‌ای که پارسال هم در همین ماه و با مبلغی نزدیک پرداخت شده: دسته‌ی نرم‌افزار و اشتراک.">
+            <span class="viz-exp__desc"><b>نرم‌افزار طراحی</b><small>تمدید اشتراک سالانه · ۸ مهر</small></span>
+            <span class="viz-exp__amt">۳۲</span>
+            <span class="viz-exp__cat">نرم‌افزار و اشتراک</span>
+          </li>
+          <li class="viz-exp__row is-done" data-cat="تبلیغات" data-amt="45" data-note="کمپین تبلیغاتی، در محدوده‌ی بودجه‌ی بازاریابی همین ماه: دسته‌ی تبلیغات.">
+            <span class="viz-exp__desc"><b>تبلیغات آنلاین</b><small>کمپین شبکه‌های اجتماعی · ۹ مهر</small></span>
+            <span class="viz-exp__amt">۴۵</span>
+            <span class="viz-exp__cat">تبلیغات</span>
+          </li>
+          <li class="viz-exp__row is-done is-flagged" data-cat="حمل‌ونقل" data-amt="4.8" data-note="همان تأمین‌کننده، همان مبلغ و همان شرح، دو روز بعد: احتمال پرداخت تکراری. پیش از پرداخت بررسی شود." data-flag>
+            <span class="viz-exp__desc"><b>باربری سریع‌السیر</b><small>حمل محموله به شیراز · ۱۰ مهر</small><span class="viz-badge viz-exp__flag" data-st="bad">پرداخت تکراری؟</span></span>
+            <span class="viz-exp__amt">۴٫۸</span>
+            <span class="viz-exp__cat">حمل‌ونقل</span>
+          </li>
+          <li class="viz-exp__row is-done is-flagged" data-cat="تجهیزات" data-amt="49.5" data-note="خرید تجهیزات؛ به‌تنهایی عادی است. اما فاکتور بعدی را ببینید." data-flag data-flag-at="5">
+            <span class="viz-exp__desc"><b>فروشگاه رایانه</b><small>لپ‌تاپ واحد فروش، فاکتور ۱ · ۱۱ مهر</small><span class="viz-badge viz-exp__flag" data-st="warn">خرید تقسیم‌شده؟</span></span>
+            <span class="viz-exp__amt">۴۹٫۵</span>
+            <span class="viz-exp__cat">تجهیزات</span>
+          </li>
+          <li class="viz-exp__row is-done is-flagged" data-cat="تجهیزات" data-amt="49.5" data-note="دو فاکتور هم‌روز از یک فروشنده، هر کدام کمی زیر سقف ۵۰ میلیونی تأیید مدیر: الگوی تقسیم خرید برای ماندن زیر سقف تأیید." data-flag>
+            <span class="viz-exp__desc"><b>فروشگاه رایانه</b><small>لپ‌تاپ واحد فروش، فاکتور ۲ · ۱۱ مهر</small><span class="viz-badge viz-exp__flag" data-st="warn">خرید تقسیم‌شده؟</span></span>
+            <span class="viz-exp__amt">۴۹٫۵</span>
+            <span class="viz-exp__cat">تجهیزات</span>
+          </li>
+          <li class="viz-exp__row is-done is-flagged" data-cat="تعمیر و نگهداری" data-amt="18" data-note="حدود سه برابر میانگین پرداخت‌های قبلی به همین پیمانکار. شاید درست باشد، اما ارزش یک نگاه دوباره را دارد." data-flag>
+            <span class="viz-exp__desc"><b>تأسیسات پارس</b><small>تعمیر کولر انبار مرکزی · ۱۲ مهر</small><span class="viz-badge viz-exp__flag" data-st="warn">مبلغ غیرعادی</span></span>
+            <span class="viz-exp__amt">۱۸</span>
+            <span class="viz-exp__cat">تعمیر و نگهداری</span>
+          </li>
+          </ol>
+        </div>
+        <div class="viz-exp__sum">
+          <p class="viz-exp__head">جمع هر دسته <small>میلیون تومان</small></p>
+          <ul class="viz-exp__bars">
+            <li data-cat="تجهیزات"><span>تجهیزات</span><span class="viz-exp__track"><i style="--v: 1.000"></i></span><b>۹۹</b></li>
+            <li data-cat="تبلیغات"><span>تبلیغات</span><span class="viz-exp__track"><i style="--v: 0.455"></i></span><b>۴۵</b></li>
+            <li data-cat="نرم‌افزار و اشتراک"><span>نرم‌افزار و اشتراک</span><span class="viz-exp__track"><i style="--v: 0.323"></i></span><b>۳۲</b></li>
+            <li data-cat="تعمیر و نگهداری"><span>تعمیر و نگهداری</span><span class="viz-exp__track"><i style="--v: 0.182"></i></span><b>۱۸</b></li>
+            <li data-cat="حمل‌ونقل"><span>حمل‌ونقل</span><span class="viz-exp__track"><i style="--v: 0.097"></i></span><b>۹٫۶</b></li>
+          </ul>
+          <span class="tag">نمونه‌ی نمایشی</span>
+        </div>
+      </div>
+      <p class="viz__note" aria-live="polite">نتیجه: هر هفت تراکنش دسته‌بندی شدند و چهار تراکنش برای بررسی پیش از پرداخت علامت خوردند. کارشناس به‌جای مرور همه‌ی ردیف‌ها، فقط همین چهار مورد را نگاه می‌کند.</p>
+    </figure>
+    <p>هر هشدار فقط پیشنهادی برای بررسی است، نه حکم: شاید تعمیر کولر واقعاً گران‌تر شده باشد. ارزش کار در این است که کارشناس به‌جای مرور همه‌ی ردیف‌ها، فقط چند مورد مشکوک را می‌بیند. الگوهای رایجی که این مدل‌ها پیدا می‌کنند:</p>
+    <ul>
+      <li><b>پرداخت تکراری:</b> همان مبلغ به همان تأمین‌کننده در فاصله‌ی کوتاه، گاهی با شماره‌ی فاکتور کمی متفاوت.</li>
+      <li><b>تقسیم خرید:</b> چند فاکتور کوچک‌تر به‌جای یک فاکتور، برای ماندن زیر سقف تأیید.</li>
+      <li><b>مبلغ غیرعادی:</b> پرداختی بسیار بیشتر از میانگین همان تأمین‌کننده یا همان دسته.</li>
+      <li><b>زمان یا الگوی غیرعادی:</b> ثبت در روز تعطیل، تأمین‌کننده‌ی تازه با مبلغ بالا، یا تغییر ناگهانی شماره‌ی حساب گیرنده.</li>
+    </ul>
+    <p>وقتی هزینه‌ها درست دسته‌بندی شده باشند، تحلیل‌های بعدی هم معنادار می‌شوند: سهم هر دسته از درآمد، روند هر دسته در ماه‌های مختلف، و مقایسه‌ی قیمت هر قلم میان تأمین‌کنندگان.</p>
+
+    <h2 id="budget">پایش بودجه</h2>
+<p>بودجه‌ای که فقط فصلی یک بار با هزینه‌ی واقعی مقایسه شود، معمولاً وقتی هشدار می‌دهد که دیگر کاری از دست کسی برنمی‌آید. داشبورد بودجه، هزینه‌ی واقعی هر واحد را هر روز با برنامه‌ی همان واحد مقایسه می‌کند.</p>
+    <p>نکته‌ی مهم این است که مقایسه با <b>برنامه‌ی ماهانه</b> انجام شود، نه با یک‌دوازدهم بودجه‌ی سال. هزینه‌ها یکنواخت نیستند: اشتراک نرم‌افزارها اول سال پرداخت می‌شود و عیدی و پاداش آخر سال. ماه را عوض کنید و ببینید هر واحد کجای برنامه‌اش است:</p>
+    <figure class="viz card" data-viz="budget" data-budget="{&quot;months&quot;: [&quot;فروردین&quot;, &quot;اردیبهشت&quot;, &quot;خرداد&quot;, &quot;تیر&quot;, &quot;مرداد&quot;, &quot;شهریور&quot;, &quot;مهر&quot;, &quot;آبان&quot;, &quot;آذر&quot;, &quot;دی&quot;, &quot;بهمن&quot;, &quot;اسفند&quot;], &quot;units&quot;: [{&quot;name&quot;: &quot;فروش و بازاریابی&quot;, &quot;budget&quot;: 48, &quot;plan&quot;: [4.8, 4.32, 3.36, 3.36, 3.84, 3.84, 4.32, 4.32, 3.84, 3.84, 3.84, 4.32], &quot;actual&quot;: [4.8, 4.32, 3.43, 3.96, 4.8, 4.68, 4.97, 4.75, 4.03, 3.84, 3.84, 4.32]}, {&quot;name&quot;: &quot;عملیات و تولید&quot;, &quot;budget&quot;: 140, &quot;plan&quot;: [11.14, 11.14, 11.14, 11.14, 11.84, 11.84, 11.84, 11.84, 11.84, 11.84, 11.84, 12.54], &quot;actual&quot;: [11.03, 11.25, 11.14, 10.92, 12.08, 11.96, 11.72, 11.84, 11.96, 11.84, 11.72, 12.54]}, {&quot;name&quot;: &quot;فناوری اطلاعات&quot;, &quot;budget&quot;: 36, &quot;plan&quot;: [10.8, 2.16, 2.16, 2.16, 2.16, 2.16, 2.16, 2.16, 2.52, 2.52, 2.52, 2.52], &quot;actual&quot;: [10.8, 1.84, 1.73, 1.73, 1.77, 1.73, 1.84, 1.94, 2.52, 2.65, 2.65, 2.77]}, {&quot;name&quot;: &quot;منابع انسانی&quot;, &quot;budget&quot;: 22, &quot;plan&quot;: [1.54, 1.54, 1.54, 1.54, 1.54, 1.54, 1.54, 1.54, 1.54, 1.54, 1.54, 5.06], &quot;actual&quot;: [1.54, 1.54, 1.56, 1.54, 1.52, 1.54, 1.57, 1.54, 1.54, 1.54, 1.54, 5.06]}, {&quot;name&quot;: &quot;اداری و پشتیبانی&quot;, &quot;budget&quot;: 30, &quot;plan&quot;: [2.4, 2.4, 2.4, 2.4, 2.4, 2.4, 2.4, 2.4, 2.4, 2.4, 2.4, 3.6], &quot;actual&quot;: [2.4, 2.4, 2.4, 2.4, 2.69, 2.69, 2.69, 2.69, 2.69, 2.69, 2.69, 4.03]}]}" data-reveal>
+      <div class="viz__bar">
+        <label class="viz-range"><span>تا پایان: <b>مهر</b></span><input type="range" min="1" max="12" step="1" value="7" aria-label="ماه" /></label>
+        <span class="tag">نمونه‌ی نمایشی</span>
+      </div>
+      <p class="viz-budget__title">هزینه‌ی واقعی تا پایان <span class="viz-budget__month">مهر</span>، درصد از بودجه‌ی سال</p>
+      <ul class="viz-budget">
+        <li class="viz-budget__row" data-st="bad">
+          <span class="viz-budget__name">فروش و بازاریابی<small>بودجه‌ی سال: ۴۸ میلیارد</small></span>
+          <span class="viz-budget__track"><i class="viz-budget__fill" style="--v: 0.645"></i><i class="viz-budget__plan" style="--p: 0.580"></i></span>
+          <span class="viz-budget__val">۶۴٪</span>
+          <span class="viz-budget__badge"><span class="viz-badge" data-st="bad">۱۱٪ بیش از برنامه</span></span>
+        </li>
+        <li class="viz-budget__row" data-st="good">
+          <span class="viz-budget__name">عملیات و تولید<small>بودجه‌ی سال: ۱۴۰ میلیارد</small></span>
+          <span class="viz-budget__track"><i class="viz-budget__fill" style="--v: 0.572"></i><i class="viz-budget__plan" style="--p: 0.572"></i></span>
+          <span class="viz-budget__val">۵۷٪</span>
+          <span class="viz-budget__badge"><span class="viz-badge" data-st="good">طبق برنامه</span></span>
+        </li>
+        <li class="viz-budget__row" data-st="mute">
+          <span class="viz-budget__name">فناوری اطلاعات<small>بودجه‌ی سال: ۳۶ میلیارد</small></span>
+          <span class="viz-budget__track"><i class="viz-budget__fill" style="--v: 0.596"></i><i class="viz-budget__plan" style="--p: 0.660"></i></span>
+          <span class="viz-budget__val">۶۰٪</span>
+          <span class="viz-budget__badge"><span class="viz-badge" data-st="mute">۱۰٪ کمتر از برنامه</span></span>
+        </li>
+        <li class="viz-budget__row" data-st="good">
+          <span class="viz-budget__name">منابع انسانی<small>بودجه‌ی سال: ۲۲ میلیارد</small></span>
+          <span class="viz-budget__track"><i class="viz-budget__fill" style="--v: 0.491"></i><i class="viz-budget__plan" style="--p: 0.490"></i></span>
+          <span class="viz-budget__val">۴۹٪</span>
+          <span class="viz-budget__badge"><span class="viz-badge" data-st="good">طبق برنامه</span></span>
+        </li>
+        <li class="viz-budget__row" data-st="warn">
+          <span class="viz-budget__name">اداری و پشتیبانی<small>بودجه‌ی سال: ۳۰ میلیارد</small></span>
+          <span class="viz-budget__track"><i class="viz-budget__fill" style="--v: 0.589"></i><i class="viz-budget__plan" style="--p: 0.560"></i></span>
+          <span class="viz-budget__val">۵۹٪</span>
+          <span class="viz-budget__badge"><span class="viz-badge" data-st="warn">۵٪ بیش از برنامه</span></span>
+        </li>
+      </ul>
+      <ul class="viz-legend viz-budget__legend"><li>هزینه‌ی واقعی</li><li class="is-plan">برنامه‌ی بودجه تا همین ماه</li><li class="is-cap">بودجه‌ی کل سال</li></ul>
+      <p class="viz__note" aria-live="polite">تا پایان مهر: ۱۶۱ میلیارد تومان هزینه شده، ۱٪ بیش از برنامه. فروش و بازاریابی فراتر از برنامه است. اگر بقیه‌ی سال طبق برنامه پیش برود، هزینه‌ی کل سال ۲۷۸ میلیارد تومان می‌شود؛ ۲ میلیارد بیش از بودجه‌ی ۲۷۶ میلیاردی.</p>
+    </figure>
+    <p>داشبورد بودجه‌ی خوب سه چیز را با هم نشان می‌دهد: چقدر خرج شده، طبق برنامه چقدر باید خرج می‌شد، و اگر بقیه‌ی سال طبق برنامه پیش برود، سال به کجا می‌رسد. هزینه‌ی کمتر از برنامه هم همیشه خبر خوبی نیست؛ ممکن است یعنی پروژه‌ای عقب افتاده است. و هر جا انحراف از حدی بگذرد، هشدار خودکار برای مسئول همان واحد فرستاده می‌شود؛ پیش از جلسه‌ی پایان فصل.</p>
+
+    <h2 id="cashflow">پیش‌بینی جریان نقدی</h2>
+<p>سود و نقد یکی نیستند. شرکت می‌تواند روی کاغذ سودده باشد و هم‌زمان پول حقوق ماه بعد را نداشته باشد، چون فروشش نسیه بوده یا موجودی انبارش زیاد شده است. برای همین بسیاری از تیم‌های مالی، جریان نقدی را <b>۱۳ هفته</b> جلوتر و هفته‌به‌هفته پیش‌بینی می‌کنند و هر هفته آن را با داده‌ی تازه به‌روز می‌کنند:</p>
+    <ul>
+      <li><b>دریافت‌ها:</b> از روی مطالبات باز و سررسید هر فاکتور؛ و مدل یادگیری ماشین، با سابقه‌ی پرداخت هر مشتری، پیش‌بینی می‌کند هر فاکتور واقعاً کدام هفته وصول می‌شود.</li>
+      <li><b>پرداخت‌ها:</b> بدهی به تأمین‌کنندگان، حقوق و دستمزد، مالیات و بیمه، اقساط وام و هزینه‌های جاری.</li>
+      <li><b>سناریوها:</b> اگر وصول مطالبات عقب بیفتد یا یک مشتری بزرگ زودتر تسویه کند، موجودی نقد چه می‌شود؟</li>
+    </ul>
+    <p>سناریو را عوض کنید یا نشانگر را روی نمودار ببرید:</p>
+    <figure class="viz card" data-viz="cash" data-cash="{&quot;min&quot;: 5, &quot;max&quot;: 20, &quot;unit&quot;: &quot;میلیارد تومان&quot;, &quot;scen&quot;: [[14.3, 15.1, 12.9, 11.9, 12.8, 11.2, 9.2, 8.9, 7.0, 8.1, 7.4, 8.4, 9.3], [12.9, 12.1, 8.7, 7.6, 8.6, 7.0, 4.8, 4.7, 2.4, 3.5, 2.8, 3.7, 4.7], [14.5, 18.2, 16.3, 16.9, 18.1, 16.7, 15.0, 15.0, 13.4, 14.8, 14.3, 15.6, 16.8]]}" data-reveal>
+      <div class="viz__bar">
+        <div class="seg" role="group" aria-label="سناریو">
+          <button type="button" aria-pressed="true" data-note="سناریوی پایه: مشتریان با همان الگوی ماه‌های گذشته پرداخت می‌کنند. کمترین موجودی، ۷ میلیارد تومان، در هفته‌ی ۹ است (هفته‌ی پرداخت مالیات)؛ بالاتر از حداقل لازم.">پایه</button>
+          <button type="button" aria-pressed="false" data-note="اگر حدود یک‌پنجم دریافت‌ها سه هفته دیرتر برسد، موجودی از هفته‌ی ۷ به زیر حداقل لازم می‌رود و در هفته‌ی ۹ به ۲٫۴ میلیارد تومان می‌رسد. پیش‌بینی این را از امروز نشان می‌دهد: شش هفته فرصت برای پیگیری مطالبات یا گرفتن تسهیلات.">تأخیر در وصول</button>
+          <button type="button" aria-pressed="false" data-note="اگر دو مشتری بزرگ زودتر تسویه کنند، موجودی هیچ‌وقت از ۱۳ میلیارد تومان کمتر نمی‌شود؛ مازادی که می‌شود کوتاه‌مدت سرمایه‌گذاری کرد.">وصول زودتر</button>
+        </div>
+        <span class="tag">نمونه‌ی نمایشی</span>
+      </div>
+      <p class="viz-plot__title">موجودی نقد در پایان هر هفته، میلیارد تومان</p>
+      <div class="viz-plot viz-cash" role="img" aria-label="پیش‌بینی موجودی نقد سیزده هفته‌ی آینده (نمونه‌ی نمایشی)، سناریوی پایه: کمترین موجودی ۷ میلیارد تومان در هفته‌ی ۹؛ حداقل نقد لازم ۵ میلیارد تومان">
+        <div class="viz-plot__y" aria-hidden="true"><span style="top: 100.00%">۰</span><span style="top: 75.00%">۵</span><span style="top: 50.00%">۱۰</span><span style="top: 25.00%">۱۵</span><span style="top: 0.00%">۲۰</span></div>
+        <div class="viz-plot__area">
+          <svg viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true">
+            <defs><clipPath id="cash-low"><rect x="0" y="225.0" width="1000" height="75.0"/></clipPath></defs>
+            <g class="viz-plot__grid"><line x1="0" x2="1000" y1="300.0" y2="300.0"/><line x1="0" x2="1000" y1="150.0" y2="150.0"/><line x1="0" x2="1000" y1="75.0" y2="75.0"/><line x1="0" x2="1000" y1="0.0" y2="0.0"/></g>
+            <path class="viz-cash__area" d="M1000.0 85.5L916.7 73.5L833.3 106.5L750.0 121.5L666.7 108.0L583.3 132.0L500.0 162.0L416.7 166.5L333.3 195.0L250.0 178.5L166.7 189.0L83.3 174.0L0.0 160.5L0.0 300L1000.0 300Z"/>
+            <path class="viz-cash__risk" clip-path="url(#cash-low)" d="M1000.0 85.5L916.7 73.5L833.3 106.5L750.0 121.5L666.7 108.0L583.3 132.0L500.0 162.0L416.7 166.5L333.3 195.0L250.0 178.5L166.7 189.0L83.3 174.0L0.0 160.5L0.0 225.0L1000.0 225.0Z"/>
+            <line class="viz-cash__min" x1="0" x2="1000" y1="225.0" y2="225.0"/>
+            <path class="viz-cash__line" d="M1000.0 85.5L916.7 73.5L833.3 106.5L750.0 121.5L666.7 108.0L583.3 132.0L500.0 162.0L416.7 166.5L333.3 195.0L250.0 178.5L166.7 189.0L83.3 174.0L0.0 160.5"/>
+          </svg>
+          <span class="viz-cash__minl" style="top: 75.00%">حداقل نقد لازم</span>
+          <div class="viz-plot__x" aria-hidden="true"><span class="is-first" style="left: 100.00%">هفته‌ی ۱</span><span class="is-minor" style="left: 83.33%">۳</span><span style="left: 66.67%">۵</span><span class="is-minor" style="left: 50.00%">۷</span><span style="left: 33.33%">۹</span><span class="is-minor" style="left: 16.67%">۱۱</span><span class="is-last" style="left: 0.00%">هفته‌ی ۱۳</span></div>
+          <span class="viz-plot__guide" aria-hidden="true"></span><span class="viz-plot__dot" aria-hidden="true"></span><div class="viz-plot__tip" aria-hidden="true"></div>
+        </div>
+      </div>
+      <p class="viz__note" aria-live="polite">سناریوی پایه: مشتریان با همان الگوی ماه‌های گذشته پرداخت می‌کنند. کمترین موجودی، ۷ میلیارد تومان، در هفته‌ی ۹ است (هفته‌ی پرداخت مالیات)؛ بالاتر از حداقل لازم.</p>
+    </figure>
+    <p>ارزش پیش‌بینی در زمانی است که می‌خرد. کسری‌ای که شش هفته زودتر دیده شود، با پیگیری مطالبات، جابه‌جا کردن یک پرداخت یا گرفتن تسهیلات با شرایط بهتر حل می‌شود؛ همان کسری اگر هفته‌ی آخر دیده شود، گران تمام می‌شود. مدل‌های پیش‌بینی را در صفحه‌ی <a href="../forecasting">پیش‌بینی و یادگیری ماشین</a> بیشتر توضیح داده‌ایم.</p>
+
+    <h2 id="variance">تحلیل انحراف</h2>
+<p>پایان هر دوره، اولین پرسش مدیریت این است: چرا سود با بودجه فرق کرد؟ پاسخ «فروش کم بود» کافی نیست. تحلیل انحراف، اختلاف کل را به اجزایش می‌شکند: چقدرش از حجم فروش بود، چقدر از قیمت، چقدر از ترکیب محصولات و چقدر از هزینه‌ها. روی هر ستون بزنید:</p>
+    <figure class="viz card" data-viz="waterfall" data-reveal>
+      <div class="viz__bar">
+        <b>سود عملیاتی شش ماه اول، میلیارد تومان</b>
+        <span class="tag">نمونه‌ی نمایشی</span>
+      </div>
+      <div class="viz-wf" role="group" aria-label="از سود بودجه‌شده (۵۲ میلیارد) تا سود واقعی (۴۲ میلیارد): حجم فروش ۹−، قیمت فروش ۶+، ترکیب محصول ۳−، بهای مواد اولیه ۷−، هزینه‌های سربار ۳+">
+        <button type="button" class="viz-wf__col is-total" aria-pressed="true" style="--lo: 0.000; --hi: 0.867; --next: 0.867; --k: 0">
+          <span class="viz-wf__plot"><i></i><b dir="ltr">۵۲</b></span>
+          <span class="viz-wf__name">سود بودجه‌شده</span>
+        </button>
+        <button type="button" class="viz-wf__col is-down" aria-pressed="false" style="--lo: 0.717; --hi: 0.867; --next: 0.717; --k: 1">
+          <span class="viz-wf__plot"><i></i><b dir="ltr">−۹</b></span>
+          <span class="viz-wf__name">حجم فروش</span>
+        </button>
+        <button type="button" class="viz-wf__col is-up" aria-pressed="false" style="--lo: 0.717; --hi: 0.817; --next: 0.817; --k: 2">
+          <span class="viz-wf__plot"><i></i><b dir="ltr">+۶</b></span>
+          <span class="viz-wf__name">قیمت فروش</span>
+        </button>
+        <button type="button" class="viz-wf__col is-down" aria-pressed="false" style="--lo: 0.767; --hi: 0.817; --next: 0.767; --k: 3">
+          <span class="viz-wf__plot"><i></i><b dir="ltr">−۳</b></span>
+          <span class="viz-wf__name">ترکیب محصول</span>
+        </button>
+        <button type="button" class="viz-wf__col is-down" aria-pressed="false" style="--lo: 0.650; --hi: 0.767; --next: 0.650; --k: 4">
+          <span class="viz-wf__plot"><i></i><b dir="ltr">−۷</b></span>
+          <span class="viz-wf__name">بهای مواد اولیه</span>
+        </button>
+        <button type="button" class="viz-wf__col is-up" aria-pressed="false" style="--lo: 0.650; --hi: 0.700; --next: 0.700; --k: 5">
+          <span class="viz-wf__plot"><i></i><b dir="ltr">+۳</b></span>
+          <span class="viz-wf__name">هزینه‌های سربار</span>
+        </button>
+        <button type="button" class="viz-wf__col is-total" aria-pressed="false" style="--lo: 0.000; --hi: 0.700; --next: 0.700; --k: 6">
+          <span class="viz-wf__plot"><i></i><b dir="ltr">۴۲</b></span>
+          <span class="viz-wf__name">سود واقعی</span>
+        </button>
+      </div>
+      <ul class="viz-legend viz-wf__legend"><li class="is-total">سود</li><li class="is-up">اثر مثبت</li><li class="is-down">اثر منفی</li></ul>
+      <div class="viz-panels" aria-live="polite">
+        <p class="viz-panel is-on"><b>سود عملیاتی بودجه‌شده: ۵۲ میلیارد تومان.</b> نقطه‌ی شروع: سودی که بودجه برای شش ماه اول سال پیش‌بینی کرده بود.</p>
+        <p class="viz-panel"><b>اثر حجم فروش: ۹ میلیارد کمتر.</b> ۸٪ کمتر از برنامه کالا فروخته شد؛ بیشترش در دو شعبه‌ی شمالی که موجودی دو کالای پرفروش تمام شده بود. <span>محاسبه: (حجم واقعی − حجم بودجه) × سود هر واحد در بودجه</span></p>
+        <p class="viz-panel"><b>اثر قیمت فروش: ۶ میلیارد بیشتر.</b> افزایش قیمت مرداد بخشی از افت حجم را جبران کرد. <span>محاسبه: (قیمت واقعی − قیمت بودجه) × حجم واقعی</span></p>
+        <p class="viz-panel"><b>اثر ترکیب محصول: ۳ میلیارد کمتر.</b> سهم کالاهای کم‌حاشیه از فروش بیشتر از برنامه بود؛ حتی با حجم و قیمت درست، سود کمتر می‌شد.</p>
+        <p class="viz-panel"><b>اثر بهای مواد اولیه: ۷ میلیارد کمتر.</b> نرخ ارز و قیمت مواد اولیه از فرض بودجه بالاتر رفت؛ بزرگ‌ترین اثری که در اختیار واحد خرید است.</p>
+        <p class="viz-panel"><b>اثر هزینه‌های سربار: ۳ میلیارد بیشتر.</b> صرفه‌جویی در انرژی و نگهداری، هزینه‌ها را کمتر از بودجه نگه داشت.</p>
+        <p class="viz-panel"><b>سود عملیاتی واقعی: ۴۲ میلیارد تومان؛ ۱۰ میلیارد (۱۹٪) کمتر از بودجه.</b> حالا روشن است این ده میلیارد از کجا آمده و کدام بخشش در اختیار کدام واحد است.</p>
+      </div>
+    </figure>
+    <p>این شکستن، مسئولیت‌ها را هم روشن می‌کند: اثر حجم به فروش و موجودی مربوط است، اثر بهای مواد به خرید، و اثر سربار به عملیات. ابزارهای هوش تجاری این محاسبه‌ها را خودکار انجام می‌دهند و اجازه می‌دهند هر اثر را تا جزئیاتش کاوش کنید: کدام شعبه، کدام کالا، کدام ماه. مدل زبانی هم می‌تواند از همین عددها پیش‌نویس گزارش انحراف را بنویسد؛ کاری که معمولاً بخش بزرگی از وقت کارشناس را در پایان هر دوره می‌گیرد.</p>
+
+    <h2 id="start">از کجا شروع کنیم؟</h2>
+<ol>
+      <li><b>با پرزحمت‌ترین گزارش شروع کنید:</b> گزارشی که هر ماه بیشترین ساعت کار را می‌گیرد، مثلاً سود و زیان مدیریتی به تفکیک شعبه، را خودکار کنید؛ نتیجه‌اش زود دیده می‌شود.</li>
+      <li><b>کدگذاری را یکدست کنید:</b> سرفصل حساب‌ها، مراکز هزینه و کد تأمین‌کنندگان باید در همه‌ی منابع یکی باشد؛ بدون آن، هیچ گزارش خودکاری قابل‌اعتماد نیست.</li>
+      <li><b>پیش‌بینی را ساده شروع کنید:</b> پیش‌بینی ۱۳ هفته‌ای نقد با قاعده‌های ساده هم ارزشمند است؛ مدل یادگیری ماشین را وقتی اضافه کنید که چند ماه پیش‌بینی و عدد واقعی برای مقایسه دارید.</li>
+      <li><b>انسان در حلقه بماند:</b> هشدارها و پیش‌نویس‌های هوش مصنوعی پیشنهادند؛ ثبت نهایی، پرداخت و امضای گزارش با کارشناس است.</li>
+      <li><b>امنیت را از اول طراحی کنید:</b> داده‌ی مالی حساس است؛ سطح دسترسی هر نقش، ثبت رویدادها و استقرار روی سرور خود سازمان را از ابتدا در نظر بگیرید.</li>
+    </ol>
+    <p class="callout"><b>در نئودیتا:</b> از <a href="../data-engineering">یکپارچه‌سازی داده‌های مالی</a> و <a href="../dashboard">داشبوردهای مدیریتی</a> تا <a href="../forecasting">پیش‌بینی جریان نقدی</a> و <a href="../agents">ایجنت‌های تطبیق و پیگیری مطالبات</a>، این زنجیره را برای تیم مالی پیاده می‌کنیم.</p>
+    </div>
+  </article>
+
+  <!-- مقاله‌های دیگر -->
+  <section aria-labelledby="t-more">
+    <header class="slide__head" data-reveal>
+      <p class="eyebrow">ادامه‌ی مطالعه</p>
+      <h2 id="t-more">مقاله‌های دیگر</h2>
+    </header>
+    <div class="post-cards post-cards--two">
+      <article class="post-card card" data-reveal>
+        <div class="post-card__art"><svg viewBox="0 0 160 90" aria-hidden="true"><path class="pc-base" d="M18 76 H142"/><g class="pc-on"><rect x="114" y="54" width="18" height="22" rx="3"/><rect x="88" y="40" width="18" height="36" rx="3"/><rect x="62" y="28" width="18" height="48" rx="3"/><rect x="36" y="14" width="18" height="62" rx="3"/></g></svg></div>
+        <div class="post-card__body">
+          <p class="post-card__tag">تحلیل داده</p>
+          <h3><a href="business-intelligence">هوش تجاری چیست؟</a></h3>
+          <p>چهار سطح تحلیل داده، معماری یک سامانه‌ی هوش تجاری، مدل ستاره‌ای انبار داده، کاوش از کل به جزء و اصول طراحی شاخص و داشبورد.</p>
+          <p class="post-card__meta"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg> ۵ دقیقه مطالعه</p>
+        </div>
+      </article>
+      <article class="post-card card" data-reveal>
+        <div class="post-card__art"><svg viewBox="0 0 160 90" aria-hidden="true"><g class="pc-tile"><rect x="24" y="14" width="34" height="28" rx="5"/><rect x="63" y="14" width="34" height="28" rx="5"/><rect x="102" y="14" width="34" height="28" rx="5"/><rect x="24" y="48" width="34" height="28" rx="5"/><rect x="63" y="48" width="34" height="28" rx="5"/><rect x="102" y="48" width="34" height="28" rx="5"/></g><g class="pc-line"><path d="M106 34 L114 28 L121 31 L131 21"/><path d="M28 68 L36 64 L43 66 L53 57"/></g><g class="pc-on"><rect x="67" y="22" width="5" height="14" rx="1.5"/><rect x="75" y="27" width="5" height="9" rx="1.5"/><rect x="83" y="19" width="5" height="17" rx="1.5"/></g></svg></div>
+        <div class="post-card__body">
+          <p class="post-card__tag">مدیریت و راهبرد</p>
+          <h3><a href="ceo-kpis">۱۲ شاخص کلیدی که هر مدیرعامل باید پایش کند</a></h3>
+          <p>رشد درآمد، حاشیه‌ی سود، جریان نقد، هزینه‌ی جذب و ماندگاری مشتری، بهره‌وری و کارایی عملیات: فرمول، معنا و نشانه‌های هشدار هر شاخص.</p>
+          <p class="post-card__meta"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg> ۸ دقیقه مطالعه</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- قدم بعدی -->
+  <section class="end" aria-labelledby="t-next" data-reveal>
+    <p class="eyebrow">قدم بعدی</p>
+    <h2 id="t-next">گزارش مالی‌ای که خودش آماده می‌شود</h2>
+    <p>در جلسه‌ی مشاوره‌ی رایگان، نیاز کسب‌وکارتان را می‌شنویم و پیشنهاد می‌دهیم کدام راه‌حل بیشترین صرفه‌جویی و مزیت رقابتی را برایتان دارد.</p>
+    <div class="end__cta">
+      <a class="btn btn--primary btn--lg" href="../consult">درخواست مشاوره رایگان <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="btn btn--ghost btn--lg" href="../dashboard">داشبورد و تحلیل داده</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- پانویس سایت: محتوایش را tools/sync-layout.py از index.html می‌آورد -->
+<footer class="site-foot">
+  <div class="site-foot__grid">
+    <div class="site-foot__brand">
+      <a href="../" aria-label="نئودیتا، صفحه‌ی اصلی">
+        <img class="logo--light" src="../logo/4.svg" alt="" width="135" height="28" />
+        <img class="logo--dark" src="../logo/12.svg" alt="" width="135" height="28" />
+      </a>
+      <p>تحلیل داده و راهکارهای هوش مصنوعی برای سازمان‌ها؛ برای هزینه‌ی کمتر و رقابت بهتر با دیگر سازمان‌ها.</p>
+    </div>
+    <nav aria-labelledby="f-services">
+      <h2 id="f-services">خدمات</h2>
+      <ul>
+        <li><a href="../dashboard">داشبورد و تحلیل داده</a></li>
+        <li><a href="../chatbot">چت‌بات هوشمند سازمانی</a></li>
+        <li><a href="../agents">ایجنت‌ها و اتوماسیون</a></li>
+        <li><a href="../vision">بینایی ماشین</a></li>
+        <li><a href="../forecasting">پیش‌بینی و یادگیری ماشین</a></li>
+        <li><a href="../data-engineering">مهندسی و یکپارچه‌سازی داده</a></li>
+      </ul>
+    </nav>
+    <nav aria-labelledby="f-company">
+      <h2 id="f-company">نئودیتا</h2>
+      <ul>
+        <li><a href="../about">درباره‌ی ما</a></li>
+        <li><a href="./">مقالات</a></li>
+        <li><a href="../faq">سوالات متداول</a></li>
+        <li><a href="../consult">درخواست مشاوره رایگان</a></li>
+        <li><a href="../privacy">حریم خصوصی</a></li>
+      </ul>
+    </nav>
+    <div>
+      <h2>تماس</h2>
+      <ul class="site-foot__contact">
+        <li><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg><a href="tel:+989124140730" dir="ltr">۰۹۱۲ ۴۱۴۰ ۷۳۰</a></li>
+        <li><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>پاسخ‌گویی در ساعات اداری</li>
+        <li><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg><a href="mailto:info@neodata.ir" dir="ltr">info@neodata.ir</a></li>
+      </ul>
+    </div>
+    <div class="site-foot__join">
+      <h2>همکاری با ما</h2>
+      <p>به داده و هوش مصنوعی علاقه دارید و دوست دارید با نئودیتا همکاری کنید؟ رزومه یا معرفی کوتاهی از خودتان را برایمان ایمیل کنید.</p>
+      <a class="site-foot__mail" href="mailto:info@neodata.ir?subject=%D9%87%D9%85%DA%A9%D8%A7%D8%B1%DB%8C%20%D8%A8%D8%A7%20%D9%86%D8%A6%D9%88%D8%AF%DB%8C%D8%AA%D8%A7"><svg class="ico" aria-hidden="true"><use href="#i-send"/></svg>ایمیل به <span dir="ltr">info@neodata.ir</span></a>
+    </div>
+  </div>
+  <p class="site-foot__bottom">© ۱۴۰۵ نئودیتا · همه‌ی حقوق محفوظ است</p>
+</footer>
+
+<script src="../assets/site.js?v=1"></script>
+<script src="../assets/viz.js?v=1"></script>
+</body>
+</html>

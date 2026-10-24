@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="no-js">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>داشبورد هوشمند زنجیره‌ی تأمین و عملیات: موجودی، تحویل، ریسک تأمین‌کننده و گلوگاه‌ها | نئودیتا</title>
+<meta name="description" content="داشبوردهای هوشمند زنجیره‌ی تأمین: پایش موجودی و نقطه‌ی سفارش، عملکرد تحویل (OTIF)، زمان تحویل و ریسک تأمین‌کنندگان، و پیدا کردن گلوگاه‌های عملیات؛ با شکل‌ها و نمودارهای تعاملی." />
+<meta name="theme-color" content="#f6f8fc" />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="نئودیتا" />
+<meta property="og:locale" content="fa_IR" />
+<meta property="og:title" content="داشبورد هوشمند زنجیره‌ی تأمین و عملیات: موجودی، تحویل، ریسک تأمین‌کننده و گلوگاه‌ها | نئودیتا" />
+<meta property="og:description" content="داشبوردهای هوشمند زنجیره‌ی تأمین: پایش موجودی و نقطه‌ی سفارش، عملکرد تحویل (OTIF)، زمان تحویل و ریسک تأمین‌کنندگان، و پیدا کردن گلوگاه‌های عملیات؛ با شکل‌ها و نمودارهای تعاملی." />
+<link rel="icon" href="../logo/5.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="../logo/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/styles.css?v=1" />
+<!-- صفحه‌ی معمولی با اسکرول عادی (بدون حالت «صحنه»ی صفحه‌ی اصلی).
+     پوسته پیش از نخستین رنگ‌آمیزی اعمال می‌شود تا صفحه چشمک نزند. -->
+<script>
+  document.documentElement.classList.remove('no-js');
+  (function () {
+    var theme = 'light';
+    try { if (localStorage.getItem('neodata-theme') === 'dark') theme = 'dark'; } catch (e) {}
+    document.documentElement.setAttribute('data-theme', theme);
+    if (theme === 'dark') document.querySelector('meta[name="theme-color"]').setAttribute('content', '#070b16');
+  })();
+</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "داشبورد هوشمند زنجیره‌ی تأمین و عملیات: موجودی، تحویل، ریسک تأمین‌کننده و گلوگاه‌ها", "description": "داشبوردهای هوشمند زنجیره‌ی تأمین: پایش موجودی و نقطه‌ی سفارش، عملکرد تحویل (OTIF)، زمان تحویل و ریسک تأمین‌کنندگان، و پیدا کردن گلوگاه‌های عملیات؛ با شکل‌ها و نمودارهای تعاملی.", "datePublished": "2026-10-24", "dateModified": "2026-10-24", "inLanguage": "fa-IR", "author": {"@type": "Organization", "name": "نئودیتا"}, "publisher": {"@type": "Organization", "name": "نئودیتا"}}</script>
+</head>
+<body data-section="articles">
+
+<!-- آیکون‌ها: یک بار تعریف، همه‌جا با <use> (زیرمجموعه‌ای از آیکون‌های index.html) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7.5 16v-5"/><path d="M12 16V7"/><path d="M16.5 16v-8"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></symbol>
+  <symbol id="i-flow" viewBox="0 0 24 24"><circle cx="5" cy="6" r="2.5"/><circle cx="19" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.5 6h9M6.3 8.2l4.4 7.6M17.7 8.2l-4.4 7.6"/></symbol>
+  <symbol id="i-scan" viewBox="0 0 24 24"><path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M7 12s2-3.5 5-3.5 5 3.5 5 3.5-2 3.5-5 3.5S7 12 7 12z"/><circle cx="12" cy="12" r="1.2"/></symbol>
+  <symbol id="i-trend" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></symbol>
+  <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M8 13h8M8 17h5"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.6.5 1.1 1.3 1.1 2.2h5c0-.9.5-1.7 1.1-2.2A6 6 0 0 0 12 3z"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="i-lang" viewBox="0 0 24 24"><path d="M4 5h9M8.5 3v2M6 5c.5 3 2.6 5.6 5.5 7M11 5c-.6 3.4-3 6.4-6.5 8"/><path d="M13 21l4-9 4 9M14.5 18h5"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+  <symbol id="i-buoy" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M5.6 5.6l3.6 3.6M14.8 14.8l3.6 3.6M18.4 5.6l-3.6 3.6M9.2 14.8l-3.6 3.6"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 15l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></symbol>
+  <symbol id="i-crm" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="11.5" r="2"/><path d="M8.5 17c.6-1.6 2-2.5 3.5-2.5s2.9.9 3.5 2.5"/></symbol>
+  <symbol id="i-invoice" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M9 15l2 2 4-4"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M3 3l7 18 3-8 8-3z"/><path d="M13 13L3 3"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+  <symbol id="i-server" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01M11 7.5h6M11 16.5h6"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14.5v2.5"/></symbol>
+  <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M3 3l18 18"/><path d="M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17.6 17.6 0 0 1-3.2 4.2M6.6 6.6C3.9 8.4 2 12 2 12s3.6 7 10 7a9.7 9.7 0 0 0 5.4-1.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5.2 3.5h3.3l1.7 4.3-2.2 1.4a11.5 11.5 0 0 0 6.8 6.8l1.4-2.2 4.3 1.7v3.3a1.7 1.7 0 0 1-1.8 1.7C10.9 20.1 3.9 13.1 3.5 5.3a1.7 1.7 0 0 1 1.7-1.8z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></symbol>
+  <symbol id="i-trend-down" viewBox="0 0 24 24"><path d="M3 7l6 6 4-4 8 8"/><path d="M15 17h6v-6"/></symbol>
+  <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M18.5 7V5.5A1.5 1.5 0 0 0 17 4H5.5a2.5 2.5 0 0 0 0 5H19a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5.5A2.5 2.5 0 0 1 3 17.5v-11"/><path d="M16.5 14.5h.01"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><path d="M2.5 6.5h11v9.5h-11z"/><path d="M13.5 9.5h4.2l3 3.4v3.1h-7.2"/><circle cx="7" cy="17.5" r="2"/><circle cx="17" cy="17.5" r="2"/></symbol>
+  <symbol id="i-factory" viewBox="0 0 24 24"><path d="M3 21V4h4v8l5-3v3l5-3v3l4-2v11z"/><path d="M8 17h2M13 17h2M18 17h.01"/></symbol>
+  <symbol id="i-warehouse" viewBox="0 0 24 24"><path d="M3 21V9l9-5 9 5v12"/><path d="M7 21v-8h10v8"/><path d="M7 17h10"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4"/></symbol>
+</svg>
+
+<!-- پس‌زمینه‌ی ثابت: همان شبکه‌ی داده‌ی صفحه‌ی اصلی -->
+<div class="backdrop" aria-hidden="true">
+  <canvas id="net"></canvas>
+</div>
+
+<!-- هدر: همان هدر صفحه‌ی اصلی؛ پیوندهای بخش‌ها به صفحه‌ی اصلی می‌روند -->
+<header class="site-head">
+  <a class="brand" href="../">
+    <img class="brand__logo logo--light" src="../logo/4.svg" alt="نئودیتا" width="135" height="28" />
+    <img class="brand__logo logo--dark" src="../logo/12.svg" alt="نئودیتا" width="135" height="28" />
+    <span class="brand__tag">تحلیل داده و هوش مصنوعی</span>
+  </a>
+
+  <!-- ناوبری بالا: هر پیوند با data-sections می‌گوید در کدام بخش‌ها یا صفحه‌ها «جاری» است.
+       این نوار و پانویس در همه‌ی صفحه‌ها یکی‌اند: فقط در index.html ویرایششان کنید و سپس python3 tools/sync-layout.py را اجرا کنید -->
+  <nav class="topnav" id="topnav" aria-label="ناوبری اصلی">
+    <span class="topnav__ind" aria-hidden="true"></span>
+    <ul class="topnav__list">
+      <li><a class="topnav__link" href="../" data-sections="hero">خانه</a></li>
+      <li class="topnav__has-sub">
+        <button class="topnav__link" type="button" aria-expanded="false" aria-controls="navServices" data-sections="dashboard chatbot agents vision forecasting data-engineering services">
+          خدمات <svg class="ico topnav__caret" aria-hidden="true"><use href="#i-down"/></svg>
+        </button>
+        <div class="topnav__sub" id="navServices">
+          <ul class="topnav__sub-list">
+            <li><a href="../dashboard" data-sections="dashboard">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-chart"/></svg></span>
+              <span class="topnav__sub-text"><b>داشبورد و تحلیل داده</b><small>شاخص‌ها و گزارش‌های مدیریتی در یک نگاه</small></span>
+            </a></li>
+            <li><a href="../chatbot" data-sections="chatbot">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg></span>
+              <span class="topnav__sub-text"><b>چت‌بات هوشمند سازمانی</b><small>پاسخ مستند از اسناد خود سازمان</small></span>
+            </a></li>
+            <li><a href="../agents" data-sections="agents">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-flow"/></svg></span>
+              <span class="topnav__sub-text"><b>ایجنت‌ها و اتوماسیون</b><small>خودکارسازی کارهای تکراری</small></span>
+            </a></li>
+            <li><a href="../vision" data-sections="vision">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-scan"/></svg></span>
+              <span class="topnav__sub-text"><b>بینایی ماشین</b><small>شمارش، کنترل کیفیت و ایمنی</small></span>
+            </a></li>
+            <li><a href="../forecasting" data-sections="forecasting">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-trend"/></svg></span>
+              <span class="topnav__sub-text"><b>پیش‌بینی و یادگیری ماشین</b><small>پیش‌بینی فروش و تقاضا، مدل‌های اختصاصی</small></span>
+            </a></li>
+            <li><a href="../data-engineering" data-sections="data-engineering">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-db"/></svg></span>
+              <span class="topnav__sub-text"><b>مهندسی و یکپارچه‌سازی داده</b><small>انبار داده و جریان‌های خودکار داده</small></span>
+            </a></li>
+            <li><a href="../#services" data-sections="services">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-spark"/></svg></span>
+              <span class="topnav__sub-text"><b>خدمات دیگر</b><small>اسناد فارسی، مشاوره و آموزش</small></span>
+            </a></li>
+            <li><a class="topnav__sub-cta" href="../consult">
+              <b>نمی‌دانید از کجا شروع کنید؟</b>
+              <small>در مشاوره‌ی رایگان با هم پیدایش می‌کنیم</small>
+              <span>درخواست مشاوره <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+            </a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a class="topnav__link" href="../#process" data-sections="process">روش کار</a></li>
+      <li><a class="topnav__link" href="./" data-sections="articles">مقالات</a></li>
+      <li><a class="topnav__link" href="../faq" data-sections="faq">سوالات متداول</a></li>
+      <li><a class="topnav__link" href="../about" data-sections="about">درباره‌ی ما</a></li>
+    </ul>
+  </nav>
+
+  <div class="head-actions">
+    <a class="btn btn--primary btn--sm head-cta" href="../consult">درخواست مشاوره رایگان</a>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="تغییر به پوسته‌ی تیره">
+      <svg class="ico ico--moon" aria-hidden="true"><use href="#i-moon"/></svg>
+      <svg class="ico ico--sun" aria-hidden="true"><use href="#i-sun"/></svg>
+    </button>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menuPanel">
+      <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+      <em class="sr-only">منوی ناوبری</em>
+    </button>
+  </div>
+</header>
+
+<!-- منوی تمام‌صفحه برای گوشی و تبلت؛ فهرستش را site.js از روی نوار ناوبری بالا می‌سازد -->
+<nav class="menu-panel" id="menuPanel" aria-label="منوی ناوبری"></nav>
+
+<main class="page" id="main">
+
+  <article class="article" aria-labelledby="t-article">
+    <!-- آغاز -->
+    <header class="page-hero">
+      <p class="eyebrow"><svg class="ico" aria-hidden="true"><use href="#i-truck"/></svg> <a href="./">مقالات</a> · زنجیره‌ی تأمین و عملیات</p>
+      <h1 id="t-article">داشبوردهای هوشمند زنجیره‌ی تأمین و عملیات <span class="grad">پیش از آنکه کمبود یا تأخیر رخ دهد</span></h1>
+      <p class="page-hero__lead">زنجیره‌ی تأمین پر از داده است، اما این داده معمولاً پراکنده مانده: خرید در یک نرم‌افزار، انبار در نرم‌افزاری دیگر، برنامه‌ی تولید در اکسل و وضعیت حمل در تماس‌های تلفنی. داشبورد هوشمند این تکه‌ها را کنار هم می‌گذارد، شاخص‌های هر حلقه را زنده نشان می‌دهد و با مدل‌های پیش‌بینی، پیش از آنکه کمبود یا تأخیر رخ دهد هشدار می‌دهد. این مقاله موجودی، عملکرد تحویل، زمان تحویل، ریسک تأمین‌کنندگان و گلوگاه‌ها را مرور می‌کند.</p>
+      <p class="article__meta"><span><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg> ۷ دقیقه مطالعه</span><span><time datetime="2026-10-24">۲ آبان ۱۴۰۵</time></span><span>نئودیتا</span></p>
+    </header>
+
+    <nav class="toc card" aria-labelledby="t-toc" data-reveal>
+      <h2 id="t-toc">در این مقاله</h2>
+      <ol>
+        <li><a href="#overview">زنجیره‌ی تأمین در یک نگاه</a></li>
+        <li><a href="#inventory">موجودی: نه کم، نه زیاد</a></li>
+        <li><a href="#delivery">عملکرد تحویل (OTIF)</a></li>
+        <li><a href="#suppliers">زمان تحویل و ریسک تأمین‌کنندگان</a></li>
+        <li><a href="#bottlenecks">گلوگاه‌های عملیات</a></li>
+        <li><a href="#start">از کجا شروع کنیم؟</a></li>
+      </ol>
+    </nav>
+
+    <!-- متن مقاله؛ شکل‌ها با assets/viz.js تعاملی می‌شوند و بی‌جاوااسکریپت هم کامل دیده می‌شوند -->
+    <div class="article__body">
+    <h2 id="overview">زنجیره‌ی تأمین در یک نگاه</h2>
+<p>زنجیره‌ی تأمین را می‌شود چند حلقه‌ی پشت سر هم دید: تأمین‌کنندگان مواد را می‌فرستند، انبار نگه می‌دارد، تولید می‌سازد، مرکز توزیع ارسال می‌کند و کالا به مشتری می‌رسد. مشکل هر حلقه به حلقه‌ی بعد سرایت می‌کند؛ تأخیر یک تأمین‌کننده چند هفته بعد به شکل سفارش معوق مشتری دیده می‌شود. داشبورد هوشمند هر حلقه را با چند شاخص کلیدی نشان می‌دهد. روی هر حلقه بزنید:</p>
+    <figure class="viz card" data-viz="supply" data-reveal>
+      <div class="viz-sc wired" data-wires="sup:raw raw:prod prod:dc dc:cus">
+        <svg class="wires" aria-hidden="true"></svg>
+        <button type="button" class="node viz-sc__stage" data-node="sup" aria-pressed="true"><svg class="ico" aria-hidden="true"><use href="#i-box"/></svg><b>تأمین‌کنندگان</b><i class="viz-st" data-st="warn"></i><em class="sr-only">وضعیت: نیاز به توجه</em></button>
+        <button type="button" class="node viz-sc__stage" data-node="raw" aria-pressed="false"><svg class="ico" aria-hidden="true"><use href="#i-warehouse"/></svg><b>انبار مواد</b><i class="viz-st" data-st="bad"></i><em class="sr-only">وضعیت: هشدار</em></button>
+        <button type="button" class="node viz-sc__stage" data-node="prod" aria-pressed="false"><svg class="ico" aria-hidden="true"><use href="#i-factory"/></svg><b>تولید</b><i class="viz-st" data-st="good"></i><em class="sr-only">وضعیت: در محدوده‌ی هدف</em></button>
+        <button type="button" class="node viz-sc__stage" data-node="dc" aria-pressed="false"><svg class="ico" aria-hidden="true"><use href="#i-truck"/></svg><b>مرکز توزیع</b><i class="viz-st" data-st="good"></i><em class="sr-only">وضعیت: در محدوده‌ی هدف</em></button>
+        <button type="button" class="node viz-sc__stage" data-node="cus" aria-pressed="false"><svg class="ico" aria-hidden="true"><use href="#i-user"/></svg><b>مشتری</b><i class="viz-st" data-st="warn"></i><em class="sr-only">وضعیت: نیاز به توجه</em></button>
+      </div>
+      <ul class="viz-legend viz-st-legend"><li><i class="viz-st" data-st="good"></i>در محدوده‌ی هدف</li><li><i class="viz-st" data-st="warn"></i>نیاز به توجه</li><li><i class="viz-st" data-st="bad"></i>هشدار</li></ul>
+      <div class="viz-panels" aria-live="polite">
+        <div class="viz-panel is-on">
+          <p class="viz-sc__title"><b>تأمین‌کنندگان</b> <span class="viz-badge" data-st="warn">نیاز به توجه</span></p>
+          <ul class="viz-metrics"><li><span>تحویل به‌موقع</span><b>۸۶٪</b><small data-st="bad">▼ ۴٪ نسبت به فصل قبل</small></li><li><span>میانگین زمان تحویل</span><b>۱۸ روز</b><small data-st="bad">▲ ۳ روز</small></li><li><span>تأمین‌کننده‌ی پرریسک</span><b>۲ از ۲۴</b><small data-st="mute">بی‌تغییر</small></li></ul>
+          <p class="viz-sc__note">تأخیر دو تأمین‌کننده‌ی وارداتی، زمان تحویل میانگین را بالا برده است.</p>
+        </div>
+        <div class="viz-panel">
+          <p class="viz-sc__title"><b>انبار مواد</b> <span class="viz-badge" data-st="bad">هشدار</span></p>
+          <ul class="viz-metrics"><li><span>اقلام زیر نقطه‌ی سفارش</span><b>۷ قلم</b><small data-st="bad">▲ ۵ قلم</small></li><li><span>پوشش موجودی</span><b>۲۴ روز</b><small data-st="mute">هدف: ۲۰ تا ۳۰ روز</small></li><li><span>موجودی راکد</span><b>۹٪ ارزش انبار</b><small data-st="good">▼ ۲٪</small></li></ul>
+          <p class="viz-sc__note">هفت قلم زیر نقطه‌ی سفارش‌اند؛ سه تایشان مال همان تأمین‌کنندگان دیرکرده.</p>
+        </div>
+        <div class="viz-panel">
+          <p class="viz-sc__title"><b>تولید</b> <span class="viz-badge" data-st="good">در محدوده‌ی هدف</span></p>
+          <ul class="viz-metrics"><li><span>بهره‌وری کلی تجهیزات</span><b>۷۸٪</b><small data-st="good">▲ ۳٪</small></li><li><span>انجام برنامه‌ی تولید</span><b>۹۵٪</b><small data-st="good">▲ ۲٪</small></li><li><span>ضایعات</span><b>۲٫۱٪</b><small data-st="mute">هدف: زیر ۲٫۵٪</small></li></ul>
+          <p class="viz-sc__note">تولید طبق برنامه است؛ اما کمبود مواد اولیه، برنامه‌ی دو هفته‌ی آینده را تهدید می‌کند.</p>
+        </div>
+        <div class="viz-panel">
+          <p class="viz-sc__title"><b>مرکز توزیع</b> <span class="viz-badge" data-st="good">در محدوده‌ی هدف</span></p>
+          <ul class="viz-metrics"><li><span>دقت برداشت سفارش</span><b>۹۹٫۲٪</b><small data-st="good">▲ ۰٫۳٪</small></li><li><span>زمان آماده‌سازی سفارش</span><b>۶ ساعت</b><small data-st="good">▼ ۱ ساعت</small></li><li><span>سفارش در صف ارسال</span><b>۴۲</b><small data-st="mute">عادی</small></li></ul>
+          <p class="viz-sc__note">مرکز توزیع روان کار می‌کند.</p>
+        </div>
+        <div class="viz-panel">
+          <p class="viz-sc__title"><b>مشتری</b> <span class="viz-badge" data-st="warn">نیاز به توجه</span></p>
+          <ul class="viz-metrics"><li><span>تحویل کامل و به‌موقع</span><b>۸۵٪</b><small data-st="bad">▼ ۳٪</small></li><li><span>سفارش معوق</span><b>۱۴</b><small data-st="bad">▲ ۶</small></li><li><span>شکایت از تحویل</span><b>۲۱</b><small data-st="good">▼ ۱۸٪</small></li></ul>
+          <p class="viz-sc__note">افت تحویل کامل و به‌موقع، بیشتر از یک باربری است (بخش «عملکرد تحویل» را ببینید).</p>
+        </div>
+      </div>
+      <p class="viz__cap">داده‌ها نمونه‌ی نمایشی‌اند. روی هر حلقه بزنید تا شاخص‌هایش را ببینید.</p>
+    </figure>
+    <p>نشانه‌ی کنار هر حلقه می‌گوید شاخص‌هایش کجای محدوده‌ی هدف‌اند. مدیرعامل همین نما را می‌بیند؛ مدیر زنجیره‌ی تأمین با یک کلیک تا جزئیات هر حلقه پایین می‌رود: کدام کالا زیر نقطه‌ی سفارش است، کدام تأمین‌کننده دیر کرده و کدام سفارش در خطر است.</p>
+
+    <h2 id="inventory">موجودی: نه کم، نه زیاد</h2>
+<p>موجودی کم یعنی فروش از دست‌رفته و خط تولیدی که منتظر مواد می‌ماند؛ موجودی زیاد یعنی سرمایه‌ای که در انبار خوابیده، هزینه‌ی نگهداری و خطر کهنه شدن کالا. دو مفهوم پایه‌ی کنترل موجودی:</p>
+    <ul>
+      <li><b>نقطه‌ی سفارش:</b> وقتی موجودی به این عدد برسد، سفارش تازه داده می‌شود. برابر است با مصرف روزانه ضرب در زمان تحویل تأمین‌کننده، به‌اضافه‌ی موجودی اطمینان.</li>
+      <li><b>موجودی اطمینان:</b> ذخیره‌ای برای روزهایی که تقاضا بیشتر از معمول است یا محموله دیرتر از معمول می‌رسد.</li>
+    </ul>
+    <p>نمودار زیر موجودی یک کالا را در سه ماه نشان می‌دهد؛ با همان تقاضا و همان تأخیرهای تأمین‌کننده، فقط با سه سطح موجودی اطمینان:</p>
+    <figure class="viz card" data-viz="stock" data-stock="{&quot;max&quot;: 600, &quot;cost&quot;: 1.5, &quot;scen&quot;: [{&quot;ss&quot;: 0, &quot;rop&quot;: 140, &quot;v&quot;: [281, 258, 239, 221, 206, 187, 161, 139, 114, 93, 71, 50, 38, 14, 311, 289, 277, 266, 250, 232, 210, 190, 167, 150, 128, 106, 89, 60, 37, 11, 0, 0, 0, 0, 297, 276, 258, 243, 217, 182, 157, 127, 96, 74, 45, 9, 0, 0, 0, 295, 264, 235, 213, 189, 166, 141, 114, 92, 71, 57, 34, 17, 0, 0, 0, 0, 294, 284, 271, 250, 223, 200, 189, 182, 160, 144, 130, 105, 79, 58, 37, 15, 0, 0, 0, 0, 308, 282, 257, 234], &quot;out&quot;: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0]}, {&quot;ss&quot;: 80, &quot;rop&quot;: 220, &quot;v&quot;: [361, 338, 319, 301, 286, 267, 241, 219, 194, 173, 151, 130, 118, 94, 391, 369, 357, 346, 330, 312, 290, 270, 247, 230, 208, 186, 169, 140, 117, 91, 74, 58, 40, 21, 318, 297, 279, 264, 238, 203, 178, 148, 117, 95, 66, 30, 11, 304, 276, 251, 220, 191, 169, 145, 122, 97, 70, 48, 27, 13, 310, 293, 275, 261, 246, 229, 203, 193, 180, 159, 132, 109, 98, 91, 69, 53, 359, 334, 308, 287, 266, 244, 216, 193, 170, 147, 135, 109, 84, 381], &quot;out&quot;: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}, {&quot;ss&quot;: 240, &quot;rop&quot;: 380, &quot;v&quot;: [521, 498, 479, 461, 446, 427, 401, 379, 354, 333, 311, 290, 278, 254, 551, 529, 517, 506, 490, 472, 450, 430, 407, 390, 368, 346, 329, 300, 277, 251, 234, 218, 200, 181, 478, 457, 439, 424, 398, 363, 338, 308, 277, 255, 226, 190, 171, 464, 436, 411, 380, 351, 329, 305, 282, 257, 230, 208, 187, 173, 470, 453, 435, 421, 406, 389, 363, 353, 340, 319, 292, 269, 258, 251, 229, 213, 519, 494, 468, 447, 426, 404, 376, 353, 330, 307, 295, 269, 244, 541], &quot;out&quot;: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}]}" data-reveal>
+      <div class="viz__bar">
+        <div class="seg" role="group" aria-label="موجودی اطمینان">
+          <button type="button" aria-pressed="false" data-note="بدون موجودی اطمینان، سرمایه‌ی کمتری درگیر است؛ اما هر بار که تقاضا بالا می‌رود یا محموله دیر می‌رسد، انبار خالی می‌شود: ۱۵ روز کمبود در سه ماه، یعنی فروش از دست‌رفته یا خط تولید منتظر.">بدون موجودی اطمینان</button>
+          <button type="button" aria-pressed="true" data-note="با موجودی اطمینان متناسب (۸۰ عدد)، جهش تقاضا در میانه‌ی دوره و تأخیر محموله‌ها هم بی‌کمبود رد می‌شوند؛ با حدود ۴۰٪ سرمایه‌ی بیشتر از حالت بی‌ذخیره.">متناسب</button>
+          <button type="button" aria-pressed="false" data-note="با موجودی اطمینان زیاد (۲۴۰ عدد) هم کمبودی نیست، اما سرمایه‌ی درگیر نزدیک دو برابر حالت متناسب است، بی هیچ فایده‌ی بیشتری؛ به‌اضافه‌ی هزینه‌ی انبارداری و خطر کهنه شدن کالا.">زیاد</button>
+        </div>
+        <span class="tag">نمونه‌ی نمایشی</span>
+      </div>
+      <div class="viz-stats">
+        <p><span>روزهای کمبود</span><b class="viz-stock__short">۰ روز</b></p>
+        <p><span>میانگین موجودی</span><b class="viz-stock__avg">۱۹۷ عدد</b></p>
+        <p><span>سرمایه‌ی درگیر</span><b class="viz-stock__cap">۲۹۶ میلیون تومان</b></p>
+      </div>
+      <p class="viz-plot__title">موجودی یک کالا در انبار، عدد</p>
+      <div class="viz-plot viz-stock" role="img" aria-label="موجودی یک کالا در نود روز (نمونه‌ی نمایشی) با سه سطح موجودی اطمینان: بدون ذخیره ۱۵ روز کمبود؛ متناسب بی‌کمبود؛ زیاد بی‌کمبود با سرمایه‌ی بسیار بیشتر">
+        <div class="viz-plot__y" aria-hidden="true"><span style="top: 100.00%">۰</span><span style="top: 66.67%">۲۰۰</span><span style="top: 33.33%">۴۰۰</span><span style="top: 0.00%">۶۰۰</span></div>
+        <div class="viz-plot__area">
+          <svg viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true">
+            <g class="viz-plot__grid"><line x1="0" x2="1000" y1="300.0" y2="300.0"/><line x1="0" x2="1000" y1="200.0" y2="200.0"/><line x1="0" x2="1000" y1="100.0" y2="100.0"/><line x1="0" x2="1000" y1="0.0" y2="0.0"/></g>
+            <rect class="viz-stock__ss" x="0" y="260.0" width="1000" height="40.0"/>
+            <line class="viz-stock__rop" x1="0" x2="1000" y1="190.0" y2="190.0"/>
+            <path class="viz-stock__line" d="M1000.0 119.5L988.8 131.0L977.5 140.5L966.3 149.5L955.1 157.0L943.8 166.5L932.6 179.5L921.3 190.5L910.1 203.0L898.9 213.5L887.6 224.5L876.4 235.0L865.2 241.0L853.9 253.0L842.7 104.5L831.5 115.5L820.2 121.5L809.0 127.0L797.8 135.0L786.5 144.0L775.3 155.0L764.0 165.0L752.8 176.5L741.6 185.0L730.3 196.0L719.1 207.0L707.9 215.5L696.6 230.0L685.4 241.5L674.2 254.5L662.9 263.0L651.7 271.0L640.4 280.0L629.2 289.5L618.0 141.0L606.7 151.5L595.5 160.5L584.3 168.0L573.0 181.0L561.8 198.5L550.6 211.0L539.3 226.0L528.1 241.5L516.9 252.5L505.6 267.0L494.4 285.0L483.1 294.5L471.9 148.0L460.7 162.0L449.4 174.5L438.2 190.0L427.0 204.5L415.7 215.5L404.5 227.5L393.3 239.0L382.0 251.5L370.8 265.0L359.6 276.0L348.3 286.5L337.1 293.5L325.8 145.0L314.6 153.5L303.4 162.5L292.1 169.5L280.9 177.0L269.7 185.5L258.4 198.5L247.2 203.5L236.0 210.0L224.7 220.5L213.5 234.0L202.2 245.5L191.0 251.0L179.8 254.5L168.5 265.5L157.3 273.5L146.1 120.5L134.8 133.0L123.6 146.0L112.4 156.5L101.1 167.0L89.9 178.0L78.7 192.0L67.4 203.5L56.2 215.0L44.9 226.5L33.7 232.5L22.5 245.5L11.2 258.0L0.0 109.5"/>
+            <path class="viz-stock__out" d=""/>
+          </svg>
+          <span class="viz-stock__ropl" style="top: 63.33%">نقطه‌ی سفارش</span>
+          <div class="viz-plot__x" aria-hidden="true"><span class="is-first" style="left: 100.00%">روز ۱</span><span class="is-minor" style="left: 84.27%">۱۵</span><span style="left: 67.42%">۳۰</span><span class="is-minor" style="left: 50.56%">۴۵</span><span style="left: 33.71%">۶۰</span><span class="is-minor" style="left: 16.85%">۷۵</span><span class="is-last" style="left: 0.00%">روز ۹۰</span></div>
+          <span class="viz-plot__guide" aria-hidden="true"></span><span class="viz-plot__dot" aria-hidden="true"></span><div class="viz-plot__tip" aria-hidden="true"></div>
+        </div>
+      </div>
+      <ul class="viz-legend viz-stock__legend"><li>موجودی در انبار</li><li class="is-rop">نقطه‌ی سفارش</li><li class="is-ss">موجودی اطمینان</li><li class="is-out">روز کمبود</li></ul>
+      <p class="viz__note" aria-live="polite">با موجودی اطمینان متناسب (۸۰ عدد)، جهش تقاضا در میانه‌ی دوره و تأخیر محموله‌ها هم بی‌کمبود رد می‌شوند؛ با حدود ۴۰٪ سرمایه‌ی بیشتر از حالت بی‌ذخیره.</p>
+    </figure>
+    <p>انتخاب درست جایی میان این دو سر است و برای هر کالا فرق دارد. مدل‌های پیش‌بینی تقاضا اینجا به کار می‌آیند: به‌جای یک عدد ثابت، نقطه‌ی سفارش هر کالا را با فصل، روند و نوسان تقاضای خودش تنظیم می‌کنند. داشبورد موجودی معمولاً این‌ها را هم نشان می‌دهد:</p>
+    <ul>
+      <li><b>روز پوشش:</b> موجودی فعلی برای چند روز مصرف کافی است.</li>
+      <li><b>گردش موجودی:</b> موجودی در سال چند بار فروخته و جایگزین می‌شود.</li>
+      <li><b>تحلیل ABC:</b> کدام کالاها بیشترین سهم از ارزش موجودی را دارند و باید دقیق‌تر پایش شوند.</li>
+      <li><b>کالای راکد:</b> اقلامی که ماه‌هاست جابه‌جا نشده‌اند و سرمایه را حبس کرده‌اند.</li>
+    </ul>
+
+    <h2 id="delivery">عملکرد تحویل (OTIF)</h2>
+<p>مشتری فقط دو چیز را می‌بیند: سفارشش به‌موقع رسید؟ کامل رسید؟ شاخص <b>OTIF</b> (On Time In Full) سهم سفارش‌هایی است که هر دو شرط را داشته‌اند. سفارشی که به‌موقع ولی ناقص برسد، یا کامل ولی دیر، از نگاه مشتری شکست است. هر مربع زیر یک سفارش است:</p>
+    <figure class="viz card" data-viz="otif" data-reveal>
+      <div class="viz__bar">
+        <div class="seg" role="group" aria-label="سفارش‌ها">
+          <button type="button" aria-pressed="true" data-late="10" data-part="5" data-note="از هر ۱۰۰ سفارش مهر، ۸۵ سفارش کامل و به‌موقع رسید: OTIF برابر ۸۵٪. ۱۰ سفارش دیر رسید و ۵ سفارش ناقص.">همه‌ی سفارش‌های مهر</button>
+          <button type="button" aria-pressed="false" data-late="2" data-part="4" data-note="باربری الف: OTIF برابر ۹۴٪. فقط ۲ سفارش از هر ۱۰۰ دیر رسیده؛ سفارش‌های ناقص (۴ از ۱۰۰) هم مشکل حمل نیست، کمبود موجودی انبار است.">باربری الف</button>
+          <button type="button" aria-pressed="false" data-late="18" data-part="6" data-note="باربری ب: OTIF برابر ۷۶٪؛ ۱۸ سفارش از هر ۱۰۰ دیر رسیده. سهم سفارش‌های ناقص در هر دو باربری نزدیک به هم است؛ پس تأخیر مشکل حمل است و ناقص بودن مشکل انبار.">باربری ب</button>
+        </div>
+        <span class="tag">نمونه‌ی نمایشی</span>
+      </div>
+      <div class="viz-otif">
+        <div class="viz-otif__grid" role="img" aria-label="۱۰۰ سفارش: ۸۵ کامل و به‌موقع، ۱۰ دیر، ۵ ناقص">
+          <i class="is-ok" style="--r: 91"></i><i class="is-late" style="--r: 2"></i><i class="is-ok" style="--r: 30"></i><i class="is-ok" style="--r: 33"></i><i class="is-ok" style="--r: 58"></i><i class="is-ok" style="--r: 68"></i><i class="is-ok" style="--r: 85"></i><i class="is-late" style="--r: 7"></i><i class="is-ok" style="--r: 74"></i><i class="is-ok" style="--r: 29"></i><i class="is-ok" style="--r: 50"></i><i class="is-ok" style="--r: 53"></i><i class="is-ok" style="--r: 87"></i><i class="is-ok" style="--r: 39"></i><i class="is-part" style="--r: 98"></i><i class="is-ok" style="--r: 92"></i><i class="is-ok" style="--r: 84"></i><i class="is-ok" style="--r: 61"></i><i class="is-ok" style="--r: 78"></i><i class="is-late" style="--r: 8"></i><i class="is-ok" style="--r: 81"></i><i class="is-ok" style="--r: 25"></i><i class="is-ok" style="--r: 75"></i><i class="is-ok" style="--r: 46"></i><i class="is-ok" style="--r: 28"></i><i class="is-late" style="--r: 5"></i><i class="is-ok" style="--r: 41"></i><i class="is-ok" style="--r: 77"></i><i class="is-ok" style="--r: 15"></i><i class="is-ok" style="--r: 51"></i><i class="is-ok" style="--r: 42"></i><i class="is-ok" style="--r: 22"></i><i class="is-ok" style="--r: 36"></i><i class="is-ok" style="--r: 38"></i><i class="is-ok" style="--r: 37"></i><i class="is-ok" style="--r: 63"></i><i class="is-part" style="--r: 96"></i><i class="is-ok" style="--r: 21"></i><i class="is-late" style="--r: 4"></i><i class="is-ok" style="--r: 65"></i><i class="is-ok" style="--r: 80"></i><i class="is-ok" style="--r: 57"></i><i class="is-ok" style="--r: 26"></i><i class="is-ok" style="--r: 72"></i><i class="is-ok" style="--r: 76"></i><i class="is-ok" style="--r: 19"></i><i class="is-ok" style="--r: 24"></i><i class="is-ok" style="--r: 54"></i><i class="is-ok" style="--r: 44"></i><i class="is-ok" style="--r: 11"></i><i class="is-part" style="--r: 95"></i><i class="is-ok" style="--r: 40"></i><i class="is-ok" style="--r: 43"></i><i class="is-ok" style="--r: 34"></i><i class="is-ok" style="--r: 12"></i><i class="is-ok" style="--r: 70"></i><i class="is-ok" style="--r: 18"></i><i class="is-ok" style="--r: 90"></i><i class="is-ok" style="--r: 55"></i><i class="is-ok" style="--r: 10"></i><i class="is-ok" style="--r: 62"></i><i class="is-ok" style="--r: 71"></i><i class="is-part" style="--r: 99"></i><i class="is-ok" style="--r: 64"></i><i class="is-late" style="--r: 0"></i><i class="is-ok" style="--r: 66"></i><i class="is-ok" style="--r: 16"></i><i class="is-ok" style="--r: 56"></i><i class="is-ok" style="--r: 17"></i><i class="is-late" style="--r: 9"></i><i class="is-ok" style="--r: 86"></i><i class="is-ok" style="--r: 49"></i><i class="is-ok" style="--r: 23"></i><i class="is-ok" style="--r: 35"></i><i class="is-ok" style="--r: 52"></i><i class="is-ok" style="--r: 27"></i><i class="is-late" style="--r: 1"></i><i class="is-ok" style="--r: 82"></i><i class="is-ok" style="--r: 73"></i><i class="is-ok" style="--r: 13"></i><i class="is-ok" style="--r: 69"></i><i class="is-ok" style="--r: 48"></i><i class="is-ok" style="--r: 89"></i><i class="is-ok" style="--r: 60"></i><i class="is-ok" style="--r: 47"></i><i class="is-ok" style="--r: 14"></i><i class="is-ok" style="--r: 20"></i><i class="is-late" style="--r: 6"></i><i class="is-ok" style="--r: 93"></i><i class="is-ok" style="--r: 31"></i><i class="is-ok" style="--r: 59"></i><i class="is-late" style="--r: 3"></i><i class="is-ok" style="--r: 67"></i><i class="is-ok" style="--r: 83"></i><i class="is-part" style="--r: 97"></i><i class="is-ok" style="--r: 88"></i><i class="is-ok" style="--r: 45"></i><i class="is-ok" style="--r: 94"></i><i class="is-ok" style="--r: 32"></i><i class="is-ok" style="--r: 79"></i>
+        </div>
+        <div class="viz-otif__side">
+          <p class="viz-otif__big"><span>تحویل کامل و به‌موقع (OTIF)</span><b>۸۵٪</b></p>
+          <ul class="viz-otif__legend">
+            <li class="is-ok"><i></i>کامل و به‌موقع <b>۸۵</b></li>
+            <li class="is-late"><i></i>دیر رسید <b>۱۰</b></li>
+            <li class="is-part"><i></i>ناقص رسید <b>۵</b></li>
+          </ul>
+        </div>
+      </div>
+      <p class="viz__note" aria-live="polite">از هر ۱۰۰ سفارش مهر، ۸۵ سفارش کامل و به‌موقع رسید: OTIF برابر ۸۵٪. ۱۰ سفارش دیر رسید و ۵ سفارش ناقص.</p>
+    </figure>
+    <p>عدد کل کافی نیست؛ ارزش داشبورد در شکستن آن است. در این نمونه، سهم سفارش‌های ناقص در هر دو باربری نزدیک به هم است؛ پس ریشه‌اش کمبود موجودی در انبار است، نه حمل. اما بیشتر تأخیرها مال یک باربری است. شکستن OTIF به تفکیک مشتری، منطقه، کالا و حمل‌کننده، ریشه‌ی مشکل را نشان می‌دهد.</p>
+    <p>قدم بعدی پیش‌بینی است: مدل یادگیری ماشین از روی سابقه‌ی سفارش‌ها، مسیر، حمل‌کننده و موجودی، احتمال تأخیر هر سفارش باز را تخمین می‌زند تا تیم پیش از تأخیر کاری بکند.</p>
+
+    <h2 id="suppliers">زمان تحویل و ریسک تأمین‌کنندگان</h2>
+<p>برای برنامه‌ریزی، <b>نوسان</b> زمان تحویل به اندازه‌ی میانگینش مهم است. تأمین‌کننده‌ای که همیشه ۱۴ روزه می‌رساند، از تأمین‌کننده‌ای که میانگینش ۱۲ روز است ولی گاهی ۲۰ روز طول می‌کشد، قابل‌اعتمادتر است؛ چون برای دومی باید موجودی اطمینان بیشتری نگه داشت. هر نقطه یکی از دوازده محموله‌ی اخیر است:</p>
+    <figure class="viz card" data-viz="leadtime" data-reveal>
+      <div class="viz__bar">
+        <b>زمان تحویل دوازده محموله‌ی اخیر، روز</b>
+        <span class="tag">نمونه‌ی نمایشی</span>
+      </div>
+      <div class="viz-lt">
+        <p class="viz-lt__head" aria-hidden="true"><span></span><span class="viz-lt__axis"><span style="--x: 0.00">۰</span><span style="--x: 0.20">۱۰</span><span style="--x: 0.40">۲۰</span><span style="--x: 0.60">۳۰</span><span style="--x: 0.80">۴۰</span><span style="--x: 1.00">۵۰</span></span><span>میانگین و نوسان</span></p>
+        <ul class="viz-lt__rows">
+        <li class="viz-lt__row" data-promise="14">
+          <span class="viz-lt__name">ورق فولادی<small>تأمین‌کننده‌ی الف</small></span>
+          <span class="viz-lt__track"><i class="viz-lt__promise" style="--x: 0.280"></i><i class="viz-lt__dot" style="--x: 0.260; --y: 0.24; --k: 0" data-k="1" data-v="13"></i><i class="viz-lt__dot" style="--x: 0.280; --y: 0.54; --k: 1" data-k="2" data-v="14"></i><i class="viz-lt__dot is-late" style="--x: 0.300; --y: 0.37; --k: 2" data-k="3" data-v="15"></i><i class="viz-lt__dot" style="--x: 0.280; --y: 0.60; --k: 3" data-k="4" data-v="14"></i><i class="viz-lt__dot" style="--x: 0.260; --y: 0.63; --k: 4" data-k="5" data-v="13"></i><i class="viz-lt__dot is-late" style="--x: 0.320; --y: 0.07; --k: 5" data-k="6" data-v="16"></i><i class="viz-lt__dot" style="--x: 0.280; --y: 0.01; --k: 6" data-k="7" data-v="14"></i><i class="viz-lt__dot is-late" style="--x: 0.300; --y: 0.84; --k: 7" data-k="8" data-v="15"></i><i class="viz-lt__dot" style="--x: 0.280; --y: 0.26; --k: 8" data-k="9" data-v="14"></i><i class="viz-lt__dot" style="--x: 0.260; --y: 0.23; --k: 9" data-k="10" data-v="13"></i><i class="viz-lt__dot is-late" style="--x: 0.300; --y: 1.00; --k: 10" data-k="11" data-v="15"></i><i class="viz-lt__dot" style="--x: 0.280; --y: 0.47; --k: 11" data-k="12" data-v="14"></i></span>
+          <span class="viz-lt__num"><b>۱۴٫۲</b><small>±۰٫۹</small></span>
+        </li>
+        <li class="viz-lt__row" data-promise="30">
+          <span class="viz-lt__name">قطعات الکترونیکی<small>تأمین‌کننده‌ی ب، وارداتی</small></span>
+          <span class="viz-lt__track"><i class="viz-lt__promise" style="--x: 0.600"></i><i class="viz-lt__dot" style="--x: 0.560; --y: 0.84; --k: 0" data-k="1" data-v="28"></i><i class="viz-lt__dot is-late" style="--x: 0.700; --y: 0.48; --k: 1" data-k="2" data-v="35"></i><i class="viz-lt__dot is-late" style="--x: 0.820; --y: 0.64; --k: 2" data-k="3" data-v="41"></i><i class="viz-lt__dot" style="--x: 0.600; --y: 0.15; --k: 3" data-k="4" data-v="30"></i><i class="viz-lt__dot" style="--x: 0.520; --y: 0.63; --k: 4" data-k="5" data-v="26"></i><i class="viz-lt__dot is-late" style="--x: 0.760; --y: 0.87; --k: 5" data-k="6" data-v="38"></i><i class="viz-lt__dot is-late" style="--x: 0.660; --y: 0.52; --k: 6" data-k="7" data-v="33"></i><i class="viz-lt__dot is-late" style="--x: 0.900; --y: 0.74; --k: 7" data-k="8" data-v="45"></i><i class="viz-lt__dot" style="--x: 0.580; --y: 0.67; --k: 8" data-k="9" data-v="29"></i><i class="viz-lt__dot is-late" style="--x: 0.720; --y: 0.06; --k: 9" data-k="10" data-v="36"></i><i class="viz-lt__dot is-late" style="--x: 0.800; --y: 0.76; --k: 10" data-k="11" data-v="40"></i><i class="viz-lt__dot is-late" style="--x: 0.620; --y: 0.59; --k: 11" data-k="12" data-v="31"></i></span>
+          <span class="viz-lt__num"><b>۳۴٫۳</b><small>±۵٫۶</small></span>
+        </li>
+        <li class="viz-lt__row" data-promise="10">
+          <span class="viz-lt__name">رنگ و پوشش<small>تأمین‌کننده‌ی د</small></span>
+          <span class="viz-lt__track"><i class="viz-lt__promise" style="--x: 0.200"></i><i class="viz-lt__dot" style="--x: 0.180; --y: 0.30; --k: 0" data-k="1" data-v="9"></i><i class="viz-lt__dot is-late" style="--x: 0.300; --y: 0.03; --k: 1" data-k="2" data-v="15"></i><i class="viz-lt__dot" style="--x: 0.200; --y: 0.87; --k: 2" data-k="3" data-v="10"></i><i class="viz-lt__dot is-late" style="--x: 0.360; --y: 0.47; --k: 3" data-k="4" data-v="18"></i><i class="viz-lt__dot is-late" style="--x: 0.220; --y: 0.72; --k: 4" data-k="5" data-v="11"></i><i class="viz-lt__dot" style="--x: 0.180; --y: 0.88; --k: 5" data-k="6" data-v="9"></i><i class="viz-lt__dot is-late" style="--x: 0.420; --y: 0.71; --k: 6" data-k="7" data-v="21"></i><i class="viz-lt__dot" style="--x: 0.200; --y: 0.92; --k: 7" data-k="8" data-v="10"></i><i class="viz-lt__dot is-late" style="--x: 0.240; --y: 0.39; --k: 8" data-k="9" data-v="12"></i><i class="viz-lt__dot is-late" style="--x: 0.320; --y: 0.80; --k: 9" data-k="10" data-v="16"></i><i class="viz-lt__dot" style="--x: 0.180; --y: 0.44; --k: 10" data-k="11" data-v="9"></i><i class="viz-lt__dot is-late" style="--x: 0.280; --y: 0.94; --k: 11" data-k="12" data-v="14"></i></span>
+          <span class="viz-lt__num"><b>۱۲٫۸</b><small>±۳٫۸</small></span>
+        </li>
+        <li class="viz-lt__row" data-promise="7">
+          <span class="viz-lt__name">بسته‌بندی<small>تأمین‌کننده‌ی ج</small></span>
+          <span class="viz-lt__track"><i class="viz-lt__promise" style="--x: 0.140"></i><i class="viz-lt__dot" style="--x: 0.140; --y: 0.88; --k: 0" data-k="1" data-v="7"></i><i class="viz-lt__dot is-late" style="--x: 0.160; --y: 0.10; --k: 1" data-k="2" data-v="8"></i><i class="viz-lt__dot" style="--x: 0.140; --y: 0.14; --k: 2" data-k="3" data-v="7"></i><i class="viz-lt__dot is-late" style="--x: 0.180; --y: 0.22; --k: 3" data-k="4" data-v="9"></i><i class="viz-lt__dot" style="--x: 0.140; --y: 0.97; --k: 4" data-k="5" data-v="7"></i><i class="viz-lt__dot is-late" style="--x: 0.160; --y: 0.44; --k: 5" data-k="6" data-v="8"></i><i class="viz-lt__dot is-late" style="--x: 0.200; --y: 0.63; --k: 6" data-k="7" data-v="10"></i><i class="viz-lt__dot" style="--x: 0.140; --y: 0.30; --k: 7" data-k="8" data-v="7"></i><i class="viz-lt__dot is-late" style="--x: 0.160; --y: 0.51; --k: 8" data-k="9" data-v="8"></i><i class="viz-lt__dot" style="--x: 0.140; --y: 0.39; --k: 9" data-k="10" data-v="7"></i><i class="viz-lt__dot is-late" style="--x: 0.180; --y: 0.35; --k: 10" data-k="11" data-v="9"></i><i class="viz-lt__dot is-late" style="--x: 0.160; --y: 0.59; --k: 11" data-k="12" data-v="8"></i></span>
+          <span class="viz-lt__num"><b>۷٫۹</b><small>±۱</small></span>
+        </li>
+        </ul>
+        <div class="viz-lt__tip" aria-hidden="true"></div>
+      </div>
+      <ul class="viz-legend viz-lt__legend"><li class="is-dot">محموله‌ی به‌موقع</li><li class="is-late">دیرتر از تعهد</li><li class="is-promise">زمان تعهدشده</li></ul>
+      <p class="viz__cap">قطعات الکترونیکی به‌طور میانگین ۴ روز دیرتر از تعهد می‌رسند، اما مشکل اصلی نوسانشان است: از ۲۶ تا ۴۵ روز. برای چنین تأمین‌کننده‌ای باید موجودی اطمینان بیشتری نگه داشت.</p>
+    </figure>
+    <p>زمان تحویل فقط یکی از ابعاد ریسک است. کارت امتیاز هر تأمین‌کننده معمولاً این‌ها را هم دارد: درصد تحویل به‌موقع، درصد مرجوعی و ضایعات، تغییرات قیمت، وابستگی (آیا تأمین‌کننده‌ی جایگزین داریم؟)، ریسک ارزی و واردات، و وضعیت مالی. این امتیازها روی یک ماتریس ریسک کنار هم می‌نشینند: احتمال اختلال در برابر اثرش بر کسب‌وکار. روی هر تأمین‌کننده بزنید:</p>
+    <figure class="viz card" data-viz="risk" data-reveal>
+      <div class="viz-risk">
+        <div class="viz-risk__plot">
+          <div class="viz-risk__cells" aria-hidden="true"><i style="--r: 2"></i><i style="--r: 3"></i><i style="--r: 4"></i><i style="--r: 1"></i><i style="--r: 2"></i><i style="--r: 3"></i><i style="--r: 0"></i><i style="--r: 1"></i><i style="--r: 2"></i></div>
+          <button type="button" class="viz-risk__pt" aria-pressed="true" data-st="bad" style="--x: 0.82; --y: 0.86; --s: 0.22"><i></i><span>قطعات الکترونیکی</span></button>
+          <button type="button" class="viz-risk__pt" aria-pressed="false" data-st="warn" style="--x: 0.22; --y: 0.78; --s: 0.38"><i></i><span>ورق فولادی</span></button>
+          <button type="button" class="viz-risk__pt" aria-pressed="false" data-st="warn" style="--x: 0.70; --y: 0.52; --s: 0.12"><i></i><span>باربری ب</span></button>
+          <button type="button" class="viz-risk__pt" aria-pressed="false" data-st="warn" style="--x: 0.55; --y: 0.32; --s: 0.10"><i></i><span>رنگ و پوشش</span></button>
+          <button type="button" class="viz-risk__pt" aria-pressed="false" data-st="good" style="--x: 0.25; --y: 0.20; --s: 0.08"><i></i><span>بسته‌بندی</span></button>
+          <span class="viz-risk__ax viz-risk__ax--x" aria-hidden="true">احتمال اختلال ←</span>
+          <span class="viz-risk__ax viz-risk__ax--y" aria-hidden="true">↑ اثر بر کسب‌وکار</span>
+        </div>
+        <div class="viz-panels" aria-live="polite">
+          <div class="viz-panel is-on">
+            <p class="viz-sc__title"><b>قطعات الکترونیکی</b> <span class="viz-badge" data-st="bad">ریسک بالا</span></p>
+            <ul class="viz-metrics viz-metrics--two"><li><span>تحویل به‌موقع</span><b>۵۸٪</b></li><li><span>سهم از خرید</span><b>۲۲٪</b></li><li><span>جایگزین</span><b>ندارد</b></li><li><span>ریسک ارزی</span><b>بالا</b></li></ul>
+            <p class="viz-sc__note">تک‌منبع و وارداتی، با نوسان زیاد زمان تحویل. اقدام: پیدا کردن تأمین‌کننده‌ی دوم و موجودی اطمینان بیشتر برای اقلام حیاتی.</p>
+          </div>
+          <div class="viz-panel">
+            <p class="viz-sc__title"><b>ورق فولادی</b> <span class="viz-badge" data-st="warn">ریسک متوسط</span></p>
+            <ul class="viz-metrics viz-metrics--two"><li><span>تحویل به‌موقع</span><b>۹۶٪</b></li><li><span>سهم از خرید</span><b>۳۸٪</b></li><li><span>جایگزین</span><b>دارد</b></li><li><span>مرجوعی</span><b>۰٫۴٪</b></li></ul>
+            <p class="viz-sc__note">قابل‌اعتماد، اما بزرگ‌ترین قلم خرید است. اقدام: قرارداد بلندمدت با قیمت‌گذاری شفاف، و پایش ماهانه.</p>
+          </div>
+          <div class="viz-panel">
+            <p class="viz-sc__title"><b>باربری ب</b> <span class="viz-badge" data-st="warn">ریسک متوسط</span></p>
+            <ul class="viz-metrics viz-metrics--two"><li><span>تحویل به‌موقع</span><b>۸۲٪</b></li><li><span>سهم از حمل</span><b>۵۰٪</b></li><li><span>جایگزین</span><b>دارد</b></li><li><span>خسارت بار</span><b>۱٫۱٪</b></li></ul>
+            <p class="viz-sc__note">تأخیرهای پرتکرار، و اثرش مستقیم روی OTIF مشتری. اقدام: جابه‌جا کردن بخشی از ارسال‌ها به باربری الف و قرارداد با جریمه‌ی تأخیر.</p>
+          </div>
+          <div class="viz-panel">
+            <p class="viz-sc__title"><b>رنگ و پوشش</b> <span class="viz-badge" data-st="warn">ریسک متوسط</span></p>
+            <ul class="viz-metrics viz-metrics--two"><li><span>تحویل به‌موقع</span><b>۷۵٪</b></li><li><span>سهم از خرید</span><b>۱۰٪</b></li><li><span>جایگزین</span><b>دارد</b></li><li><span>مرجوعی</span><b>۲٫۸٪</b></li></ul>
+            <p class="viz-sc__note">نوسان زمان تحویل و مرجوعی بالاتر از بقیه. اقدام: بازرسی ورودی سخت‌گیرانه‌تر و مذاکره درباره‌ی کیفیت.</p>
+          </div>
+          <div class="viz-panel">
+            <p class="viz-sc__title"><b>بسته‌بندی</b> <span class="viz-badge" data-st="good">ریسک کم</span></p>
+            <ul class="viz-metrics viz-metrics--two"><li><span>تحویل به‌موقع</span><b>۹۴٪</b></li><li><span>سهم از خرید</span><b>۸٪</b></li><li><span>جایگزین</span><b>دارد</b></li><li><span>مرجوعی</span><b>۰٫۶٪</b></li></ul>
+            <p class="viz-sc__note">ریسک کم. پایش عادی کافی است.</p>
+          </div>
+        </div>
+      </div>
+      <p class="viz__cap">اندازه‌ی هر دایره، سهم آن تأمین‌کننده از خرید یا حمل است. داده‌ها نمونه‌ی نمایشی‌اند.</p>
+    </figure>
+    <p>تأمین‌کنندگان گوشه‌ی بالای ماتریس برنامه‌ی اقدام لازم دارند: تأمین‌کننده‌ی دوم، موجودی اطمینان بیشتر یا قرارداد بلندمدت. داده‌های بیرونی، مثل خبرها، نرخ ارز و وضعیت گمرک، را هم می‌شود به این پایش اضافه کرد تا هشدار زودتر برسد.</p>
+
+    <h2 id="bottlenecks">گلوگاه‌های عملیات</h2>
+<p>خروجی هر خط تولید یا فرایند، برابر خروجی کندترین ایستگاه آن است؛ این ایده‌ی اصلی «نظریه‌ی محدودیت‌ها» است. بهبود هر ایستگاه دیگر، تا وقتی گلوگاه سر جایش است، فقط صف‌ها و کار در جریان را بیشتر می‌کند. سه حالت را مقایسه کنید:</p>
+    <figure class="viz card" data-viz="line" data-reveal>
+      <div class="viz__bar">
+        <div class="seg" role="group" aria-label="حالت خط تولید">
+          <button type="button" aria-pressed="true" data-caps="60 48 30 42 55" data-note="وضعیت فعلی: مونتاژ با ظرفیت ۳۰ واحد در ساعت کندترین ایستگاه است و خروجی کل خط هم ۳۰ است، هرقدر بقیه سریع باشند. صف کار پشت مونتاژ مدام بلندتر می‌شود.">وضعیت فعلی</button>
+          <button type="button" aria-pressed="false" data-caps="60 60 30 42 55" data-note="ظرفیت برش به ۶۰ رسید، اما خروجی خط تکان نخورد: هنوز ۳۰. فقط صف پشت مونتاژ بلندتر شد. سرمایه‌گذاری روی ایستگاهی که گلوگاه نیست، خروجی را بالا نمی‌برد.">افزایش ظرفیت برش</button>
+          <button type="button" aria-pressed="false" data-caps="60 48 45 42 55" data-note="با افزایش ظرفیت مونتاژ به ۴۵، خروجی خط به ۴۲ رسید (۴۰٪ بیشتر) و گلوگاه به کنترل کیفیت منتقل شد. گلوگاه حذف نمی‌شود، جابه‌جا می‌شود؛ داشبورد باید جای تازه‌اش را نشان دهد.">افزایش ظرفیت مونتاژ</button>
+        </div>
+        <span class="tag">نمونه‌ی نمایشی</span>
+      </div>
+      <div class="viz-line" style="--speed: 1.00">
+        <ol class="viz-line__stations">
+        <li class="viz-line__st">
+          <span class="viz-line__queue" aria-hidden="true"></span>
+          <span class="node viz-line__box">
+            <span class="viz-badge viz-line__neck" data-st="bad">گلوگاه</span>
+            <b>دریافت سفارش</b>
+            <span class="viz-line__cap"><b>۶۰</b> در ساعت</span>
+            <span class="viz-line__util"><i style="--v: 0.500"></i></span>
+            <small class="viz-line__pct">بهره‌برداری ۵۰٪</small>
+          </span>
+        </li>
+        <li class="viz-line__st">
+          <span class="viz-line__queue" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="node viz-line__box">
+            <span class="viz-badge viz-line__neck" data-st="bad">گلوگاه</span>
+            <b>برش</b>
+            <span class="viz-line__cap"><b>۴۸</b> در ساعت</span>
+            <span class="viz-line__util"><i style="--v: 0.625"></i></span>
+            <small class="viz-line__pct">بهره‌برداری ۶۲٪</small>
+          </span>
+        </li>
+        <li class="viz-line__st is-neck">
+          <span class="viz-line__queue" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+          <span class="node viz-line__box">
+            <span class="viz-badge viz-line__neck" data-st="bad">گلوگاه</span>
+            <b>مونتاژ</b>
+            <span class="viz-line__cap"><b>۳۰</b> در ساعت</span>
+            <span class="viz-line__util"><i style="--v: 1.000"></i></span>
+            <small class="viz-line__pct">بهره‌برداری ۱۰۰٪</small>
+          </span>
+        </li>
+        <li class="viz-line__st">
+          <span class="viz-line__queue" aria-hidden="true"></span>
+          <span class="node viz-line__box">
+            <span class="viz-badge viz-line__neck" data-st="bad">گلوگاه</span>
+            <b>کنترل کیفیت</b>
+            <span class="viz-line__cap"><b>۴۲</b> در ساعت</span>
+            <span class="viz-line__util"><i style="--v: 0.714"></i></span>
+            <small class="viz-line__pct">بهره‌برداری ۷۱٪</small>
+          </span>
+        </li>
+        <li class="viz-line__st">
+          <span class="viz-line__queue" aria-hidden="true"></span>
+          <span class="node viz-line__box">
+            <span class="viz-badge viz-line__neck" data-st="bad">گلوگاه</span>
+            <b>بسته‌بندی</b>
+            <span class="viz-line__cap"><b>۵۵</b> در ساعت</span>
+            <span class="viz-line__util"><i style="--v: 0.545"></i></span>
+            <small class="viz-line__pct">بهره‌برداری ۵۵٪</small>
+          </span>
+        </li>
+        </ol>
+        <div class="viz-line__belt" aria-hidden="true"></div>
+        <p class="viz-line__out">خروجی خط: <b>۳۰</b> واحد در ساعت</p>
+      </div>
+      <ul class="viz-legend viz-line__legend"><li class="is-queue">کار منتظر در صف</li><li class="is-util">بهره‌برداری از ظرفیت</li></ul>
+      <p class="viz__note" aria-live="polite">وضعیت فعلی: مونتاژ با ظرفیت ۳۰ واحد در ساعت کندترین ایستگاه است و خروجی کل خط هم ۳۰ است، هرقدر بقیه سریع باشند. صف کار پشت مونتاژ مدام بلندتر می‌شود.</p>
+    </figure>
+    <p>پیدا کردن گلوگاه همیشه به این سادگی نیست. داشبورد عملیات از روی زمان ثبت هر رویداد (رسیدن سفارش، شروع و پایان هر مرحله) نشان می‌دهد کار کجا منتظر می‌ماند؛ روشی که به آن «فرایندکاوی» می‌گویند. شاخص‌های رایج این بخش:</p>
+    <ul>
+      <li><b>بهره‌وری کلی تجهیزات (OEE):</b> حاصل‌ضرب دسترس‌پذیری، کارایی و کیفیت هر دستگاه.</li>
+      <li><b>کار در جریان و زمان انتظار:</b> صف‌های بلند نشانه‌ی گلوگاه‌اند.</li>
+      <li><b>زمان چرخه:</b> از ثبت سفارش تا تحویل، و سهم زمان انتظار از آن.</li>
+      <li><b>ضایعات و دوباره‌کاری:</b> که ظرفیت گلوگاه را بی‌صدا هدر می‌دهند.</li>
+    </ul>
+    <p><a href="../vision">بینایی ماشین</a> هم می‌تواند داده‌ی این داشبوردها را تأمین کند: شمارش خودکار محصول روی خط و کنترل کیفیت در همان ایستگاه.</p>
+
+    <h2 id="start">از کجا شروع کنیم؟</h2>
+<ol>
+      <li><b>با چند شاخص شروع کنید:</b> پنج تا هشت شاخص که مستقیم به تصمیم وصل‌اند، مثل OTIF، روز پوشش موجودی، زمان تحویل تأمین‌کنندگان و OEE؛ هر کدام با تعریف دقیق و مالک مشخص.</li>
+      <li><b>زمان رویدادها را ثبت کنید:</b> بدون زمان ثبت سفارش، ارسال و دریافت، نه تحلیل تأخیر ممکن است و نه پیدا کردن گلوگاه.</li>
+      <li><b>منابع را یکپارچه کنید:</b> نرم‌افزار انبار، خرید، فروش و اکسل‌های برنامه‌ریزی، با کد کالای یکسان، در یک انبار داده.</li>
+      <li><b>برای هر نقش، داشبورد خودش:</b> مدیرعامل چند شاخص کلان، مدیر زنجیره جزئیات و روندها، و سرپرست انبار فهرست اقدام‌های امروز.</li>
+      <li><b>از توصیف به پیش‌بینی بروید:</b> وقتی داده‌ی قابل‌اعتماد جریان دارد، پیش‌بینی تقاضا و هشدار تأخیر را اضافه کنید.</li>
+    </ol>
+    <p class="callout"><b>در نئودیتا:</b> از <a href="../data-engineering">یکپارچه‌سازی داده‌های انبار، خرید و تولید</a> تا <a href="../dashboard">داشبوردهای عملیات</a>، <a href="../forecasting">پیش‌بینی تقاضا</a> و <a href="../vision">شمارش و کنترل کیفیت با بینایی ماشین</a>، این زنجیره را پیاده می‌کنیم.</p>
+    </div>
+  </article>
+
+  <!-- مقاله‌های دیگر -->
+  <section aria-labelledby="t-more">
+    <header class="slide__head" data-reveal>
+      <p class="eyebrow">ادامه‌ی مطالعه</p>
+      <h2 id="t-more">مقاله‌های دیگر</h2>
+    </header>
+    <div class="post-cards post-cards--two">
+      <article class="post-card card" data-reveal>
+        <div class="post-card__art"><svg viewBox="0 0 160 90" aria-hidden="true"><g class="pc-tile"><rect x="24" y="14" width="34" height="28" rx="5"/><rect x="63" y="14" width="34" height="28" rx="5"/><rect x="102" y="14" width="34" height="28" rx="5"/><rect x="24" y="48" width="34" height="28" rx="5"/><rect x="63" y="48" width="34" height="28" rx="5"/><rect x="102" y="48" width="34" height="28" rx="5"/></g><g class="pc-line"><path d="M106 34 L114 28 L121 31 L131 21"/><path d="M28 68 L36 64 L43 66 L53 57"/></g><g class="pc-on"><rect x="67" y="22" width="5" height="14" rx="1.5"/><rect x="75" y="27" width="5" height="9" rx="1.5"/><rect x="83" y="19" width="5" height="17" rx="1.5"/></g></svg></div>
+        <div class="post-card__body">
+          <p class="post-card__tag">مدیریت و راهبرد</p>
+          <h3><a href="ceo-kpis">۱۲ شاخص کلیدی که هر مدیرعامل باید پایش کند</a></h3>
+          <p>رشد درآمد، حاشیه‌ی سود، جریان نقد، هزینه‌ی جذب و ماندگاری مشتری، بهره‌وری و کارایی عملیات: فرمول، معنا و نشانه‌های هشدار هر شاخص.</p>
+          <p class="post-card__meta"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg> ۸ دقیقه مطالعه</p>
+        </div>
+      </article>
+      <article class="post-card card" data-reveal>
+        <div class="post-card__art"><svg viewBox="0 0 160 90" aria-hidden="true"><path class="pc-base" d="M18 76 H142"/><g class="pc-on"><rect x="114" y="54" width="18" height="22" rx="3"/><rect x="88" y="40" width="18" height="36" rx="3"/><rect x="62" y="28" width="18" height="48" rx="3"/><rect x="36" y="14" width="18" height="62" rx="3"/></g></svg></div>
+        <div class="post-card__body">
+          <p class="post-card__tag">تحلیل داده</p>
+          <h3><a href="business-intelligence">هوش تجاری چیست؟</a></h3>
+          <p>چهار سطح تحلیل داده، معماری یک سامانه‌ی هوش تجاری، مدل ستاره‌ای انبار داده، کاوش از کل به جزء و اصول طراحی شاخص و داشبورد.</p>
+          <p class="post-card__meta"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg> ۵ دقیقه مطالعه</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- قدم بعدی -->
+  <section class="end" aria-labelledby="t-next" data-reveal>
+    <p class="eyebrow">قدم بعدی</p>
+    <h2 id="t-next">زنجیره‌ای که پیش از مشکل هشدار می‌دهد</h2>
+    <p>در جلسه‌ی مشاوره‌ی رایگان، نیاز کسب‌وکارتان را می‌شنویم و پیشنهاد می‌دهیم کدام راه‌حل بیشترین صرفه‌جویی و مزیت رقابتی را برایتان دارد.</p>
+    <div class="end__cta">
+      <a class="btn btn--primary btn--lg" href="../consult">درخواست مشاوره رایگان <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="btn btn--ghost btn--lg" href="../forecasting">پیش‌بینی و یادگیری ماشین</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- پانویس سایت: محتوایش را tools/sync-layout.py از index.html می‌آورد -->
+<footer class="site-foot">
+  <div class="site-foot__grid">
+    <div class="site-foot__brand">
+      <a href="../" aria-label="نئودیتا، صفحه‌ی اصلی">
+        <img class="logo--light" src="../logo/4.svg" alt="" width="135" height="28" />
+        <img class="logo--dark" src="../logo/12.svg" alt="" width="135" height="28" />
+      </a>
+      <p>تحلیل داده و راهکارهای هوش مصنوعی برای سازمان‌ها؛ برای هزینه‌ی کمتر و رقابت بهتر با دیگر سازمان‌ها.</p>
+    </div>
+    <nav aria-labelledby="f-services">
+      <h2 id="f-services">خدمات</h2>
+      <ul>
+        <li><a href="../dashboard">داشبورد و تحلیل داده</a></li>
+        <li><a href="../chatbot">چت‌بات هوشمند سازمانی</a></li>
+        <li><a href="../agents">ایجنت‌ها و اتوماسیون</a></li>
+        <li><a href="../vision">بینایی ماشین</a></li>
+        <li><a href="../forecasting">پیش‌بینی و یادگیری ماشین</a></li>
+        <li><a href="../data-engineering">مهندسی و یکپارچه‌سازی داده</a></li>
+      </ul>
+    </nav>
+    <nav aria-labelledby="f-company">
+      <h2 id="f-company">نئودیتا</h2>
+      <ul>
+        <li><a href="../about">درباره‌ی ما</a></li>
+        <li><a href="./">مقالات</a></li>
+        <li><a href="../faq">سوالات متداول</a></li>
+        <li><a href="../consult">درخواست مشاوره رایگان</a></li>
+        <li><a href="../privacy">حریم خصوصی</a></li>
+      </ul>
+    </nav>
+    <div>
+      <h2>تماس</h2>
+      <ul class="site-foot__contact">
+        <li><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg><a href="tel:+989124140730" dir="ltr">۰۹۱۲ ۴۱۴۰ ۷۳۰</a></li>
+        <li><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>پاسخ‌گویی در ساعات اداری</li>
+        <li><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg><a href="mailto:info@neodata.ir" dir="ltr">info@neodata.ir</a></li>
+      </ul>
+    </div>
+    <div class="site-foot__join">
+      <h2>همکاری با ما</h2>
+      <p>به داده و هوش مصنوعی علاقه دارید و دوست دارید با نئودیتا همکاری کنید؟ رزومه یا معرفی کوتاهی از خودتان را برایمان ایمیل کنید.</p>
+      <a class="site-foot__mail" href="mailto:info@neodata.ir?subject=%D9%87%D9%85%DA%A9%D8%A7%D8%B1%DB%8C%20%D8%A8%D8%A7%20%D9%86%D8%A6%D9%88%D8%AF%DB%8C%D8%AA%D8%A7"><svg class="ico" aria-hidden="true"><use href="#i-send"/></svg>ایمیل به <span dir="ltr">info@neodata.ir</span></a>
+    </div>
+  </div>
+  <p class="site-foot__bottom">© ۱۴۰۵ نئودیتا · همه‌ی حقوق محفوظ است</p>
+</footer>
+
+<script src="../assets/site.js?v=1"></script>
+<script src="../assets/viz.js?v=1"></script>
+</body>
+</html>

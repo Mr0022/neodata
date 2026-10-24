@@ -38,6 +38,11 @@
   --good-soft: rgba(18, 138, 83, .09);
   --good-line: rgba(18, 138, 83, .28);
   --bad: #d33a3a;
+  --bad-soft: rgba(211, 58, 58, .08);
+  --bad-line: rgba(211, 58, 58, .3);
+  --warn: #b25e00;                   /* هشدار؛ نسبت تمایز ۴٫۷ روی سطح کارت */
+  --warn-soft: rgba(178, 94, 0, .09);
+  --warn-line: rgba(178, 94, 0, .3);
   --head-from: rgba(246, 248, 252, .95);
   --overlay: rgba(246, 248, 252, .96);
   --nav-glass: rgba(255, 255, 255, .74);  /* زمینه‌ی شیشه‌ای نوار ناوبری */
@@ -107,6 +112,11 @@
   --good-soft: rgba(61, 220, 151, .1);
   --good-line: rgba(61, 220, 151, .25);
   --bad: #ff6b6b;
+  --bad-soft: rgba(255, 107, 107, .1);
+  --bad-line: rgba(255, 107, 107, .32);
+  --warn: #ffb547;
+  --warn-soft: rgba(255, 181, 71, .1);
+  --warn-line: rgba(255, 181, 71, .3);
   --head-from: rgba(7, 11, 22, .92);
   --overlay: rgba(7, 11, 22, .94);
   --nav-glass: rgba(16, 23, 42, .68);
@@ -1427,7 +1437,7 @@ body > .site-foot {
   font-size: 11px; color: var(--ink-mute);
 }
 .viz-dash__months span { justify-self: center; white-space: nowrap; }
-.viz-dash__tip, .viz-fc__tip, .viz-vec__tip {
+.viz-dash__tip, .viz-fc__tip, .viz-vec__tip, .viz-plot__tip, .viz-lt__tip {
   position: absolute; z-index: 2; translate: -50% 0;
   padding: 3px 10px; border-radius: 8px;
   font-size: 12px; font-weight: 700; line-height: 1.7; white-space: nowrap;
@@ -1817,6 +1827,571 @@ html.no-js .viz-panel + .viz-panel { margin-top: 8px; }
   .viz-hub .viz-int__hub { grid-column: 1 / -1; order: -1; justify-self: center; margin-bottom: 8px; }
 }
 
+/* ---------------- شکل‌های مقاله‌های مالی، زنجیره‌ی تأمین و شاخص‌ها (همان assets/viz.js) ----------------
+   رنگ وضعیت (خوب، هشدار، بد) همیشه با برچسب یا نشانه‌ی شکلی همراه است تا فقط به رنگ تکیه نکند */
+
+/* برچسب وضعیت: رنگ و نوشته با هم */
+.viz-badge {
+  display: inline-flex; align-items: center; gap: 6px; padding: 0 9px; border-radius: 999px;
+  font-size: 11.5px; font-weight: 800; line-height: 1.95; white-space: nowrap;
+  color: var(--ink-soft); background: var(--surface-2); border: 1px solid var(--line);
+}
+.viz-badge[data-st="good"] { color: var(--good); background: var(--good-soft); border-color: var(--good-line); }
+.viz-badge[data-st="warn"] { color: var(--warn); background: var(--warn-soft); border-color: var(--warn-line); }
+.viz-badge[data-st="bad"] { color: var(--bad); background: var(--bad-soft); border-color: var(--bad-line); }
+.viz-badge[data-st]:not([data-st="mute"])::before { content: ""; }
+/* نشانه‌ی وضعیت با شکل خودش: خوب دایره، هشدار لوزی، بد مثلث */
+.viz-st, .viz-badge[data-st]:not([data-st="mute"])::before {
+  display: inline-block; flex: none; width: 9px; height: 9px; background: currentColor;
+}
+.viz-st[data-st="good"], .viz-badge[data-st="good"]::before { border-radius: 50%; }
+.viz-st[data-st="warn"], .viz-badge[data-st="warn"]::before { width: 8px; height: 8px; rotate: 45deg; border-radius: 1px; }
+.viz-st[data-st="bad"], .viz-badge[data-st="bad"]::before { clip-path: polygon(50% 0, 100% 100%, 0 100%); width: 10px; }
+.viz-st[data-st="good"] { color: var(--good); }
+.viz-st[data-st="warn"] { color: var(--warn); }
+.viz-st[data-st="bad"] { color: var(--bad); }
+.viz-st-legend li::before { display: none; }
+
+/* شاخص‌های کوچک درون کارت توضیح (حلقه‌های زنجیره، تأمین‌کنندگان) */
+.viz-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 10px 0; }
+.viz-metrics--two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.viz-metrics li { padding: 8px 12px; border-radius: 12px; background: var(--card-bg); border: 1px solid var(--line-soft); line-height: 1.7; }
+.viz-metrics b { display: block; font-size: 18px; font-weight: 900; color: var(--ink); }
+.viz-metrics small { display: block; font-size: 11.5px; font-weight: 700; color: var(--ink-mute); }
+.viz-metrics small[data-st="good"] { color: var(--good); }
+.viz-metrics small[data-st="bad"] { color: var(--bad); }
+.viz-panel .viz-badge { display: inline-flex; }
+.viz-panel .viz-sc__title { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 0; }
+.viz-panel .viz-sc__title b { font-size: 15px; }
+.viz-panel .viz-sc__note { display: block; margin: 0; font-size: 13.5px; color: var(--ink-soft); }
+
+/* نمودار خطی مشترک (جریان نقدی، موجودی): زمان از راست به چپ، برچسب‌های محور عمودی سمت راست */
+.viz-plot__title { margin: 0 0 10px; font-size: 13px; font-weight: 700; color: var(--ink-soft); }
+.viz-plot { position: relative; padding-inline-start: 34px; margin-bottom: 32px; }
+.viz-plot__y { position: absolute; top: 0; inset-inline-start: 0; height: 230px; width: 30px; }
+.viz-plot__y span { position: absolute; inset-inline-start: 0; translate: 0 -50%; font-size: 11px; line-height: 1; color: var(--ink-mute); font-variant-numeric: tabular-nums; }
+.viz-plot__area { position: relative; height: 230px; touch-action: pan-y; cursor: crosshair; }
+.viz-plot__area > svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.viz-plot__area svg path, .viz-plot__area svg line, .viz-plot__area svg rect { vector-effect: non-scaling-stroke; }
+.viz-plot__grid line { stroke: var(--line-soft); stroke-width: 1; }
+.viz-plot__x span { position: absolute; top: calc(100% + 8px); translate: -50% 0; font-size: 11px; color: var(--ink-mute); white-space: nowrap; }
+.viz-plot__x span.is-first { translate: -100% 0; }
+.viz-plot__x span.is-last { translate: 0 0; }
+.viz-plot__guide { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--accent-line); opacity: 0; pointer-events: none; }
+.viz-plot__dot {
+  position: absolute; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%;
+  background: var(--accent); box-shadow: 0 0 0 2px var(--surface-solid); opacity: 0; pointer-events: none;
+}
+.viz-plot__tip { translate: -50% calc(-100% - 12px); }
+.viz-plot__area.is-hover .viz-plot__guide, .viz-plot__area.is-hover .viz-plot__dot, .viz-plot__area.is-hover .viz-plot__tip { opacity: 1; }
+/* با رسیدن شکل به صفحه، خط از راست (امروز) به چپ کشیده می‌شود */
+.viz-plot__area > svg { transition: clip-path 1.4s var(--ease-out) .15s; }
+.reveal-ready .viz:not(.is-in) .viz-plot__area > svg { clip-path: inset(0 0 0 100%); }
+
+/* بستن دفاتر: نوار زمانی کارها در روزهای کاری */
+.viz-gantt { position: relative; --name-w: 200px; padding-bottom: 30px; }
+.viz-gantt__days { margin: 0; padding-inline-start: var(--name-w); font-size: 11.5px; font-weight: 700; color: var(--ink-mute); }
+.viz-gantt__axis {
+  display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); margin: 2px 0 4px; margin-inline-start: var(--name-w);
+  font-size: 11px; color: var(--ink-mute); text-align: center; font-variant-numeric: tabular-nums;
+}
+.viz-gantt__rows > li { display: grid; grid-template-columns: var(--name-w) minmax(0, 1fr); align-items: center; }
+.viz-gantt__name { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 8px; padding-inline-end: 12px; font-size: 13.5px; font-weight: 700; line-height: 1.6; }
+.viz-gantt__track {
+  position: relative; height: 40px;
+  background: repeating-linear-gradient(to left, transparent 0 calc(10% - 1px), var(--line-soft) calc(10% - 1px) 10%);
+  border-inline-start: 1px solid var(--line);
+}
+.viz-gantt__track i {
+  position: absolute; top: 13px; height: 14px; border-radius: 4px;
+  inset-inline-start: calc(var(--s) * 10%); width: max(6px, calc(var(--l) * 10%));
+  background: var(--ink-mute);
+  transition: inset-inline-start .8s var(--ease-out), width .8s var(--ease-out), background .4s ease;
+}
+.viz-gantt[data-mode="auto"] [data-robot] i { background: var(--accent); }
+.viz-gantt[data-mode="auto"] [data-robot] .viz-gantt__name::after {
+  content: "خودکار"; padding: 0 7px; border-radius: 999px; font-size: 10.5px; font-weight: 800; line-height: 1.8;
+  color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-line);
+}
+.viz-gantt__lane { position: absolute; top: 46px; bottom: 0; inset-inline-start: var(--name-w); inset-inline-end: 0; pointer-events: none; }
+.viz-gantt__end {
+  position: absolute; top: 0; bottom: 26px; inset-inline-start: calc(var(--s) * 10%);
+  border-inline-start: 2px dashed var(--accent); transition: inset-inline-start .8s var(--ease-out);
+}
+.viz-gantt__end b {
+  position: absolute; top: calc(100% + 4px); inset-inline-start: 0; translate: 50% 0;
+  font-size: 12px; font-weight: 800; color: var(--accent); white-space: nowrap;
+}
+.viz-gantt__legend .is-manual::before { background: var(--ink-mute); }
+.viz-gantt__legend li::before { height: 8px; border-radius: 3px; }
+
+/* تحلیل هزینه‌ها: تراکنش‌ها یکی‌یکی دسته‌بندی می‌شوند */
+.viz-exp__count { font-size: 12.5px; font-weight: 700; color: var(--ink-mute); }
+.viz-exp__next { margin-inline-start: auto; }
+.viz-exp { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 22px; align-items: start; }
+.viz-exp__cols, .viz-exp__row { display: grid; grid-template-columns: minmax(0, 1fr) 54px 128px; align-items: center; gap: 10px; }
+.viz-exp__cols { margin: 0 0 4px; padding: 0 10px; font-size: 11px; font-weight: 700; color: var(--ink-mute); }
+.viz-exp__cols span:nth-child(2) { text-align: end; }
+.viz-exp__list { display: grid; gap: 3px; }
+.viz-exp__row { padding: 6px 10px; border-radius: 12px; border: 1px solid transparent; transition: background .3s ease, border-color .3s ease, opacity .3s ease; }
+.viz-exp__desc { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 8px; line-height: 1.6; }
+.viz-exp__desc b { font-size: 13.5px; }
+.viz-exp__desc small { width: 100%; font-size: 11.5px; color: var(--ink-mute); order: 2; }
+.viz-exp__flag { order: 1; }
+.viz-exp__amt { font-size: 13.5px; font-weight: 800; text-align: end; font-variant-numeric: tabular-nums; }
+.viz-exp__cat {
+  justify-self: start; padding: 0 9px; border-radius: 999px; font-size: 11.5px; font-weight: 700; line-height: 1.9; white-space: nowrap;
+  color: var(--ink-soft); background: var(--surface-2); border: 1px solid var(--line);
+  transition: color .3s ease, background .3s ease, border-color .3s ease;
+}
+.viz-exp.is-ready .viz-exp__row:not(.is-done) { opacity: .4; }
+.viz-exp.is-ready .viz-exp__row:not(.is-done) .viz-exp__cat { color: transparent; border-style: dashed; }
+.viz-exp.is-ready .viz-exp__row:not(.is-flagged) .viz-exp__flag { display: none; }
+.viz-exp__row.is-flagged .viz-exp__flag { animation: fade-in .4s ease; }
+.viz-exp__row.is-on { background: var(--accent-soft); border-color: var(--accent-line); }
+.viz-exp__row.is-on .viz-exp__cat { color: var(--on-accent); background: var(--btn-bg); border-color: transparent; }
+.viz-exp__sum { position: relative; padding: 14px 16px; border-radius: 16px; background: var(--surface-2); border: 1px solid var(--line-soft); }
+.viz-exp__head { margin: 0 0 8px; font-size: 13.5px; font-weight: 800; }
+.viz-exp__head small { font-weight: 500; color: var(--ink-mute); }
+.viz-exp__bars { display: grid; gap: 6px; margin-bottom: 12px; }
+.viz-exp__bars li { display: grid; grid-template-columns: 96px minmax(0, 1fr) 36px; align-items: center; gap: 8px; font-size: 12.5px; line-height: 1.6; }
+.viz-exp__bars b { text-align: end; font-variant-numeric: tabular-nums; }
+.viz-exp__track { height: 10px; }
+.viz-exp__track i {
+  display: block; height: 100%; width: calc(var(--v) * 100%); background: var(--series);
+  border-start-end-radius: 4px; border-end-end-radius: 4px; transition: width .6s var(--ease-out);
+}
+
+/* پایش بودجه: نوار هزینه‌ی واقعی، خط برنامه تا همین ماه، و بودجه‌ی کل سال (تا ۱۱۰٪ جا هست) */
+.viz-budget__title { margin: 0 0 6px; font-size: 13px; font-weight: 700; color: var(--ink-soft); }
+.viz-budget { display: grid; }
+.viz-budget__row {
+  display: grid; grid-template-columns: 150px minmax(0, 1fr) 46px 136px; align-items: center; gap: 14px;
+  padding: 9px 0; border-bottom: 1px solid var(--line-soft);
+}
+.viz-budget__name { font-size: 14px; font-weight: 700; line-height: 1.6; }
+.viz-budget__name small { display: block; font-size: 11.5px; font-weight: 500; color: var(--ink-mute); }
+.viz-budget__track {
+  position: relative; height: 24px;
+  background: linear-gradient(to left, var(--surface-2) calc(100% / 1.1), transparent 0);
+  border-radius: 4px;
+}
+.viz-budget__track::after {   /* بودجه‌ی کل سال */
+  content: ""; position: absolute; top: -4px; bottom: -4px; inset-inline-start: calc(100% / 1.1); width: 1px; background: var(--ink-mute);
+}
+.viz-budget__fill {
+  position: absolute; top: 5px; bottom: 5px; inset-inline-start: 0; width: calc(var(--v) / 1.1 * 100%);
+  background: var(--series); border-start-end-radius: 4px; border-end-end-radius: 4px;
+  transition: width .6s var(--ease-out), background .3s ease;
+}
+.viz-budget__row[data-st="warn"] .viz-budget__fill { background: var(--warn); }
+.viz-budget__row[data-st="bad"] .viz-budget__fill { background: var(--bad); }
+.viz-budget__plan {
+  position: absolute; z-index: 1; top: 0; bottom: 0; width: 3px; margin-inline-start: -1px; border-radius: 2px;
+  inset-inline-start: calc(var(--p) / 1.1 * 100%); background: var(--ink); box-shadow: 0 0 0 2px var(--surface-solid);
+  transition: inset-inline-start .6s var(--ease-out);
+}
+.viz-budget__val { font-size: 14px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.viz-budget__legend .is-plan::before { width: 3px; height: 14px; background: var(--ink); }
+.viz-budget__legend .is-cap::before { width: 1px; height: 14px; background: var(--ink-mute); }
+.viz-budget__legend li:first-child::before { height: 10px; border-radius: 3px; background: var(--series); }
+.viz-budget + .viz-legend { margin-top: 14px; }
+
+/* جریان نقدی */
+.viz-cash__area { fill: var(--accent); fill-opacity: .08; stroke: none; }
+.viz-cash__risk { fill: var(--bad); fill-opacity: .16; stroke: none; }
+.viz-cash__min { stroke: var(--bad); stroke-width: 1.5; stroke-dasharray: 6 5; }
+.viz-cash__line { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.viz-cash__minl, .viz-stock__ropl {
+  position: absolute; inset-inline-end: 6px; translate: 0 calc(-100% - 3px);
+  padding: 0 5px; border-radius: 5px; background: var(--surface-solid);
+  font-size: 11.5px; font-weight: 700; color: var(--bad); white-space: nowrap; pointer-events: none;
+  transition: top .6s var(--ease-out);
+}
+
+/* تحلیل انحراف: آبشاری از سود بودجه تا سود واقعی */
+.viz-wf { display: flex; gap: 10px; padding-top: 22px; }
+.viz-wf__col {
+  flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; padding: 0 0 4px;
+  border: 0; border-radius: 12px; background: none; cursor: pointer; color: inherit; transition: background .25s ease;
+}
+.viz-wf__col:hover { background: var(--accent-soft); }
+.viz-wf__plot { position: relative; display: block; height: 220px; border-bottom: 1px solid var(--line); }
+.viz-wf__plot i {
+  position: absolute; left: 50%; width: 24px; margin-left: -12px; border-radius: 4px;
+  bottom: calc(var(--lo) * 100%); height: calc((var(--hi) - var(--lo)) * 100%);
+  background: var(--accent); transform-origin: 50% 100%;
+  transition: transform .8s var(--ease-out) calc(var(--k) * 90ms), opacity .25s ease, box-shadow .25s ease;
+}
+.viz-wf__col.is-up i { background: var(--good); }
+.viz-wf__col.is-down i { background: var(--bad); }
+.viz-wf__plot b {
+  position: absolute; left: 50%; translate: -50% 0; bottom: calc(var(--hi) * 100% + 4px);
+  font-size: 13px; font-weight: 800; white-space: nowrap; font-variant-numeric: tabular-nums;
+}
+/* خط اتصال از سطح پایان هر ستون به ستون بعد (در راست‌چین، ستون بعد سمت چپ است) */
+.viz-wf__plot::after {
+  content: ""; position: absolute; bottom: calc(var(--next) * 100%); right: calc(50% + 12px); width: calc(100% - 14px);
+  border-top: 1px dashed var(--ink-mute);
+}
+.viz-wf__col:last-child .viz-wf__plot::after { display: none; }
+.viz-wf__name { font-size: 12px; font-weight: 700; line-height: 1.6; color: var(--ink-soft); text-align: center; }
+.viz-wf__col[aria-pressed="true"] i { box-shadow: 0 0 0 2px var(--surface-solid), 0 0 0 4px var(--ink); }
+.viz-wf__col[aria-pressed="true"] .viz-wf__name { color: var(--ink); }
+.reveal-ready .viz:not(.is-in) .viz-wf__plot i { transform: scaleY(0); }
+.viz-wf__legend .is-total::before, .viz-wf__legend .is-up::before, .viz-wf__legend .is-down::before { height: 10px; border-radius: 3px; }
+.viz-wf__legend .is-up::before { background: var(--good); }
+.viz-wf__legend .is-down::before { background: var(--bad); }
+
+/* زنجیره‌ی تأمین: پنج حلقه، با نشانه‌ی وضعیت هر کدام */
+.viz-sc { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 30px; }
+.viz-sc__stage { flex-direction: column; justify-content: center; gap: 6px; padding: 14px 6px 12px; text-align: center; cursor: pointer; font-size: 13.5px; }
+.viz-sc__stage > .ico { width: 24px; height: 24px; }
+.viz-sc__stage .viz-st { position: absolute; top: 9px; inset-inline-end: 9px; }
+.viz-sc__stage:hover { border-color: var(--accent-line); }
+.viz-sc__stage[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+.viz-sc + .viz-legend { margin: 16px 0 4px; }
+
+/* موجودی */
+.viz-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 18px; }
+.viz-stats p { margin: 0; padding: 8px 14px; border-radius: 14px; background: var(--surface-2); border: 1px solid var(--line-soft); }
+.viz-stats span { display: block; font-size: 12px; font-weight: 600; color: var(--ink-mute); }
+.viz-stats b { font-size: 19px; font-weight: 900; }
+.viz-stock__ss { fill: var(--warn); fill-opacity: .1; stroke: none; transition: y .6s var(--ease-out), height .6s var(--ease-out); }
+.viz-stock__rop { stroke: var(--ink-soft); stroke-width: 1.5; stroke-dasharray: 6 5; }
+.viz-stock__ropl { color: var(--ink-soft); }
+.viz-stock__line { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; }
+.viz-stock__out { fill: none; stroke: var(--bad); stroke-width: 6; }
+.viz-stock__legend .is-rop::before { background: repeating-linear-gradient(90deg, var(--ink-soft) 0 5px, transparent 5px 8px); }
+.viz-stock__legend .is-ss::before { height: 10px; background: var(--warn-soft); border: 1px solid var(--warn-line); }
+.viz-stock__legend .is-out::before { height: 5px; background: var(--bad); }
+
+/* OTIF: صد سفارش؛ دیر با دایره، ناقص با مربع نیم‌پر (شکل، رنگ را همراهی می‌کند) */
+.viz-otif { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 32px; align-items: center; }
+.viz-otif__grid { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 2px; }
+.viz-otif__grid i {
+  aspect-ratio: 1; border-radius: 3px; background: var(--series); opacity: .4;
+  transition: border-radius .35s ease, background-color .35s ease, opacity .35s ease, scale .5s var(--ease-out);
+  transition-delay: calc(var(--r) * 5ms);
+}
+.viz-otif__grid i.is-late { border-radius: 50%; background: var(--bad); opacity: 1; }
+.viz-otif__grid i.is-part { opacity: 1; background: linear-gradient(135deg, var(--warn) 50%, transparent 0); box-shadow: inset 0 0 0 2px var(--warn); }
+.reveal-ready .viz:not(.is-in) .viz-otif__grid i { opacity: 0; scale: .3; }
+.viz-otif__side { max-width: 280px; }
+.viz-otif__big { margin: 0 0 12px; }
+.viz-otif__big span { display: block; font-size: 13px; font-weight: 700; color: var(--ink-mute); }
+.viz-otif__big b { font-size: 52px; font-weight: 900; line-height: 1.3; }
+.viz-otif__legend { display: grid; gap: 6px; }
+.viz-otif__legend li { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: var(--ink-soft); }
+.viz-otif__legend b { margin-inline-start: auto; min-width: 2.5em; font-size: 15px; color: var(--ink); font-variant-numeric: tabular-nums; }
+.viz-otif__legend i { width: 14px; height: 14px; border-radius: 3px; background: var(--series); opacity: .4; }
+.viz-otif__legend .is-late i { border-radius: 50%; background: var(--bad); opacity: 1; }
+.viz-otif__legend .is-part i { opacity: 1; background: linear-gradient(135deg, var(--warn) 50%, transparent 0); box-shadow: inset 0 0 0 2px var(--warn); }
+
+/* زمان تحویل: هر نقطه یک محموله، خط زمان تعهدشده */
+.viz-lt { position: relative; }
+.viz-lt__head, .viz-lt__row { display: grid; grid-template-columns: 150px minmax(0, 1fr) 92px; align-items: center; gap: 14px; }
+.viz-lt__head { margin: 0 0 4px; font-size: 11px; font-weight: 700; color: var(--ink-mute); }
+.viz-lt__axis { position: relative; height: 1.8em; }
+.viz-lt__axis span { position: absolute; inset-inline-start: calc(var(--x) * 100%); translate: 50% 0; font-variant-numeric: tabular-nums; }
+.viz-lt__axis span:first-child { translate: 0 0; }
+.viz-lt__axis span:last-child { translate: 100% 0; }
+.viz-lt__row { padding: 4px 0; border-bottom: 1px solid var(--line-soft); }
+.viz-lt__name { font-size: 13.5px; font-weight: 700; line-height: 1.6; }
+.viz-lt__name small { display: block; font-size: 11.5px; font-weight: 500; color: var(--ink-mute); }
+.viz-lt__track {
+  position: relative; height: 46px;
+  background: repeating-linear-gradient(to left, var(--line-soft) 0 1px, transparent 1px 20%);
+}
+.viz-lt__promise {
+  position: absolute; top: 4px; bottom: 4px; width: 2px; margin-inline-start: -1px;
+  inset-inline-start: calc(var(--x) * 100%); background: var(--ink); border-radius: 1px;
+}
+.viz-lt__dot {
+  position: absolute; width: 10px; height: 10px; margin: -5px -5px 0 0; border-radius: 50%;
+  inset-inline-start: calc(var(--x) * 100%); top: calc(18% + var(--y) * 64%);
+  background: var(--series); box-shadow: 0 0 0 2px var(--surface-solid); cursor: default;
+  transition: opacity .4s ease calc(var(--k) * 70ms), translate .6s var(--ease-out) calc(var(--k) * 70ms);
+}
+.viz-lt__dot.is-late { background: var(--bad); }
+.reveal-ready .viz:not(.is-in) .viz-lt__dot { opacity: 0; translate: 24px 0; }
+.viz-lt__num b { display: block; font-size: 15px; font-weight: 800; }
+.viz-lt__num small { font-size: 12px; font-weight: 600; color: var(--ink-mute); }
+.viz-lt__tip { translate: -50% calc(-100% - 10px); }
+.viz-lt__tip.is-on { opacity: 1; }
+.viz-lt__legend li::before { width: 10px; height: 10px; border-radius: 50%; background: var(--series); }
+.viz-lt__legend .is-late::before { background: var(--bad); }
+.viz-lt__legend .is-promise::before { width: 2px; height: 14px; border-radius: 1px; background: var(--ink); }
+.viz-lt + .viz-legend { margin-top: 14px; }
+
+/* ماتریس ریسک: احتمال به چپ زیاد می‌شود (راست‌چین)، اثر به بالا */
+.viz-risk { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 24px; align-items: center; }
+.viz-risk__plot { position: relative; aspect-ratio: 1.15; margin: 26px 0 26px; }
+.viz-risk__cells { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); gap: 2px; }
+.viz-risk__cells i { border-radius: 8px; background: var(--bad); opacity: calc(.03 + var(--r) * .045); }
+.viz-risk__pt {
+  position: absolute; z-index: 1; inset-inline-start: calc(var(--x) * 100%); bottom: calc(var(--y) * 100%);
+  translate: 50% 50%; display: flex; flex-direction: column; align-items: center; gap: 2px;
+  padding: 0; border: 0; background: none; cursor: pointer; color: var(--ink);
+}
+.viz-risk__pt i {
+  width: calc(18px + var(--s) * 60px); aspect-ratio: 1; border-radius: 50%;
+  background: var(--series); box-shadow: 0 0 0 2px var(--surface-solid); transition: box-shadow .25s ease, scale .25s ease;
+}
+.viz-risk__pt[data-st="bad"] i { background: var(--bad); }
+.viz-risk__pt[data-st="warn"] i { background: var(--warn); }
+.viz-risk__pt span {
+  position: absolute; top: 100%; padding: 0 6px; border-radius: 6px; font-size: 12px; font-weight: 700; line-height: 1.7; white-space: nowrap;
+  background: var(--surface-solid);
+}
+.viz-risk__pt:hover i { scale: 1.08; }
+.viz-risk__pt[aria-pressed="true"] i { box-shadow: 0 0 0 2px var(--surface-solid), 0 0 0 4px var(--ink); }
+.viz-risk__ax { position: absolute; font-size: 12px; font-weight: 700; color: var(--ink-mute); white-space: nowrap; }
+.viz-risk__ax--x { top: calc(100% + 6px); inset-inline-end: 0; }
+.viz-risk__ax--y { bottom: calc(100% + 6px); inset-inline-start: 0; }
+.viz-risk .viz-panels { margin-top: 0; }
+
+/* گلوگاه: ظرفیت هر ایستگاه، صف پشت آن و خروجی خط */
+.viz-line__stations { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; align-items: end; }
+.viz-line__st { display: flex; flex-direction: column; gap: 8px; }
+.viz-line__queue { display: flex; flex-wrap: wrap-reverse; justify-content: center; align-content: flex-start; gap: 3px; min-height: 26px; padding: 0 14px; }
+.viz-line__queue i { width: 9px; height: 9px; border-radius: 2px; background: var(--warn); animation: fade-in .35s ease; }
+.viz-line__box { position: relative; flex-direction: column; align-items: stretch; gap: 3px; padding: 16px 10px 10px; text-align: center; font-size: 13.5px; }
+.viz-line__neck { position: absolute; bottom: 0; left: 50%; translate: -50% 55%; opacity: 0; transition: opacity .3s ease; }
+.viz-line__st.is-neck .viz-line__neck { opacity: 1; }
+.viz-line__st.is-neck .viz-line__box { border-color: var(--bad); box-shadow: 0 0 0 4px var(--bad-soft); }
+.viz-line__cap { font-size: 12px; font-weight: 500; color: var(--ink-mute); }
+.viz-line__cap b { font-size: 20px; font-weight: 900; color: var(--ink); }
+.viz-line__util { display: block; height: 6px; margin-top: 4px; border-radius: 3px; background: var(--surface-2); overflow: hidden; }
+.viz-line__util i { display: block; height: 100%; width: calc(var(--v) * 100%); border-radius: 3px; background: var(--series); transition: width .6s var(--ease-out); }
+.viz-line__st.is-neck .viz-line__util i { background: var(--bad); }
+.viz-line__pct { font-size: 11.5px; color: var(--ink-mute); }
+.viz-line__belt {
+  height: 8px; margin-top: 20px; border-radius: 4px;
+  background: repeating-linear-gradient(90deg, var(--accent-line) 0 14px, transparent 14px 28px);
+  animation: line-belt calc(var(--speed) * 1.1s) linear infinite;
+}
+@keyframes line-belt { to { background-position: -28px 0; } }
+.viz-line__out { margin: 12px 0 0; text-align: center; font-size: 14px; font-weight: 700; color: var(--ink-soft); }
+.viz-line__out b { font-size: 24px; font-weight: 900; color: var(--ink); }
+.viz-line__legend .is-queue::before { width: 9px; height: 9px; border-radius: 2px; background: var(--warn); }
+.viz-line__legend .is-util::before { height: 6px; border-radius: 3px; background: var(--series); }
+
+/* دوازده شاخص */
+.viz-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.viz-kpi {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; align-content: start; gap: 0 8px;
+  padding: 11px 13px 9px; border-radius: 14px; text-align: start; cursor: pointer;
+  background: var(--card-bg); border: 1px solid var(--line);
+  transition: border-color .25s ease, box-shadow .25s ease, opacity .3s ease;
+}
+.viz-kpi:hover { border-color: var(--accent-line); }
+.viz-kpi[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+.viz-kpi.is-dim { opacity: .3; }
+.viz-kpi__name { grid-row: 1; font-size: 12.5px; font-weight: 700; line-height: 1.7; color: var(--ink-soft); }
+.viz-kpi__n {
+  grid-row: 1; grid-column: 2; align-self: start; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%;
+  font-size: 11px; font-weight: 800; color: var(--ink-mute); background: var(--surface-2);
+}
+.viz-kpi__val { grid-column: 1 / -1; font-size: 23px; font-weight: 900; line-height: 1.45; }
+.viz-kpi__val small { margin-inline-start: 5px; font-size: 11px; font-weight: 600; color: var(--ink-mute); }
+.viz-kpi__delta { grid-column: 1 / -1; font-size: 11.5px; font-weight: 700; color: var(--ink-mute); }
+.viz-kpi__delta[data-st="good"] { color: var(--good); }
+.viz-kpi__delta[data-st="bad"] { color: var(--bad); }
+.viz-kpi__spark { grid-column: 1 / -1; width: 100%; height: auto; margin-top: 4px; overflow: visible; }
+.viz-kpi__spark path {
+  fill: none; stroke: var(--series); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round;
+  stroke-dasharray: 1; stroke-dashoffset: 0; transition: stroke-dashoffset 1.2s var(--ease-out) calc(var(--k) * 60ms);
+}
+.viz-kpi__spark circle { fill: var(--accent); stroke: var(--surface-solid); stroke-width: 2; }
+.reveal-ready .viz:not(.is-in) .viz-kpi__spark path { stroke-dashoffset: 1; }
+.viz-kpi__detail p { margin: 0; }
+.viz-kpi__head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 12px; }
+.viz-kpi__head b { font-size: 15px; }
+.viz-kpi__head em { font-style: normal; font-size: 12px; font-weight: 700; color: var(--ink-mute); }
+.viz-panel .viz-kpi__formula {
+  margin: 6px 0; padding: 6px 12px; border-radius: 10px; font-size: 13.5px; font-weight: 700; color: var(--ink);
+  background: var(--card-bg); border: 1px solid var(--line-soft);
+}
+
+/* چرخه‌ی تبدیل نقد */
+.viz-ccc__controls { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 18px; margin-bottom: 20px; }
+.viz-ccc__controls .viz-range, .viz-unit__controls .viz-range { display: flex; flex-direction: column; align-items: stretch; gap: 2px; }
+.viz-ccc__controls .viz-range input, .viz-unit__controls .viz-range input { width: 100%; }
+.viz-ccc { --max: 180; }
+.viz-ccc__row, .viz-ccc__axis { display: grid; grid-template-columns: 160px minmax(0, 1fr); align-items: center; gap: 12px; }
+.viz-ccc__label { font-size: 13px; font-weight: 700; line-height: 1.6; color: var(--ink-soft); }
+.viz-ccc__row.is-gap .viz-ccc__label { color: var(--ink); }
+.viz-ccc__track {
+  position: relative; height: 50px;
+  background: repeating-linear-gradient(to left, var(--line-soft) 0 1px, transparent 1px calc(100% / 6));
+}
+.viz-ccc__track > i {
+  position: absolute; bottom: 8px; height: 16px; border-radius: 4px;
+  transition: inset-inline-start .5s var(--ease-out), width .5s var(--ease-out), background .3s ease;
+}
+.viz-ccc__inv { inset-inline-start: 0; width: calc(var(--dio) / var(--max) * 100%); background: var(--series); }
+.viz-ccc__ar { inset-inline-start: calc(var(--dio) / var(--max) * 100% + 2px); width: max(0px, calc(var(--dso) / var(--max) * 100% - 2px)); background: var(--series); opacity: .65; }
+.viz-ccc__ap { inset-inline-start: 0; width: calc(var(--dpo) / var(--max) * 100%); background: var(--good); }
+.viz-ccc__gap { inset-inline-start: calc(var(--gs) / var(--max) * 100%); width: calc(var(--gl) / var(--max) * 100%); background: var(--accent); }
+.viz-ccc.is-neg .viz-ccc__gap { background: var(--good); }
+.viz-ccc__track em {
+  position: absolute; bottom: calc(100% + 1px); left: 50%; translate: -50% 0;
+  font-style: normal; font-size: 11.5px; font-weight: 700; color: var(--ink-soft); white-space: nowrap; transition: opacity .2s ease;
+}
+.viz-ccc__track em.is-hidden { opacity: 0; }
+.viz-ccc__axis { margin: 2px 0 0; font-size: 11px; color: var(--ink-mute); }
+.viz-ccc__ticks { position: relative; height: 1.6em; }
+.viz-ccc__ticks span { position: absolute; inset-inline-start: calc(var(--x) * 100%); translate: 50% 0; font-variant-numeric: tabular-nums; }
+.viz-ccc__ticks span:first-child { translate: 0 0; }
+.viz-ccc__ticks span:last-child { translate: 100% 0; }
+.viz-ccc__result {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; gap: 4px 22px; margin: 18px 0 0;
+  font-size: 14px; font-weight: 700; color: var(--ink-soft);
+}
+.viz-ccc__result b { font-size: 20px; font-weight: 900; color: var(--ink); }
+
+/* ارزش طول عمر به هزینه‌ی جذب */
+.viz-unit { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 28px; align-items: center; }
+.viz-unit__controls { display: grid; gap: 14px; }
+.viz-unit__bars { display: grid; gap: 8px; }
+.viz-unit__bars p { display: grid; grid-template-columns: 130px minmax(0, 1fr) 84px; align-items: center; gap: 10px; margin: 0; font-size: 12.5px; font-weight: 700; color: var(--ink-soft); }
+.viz-unit__bars b { text-align: end; color: var(--ink); white-space: nowrap; }
+.viz-unit__track { height: 16px; }
+.viz-unit__track i { display: block; height: 100%; width: calc(var(--v) * 100%); min-width: 2px; border-start-end-radius: 4px; border-end-end-radius: 4px; transition: width .5s var(--ease-out); }
+.viz-unit__ltv { background: var(--accent); }
+.viz-unit__cac { background: var(--ink-mute); }
+.viz-unit__big { margin: 18px 0 6px; font-size: 14px; font-weight: 700; color: var(--ink-soft); }
+.viz-unit__big span { display: block; font-size: 12.5px; color: var(--ink-mute); }
+.viz-unit__big b { font-size: 48px; font-weight: 900; line-height: 1.25; color: var(--ink); }
+.viz-unit__scale { position: relative; padding-top: 12px; }
+.viz-unit__zones { display: flex; gap: 2px; height: 12px; }
+.viz-unit__zones i { border-radius: 3px; }
+.viz-unit__zones [data-st="bad"] { flex: 1; background: var(--bad); opacity: .55; }
+.viz-unit__zones [data-st="warn"] { flex: 2; background: var(--warn); opacity: .55; }
+.viz-unit__zones [data-st="good"] { flex: 5; background: var(--good); opacity: .55; }
+.viz-unit__mark {
+  position: absolute; top: 0; inset-inline-start: calc(var(--r) * 100%); width: 0; height: 30px;
+  border-inline-start: 3px solid var(--ink); margin-inline-start: -1.5px; transition: inset-inline-start .5s var(--ease-out);
+}
+.viz-unit__mark::before {
+  content: ""; position: absolute; top: -2px; inset-inline-start: -7.5px; border: 6px solid transparent; border-top: 7px solid var(--ink);
+}
+.viz-unit__ticks { position: relative; display: block; height: 1.7em; margin-top: 4px; font-size: 11px; color: var(--ink-mute); }
+.viz-unit__ticks span { position: absolute; inset-inline-start: calc(var(--x) * 100%); translate: 50% 0; }
+.viz-unit__ticks span:first-child { translate: 0 0; }
+.viz-unit__ticks span:last-child { translate: 100% 0; }
+.viz-unit__facts { margin: 8px 0 0; font-size: 13px; color: var(--ink-soft); }
+.viz-unit__facts b { color: var(--ink); }
+
+/* درخت شاخص‌ها: محرک‌ها سمت راست، نتیجه‌ها سمت چپ */
+.viz-tree { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(4, auto); gap: 16px 44px; align-items: center; }
+.viz-tree [data-node="nps"] { grid-area: 1 / 1; }
+.viz-tree [data-node="cac"] { grid-area: 2 / 1; }
+.viz-tree [data-node="eff"] { grid-area: 3 / 1; }
+.viz-tree [data-node="ccc"] { grid-area: 4 / 1; }
+.viz-tree [data-node="ret"] { grid-area: 1 / 2; }
+.viz-tree [data-node="cost"] { grid-area: 2 / 2 / 4 / 3; }
+.viz-tree [data-node="rev"] { grid-area: 1 / 3; }
+.viz-tree [data-node="profit"] { grid-area: 2 / 3 / 4 / 4; }
+.viz-tree [data-node="cash"] { grid-area: 3 / 4 / 5 / 5; }
+.viz-tree__node { flex-direction: column; align-items: flex-start; gap: 0; padding: 8px 12px; font-size: 13.5px; }
+.viz-tree__node small { font-size: 11.5px; }
+.viz-tree__st { display: inline-flex; align-items: center; gap: 6px; margin-top: 2px; font-size: 12px; font-weight: 800; color: var(--ink-mute); }
+.viz-tree__node[data-state$="good"] { border-color: var(--good-line); }
+.viz-tree__node[data-state$="bad"] { border-color: var(--bad-line); }
+.viz-tree__node[data-state$="good"] .viz-tree__st { color: var(--good); }
+.viz-tree__node[data-state$="bad"] .viz-tree__st { color: var(--bad); }
+.viz-tree__node[data-state="flat"] { opacity: .6; }
+.viz-tree .wire.is-live.is-good { stroke: var(--good); }
+.viz-tree .wire.is-live.is-bad { stroke: var(--bad); }
+
+html.no-js .viz-exp__next, html.no-js .viz-exp__reset { display: none; }
+
+@media (max-width: 700px) {
+  .viz-metrics { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .viz-metrics--two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .viz-metrics li { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: 0 10px; padding: 6px 10px; }
+  .viz-metrics--two li { display: block; }
+  .viz-metrics small { grid-column: 1 / -1; }
+  .viz-plot { padding-inline-start: 28px; }
+  .viz-plot__area, .viz-plot__y { height: 190px; }
+  .viz-plot__x span.is-minor { display: none; }
+  .viz-gantt { --name-w: 112px; }
+  .viz-gantt__name { font-size: 12px; padding-inline-end: 8px; line-height: 1.5; }
+  .viz-gantt__axis { font-size: 10px; }
+  .viz-exp { grid-template-columns: minmax(0, 1fr); }
+  .viz-exp__cols, .viz-exp__row { grid-template-columns: minmax(0, 1fr) 40px 96px; gap: 6px; }
+  .viz-exp__row { padding: 6px 6px; }
+  .viz-exp__cat { justify-self: end; font-size: 10.5px; padding: 0 7px; }
+  .viz-exp__next { margin-inline-start: 0; }
+  .viz-budget__row { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "name badge" "track val"; gap: 4px 12px; }
+  .viz-budget__name { grid-area: name; }
+  .viz-budget__badge { grid-area: badge; justify-self: end; }
+  .viz-budget__track { grid-area: track; }
+  .viz-budget__val { grid-area: val; }
+  .viz-wf { gap: 4px; }
+  .viz-wf__plot { height: 190px; }
+  .viz-wf__plot i { width: 18px; margin-left: -9px; }
+  .viz-wf__plot::after { right: calc(50% + 9px); width: calc(100% - 14px); }
+  .viz-wf__plot b { font-size: 11.5px; }
+  .viz-wf__name { font-size: 10.5px; }
+  .viz-sc { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px; }
+  .viz-sc .wires { display: none; }
+  .viz-sc__stage { padding: 10px 2px 8px; font-size: 11px; line-height: 1.5; }
+  .viz-sc__stage > .ico { width: 20px; height: 20px; }
+  .viz-sc__stage .viz-st { top: 5px; inset-inline-end: 5px; width: 7px; height: 7px; }
+  .viz-stats { gap: 6px; }
+  .viz-stats p { padding: 6px 10px; }
+  .viz-stats span { font-size: 11px; }
+  .viz-stats b { font-size: 15px; }
+  .viz-otif { grid-template-columns: minmax(0, 1fr); gap: 18px; justify-items: center; }
+  .viz-otif__grid { width: min(100%, 300px); }
+  .viz-otif__side { width: min(100%, 300px); }
+  .viz-otif__big b { font-size: 44px; }
+  .viz-lt__head, .viz-lt__row { grid-template-columns: 82px minmax(0, 1fr) 46px; gap: 8px; }
+  .viz-lt__name { font-size: 12px; }
+  .viz-lt__name small { display: none; }
+  .viz-lt__head > span:last-child { font-size: 10px; }
+  .viz-lt__dot { width: 8px; height: 8px; margin: -4px -4px 0 0; }
+  .viz-risk { grid-template-columns: minmax(0, 1fr); }
+  .viz-risk__pt span { font-size: 11px; }
+  .viz-line__stations { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .viz-line__st { display: grid; grid-template-columns: 70px minmax(0, 1fr); align-items: center; gap: 10px; }
+  .viz-line__queue { justify-content: flex-start; min-height: 0; padding: 0; }
+  .viz-line__box { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 2px 10px; padding: 8px 12px; text-align: start; }
+  .viz-line__box > b { grid-column: 1; }
+  .viz-line__cap { grid-column: 2; grid-row: 1; }
+  .viz-line__util { grid-column: 1 / -1; }
+  .viz-line__pct { grid-column: 1 / -1; }
+  .viz-line__neck { display: none; }
+  .viz-line__st.is-neck .viz-line__neck { display: inline-flex; position: static; translate: none; grid-column: 1 / -1; justify-self: start; }
+  .viz-line__belt { display: none; }
+  .viz-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .viz-kpi { padding: 9px 10px 7px; }
+  .viz-kpi__val { font-size: 19px; }
+  .viz-kpi__val small { display: block; margin: 0; }
+  .viz-ccc__controls { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .viz-ccc__row, .viz-ccc__axis { grid-template-columns: 84px minmax(0, 1fr); gap: 8px; }
+  .viz-ccc__label { font-size: 11.5px; line-height: 1.5; }
+  .viz-unit { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .viz-unit__bars p { grid-template-columns: 100px minmax(0, 1fr) 72px; font-size: 11.5px; }
+  .viz-unit__big b { font-size: 40px; }
+  .viz-tree { --wire-dir: y; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: none; gap: 26px 8px; }
+  .viz-tree [data-node="nps"] { grid-area: 1 / 1; }
+  .viz-tree [data-node="cac"] { grid-area: 1 / 2; }
+  .viz-tree [data-node="eff"] { grid-area: 1 / 3; }
+  .viz-tree [data-node="ret"] { grid-area: 2 / 1; }
+  .viz-tree [data-node="cost"] { grid-area: 2 / 2 / 3 / 4; justify-self: center; }
+  .viz-tree [data-node="rev"] { grid-area: 3 / 1; }
+  .viz-tree [data-node="ccc"] { grid-area: 3 / 3; }
+  .viz-tree [data-node="profit"] { grid-area: 4 / 1 / 5 / 3; justify-self: center; }
+  .viz-tree [data-node="cash"] { grid-area: 5 / 2 / 6 / 4; justify-self: center; }
+  .viz-tree__node { padding: 6px 8px; font-size: 12px; }
+  .viz-tree__node small { display: none; }
+  .viz-tree__st { font-size: 11px; }
+}
+
 /* ---------------- مقاله‌ها (articles.html و صفحه‌ی هر مقاله) ----------------
    قاعده‌های متن فقط فرزندان مستقیم .article__body را می‌گیرند تا به درون شکل‌ها نرسند */
 
@@ -1899,6 +2474,9 @@ html.no-js .viz-panel + .viz-panel { margin-top: 8px; }
 .pc-on circle, .pc-on rect { fill: var(--accent); }
 .pc-star { fill: var(--accent-2); }
 .pc-base { stroke: var(--line); stroke-width: 2; }
+.pc-soft rect { fill: var(--accent); opacity: .45; }
+.pc-warn { fill: var(--warn); }
+.pc-tile rect { fill: var(--surface-solid); stroke: var(--line); stroke-width: 1.5; }
 .post-card__body { flex: 1; display: flex; flex-direction: column; gap: 8px; padding: 18px 20px 20px; }
 .post-card h2, .post-card h3 { margin: 0; font-size: 19px; line-height: 1.6; }
 .post-card h2 a, .post-card h3 a { color: var(--ink); text-decoration: none; }
@@ -2072,4 +2650,5 @@ html.no-js .menu-btn, html.no-js .theme-btn, html.no-js .dots, html.no-js .pager
   .menu-panel__group { transition: none; }
   .wire.is-live, .cam-stripes, .cam-line, .cam-alert rect,
   .viz-flow__scene.is-on .viz-docs--scan .src, .viz-flow__scene.is-on { animation: none; }
+  .viz-line__belt, .viz-line__queue i, .viz-exp__row.is-flagged .viz-exp__flag { animation: none; }
 }

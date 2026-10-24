@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="no-js">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>هوش تجاری (BI) چیست؟ از داده‌ی خام تا تصمیم بهتر | نئودیتا</title>
+<meta name="description" content="هوش تجاری چیست: چهار سطح تحلیل داده، معماری از منابع و ETL تا انبار داده و داشبورد، مدل ستاره‌ای، کاوش از کل به جزء و اصول طراحی شاخص و داشبورد." />
+<meta name="theme-color" content="#f6f8fc" />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="نئودیتا" />
+<meta property="og:locale" content="fa_IR" />
+<meta property="og:title" content="هوش تجاری (BI) چیست؟ از داده‌ی خام تا تصمیم بهتر | نئودیتا" />
+<meta property="og:description" content="هوش تجاری چیست: چهار سطح تحلیل داده، معماری از منابع و ETL تا انبار داده و داشبورد، مدل ستاره‌ای، کاوش از کل به جزء و اصول طراحی شاخص و داشبورد." />
+<link rel="icon" href="logo/5.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="logo/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/styles.css?v=1" />
+<!-- صفحه‌ی معمولی با اسکرول عادی (بدون حالت «صحنه»ی صفحه‌ی اصلی).
+     پوسته پیش از نخستین رنگ‌آمیزی اعمال می‌شود تا صفحه چشمک نزند. -->
+<script>
+  document.documentElement.classList.remove('no-js');
+  (function () {
+    var theme = 'light';
+    try { if (localStorage.getItem('neodata-theme') === 'dark') theme = 'dark'; } catch (e) {}
+    document.documentElement.setAttribute('data-theme', theme);
+    if (theme === 'dark') document.querySelector('meta[name="theme-color"]').setAttribute('content', '#070b16');
+  })();
+</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "هوش تجاری (BI) چیست؟ از داده‌ی خام تا تصمیم بهتر", "description": "هوش تجاری چیست: چهار سطح تحلیل داده، معماری از منابع و ETL تا انبار داده و داشبورد، مدل ستاره‌ای، کاوش از کل به جزء و اصول طراحی شاخص و داشبورد.", "datePublished": "2026-10-24", "dateModified": "2026-10-24", "inLanguage": "fa-IR", "author": {"@type": "Organization", "name": "نئودیتا"}, "publisher": {"@type": "Organization", "name": "نئودیتا"}}</script>
+</head>
+<body data-section="articles">
+
+<!-- آیکون‌ها: یک بار تعریف، همه‌جا با <use> (زیرمجموعه‌ای از آیکون‌های index.html) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7.5 16v-5"/><path d="M12 16V7"/><path d="M16.5 16v-8"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></symbol>
+  <symbol id="i-flow" viewBox="0 0 24 24"><circle cx="5" cy="6" r="2.5"/><circle cx="19" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.5 6h9M6.3 8.2l4.4 7.6M17.7 8.2l-4.4 7.6"/></symbol>
+  <symbol id="i-scan" viewBox="0 0 24 24"><path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M7 12s2-3.5 5-3.5 5 3.5 5 3.5-2 3.5-5 3.5S7 12 7 12z"/><circle cx="12" cy="12" r="1.2"/></symbol>
+  <symbol id="i-trend" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></symbol>
+  <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M8 13h8M8 17h5"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.6.5 1.1 1.3 1.1 2.2h5c0-.9.5-1.7 1.1-2.2A6 6 0 0 0 12 3z"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="i-lang" viewBox="0 0 24 24"><path d="M4 5h9M8.5 3v2M6 5c.5 3 2.6 5.6 5.5 7M11 5c-.6 3.4-3 6.4-6.5 8"/><path d="M13 21l4-9 4 9M14.5 18h5"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+  <symbol id="i-buoy" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M5.6 5.6l3.6 3.6M14.8 14.8l3.6 3.6M18.4 5.6l-3.6 3.6M9.2 14.8l-3.6 3.6"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 15l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></symbol>
+  <symbol id="i-crm" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="11.5" r="2"/><path d="M8.5 17c.6-1.6 2-2.5 3.5-2.5s2.9.9 3.5 2.5"/></symbol>
+  <symbol id="i-invoice" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M9 15l2 2 4-4"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M3 3l7 18 3-8 8-3z"/><path d="M13 13L3 3"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+  <symbol id="i-server" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01M11 7.5h6M11 16.5h6"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14.5v2.5"/></symbol>
+  <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M3 3l18 18"/><path d="M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17.6 17.6 0 0 1-3.2 4.2M6.6 6.6C3.9 8.4 2 12 2 12s3.6 7 10 7a9.7 9.7 0 0 0 5.4-1.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5.2 3.5h3.3l1.7 4.3-2.2 1.4a11.5 11.5 0 0 0 6.8 6.8l1.4-2.2 4.3 1.7v3.3a1.7 1.7 0 0 1-1.8 1.7C10.9 20.1 3.9 13.1 3.5 5.3a1.7 1.7 0 0 1 1.7-1.8z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></symbol>
+  <symbol id="i-trend-down" viewBox="0 0 24 24"><path d="M3 7l6 6 4-4 8 8"/><path d="M15 17h6v-6"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4"/></symbol>
+</svg>
+
+<!-- پس‌زمینه‌ی ثابت: همان شبکه‌ی داده‌ی صفحه‌ی اصلی -->
+<div class="backdrop" aria-hidden="true">
+  <canvas id="net"></canvas>
+</div>
+
+<!-- هدر: همان هدر صفحه‌ی اصلی؛ پیوندهای بخش‌ها به صفحه‌ی اصلی می‌روند -->
+<header class="site-head">
+  <a class="brand" href="index.html">
+    <img class="brand__logo logo--light" src="logo/4.svg" alt="نئودیتا" width="135" height="28" />
+    <img class="brand__logo logo--dark" src="logo/12.svg" alt="نئودیتا" width="135" height="28" />
+    <span class="brand__tag">تحلیل داده و هوش مصنوعی</span>
+  </a>
+
+  <!-- ناوبری بالا: هر پیوند با data-sections می‌گوید در کدام بخش‌ها یا صفحه‌ها «جاری» است.
+       این نوار و پانویس در همه‌ی صفحه‌ها یکی‌اند: فقط در index.html ویرایششان کنید و سپس python3 tools/sync-layout.py را اجرا کنید -->
+  <nav class="topnav" id="topnav" aria-label="ناوبری اصلی">
+    <span class="topnav__ind" aria-hidden="true"></span>
+    <ul class="topnav__list">
+      <li><a class="topnav__link" href="index.html" data-sections="hero">خانه</a></li>
+      <li class="topnav__has-sub">
+        <button class="topnav__link" type="button" aria-expanded="false" aria-controls="navServices" data-sections="dashboard chatbot agents vision forecasting data-engineering services">
+          خدمات <svg class="ico topnav__caret" aria-hidden="true"><use href="#i-down"/></svg>
+        </button>
+        <div class="topnav__sub" id="navServices">
+          <ul class="topnav__sub-list">
+            <li><a href="dashboard.html" data-sections="dashboard">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-chart"/></svg></span>
+              <span class="topnav__sub-text"><b>داشبورد و تحلیل داده</b><small>شاخص‌ها و گزارش‌های مدیریتی در یک نگاه</small></span>
+            </a></li>
+            <li><a href="chatbot.html" data-sections="chatbot">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg></span>
+              <span class="topnav__sub-text"><b>چت‌بات هوشمند سازمانی</b><small>پاسخ مستند از اسناد خود سازمان</small></span>
+            </a></li>
+            <li><a href="agents.html" data-sections="agents">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-flow"/></svg></span>
+              <span class="topnav__sub-text"><b>ایجنت‌ها و اتوماسیون</b><small>خودکارسازی کارهای تکراری</small></span>
+            </a></li>
+            <li><a href="vision.html" data-sections="vision">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-scan"/></svg></span>
+              <span class="topnav__sub-text"><b>بینایی ماشین</b><small>شمارش، کنترل کیفیت و ایمنی</small></span>
+            </a></li>
+            <li><a href="forecasting.html" data-sections="forecasting">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-trend"/></svg></span>
+              <span class="topnav__sub-text"><b>پیش‌بینی و یادگیری ماشین</b><small>پیش‌بینی فروش و تقاضا، مدل‌های اختصاصی</small></span>
+            </a></li>
+            <li><a href="data-engineering.html" data-sections="data-engineering">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-db"/></svg></span>
+              <span class="topnav__sub-text"><b>مهندسی و یکپارچه‌سازی داده</b><small>انبار داده و جریان‌های خودکار داده</small></span>
+            </a></li>
+            <li><a href="index.html#services" data-sections="services">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-spark"/></svg></span>
+              <span class="topnav__sub-text"><b>خدمات دیگر</b><small>اسناد فارسی، مشاوره و آموزش</small></span>
+            </a></li>
+            <li><a class="topnav__sub-cta" href="consult.html">
+              <b>نمی‌دانید از کجا شروع کنید؟</b>
+              <small>در مشاوره‌ی رایگان با هم پیدایش می‌کنیم</small>
+              <span>درخواست مشاوره <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+            </a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a class="topnav__link" href="index.html#process" data-sections="process">روش کار</a></li>
+      <li><a class="topnav__link" href="articles.html" data-sections="articles">مقالات</a></li>
+      <li><a class="topnav__link" href="faq.html" data-sections="faq">سوالات متداول</a></li>
+      <li><a class="topnav__link" href="about.html" data-sections="about">درباره‌ی ما</a></li>
+    </ul>
+  </nav>
+
+  <div class="head-actions">
+    <a class="btn btn--primary btn--sm head-cta" href="consult.html">درخواست مشاوره رایگان</a>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="تغییر به پوسته‌ی تیره">
+      <svg class="ico ico--moon" aria-hidden="true"><use href="#i-moon"/></svg>
+      <svg class="ico ico--sun" aria-hidden="true"><use href="#i-sun"/></svg>
+    </button>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menuPanel">
+      <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+      <em class="sr-only">منوی ناوبری</em>
+    </button>
+  </div>
+</header>
+
+<!-- منوی تمام‌صفحه برای گوشی و تبلت؛ فهرستش را site.js از روی نوار ناوبری بالا می‌سازد -->
+<nav class="menu-panel" id="menuPanel" aria-label="منوی ناوبری"></nav>
+
+<main class="page" id="main">
+
+  <article class="article" aria-labelledby="t-article">
+    <!-- آغاز -->
+    <header class="page-hero">
+      <p class="eyebrow"><svg class="ico" aria-hidden="true"><use href="#i-chart"/></svg> <a href="articles.html">مقالات</a> · تحلیل داده</p>
+      <h1 id="t-article">هوش تجاری چیست؟ <span class="grad">از داده‌ی خام تا تصمیم بهتر</span></h1>
+      <p class="page-hero__lead">هوش تجاری (Business Intelligence یا BI) مجموعه‌ی روش‌ها، فرایندها و ابزارهایی است که داده‌های پراکنده‌ی سازمان را جمع، یکپارچه و تحلیل می‌کند تا تصمیم‌ها به‌جای حدس، بر پایه‌ی عدد گرفته شوند. این مقاله اجزای یک سامانه‌ی هوش تجاری را، از انبار داده تا داشبورد، مرور می‌کند.</p>
+      <p class="article__meta"><span><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg> ۵ دقیقه مطالعه</span><span><time datetime="2026-10-24">۲ آبان ۱۴۰۵</time></span><span>نئودیتا</span></p>
+    </header>
+
+    <nav class="toc card" aria-labelledby="t-toc" data-reveal>
+      <h2 id="t-toc">در این مقاله</h2>
+      <ol>
+        <li><a href="#levels">چهار پرسش تحلیل داده</a></li>
+        <li><a href="#architecture">معماری یک سامانه‌ی هوش تجاری</a></li>
+        <li><a href="#star">مدل ستاره‌ای: قلب انبار داده</a></li>
+        <li><a href="#drill">کاوش از کل به جزء</a></li>
+        <li><a href="#kpi">شاخص خوب، داشبورد خوب</a></li>
+        <li><a href="#start">از کجا شروع کنیم؟</a></li>
+      </ol>
+    </nav>
+
+    <!-- متن مقاله؛ شکل‌ها با assets/viz.js تعاملی می‌شوند و بی‌جاوااسکریپت هم کامل دیده می‌شوند -->
+    <div class="article__body">
+    <h2 id="levels">چهار پرسش تحلیل داده</h2>
+<p>تحلیل داده را معمولاً در چهار سطح دسته‌بندی می‌کنند. هر سطح به پرسش سخت‌تری پاسخ می‌دهد و ارزش بیشتری برای تصمیم دارد، و هر سطح بر پایه‌ی سطح پیش از خود ساخته می‌شود. روی هر پله بزنید:</p>
+    <figure class="viz card" data-viz="ladder" data-reveal>
+      <div class="viz-ladder" role="group" aria-label="چهار سطح تحلیل داده، از ساده به پیچیده">
+        <button type="button" class="viz-ladder__step" style="--h: 1" aria-pressed="true">
+          <span>چه اتفاقی افتاد؟</span><b>توصیفی</b>
+        </button>
+        <button type="button" class="viz-ladder__step" style="--h: 2" aria-pressed="false">
+          <span>چرا اتفاق افتاد؟</span><b>تشخیصی</b>
+        </button>
+        <button type="button" class="viz-ladder__step" style="--h: 3" aria-pressed="false">
+          <span>چه اتفاقی خواهد افتاد؟</span><b>پیش‌بینانه</b>
+        </button>
+        <button type="button" class="viz-ladder__step" style="--h: 4" aria-pressed="false">
+          <span>چه باید کرد؟</span><b>تجویزی</b>
+        </button>
+      </div>
+      <p class="viz-ladder__axis" aria-hidden="true">پیچیدگی بیشتر، ارزش بیشتر برای تصمیم ←</p>
+      <div class="viz-panels" aria-live="polite">
+        <p class="viz-panel is-on"><b>تحلیل توصیفی، «چه اتفاقی افتاد؟»</b> نمونه: فروش فصل گذشته ۱۲٪ کمتر از فصل قبل بود. <span>ابزار: گزارش‌ها، داشبوردها و شاخص‌های کلیدی عملکرد.</span></p>
+        <p class="viz-panel"><b>تحلیل تشخیصی، «چرا اتفاق افتاد؟»</b> نمونه: بیشتر افت از دو شعبه و یک گروه کالا بود که موجودی‌اش تمام شده بود. <span>ابزار: کاوش در جزئیات، مقایسه‌ی بخش‌ها و تحلیل همبستگی.</span></p>
+        <p class="viz-panel"><b>تحلیل پیش‌بینانه، «چه اتفاقی خواهد افتاد؟»</b> نمونه: با روند فعلی، فروش ماه آینده حدود ۸٪ کمتر از هدف خواهد بود. <span>ابزار: مدل‌های سری زمانی و یادگیری ماشین.</span></p>
+        <p class="viz-panel"><b>تحلیل تجویزی، «چه باید کرد؟»</b> نمونه: از هر کالا چه مقدار برای کدام شعبه سفارش داده شود تا نه کمبود پیش بیاید و نه انبار پر شود. <span>ابزار: بهینه‌سازی و شبیه‌سازی سناریو.</span></p>
+      </div>
+    </figure>
+    <p>هوش تجاری به معنای کلاسیک، بیشتر دو سطح اول را پوشش می‌دهد: گزارش دقیق از آنچه گذشته و کاوش در علت‌ها. دو سطح بعد با مدل‌های پیش‌بینی و بهینه‌سازی ساخته می‌شوند؛ اما بدون داده‌ی یکپارچه و قابل‌اعتمادی که هوش تجاری فراهم می‌کند، هیچ مدل پیش‌بینی‌ای قابل‌اعتماد نیست.</p>
+
+    <h2 id="architecture">معماری یک سامانه‌ی هوش تجاری</h2>
+<p>داشبوردی که مدیر می‌بیند، آخرین حلقه‌ی یک زنجیره است:</p>
+    <figure class="viz card" data-viz="chain" data-reveal>
+      <div class="viz-chain wired" data-wires="src:etl etl:dw dw:sem sem:bi">
+        <svg class="wires" aria-hidden="true"></svg>
+        <div class="node viz-chain__node" data-node="src"><svg class="ico" aria-hidden="true"><use href="#i-db"/></svg><span><b>منابع داده</b><small>حسابداری، ERP، CRM، اکسل</small></span></div>
+        <div class="node viz-chain__node" data-node="etl"><svg class="ico" aria-hidden="true"><use href="#i-flow"/></svg><span><b>ETL / ELT</b><small>استخراج، پاک‌سازی، بارگذاری</small></span></div>
+        <div class="node viz-chain__node" data-node="dw"><svg class="ico" aria-hidden="true"><use href="#i-server"/></svg><span><b>انبار داده</b><small>تاریخچه‌ی یکپارچه برای تحلیل</small></span></div>
+        <div class="node viz-chain__node" data-node="sem"><svg class="ico" aria-hidden="true"><use href="#i-target"/></svg><span><b>مدل معنایی</b><small>تعریف یکسان شاخص‌ها و دسترسی</small></span></div>
+        <div class="node viz-chain__node" data-node="bi"><svg class="ico" aria-hidden="true"><use href="#i-chart"/></svg><span><b>داشبورد و گزارش</b><small>تصمیم بر پایه‌ی عدد</small></span></div>
+      </div>
+      <p class="viz__cap">داده خودکار، مثلاً هر شب، از منابع تا داشبورد می‌رسد؛ داشبورد فقط نمایش می‌دهد و محاسبه‌ای در آن تکرار نمی‌شود.</p>
+    </figure>
+    <ul>
+      <li><b>منابع داده:</b> نرم‌افزار حسابداری و ERP، سامانه‌ی فروش و CRM، فروشگاه اینترنتی و فایل‌های اکسل؛ هر کدام با ساختار، کدگذاری و کیفیت داده‌ی خودش.</li>
+      <li><b>ETL یا ELT:</b> داده‌ها استخراج (Extract)، پاک‌سازی و یکدست (Transform) و در انبار داده بارگذاری (Load) می‌شوند. در رویکرد ELT، داده‌ی خام اول بارگذاری و تبدیل درون خود انبار انجام می‌شود. این کار زمان‌بندی‌شده و خودکار است.</li>
+      <li><b>انبار داده (data warehouse):</b> پایگاه داده‌ای که برای تحلیل طراحی شده، نه برای ثبت تراکنش؛ تاریخچه را نگه می‌دارد و داده‌ی همه‌ی منابع را کنار هم می‌گذارد.</li>
+      <li><b>مدل معنایی (semantic model):</b> لایه‌ای که روابط جدول‌ها، تعریف شاخص‌ها و سطح دسترسی را یک بار و برای همه تعریف می‌کند. اگر «فروش خالص» را هر واحد خودش حساب کند، در جلسه‌ی مدیریت سه عدد متفاوت روی میز است؛ مدل معنایی همین را حل می‌کند.</li>
+      <li><b>داشبورد و گزارش:</b> لایه‌ی نمایش؛ محاسبه‌ای در آن تکرار نمی‌شود.</li>
+    </ul>
+
+    <h2 id="star">مدل ستاره‌ای: قلب انبار داده</h2>
+<p>رایج‌ترین شیوه‌ی طراحی انبار داده برای هوش تجاری، «مدل ستاره‌ای» (star schema) است. در مرکز آن یک <b>جدول واقعیت</b> (fact) قرار دارد که رویدادهای قابل‌اندازه‌گیری را نگه می‌دارد؛ مثلاً هر سطر یک قلم فروش با تعداد و مبلغ. دور آن <b>جدول‌های بُعد</b> (dimension) هستند که زمینه‌ی هر رویداد را توصیف می‌کنند: چه زمانی، چه محصولی، کدام مشتری، کدام شعبه. یک پرسش را انتخاب کنید:</p>
+    <figure class="viz card" data-viz="star" data-reveal>
+      <div class="viz__bar">
+        <div class="seg" role="group" aria-label="پرسش تحلیلی">
+          <button type="button" aria-pressed="true" data-tables="date" data-cols="dim_date.date_key dim_date.year dim_date.month fact_sales.date_key fact_sales.amount" data-sql="SELECT d.year, d.month, SUM(f.amount) AS sales
+FROM fact_sales f
+JOIN dim_date d ON d.date_key = f.date_key
+GROUP BY d.year, d.month;" data-note="فروش هر ماه: جدول واقعیت با بُعد زمان پیوند می‌خورد و مبلغ‌ها بر اساس سال و ماه جمع زده می‌شوند.">فروش هر ماه</button>
+          <button type="button" aria-pressed="false" data-tables="product" data-cols="dim_product.product_key dim_product.category fact_sales.product_key fact_sales.amount" data-sql="SELECT p.category, SUM(f.amount) AS sales
+FROM fact_sales f
+JOIN dim_product p ON p.product_key = f.product_key
+GROUP BY p.category;" data-note="سهم هر گروه کالا: همان جدول واقعیت، این بار با بُعد محصول و گروه‌بندی بر اساس دسته‌ی کالا.">سهم هر گروه کالا</button>
+          <button type="button" aria-pressed="false" data-tables="store customer" data-cols="dim_store.store_key dim_store.city dim_customer.customer_key dim_customer.segment fact_sales.store_key fact_sales.customer_key fact_sales.amount" data-sql="SELECT s.city, SUM(f.amount) AS sales
+FROM fact_sales f
+JOIN dim_store s    ON s.store_key = f.store_key
+JOIN dim_customer c ON c.customer_key = f.customer_key
+WHERE c.segment = &#x27;wholesale&#x27;
+GROUP BY s.city;" data-note="فروش عمده در هر شهر: دو بُعد هم‌زمان؛ بُعد مشتری برای فیلتر و بُعد شعبه برای گروه‌بندی.">فروش عمده در هر شهر</button>
+        </div>
+      </div>
+      <div class="viz-star wired" data-wires="date:fact:wire--straight product:fact:wire--straight customer:fact:wire--straight store:fact:wire--straight">
+        <svg class="wires" aria-hidden="true"></svg>
+        <div class="node viz-table viz-table--fact is-on" data-node="fact"><p class="viz-table__head"><b>جدول واقعیت: فروش</b><code>fact_sales</code></p><ul><li data-col="fact_sales.date_key" class="is-key is-used">date_key</li><li data-col="fact_sales.product_key" class="is-key ">product_key</li><li data-col="fact_sales.customer_key" class="is-key ">customer_key</li><li data-col="fact_sales.store_key" class="is-key ">store_key</li><li data-col="fact_sales.quantity" class="">quantity</li><li data-col="fact_sales.amount" class="is-used">amount</li></ul></div>
+        <div class="node viz-table is-on" data-node="date"><p class="viz-table__head"><b>بُعد زمان</b><code>dim_date</code></p><ul><li data-col="dim_date.date_key" class="is-key is-used">date_key</li><li data-col="dim_date.day" class="">day</li><li data-col="dim_date.month" class="is-used">month</li><li data-col="dim_date.year" class="is-used">year</li></ul></div>
+        <div class="node viz-table" data-node="product"><p class="viz-table__head"><b>بُعد محصول</b><code>dim_product</code></p><ul><li data-col="dim_product.product_key" class="is-key ">product_key</li><li data-col="dim_product.name" class="">name</li><li data-col="dim_product.category" class="">category</li><li data-col="dim_product.brand" class="">brand</li></ul></div>
+        <div class="node viz-table" data-node="customer"><p class="viz-table__head"><b>بُعد مشتری</b><code>dim_customer</code></p><ul><li data-col="dim_customer.customer_key" class="is-key ">customer_key</li><li data-col="dim_customer.name" class="">name</li><li data-col="dim_customer.segment" class="">segment</li><li data-col="dim_customer.city" class="">city</li></ul></div>
+        <div class="node viz-table" data-node="store"><p class="viz-table__head"><b>بُعد شعبه</b><code>dim_store</code></p><ul><li data-col="dim_store.store_key" class="is-key ">store_key</li><li data-col="dim_store.name" class="">name</li><li data-col="dim_store.city" class="">city</li><li data-col="dim_store.region" class="">region</li></ul></div>
+      </div>
+      <pre class="viz-sql" dir="ltr"><code>SELECT d.year, d.month, SUM(f.amount) AS sales
+FROM fact_sales f
+JOIN dim_date d ON d.date_key = f.date_key
+GROUP BY d.year, d.month;</code></pre>
+      <p class="viz__note" aria-live="polite">فروش هر ماه: جدول واقعیت با بُعد زمان پیوند می‌خورد و مبلغ‌ها بر اساس سال و ماه جمع زده می‌شوند.</p>
+    </figure>
+    <p>هر پرسش تحلیلی در این مدل یک الگوی ثابت دارد: جدول واقعیت را با بُعدهای لازم پیوند بده (JOIN)، با ویژگی‌های بُعدها فیلتر و گروه‌بندی کن و اندازه‌ها را جمع بزن. همین سادگی است که پرس‌وجوها را سریع، مدل را برای کاربران کسب‌وکار قابل‌فهم و آن را با ابزارهایی مثل Power BI سازگار می‌کند.</p>
+    <p>مهم‌ترین تصمیم طراحی، «دانه‌بندی» (grain) جدول واقعیت است: هر سطر دقیقاً نماینده‌ی چیست؟ یک قلم فاکتور، یک فاکتور کامل، یا جمع فروش روزانه‌ی هر شعبه؟ دانه‌ی ریزتر انعطاف بیشتری برای تحلیل می‌دهد، و این تصمیم باید پیش از هر چیز دیگری گرفته شود.</p>
+
+    <h2 id="drill">کاوش از کل به جزء</h2>
+<p>یکی از توانایی‌های اصلی ابزارهای هوش تجاری، کاوش چندبُعدی است که ریشه در مفهوم OLAP دارد:</p>
+    <ul>
+      <li><b>ریز شدن (drill-down)</b> از کل به جزء، مثل سال به ماه یا منطقه به شهر؛ و <b>جمع شدن (roll-up)</b>، برعکس آن.</li>
+      <li><b>برش (slice):</b> ثابت کردن یک بُعد؛ مثلاً فقط سال ۱۴۰۴.</li>
+      <li><b>برش چندبُعدی (dice):</b> چند فیلتر هم‌زمان؛ مثلاً فروش لوازم خانگی در شعبه‌های شمال در فصل پاییز.</li>
+    </ul>
+    <p>در نمودار زیر روی هر منطقه بزنید تا شهرهایش را ببینید. مدیر فروش برای پیدا کردن علت یک افت همین کار را می‌کند: از عدد کل شروع می‌کند و تا جایی پایین می‌رود که مشکل پیدا شود.</p>
+    <figure class="viz card" data-viz="drill" data-tree="[{&quot;name&quot;: &quot;تهران&quot;, &quot;value&quot;: 42, &quot;children&quot;: [{&quot;name&quot;: &quot;تهران&quot;, &quot;value&quot;: 34}, {&quot;name&quot;: &quot;کرج&quot;, &quot;value&quot;: 8}]}, {&quot;name&quot;: &quot;شمال&quot;, &quot;value&quot;: 18, &quot;children&quot;: [{&quot;name&quot;: &quot;رشت&quot;, &quot;value&quot;: 7}, {&quot;name&quot;: &quot;ساری&quot;, &quot;value&quot;: 6}, {&quot;name&quot;: &quot;گرگان&quot;, &quot;value&quot;: 5}]}, {&quot;name&quot;: &quot;جنوب&quot;, &quot;value&quot;: 15, &quot;children&quot;: [{&quot;name&quot;: &quot;شیراز&quot;, &quot;value&quot;: 8}, {&quot;name&quot;: &quot;اهواز&quot;, &quot;value&quot;: 5}, {&quot;name&quot;: &quot;بندرعباس&quot;, &quot;value&quot;: 2}]}, {&quot;name&quot;: &quot;شرق&quot;, &quot;value&quot;: 13, &quot;children&quot;: [{&quot;name&quot;: &quot;مشهد&quot;, &quot;value&quot;: 10}, {&quot;name&quot;: &quot;بیرجند&quot;, &quot;value&quot;: 3}]}, {&quot;name&quot;: &quot;غرب&quot;, &quot;value&quot;: 11, &quot;children&quot;: [{&quot;name&quot;: &quot;کرمانشاه&quot;, &quot;value&quot;: 5}, {&quot;name&quot;: &quot;همدان&quot;, &quot;value&quot;: 4}, {&quot;name&quot;: &quot;سنندج&quot;, &quot;value&quot;: 2}]}]" data-reveal>
+      <div class="viz__bar">
+        <p class="viz-drill__crumbs"><button type="button" class="viz-drill__up" disabled>همه‌ی مناطق</button><span class="viz-drill__here"></span></p>
+        <span class="tag">نمونه‌ی نمایشی</span>
+      </div>
+      <p class="viz-drill__title">فروش ۱۴۰۴ به تفکیک منطقه، میلیارد تومان <span>(روی هر منطقه بزنید)</span></p>
+      <ul class="viz-drill__bars" aria-live="polite">
+          <li><button type="button" class="viz-drill__row" data-i="0">
+            <span class="viz-drill__name">تهران</span><span class="viz-drill__track"><i style="--v: 1.000"></i></span>
+            <span class="viz-drill__val">۴۲ <small>۴۲٪</small></span>
+          </button></li>
+          <li><button type="button" class="viz-drill__row" data-i="1">
+            <span class="viz-drill__name">شمال</span><span class="viz-drill__track"><i style="--v: 0.429"></i></span>
+            <span class="viz-drill__val">۱۸ <small>۱۸٪</small></span>
+          </button></li>
+          <li><button type="button" class="viz-drill__row" data-i="2">
+            <span class="viz-drill__name">جنوب</span><span class="viz-drill__track"><i style="--v: 0.357"></i></span>
+            <span class="viz-drill__val">۱۵ <small>۱۵٪</small></span>
+          </button></li>
+          <li><button type="button" class="viz-drill__row" data-i="3">
+            <span class="viz-drill__name">شرق</span><span class="viz-drill__track"><i style="--v: 0.310"></i></span>
+            <span class="viz-drill__val">۱۳ <small>۱۳٪</small></span>
+          </button></li>
+          <li><button type="button" class="viz-drill__row" data-i="4">
+            <span class="viz-drill__name">غرب</span><span class="viz-drill__track"><i style="--v: 0.262"></i></span>
+            <span class="viz-drill__val">۱۱ <small>۱۱٪</small></span>
+          </button></li>
+      </ul>
+    </figure>
+
+    <h2 id="kpi">شاخص خوب، داشبورد خوب</h2>
+<p>داشبورد خوب با فهرست شاخص‌ها شروع می‌شود، نه با نمودار. هر شاخص کلیدی عملکرد (KPI) باید تعریف دقیق و فرمول، منبع داده، مالک (کسی که درباره‌اش پاسخ‌گوست)، هدف و دوره‌ی به‌روزرسانی داشته باشد.</p>
+    <p>شاخص‌ها دو دسته‌اند: <b>پس‌رو</b> (lagging) مثل فروش ماه گذشته، که نتیجه را نشان می‌دهد ولی دیگر قابل‌تغییر نیست؛ و <b>پیش‌رو</b> (leading) مثل تعداد پیش‌فاکتورهای باز یا نرخ تبدیل بازدید به سفارش، که زودتر هشدار می‌دهد. داشبورد مدیریتی خوب هر دو را کنار هم دارد، و این اصول را رعایت می‌کند:</p>
+    <ul>
+      <li>مهم‌ترین عددها بالا و سمت راست؛ چشم خواننده‌ی فارسی از همان‌جا شروع می‌کند.</li>
+      <li>هر عدد با یک مبنای مقایسه: هدف، دوره‌ی قبل یا همان دوره در سال گذشته.</li>
+      <li>کمترین رنگ و تزئین؛ رنگ فقط برای جلب توجه به چیزی که اقدام می‌خواهد.</li>
+      <li>امکان کاوش تا جزئیات، به‌جای ده‌ها نمودار در یک صفحه.</li>
+    </ul>
+    <p>برای ساخت داشبورد، در بیشتر سازمان‌ها Power BI انتخاب مناسبی است؛ و هر جا تحلیل یا ظاهر ویژه‌ای لازم باشد، داشبوردهای کدنویسی‌شده با پایتون یا R.</p>
+
+    <h2 id="start">از کجا شروع کنیم؟</h2>
+<ol>
+      <li><b>با تصمیم شروع کنید، نه با داده:</b> مدیر فروش هر هفته چه تصمیمی می‌گیرد و برای آن به چه عددی نیاز دارد؟</li>
+      <li><b>یک حوزه را کامل کنید:</b> مثلاً فقط فروش، از منبع تا داشبورد؛ بعد گسترش دهید.</li>
+      <li><b>کیفیت داده را زود بسنجید:</b> کد تکراری مشتری، تاریخ‌های ناقص و واحدهای ناهمسان، اگر دیر پیدا شوند گران تمام می‌شوند.</li>
+      <li><b>کاربران را از اول درگیر کنید:</b> داشبوردی که کاربرانش در طراحی آن نقشی نداشته‌اند، کمتر استفاده می‌شود.</li>
+    </ol>
+    <p class="callout"><b>در نئودیتا:</b> از طراحی انبار داده و <a href="data-engineering.html">جریان‌های خودکار داده</a> تا <a href="dashboard.html">داشبوردهای مدیریتی</a> با Power BI یا کدنویسی‌شده، همه‌ی این زنجیره را پیاده می‌کنیم.</p>
+    </div>
+  </article>
+
+  <!-- مقاله‌های دیگر -->
+  <section aria-labelledby="t-more">
+    <header class="slide__head" data-reveal>
+      <p class="eyebrow">ادامه‌ی مطالعه</p>
+      <h2 id="t-more">مقاله‌های دیگر</h2>
+    </header>
+    <div class="post-cards post-cards--two">
+      <article class="post-card card" data-reveal>
+        <div class="post-card__art"><svg viewBox="0 0 160 90" aria-hidden="true"><g class="pc-faint"><circle cx="28" cy="24" r="4"/><circle cx="44" cy="36" r="4"/><circle cx="26" cy="48" r="4"/><circle cx="122" cy="66" r="4"/><circle cx="138" cy="54" r="4"/><circle cx="118" cy="44" r="4"/><circle cx="132" cy="22" r="4"/></g><g class="pc-line"><path d="M80 52 L58 30 M80 52 L66 64 M80 52 L92 70"/></g><g class="pc-on"><circle cx="58" cy="30" r="5"/><circle cx="66" cy="64" r="5"/><circle cx="92" cy="70" r="5"/></g><path class="pc-star" d="M80 41 l3.2 7.4 7.8.2-6 5.2 2 7.8-7-4.4-7 4.4 2-7.8-6-5.2 7.8-.2z"/></svg></div>
+        <div class="post-card__body">
+          <p class="post-card__tag">هوش مصنوعی مولد</p>
+          <h3><a href="rag.html">RAG چیست؟</a></h3>
+          <p>چطور یک مدل زبانی از اسناد خود سازمان پاسخ می‌دهد و منبعش را می‌گوید؛ از تکه‌تکه کردن و بردارسازی اسناد تا جست‌وجوی معنایی و سنجش کیفیت.</p>
+          <p class="post-card__meta"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg> ۶ دقیقه مطالعه</p>
+        </div>
+      </article>
+      <article class="post-card card" data-reveal>
+        <div class="post-card__art"><svg viewBox="0 0 160 90" aria-hidden="true"><g class="pc-line"><path d="M80 22 C 104 26, 112 44, 104 62 M96 70 H64 M56 62 C 48 44, 56 26, 80 22"/></g><g class="pc-on"><circle cx="80" cy="20" r="9"/><circle cx="106" cy="66" r="9"/><circle cx="54" cy="66" r="9"/></g></svg></div>
+        <div class="post-card__body">
+          <p class="post-card__tag">هوش مصنوعی مولد</p>
+          <h3><a href="ai-agents.html">ایجنت‌های هوشمند</a></h3>
+          <p>تفاوت ایجنت با اتوماسیون و چت‌بات، حلقه‌ی فکر، اقدام و مشاهده، اجزای یک ایجنت و کنترل‌هایی که آن را قابل‌اعتماد می‌کنند.</p>
+          <p class="post-card__meta"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg> ۴ دقیقه مطالعه</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- قدم بعدی -->
+  <section class="end" aria-labelledby="t-next" data-reveal>
+    <p class="eyebrow">قدم بعدی</p>
+    <h2 id="t-next">داشبوردی که مدیران واقعاً هر روز بازش می‌کنند</h2>
+    <p>در جلسه‌ی مشاوره‌ی رایگان، نیاز کسب‌وکارتان را می‌شنویم و پیشنهاد می‌دهیم کدام راه‌حل بیشترین صرفه‌جویی و مزیت رقابتی را برایتان دارد.</p>
+    <div class="end__cta">
+      <a class="btn btn--primary btn--lg" href="consult.html">درخواست مشاوره رایگان <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="btn btn--ghost btn--lg" href="dashboard.html">داشبورد و تحلیل داده</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- پانویس سایت: محتوایش را tools/sync-layout.py از index.html می‌آورد -->
+<footer class="site-foot">
+  <div class="site-foot__grid">
+    <div class="site-foot__brand">
+      <a href="index.html" aria-label="نئودیتا، صفحه‌ی اصلی">
+        <img class="logo--light" src="logo/4.svg" alt="" width="135" height="28" />
+        <img class="logo--dark" src="logo/12.svg" alt="" width="135" height="28" />
+      </a>
+      <p>تحلیل داده و راهکارهای هوش مصنوعی برای سازمان‌ها؛ برای هزینه‌ی کمتر و رقابت بهتر با دیگر سازمان‌ها.</p>
+    </div>
+    <nav aria-labelledby="f-services">
+      <h2 id="f-services">خدمات</h2>
+      <ul>
+        <li><a href="dashboard.html">داشبورد و تحلیل داده</a></li>
+        <li><a href="chatbot.html">چت‌بات هوشمند سازمانی</a></li>
+        <li><a href="agents.html">ایجنت‌ها و اتوماسیون</a></li>
+        <li><a href="vision.html">بینایی ماشین</a></li>
+        <li><a href="forecasting.html">پیش‌بینی و یادگیری ماشین</a></li>
+        <li><a href="data-engineering.html">مهندسی و یکپارچه‌سازی داده</a></li>
+      </ul>
+    </nav>
+    <nav aria-labelledby="f-company">
+      <h2 id="f-company">نئودیتا</h2>
+      <ul>
+        <li><a href="about.html">درباره‌ی ما</a></li>
+        <li><a href="articles.html">مقالات</a></li>
+        <li><a href="faq.html">سوالات متداول</a></li>
+        <li><a href="consult.html">درخواست مشاوره رایگان</a></li>
+        <li><a href="privacy.html">حریم خصوصی</a></li>
+      </ul>
+    </nav>
+    <div>
+      <h2>تماس</h2>
+      <ul class="site-foot__contact">
+        <li><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg><a href="tel:+989124140730" dir="ltr">۰۹۱۲ ۴۱۴۰ ۷۳۰</a></li>
+        <li><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>پاسخ‌گویی در ساعات اداری</li>
+        <li><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg><a href="mailto:info@neodata.ir" dir="ltr">info@neodata.ir</a></li>
+      </ul>
+    </div>
+    <div class="site-foot__join">
+      <h2>همکاری با ما</h2>
+      <p>به داده و هوش مصنوعی علاقه دارید و دوست دارید با نئودیتا همکاری کنید؟ رزومه یا معرفی کوتاهی از خودتان را برایمان ایمیل کنید.</p>
+      <a class="site-foot__mail" href="mailto:info@neodata.ir?subject=%D9%87%D9%85%DA%A9%D8%A7%D8%B1%DB%8C%20%D8%A8%D8%A7%20%D9%86%D8%A6%D9%88%D8%AF%DB%8C%D8%AA%D8%A7"><svg class="ico" aria-hidden="true"><use href="#i-send"/></svg>ایمیل به <span dir="ltr">info@neodata.ir</span></a>
+    </div>
+  </div>
+  <p class="site-foot__bottom">© ۱۴۰۵ نئودیتا · همه‌ی حقوق محفوظ است</p>
+</footer>
+
+<script src="assets/site.js?v=1"></script>
+<script src="assets/viz.js?v=1"></script>
+</body>
+</html>

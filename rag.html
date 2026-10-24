@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="no-js">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>RAG چیست؟ پاسخ مدل زبانی از اسناد سازمان | نئودیتا</title>
+<meta name="description" content="تولید تقویت‌شده با بازیابی (RAG) چطور کار می‌کند: تکه‌تکه کردن و بردارسازی اسناد، جست‌وجوی معنایی، پاسخ با ارجاع به منبع، مقایسه با آموزش دوباره‌ی مدل و سنجش کیفیت." />
+<meta name="theme-color" content="#f6f8fc" />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="نئودیتا" />
+<meta property="og:locale" content="fa_IR" />
+<meta property="og:title" content="RAG چیست؟ پاسخ مدل زبانی از اسناد سازمان | نئودیتا" />
+<meta property="og:description" content="تولید تقویت‌شده با بازیابی (RAG) چطور کار می‌کند: تکه‌تکه کردن و بردارسازی اسناد، جست‌وجوی معنایی، پاسخ با ارجاع به منبع، مقایسه با آموزش دوباره‌ی مدل و سنجش کیفیت." />
+<link rel="icon" href="logo/5.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="logo/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/styles.css?v=1" />
+<!-- صفحه‌ی معمولی با اسکرول عادی (بدون حالت «صحنه»ی صفحه‌ی اصلی).
+     پوسته پیش از نخستین رنگ‌آمیزی اعمال می‌شود تا صفحه چشمک نزند. -->
+<script>
+  document.documentElement.classList.remove('no-js');
+  (function () {
+    var theme = 'light';
+    try { if (localStorage.getItem('neodata-theme') === 'dark') theme = 'dark'; } catch (e) {}
+    document.documentElement.setAttribute('data-theme', theme);
+    if (theme === 'dark') document.querySelector('meta[name="theme-color"]').setAttribute('content', '#070b16');
+  })();
+</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "RAG چیست؟ پاسخ مدل زبانی از اسناد سازمان", "description": "تولید تقویت‌شده با بازیابی (RAG) چطور کار می‌کند: تکه‌تکه کردن و بردارسازی اسناد، جست‌وجوی معنایی، پاسخ با ارجاع به منبع، مقایسه با آموزش دوباره‌ی مدل و سنجش کیفیت.", "datePublished": "2026-10-24", "dateModified": "2026-10-24", "inLanguage": "fa-IR", "author": {"@type": "Organization", "name": "نئودیتا"}, "publisher": {"@type": "Organization", "name": "نئودیتا"}}</script>
+</head>
+<body data-section="articles">
+
+<!-- آیکون‌ها: یک بار تعریف، همه‌جا با <use> (زیرمجموعه‌ای از آیکون‌های index.html) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7.5 16v-5"/><path d="M12 16V7"/><path d="M16.5 16v-8"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></symbol>
+  <symbol id="i-flow" viewBox="0 0 24 24"><circle cx="5" cy="6" r="2.5"/><circle cx="19" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.5 6h9M6.3 8.2l4.4 7.6M17.7 8.2l-4.4 7.6"/></symbol>
+  <symbol id="i-scan" viewBox="0 0 24 24"><path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M7 12s2-3.5 5-3.5 5 3.5 5 3.5-2 3.5-5 3.5S7 12 7 12z"/><circle cx="12" cy="12" r="1.2"/></symbol>
+  <symbol id="i-trend" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></symbol>
+  <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M8 13h8M8 17h5"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.6.5 1.1 1.3 1.1 2.2h5c0-.9.5-1.7 1.1-2.2A6 6 0 0 0 12 3z"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="i-lang" viewBox="0 0 24 24"><path d="M4 5h9M8.5 3v2M6 5c.5 3 2.6 5.6 5.5 7M11 5c-.6 3.4-3 6.4-6.5 8"/><path d="M13 21l4-9 4 9M14.5 18h5"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+  <symbol id="i-buoy" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M5.6 5.6l3.6 3.6M14.8 14.8l3.6 3.6M18.4 5.6l-3.6 3.6M9.2 14.8l-3.6 3.6"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 15l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></symbol>
+  <symbol id="i-crm" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="11.5" r="2"/><path d="M8.5 17c.6-1.6 2-2.5 3.5-2.5s2.9.9 3.5 2.5"/></symbol>
+  <symbol id="i-invoice" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M9 15l2 2 4-4"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M3 3l7 18 3-8 8-3z"/><path d="M13 13L3 3"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+  <symbol id="i-server" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01M11 7.5h6M11 16.5h6"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14.5v2.5"/></symbol>
+  <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M3 3l18 18"/><path d="M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17.6 17.6 0 0 1-3.2 4.2M6.6 6.6C3.9 8.4 2 12 2 12s3.6 7 10 7a9.7 9.7 0 0 0 5.4-1.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5.2 3.5h3.3l1.7 4.3-2.2 1.4a11.5 11.5 0 0 0 6.8 6.8l1.4-2.2 4.3 1.7v3.3a1.7 1.7 0 0 1-1.8 1.7C10.9 20.1 3.9 13.1 3.5 5.3a1.7 1.7 0 0 1 1.7-1.8z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></symbol>
+  <symbol id="i-trend-down" viewBox="0 0 24 24"><path d="M3 7l6 6 4-4 8 8"/><path d="M15 17h6v-6"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4"/></symbol>
+</svg>
+
+<!-- پس‌زمینه‌ی ثابت: همان شبکه‌ی داده‌ی صفحه‌ی اصلی -->
+<div class="backdrop" aria-hidden="true">
+  <canvas id="net"></canvas>
+</div>
+
+<!-- هدر: همان هدر صفحه‌ی اصلی؛ پیوندهای بخش‌ها به صفحه‌ی اصلی می‌روند -->
+<header class="site-head">
+  <a class="brand" href="index.html">
+    <img class="brand__logo logo--light" src="logo/4.svg" alt="نئودیتا" width="135" height="28" />
+    <img class="brand__logo logo--dark" src="logo/12.svg" alt="نئودیتا" width="135" height="28" />
+    <span class="brand__tag">تحلیل داده و هوش مصنوعی</span>
+  </a>
+
+  <!-- ناوبری بالا: هر پیوند با data-sections می‌گوید در کدام بخش‌ها یا صفحه‌ها «جاری» است.
+       این نوار و پانویس در همه‌ی صفحه‌ها یکی‌اند: فقط در index.html ویرایششان کنید و سپس python3 tools/sync-layout.py را اجرا کنید -->
+  <nav class="topnav" id="topnav" aria-label="ناوبری اصلی">
+    <span class="topnav__ind" aria-hidden="true"></span>
+    <ul class="topnav__list">
+      <li><a class="topnav__link" href="index.html" data-sections="hero">خانه</a></li>
+      <li class="topnav__has-sub">
+        <button class="topnav__link" type="button" aria-expanded="false" aria-controls="navServices" data-sections="dashboard chatbot agents vision forecasting data-engineering services">
+          خدمات <svg class="ico topnav__caret" aria-hidden="true"><use href="#i-down"/></svg>
+        </button>
+        <div class="topnav__sub" id="navServices">
+          <ul class="topnav__sub-list">
+            <li><a href="dashboard.html" data-sections="dashboard">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-chart"/></svg></span>
+              <span class="topnav__sub-text"><b>داشبورد و تحلیل داده</b><small>شاخص‌ها و گزارش‌های مدیریتی در یک نگاه</small></span>
+            </a></li>
+            <li><a href="chatbot.html" data-sections="chatbot">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg></span>
+              <span class="topnav__sub-text"><b>چت‌بات هوشمند سازمانی</b><small>پاسخ مستند از اسناد خود سازمان</small></span>
+            </a></li>
+            <li><a href="agents.html" data-sections="agents">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-flow"/></svg></span>
+              <span class="topnav__sub-text"><b>ایجنت‌ها و اتوماسیون</b><small>خودکارسازی کارهای تکراری</small></span>
+            </a></li>
+            <li><a href="vision.html" data-sections="vision">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-scan"/></svg></span>
+              <span class="topnav__sub-text"><b>بینایی ماشین</b><small>شمارش، کنترل کیفیت و ایمنی</small></span>
+            </a></li>
+            <li><a href="forecasting.html" data-sections="forecasting">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-trend"/></svg></span>
+              <span class="topnav__sub-text"><b>پیش‌بینی و یادگیری ماشین</b><small>پیش‌بینی فروش و تقاضا، مدل‌های اختصاصی</small></span>
+            </a></li>
+            <li><a href="data-engineering.html" data-sections="data-engineering">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-db"/></svg></span>
+              <span class="topnav__sub-text"><b>مهندسی و یکپارچه‌سازی داده</b><small>انبار داده و جریان‌های خودکار داده</small></span>
+            </a></li>
+            <li><a href="index.html#services" data-sections="services">
+              <span class="topnav__sub-ico"><svg class="ico" aria-hidden="true"><use href="#i-spark"/></svg></span>
+              <span class="topnav__sub-text"><b>خدمات دیگر</b><small>اسناد فارسی، مشاوره و آموزش</small></span>
+            </a></li>
+            <li><a class="topnav__sub-cta" href="consult.html">
+              <b>نمی‌دانید از کجا شروع کنید؟</b>
+              <small>در مشاوره‌ی رایگان با هم پیدایش می‌کنیم</small>
+              <span>درخواست مشاوره <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+            </a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a class="topnav__link" href="index.html#process" data-sections="process">روش کار</a></li>
+      <li><a class="topnav__link" href="articles.html" data-sections="articles">مقالات</a></li>
+      <li><a class="topnav__link" href="faq.html" data-sections="faq">سوالات متداول</a></li>
+      <li><a class="topnav__link" href="about.html" data-sections="about">درباره‌ی ما</a></li>
+    </ul>
+  </nav>
+
+  <div class="head-actions">
+    <a class="btn btn--primary btn--sm head-cta" href="consult.html">درخواست مشاوره رایگان</a>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="تغییر به پوسته‌ی تیره">
+      <svg class="ico ico--moon" aria-hidden="true"><use href="#i-moon"/></svg>
+      <svg class="ico ico--sun" aria-hidden="true"><use href="#i-sun"/></svg>
+    </button>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menuPanel">
+      <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+      <em class="sr-only">منوی ناوبری</em>
+    </button>
+  </div>
+</header>
+
+<!-- منوی تمام‌صفحه برای گوشی و تبلت؛ فهرستش را site.js از روی نوار ناوبری بالا می‌سازد -->
+<nav class="menu-panel" id="menuPanel" aria-label="منوی ناوبری"></nav>
+
+<main class="page" id="main">
+
+  <article class="article" aria-labelledby="t-article">
+    <!-- آغاز -->
+    <header class="page-hero">
+      <p class="eyebrow"><svg class="ico" aria-hidden="true"><use href="#i-search"/></svg> <a href="articles.html">مقالات</a> · هوش مصنوعی مولد</p>
+      <h1 id="t-article">RAG چیست؟ <span class="grad">مدل زبانی‌ای که پیش از پاسخ، جست‌وجو می‌کند</span></h1>
+      <p class="page-hero__lead">مدل‌های زبانی بزرگ روان و قانع‌کننده می‌نویسند، اما از آیین‌نامه‌ها، قراردادها و داده‌های داخلی سازمان شما خبر ندارند و گاهی با اطمینان کامل پاسخی نادرست می‌سازند. «تولید تقویت‌شده با بازیابی» (Retrieval-Augmented Generation یا RAG) راه رایج حل این مشکل است: پیش از هر پاسخ، مرتبط‌ترین بخش‌های اسناد خود سازمان پیدا و در اختیار مدل گذاشته می‌شود.</p>
+      <p class="article__meta"><span><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg> ۶ دقیقه مطالعه</span><span><time datetime="2026-10-24">۲ آبان ۱۴۰۵</time></span><span>نئودیتا</span></p>
+    </header>
+
+    <nav class="toc card" aria-labelledby="t-toc" data-reveal>
+      <h2 id="t-toc">در این مقاله</h2>
+      <ol>
+        <li><a href="#problem">مشکل: مدل زبانی از اسناد شما خبر ندارد</a></li>
+        <li><a href="#how">RAG چگونه کار می‌کند؟</a></li>
+        <li><a href="#vectors">جست‌وجوی معنایی و فضای برداری</a></li>
+        <li><a href="#quality">جزئیاتی که کیفیت پاسخ را می‌سازند</a></li>
+        <li><a href="#compare">RAG یا آموزش دوباره‌ی مدل؟</a></li>
+        <li><a href="#eval">سنجش کیفیت یک سامانه‌ی RAG</a></li>
+      </ol>
+    </nav>
+
+    <!-- متن مقاله؛ شکل‌ها با assets/viz.js تعاملی می‌شوند و بی‌جاوااسکریپت هم کامل دیده می‌شوند -->
+    <div class="article__body">
+    <h2 id="problem">مشکل: مدل زبانی از اسناد شما خبر ندارد</h2>
+<p>یک مدل زبانی بزرگ (LLM) دانشش را از متن‌هایی گرفته که با آن‌ها آموزش دیده است. این دانش دو محدودیت مهم دارد:</p>
+    <ul>
+      <li><b>تاریخ دارد.</b> هر مدل تا تاریخ مشخصی آموزش دیده (knowledge cutoff) و از تغییرات پس از آن بی‌خبر است.</li>
+      <li><b>عمومی است.</b> آیین‌نامه‌ی فروش، قراردادها، سوابق مشتری و دستورالعمل‌های داخلی سازمان شما هرگز در داده‌های آموزش مدل نبوده‌اند.</li>
+    </ul>
+    <p>وقتی مدل پاسخ پرسشی را نمی‌داند، به‌جای «نمی‌دانم» اغلب پاسخی می‌سازد که درست به نظر می‌رسد اما ساختگی است. به این پدیده «توهم» (hallucination) می‌گویند و در کاربرد سازمانی، بزرگ‌ترین مانع اعتماد به مدل‌های زبانی است.</p>
+    <p>یک راه، آموزش دوباره‌ی مدل با اسناد سازمان است (fine-tuning)؛ اما این کار پرهزینه است، با هر تغییر سند باید تکرار شود و باز هم معلوم نمی‌کند پاسخ از کدام سند آمده است. RAG مسئله را از راه دیگری حل می‌کند: به‌جای اینکه دانش را درون مدل بگذارد، در لحظه‌ی پاسخ آن را در اختیار مدل قرار می‌دهد؛ مثل امتحان کتاب‌باز.</p>
+
+    <h2 id="how">RAG چگونه کار می‌کند؟</h2>
+<p>یک سامانه‌ی RAG دو مرحله‌ی جدا دارد. در شکل زیر میان دو مرحله جابه‌جا شوید:</p>
+    <figure class="viz card" data-viz="rag" data-reveal>
+      <div class="viz__bar">
+        <div class="seg" role="group" aria-label="مرحله‌ی کار RAG">
+          <button type="button" aria-pressed="true" data-lane="index" data-note="نمایه‌سازی: اسناد به تکه‌های کوچک تقسیم می‌شوند، هر تکه به یک بردار عددی تبدیل و در پایگاه داده‌ی برداری ذخیره می‌شود. این کار یک بار، و پس از هر تغییر اسناد دوباره، انجام می‌شود.">۱. نمایه‌سازی</button>
+          <button type="button" aria-pressed="false" data-lane="query" data-note="پاسخ‌گویی: پرسش هم بردار می‌شود، نزدیک‌ترین تکه‌ها از پایگاه برداری بازیابی و همراه پرسش به مدل زبانی داده می‌شوند؛ مدل فقط از همین تکه‌ها پاسخ می‌دهد و منبع را می‌گوید.">۲. پاسخ به پرسش</button>
+        </div>
+      </div>
+      <div class="viz-rag wired" data-lane="index" data-wires="docs:chunk:l-index chunk:embed:l-index embed:db:l-index:wire--straight ask:qemb:l-query qemb:db:l-query db:llm:l-query llm:ans:l-query">
+        <svg class="wires" aria-hidden="true"></svg>
+        <div class="node" data-node="docs" data-lanes="index"><svg class="ico" aria-hidden="true"><use href="#i-doc"/></svg><span><b>اسناد سازمان</b><small>PDF، Word، صفحه‌های داخلی</small></span></div>
+        <div class="node" data-node="chunk" data-lanes="index"><svg class="ico" aria-hidden="true"><use href="#i-box"/></svg><span><b>تکه‌تکه کردن</b><small>بخش‌های چندصد توکنی</small></span></div>
+        <div class="node" data-node="embed" data-lanes="index"><svg class="ico" aria-hidden="true"><use href="#i-spark"/></svg><span><b>بردارسازی</b><small>هر تکه ← یک بردار عددی</small></span></div>
+        <div class="node" data-node="ask" data-lanes="query"><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg><span><b>پرسش کاربر</b><small>«مهلت مرجوعی کالا چند روز است؟»</small></span></div>
+        <div class="node" data-node="qemb" data-lanes="query"><svg class="ico" aria-hidden="true"><use href="#i-spark"/></svg><span><b>بردار پرسش</b><small>با همان مدل بردارساز</small></span></div>
+        <div class="node viz-rag__db" data-node="db" data-lanes="index query"><svg class="ico" aria-hidden="true"><use href="#i-db"/></svg><span><b>پایگاه داده‌ی برداری</b><small>جست‌وجوی k تکه‌ی نزدیک</small></span></div>
+        <div class="node" data-node="llm" data-lanes="query"><svg class="ico" aria-hidden="true"><use href="#i-bulb"/></svg><span><b>مدل زبانی</b><small>پرسش + تکه‌های بازیابی‌شده</small></span></div>
+        <div class="node" data-node="ans" data-lanes="query"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span><b>پاسخ با ارجاع</b><small>«۷ روز؛ آیین‌نامه‌ی فروش، بند ۴»</small></span></div>
+      </div>
+      <p class="viz__note" aria-live="polite">نمایه‌سازی: اسناد به تکه‌های کوچک تقسیم می‌شوند، هر تکه به یک بردار عددی تبدیل و در پایگاه داده‌ی برداری ذخیره می‌شود. این کار یک بار، و پس از هر تغییر اسناد دوباره، انجام می‌شود.</p>
+    </figure>
+    <h3>۱. نمایه‌سازی (indexing)</h3>
+    <p>اسناد سازمان، از PDF و Word تا صفحه‌های سامانه‌های داخلی، خوانده و به تکه‌های کوچک (chunk) تقسیم می‌شوند. سپس هر تکه با یک «مدل بردارساز» (embedding model) به برداری از چند صد عدد تبدیل می‌شود که معنای آن تکه را نمایندگی می‌کند. بردارها همراه با متن اصلی و فراداده‌ی هر تکه (نام سند، شماره‌ی بند، تاریخ، سطح دسترسی) در یک پایگاه داده‌ی برداری ذخیره می‌شوند. این مرحله یک بار انجام می‌شود و با افزودن یا تغییر هر سند، فقط همان سند دوباره نمایه می‌شود.</p>
+    <h3>۲. بازیابی و تولید پاسخ (retrieval و generation)</h3>
+    <p>با هر پرسش، خود پرسش هم با همان مدل بردارساز به بردار تبدیل می‌شود. پایگاه برداری k تکه‌ای را برمی‌گرداند که بردارشان به بردار پرسش نزدیک‌تر است؛ معمولاً بین ۳ تا ۱۰ تکه. این تکه‌ها همراه با پرسش و یک دستور روشن در پرامپت به مدل زبانی داده می‌شوند؛ دستوری از این دست:</p>
+    <blockquote class="prompt">
+      <p>فقط بر اساس متن‌های زیر به پرسش پاسخ بده و برای هر ادعا منبعش را بیاور. اگر پاسخ در این متن‌ها نیست، بگو «در اسناد موجود پاسخی پیدا نشد».</p>
+      <p>[تکه‌ی ۱: آیین‌نامه‌ی فروش، بند ۴] …<br />[تکه‌ی ۲: شرایط گارانتی، بند ۲] …</p>
+      <p>پرسش: مهلت مرجوعی کالا چند روز است؟</p>
+    </blockquote>
+    <p>نتیجه، پاسخی است که از اسناد خود سازمان آمده، منبعش قابل‌بررسی است، و اگر پاسخی در اسناد نباشد، مدل به‌جای ساختن پاسخ همین را می‌گوید.</p>
+
+    <h2 id="vectors">جست‌وجوی معنایی و فضای برداری</h2>
+<p>قلب RAG جست‌وجوی معنایی است. مدل بردارساز طوری آموزش دیده که متن‌های هم‌معنا بردارهای نزدیک به هم داشته باشند، حتی اگر واژه‌هایشان یکی نباشد. برای همین، پرسش «مهلت پس دادن کالا» تکه‌ای را پیدا می‌کند که در آن نوشته شده «مرجوعی تا ۷ روز پس از تحویل»؛ در حالی که جست‌وجوی کلیدواژه‌ای ساده این دو را به هم ربط نمی‌دهد.</p>
+    <p>نزدیکی دو بردار معمولاً با «شباهت کسینوسی» (cosine similarity) سنجیده می‌شود: کسینوس زاویه‌ی میان دو بردار، عددی میان ۱- و ۱ که هرچه به ۱ نزدیک‌تر باشد، دو متن هم‌معناترند. شکل زیر این فضا را ساده‌شده و در دو بُعد نشان می‌دهد؛ پرسش را عوض کنید و ببینید کدام تکه‌ها بازیابی می‌شوند:</p>
+    <figure class="viz card" data-viz="vectors" data-space="{&quot;points&quot;: [{&quot;x&quot;: 106, &quot;y&quot;: 83, &quot;t&quot;: &quot;بازگشت وجه به کارت&quot;}, {&quot;x&quot;: 130, &quot;y&quot;: 111, &quot;t&quot;: &quot;مرجوعی کالای آسیب‌دیده در حمل&quot;}, {&quot;x&quot;: 156, &quot;y&quot;: 75, &quot;t&quot;: &quot;شرایط گارانتی، بند ۲&quot;}, {&quot;x&quot;: 180, &quot;y&quot;: 105, &quot;t&quot;: &quot;آیین‌نامه‌ی فروش، بند ۴: مهلت مرجوعی&quot;}, {&quot;x&quot;: 198, &quot;y&quot;: 79, &quot;t&quot;: &quot;تعویض با مدل دیگر&quot;}, {&quot;x&quot;: 148, &quot;y&quot;: 125, &quot;t&quot;: &quot;هزینه‌ی ارسال کالای مرجوعی&quot;}, {&quot;x&quot;: 499, &quot;y&quot;: 73, &quot;t&quot;: &quot;فیش حقوقی ماهانه&quot;}, {&quot;x&quot;: 475, &quot;y&quot;: 101, &quot;t&quot;: &quot;مرخصی استعلاجی&quot;}, {&quot;x&quot;: 449, &quot;y&quot;: 65, &quot;t&quot;: &quot;محاسبه‌ی اضافه‌کار&quot;}, {&quot;x&quot;: 425, &quot;y&quot;: 95, &quot;t&quot;: &quot;آیین‌نامه‌ی مرخصی استحقاقی&quot;}, {&quot;x&quot;: 407, &quot;y&quot;: 69, &quot;t&quot;: &quot;ذخیره‌ی مرخصی سال قبل&quot;}, {&quot;x&quot;: 457, &quot;y&quot;: 115, &quot;t&quot;: &quot;زمان واریز حقوق&quot;}, {&quot;x&quot;: 96, &quot;y&quot;: 267, &quot;t&quot;: &quot;انتقال میان انبارها&quot;}, {&quot;x&quot;: 120, &quot;y&quot;: 239, &quot;t&quot;: &quot;کالای راکد و تاریخ‌گذشته&quot;}, {&quot;x&quot;: 146, &quot;y&quot;: 275, &quot;t&quot;: &quot;ورود و خروج کالا&quot;}, {&quot;x&quot;: 170, &quot;y&quot;: 245, &quot;t&quot;: &quot;موجودی انبار تهران&quot;}, {&quot;x&quot;: 188, &quot;y&quot;: 271, &quot;t&quot;: &quot;نقطه‌ی سفارش مجدد&quot;}, {&quot;x&quot;: 138, &quot;y&quot;: 225, &quot;t&quot;: &quot;دستورالعمل انبارگردانی&quot;}, {&quot;x&quot;: 411, &quot;y&quot;: 238, &quot;t&quot;: &quot;فسخ قرارداد&quot;}, {&quot;x&quot;: 435, &quot;y&quot;: 266, &quot;t&quot;: &quot;تمدید قرارداد&quot;}, {&quot;x&quot;: 461, &quot;y&quot;: 230, &quot;t&quot;: &quot;زمان‌بندی اقساط قرارداد&quot;}, {&quot;x&quot;: 485, &quot;y&quot;: 260, &quot;t&quot;: &quot;تضمین حسن انجام کار&quot;}, {&quot;x&quot;: 503, &quot;y&quot;: 234, &quot;t&quot;: &quot;جریمه‌ی تأخیر در پرداخت&quot;}, {&quot;x&quot;: 453, &quot;y&quot;: 280, &quot;t&quot;: &quot;قرارداد پشتیبانی، ماده‌ی ۵&quot;}], &quot;queries&quot;: [{&quot;x&quot;: 164, &quot;y&quot;: 105}, {&quot;x&quot;: 445, &quot;y&quot;: 99}, {&quot;x&quot;: 455, &quot;y&quot;: 172}]}" data-reveal>
+      <div class="viz__bar">
+        <div class="seg" role="group" aria-label="پرسش نمونه">
+          <button type="button" aria-pressed="true" data-note="پرسش کنار خوشه‌ی «مرجوعی و گارانتی» می‌نشیند؛ نزدیک‌ترین تکه‌ها همراه پرسش به مدل زبانی داده می‌شوند.">مهلت مرجوعی کالا؟</button>
+          <button type="button" aria-pressed="false" data-note="واژه‌ی «مانده» در هیچ تکه‌ای نیامده، اما بردار پرسش کنار تکه‌های مرخصی می‌نشیند؛ این همان جست‌وجوی معنایی است.">مانده‌ی مرخصی من؟</button>
+          <button type="button" aria-pressed="false" data-note="این پرسش میان دو موضوع است و با k بزرگ‌تر، تکه‌های حقوق هم بازیابی می‌شوند؛ رتبه‌بندی دوباره و فیلتر فراداده همین را اصلاح می‌کنند.">موعد قسط قرارداد؟</button>
+        </div>
+        <label class="viz-range"><span>تعداد تکه‌ها (k): <b>۳</b></span><input type="range" min="1" max="5" step="1" value="3" /></label>
+      </div>
+      <div class="viz-vec">
+        <div class="viz-vec__plot">
+          <svg viewBox="0 0 600 340" role="img" aria-label="۲۴ تکه از اسناد سازمان در چهار خوشه‌ی موضوعی؛ پرسش کنار تکه‌های هم‌معنا می‌نشیند و نزدیک‌ترین‌ها بازیابی می‌شوند">
+            <g class="viz-vec__labels"><text class="viz-vec__label" x="150" y="43" text-anchor="middle">مرجوعی و گارانتی</text><text class="viz-vec__label" x="455" y="33" text-anchor="middle">حقوق و مرخصی</text><text class="viz-vec__label" x="140" y="318" text-anchor="middle">انبار و موجودی</text><text class="viz-vec__label" x="455" y="314" text-anchor="middle">قرارداد و پرداخت</text></g>
+            <g class="viz-vec__links"><line x1="164" y1="105" x2="180" y2="105"/><line x1="164" y1="105" x2="148" y2="125"/><line x1="164" y1="105" x2="156" y2="75"/></g>
+            <g class="viz-vec__pts"><circle class="viz-vec__pt" cx="106" cy="83" r="7" data-i="0"/><circle class="viz-vec__pt" cx="130" cy="111" r="7" data-i="1"/><circle class="viz-vec__pt is-hit" cx="156" cy="75" r="7" data-i="2"/><circle class="viz-vec__pt is-hit" cx="180" cy="105" r="7" data-i="3"/><circle class="viz-vec__pt" cx="198" cy="79" r="7" data-i="4"/><circle class="viz-vec__pt is-hit" cx="148" cy="125" r="7" data-i="5"/><circle class="viz-vec__pt" cx="499" cy="73" r="7" data-i="6"/><circle class="viz-vec__pt" cx="475" cy="101" r="7" data-i="7"/><circle class="viz-vec__pt" cx="449" cy="65" r="7" data-i="8"/><circle class="viz-vec__pt" cx="425" cy="95" r="7" data-i="9"/><circle class="viz-vec__pt" cx="407" cy="69" r="7" data-i="10"/><circle class="viz-vec__pt" cx="457" cy="115" r="7" data-i="11"/><circle class="viz-vec__pt" cx="96" cy="267" r="7" data-i="12"/><circle class="viz-vec__pt" cx="120" cy="239" r="7" data-i="13"/><circle class="viz-vec__pt" cx="146" cy="275" r="7" data-i="14"/><circle class="viz-vec__pt" cx="170" cy="245" r="7" data-i="15"/><circle class="viz-vec__pt" cx="188" cy="271" r="7" data-i="16"/><circle class="viz-vec__pt" cx="138" cy="225" r="7" data-i="17"/><circle class="viz-vec__pt" cx="411" cy="238" r="7" data-i="18"/><circle class="viz-vec__pt" cx="435" cy="266" r="7" data-i="19"/><circle class="viz-vec__pt" cx="461" cy="230" r="7" data-i="20"/><circle class="viz-vec__pt" cx="485" cy="260" r="7" data-i="21"/><circle class="viz-vec__pt" cx="503" cy="234" r="7" data-i="22"/><circle class="viz-vec__pt" cx="453" cy="280" r="7" data-i="23"/></g>
+            <g class="viz-vec__q" style="transform: translate(164px, 105px)"><path d="M0 -11 L3.2 -3.6 L11 -3.4 L5 1.8 L7 9.6 L0 5.2 L-7 9.6 L-5 1.8 L-11 -3.4 L-3.2 -3.6 Z"/><text y="-16" text-anchor="middle">پرسش</text></g>
+          </svg>
+          <span class="viz-vec__tip" aria-hidden="true"></span>
+        </div>
+        <div class="viz-vec__side">
+          <p class="viz-vec__head">تکه‌های بازیابی‌شده <small>(شباهت)</small></p>
+          <ol class="viz-vec__hits" aria-live="polite">
+          <li><span>آیین‌نامه‌ی فروش، بند ۴: مهلت مرجوعی</span><b>۰٫۹۶</b></li>
+          <li><span>هزینه‌ی ارسال کالای مرجوعی</span><b>۰٫۹۴</b></li>
+          <li><span>شرایط گارانتی، بند ۲</span><b>۰٫۹۲</b></li>
+          </ol>
+        </div>
+      </div>
+      <p class="viz__note" aria-live="polite">پرسش کنار خوشه‌ی «مرجوعی و گارانتی» می‌نشیند؛ نزدیک‌ترین تکه‌ها همراه پرسش به مدل زبانی داده می‌شوند.</p>
+      <p class="viz__cap">نمایش دوبُعدیِ ساده‌شده؛ بردارهای واقعی صدها بُعد دارند و نزدیکی‌شان با شباهت کسینوسی سنجیده می‌شود.</p>
+    </figure>
+    <p>پایگاه‌های داده‌ی برداری برای اینکه در میان میلیون‌ها بردار هم در چند میلی‌ثانیه پاسخ دهند، از نمایه‌های «نزدیک‌ترین همسایه‌ی تقریبی» (ANN) مثل HNSW استفاده می‌کنند؛ یعنی کمی دقت را با سرعتی بسیار بیشتر معاوضه می‌کنند. در بسیاری از پروژه‌ها، افزونه‌ای مثل pgvector روی همان PostgreSQL موجود سازمان کافی است و به سامانه‌ی جداگانه‌ای نیاز نیست.</p>
+
+    <h2 id="quality">جزئیاتی که کیفیت پاسخ را می‌سازند</h2>
+<p>ساختن یک نمونه‌ی اولیه‌ی RAG چند ساعت کار است؛ اما فاصله‌ی نمونه‌ی اولیه تا سامانه‌ای که کارکنان به آن اعتماد کنند، در همین جزئیات است:</p>
+    <ul>
+      <li><b>اندازه‌ی تکه‌ها و هم‌پوشانی:</b> تکه‌ی بزرگ معنای دقیق را رقیق می‌کند و جای پرامپت را می‌گیرد؛ تکه‌ی کوچک زمینه را از دست می‌دهد. نقطه‌ی شروع معمول، چند صد توکن با کمی هم‌پوشانی (overlap) است؛ و بهتر از آن، تقسیم بر اساس ساختار خود سند: عنوان‌ها، بندها و جدول‌ها.</li>
+      <li><b>جست‌وجوی ترکیبی (hybrid):</b> شباهت معنایی در پیدا کردن کد کالا، شماره‌ی قرارداد یا نام خاص ضعیف است. ترکیب جست‌وجوی برداری با جست‌وجوی واژگانی مثل BM25 هر دو حالت را پوشش می‌دهد.</li>
+      <li><b>رتبه‌بندی دوباره (reranking):</b> از میان مثلاً ۵۰ نتیجه‌ی اولیه، مدلی دقیق‌تر (cross-encoder) که پرسش و هر تکه را با هم می‌خواند، چند تکه‌ی واقعاً مرتبط را برمی‌گزیند.</li>
+      <li><b>فراداده و سطح دسترسی:</b> هر تکه با منبع، تاریخ، واحد سازمانی و سطح دسترسی ذخیره می‌شود؛ تا هم بتوان جست‌وجو را فیلتر کرد («فقط آیین‌نامه‌های معتبر امسال») و هم هر کاربر فقط از اسنادی پاسخ بگیرد که اجازه‌ی دیدنشان را دارد.</li>
+      <li><b>متن فارسی:</b> «ی» و «ک» عربی، نیم‌فاصله‌های ناهمسان، رقم‌های فارسی و انگلیسی و اسناد اسکن‌شده، پیش از نمایه‌سازی یکدست می‌شوند (نرمال‌سازی) و در صورت نیاز با OCR خوانده می‌شوند؛ مدل بردارساز هم باید فارسی را خوب بفهمد.</li>
+    </ul>
+
+    <h2 id="compare">RAG یا آموزش دوباره‌ی مدل؟</h2>
+<div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col"><span class="sr-only">ویژگی</span></th><th scope="col">RAG</th><th scope="col">آموزش دوباره (fine-tuning)</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">به‌روز شدن دانش</th><td>با افزودن سند، بی‌درنگ</td><td>با هر بار آموزش دوباره</td></tr>
+          <tr><th scope="row">ارجاع به منبع پاسخ</th><td>دارد</td><td>ندارد</td></tr>
+          <tr><th scope="row">کنترل دسترسی</th><td>در سطح هر سند</td><td>عملاً ممکن نیست</td></tr>
+          <tr><th scope="row">هزینه‌ی راه‌اندازی</th><td>کم تا متوسط</td><td>بالا: داده‌ی آماده و پردازش سنگین</td></tr>
+          <tr><th scope="row">مناسب برای</th><td>دانش سازمانی که مدام تغییر می‌کند</td><td>لحن، قالب خروجی یا مهارتی ثابت</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>این دو رقیب هم نیستند: گاهی مدلی که برای لحن یا قالب خاصی تنظیم شده، درون یک سامانه‌ی RAG به کار می‌رود. اما برای «پاسخ از اسناد سازمان»، تقریباً همیشه RAG نقطه‌ی شروع درست است.</p>
+
+    <h2 id="eval">سنجش کیفیت یک سامانه‌ی RAG</h2>
+<p>کیفیت را نمی‌شود با چند پرسش آزمایشی و حس خوب سنجید. پیش از راه‌اندازی، مجموعه‌ای از پرسش‌های واقعی کاربران همراه با پاسخ درست و سند مرجعشان ساخته می‌شود (مجموعه‌ی ارزیابی) و هر تغییر، از اندازه‌ی تکه‌ها تا عوض کردن مدل، با آن سنجیده می‌شود:</p>
+    <ul>
+      <li><b>کیفیت بازیابی:</b> آیا تکه‌ی درست میان k نتیجه‌ی اول هست؟ (recall@k)</li>
+      <li><b>وفاداری (faithfulness):</b> آیا هر ادعای پاسخ واقعاً در تکه‌های بازیابی‌شده آمده است؟</li>
+      <li><b>ربط پاسخ:</b> آیا پاسخ، به خود پرسش پاسخ می‌دهد؟</li>
+      <li><b>«نمی‌دانم»های درست:</b> برای پرسش‌هایی که پاسخشان در اسناد نیست، آیا سامانه درست می‌گوید پاسخی پیدا نکرد؟</li>
+    </ul>
+    <p>پس از راه‌اندازی هم بازخورد کاربران (مفید بود یا نه) و فهرست پرسش‌های بی‌پاسخ، نشان می‌دهد کدام اسناد باید اضافه یا اصلاح شوند.</p>
+    <p class="callout"><b>در نئودیتا:</b> <a href="chatbot.html">چت‌بات سازمانی نئودیتا</a> بر پایه‌ی همین معماری ساخته می‌شود؛ روی اسناد خود سازمان، با ارجاع به منبع و سطح دسترسی هر کاربر، و در صورت نیاز کاملاً روی سرورهای داخلی سازمان.</p>
+    </div>
+  </article>
+
+  <!-- مقاله‌های دیگر -->
+  <section aria-labelledby="t-more">
+    <header class="slide__head" data-reveal>
+      <p class="eyebrow">ادامه‌ی مطالعه</p>
+      <h2 id="t-more">مقاله‌های دیگر</h2>
+    </header>
+    <div class="post-cards post-cards--two">
+      <article class="post-card card" data-reveal>
+        <div class="post-card__art"><svg viewBox="0 0 160 90" aria-hidden="true"><path class="pc-base" d="M18 76 H142"/><g class="pc-on"><rect x="114" y="54" width="18" height="22" rx="3"/><rect x="88" y="40" width="18" height="36" rx="3"/><rect x="62" y="28" width="18" height="48" rx="3"/><rect x="36" y="14" width="18" height="62" rx="3"/></g></svg></div>
+        <div class="post-card__body">
+          <p class="post-card__tag">تحلیل داده</p>
+          <h3><a href="business-intelligence.html">هوش تجاری چیست؟</a></h3>
+          <p>چهار سطح تحلیل داده، معماری یک سامانه‌ی هوش تجاری، مدل ستاره‌ای انبار داده، کاوش از کل به جزء و اصول طراحی شاخص و داشبورد.</p>
+          <p class="post-card__meta"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg> ۵ دقیقه مطالعه</p>
+        </div>
+      </article>
+      <article class="post-card card" data-reveal>
+        <div class="post-card__art"><svg viewBox="0 0 160 90" aria-hidden="true"><g class="pc-line"><path d="M80 22 C 104 26, 112 44, 104 62 M96 70 H64 M56 62 C 48 44, 56 26, 80 22"/></g><g class="pc-on"><circle cx="80" cy="20" r="9"/><circle cx="106" cy="66" r="9"/><circle cx="54" cy="66" r="9"/></g></svg></div>
+        <div class="post-card__body">
+          <p class="post-card__tag">هوش مصنوعی مولد</p>
+          <h3><a href="ai-agents.html">ایجنت‌های هوشمند</a></h3>
+          <p>تفاوت ایجنت با اتوماسیون و چت‌بات، حلقه‌ی فکر، اقدام و مشاهده، اجزای یک ایجنت و کنترل‌هایی که آن را قابل‌اعتماد می‌کنند.</p>
+          <p class="post-card__meta"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg> ۴ دقیقه مطالعه</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- قدم بعدی -->
+  <section class="end" aria-labelledby="t-next" data-reveal>
+    <p class="eyebrow">قدم بعدی</p>
+    <h2 id="t-next">چت‌باتی که از اسناد سازمان شما پاسخ می‌دهد</h2>
+    <p>در جلسه‌ی مشاوره‌ی رایگان، نیاز کسب‌وکارتان را می‌شنویم و پیشنهاد می‌دهیم کدام راه‌حل بیشترین صرفه‌جویی و مزیت رقابتی را برایتان دارد.</p>
+    <div class="end__cta">
+      <a class="btn btn--primary btn--lg" href="consult.html">درخواست مشاوره رایگان <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="btn btn--ghost btn--lg" href="chatbot.html">چت‌بات هوشمند سازمانی</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- پانویس سایت: محتوایش را tools/sync-layout.py از index.html می‌آورد -->
+<footer class="site-foot">
+  <div class="site-foot__grid">
+    <div class="site-foot__brand">
+      <a href="index.html" aria-label="نئودیتا، صفحه‌ی اصلی">
+        <img class="logo--light" src="logo/4.svg" alt="" width="135" height="28" />
+        <img class="logo--dark" src="logo/12.svg" alt="" width="135" height="28" />
+      </a>
+      <p>تحلیل داده و راهکارهای هوش مصنوعی برای سازمان‌ها؛ برای هزینه‌ی کمتر و رقابت بهتر با دیگر سازمان‌ها.</p>
+    </div>
+    <nav aria-labelledby="f-services">
+      <h2 id="f-services">خدمات</h2>
+      <ul>
+        <li><a href="dashboard.html">داشبورد و تحلیل داده</a></li>
+        <li><a href="chatbot.html">چت‌بات هوشمند سازمانی</a></li>
+        <li><a href="agents.html">ایجنت‌ها و اتوماسیون</a></li>
+        <li><a href="vision.html">بینایی ماشین</a></li>
+        <li><a href="forecasting.html">پیش‌بینی و یادگیری ماشین</a></li>
+        <li><a href="data-engineering.html">مهندسی و یکپارچه‌سازی داده</a></li>
+      </ul>
+    </nav>
+    <nav aria-labelledby="f-company">
+      <h2 id="f-company">نئودیتا</h2>
+      <ul>
+        <li><a href="about.html">درباره‌ی ما</a></li>
+        <li><a href="articles.html">مقالات</a></li>
+        <li><a href="faq.html">سوالات متداول</a></li>
+        <li><a href="consult.html">درخواست مشاوره رایگان</a></li>
+        <li><a href="privacy.html">حریم خصوصی</a></li>
+      </ul>
+    </nav>
+    <div>
+      <h2>تماس</h2>
+      <ul class="site-foot__contact">
+        <li><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg><a href="tel:+989124140730" dir="ltr">۰۹۱۲ ۴۱۴۰ ۷۳۰</a></li>
+        <li><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>پاسخ‌گویی در ساعات اداری</li>
+        <li><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg><a href="mailto:info@neodata.ir" dir="ltr">info@neodata.ir</a></li>
+      </ul>
+    </div>
+    <div class="site-foot__join">
+      <h2>همکاری با ما</h2>
+      <p>به داده و هوش مصنوعی علاقه دارید و دوست دارید با نئودیتا همکاری کنید؟ رزومه یا معرفی کوتاهی از خودتان را برایمان ایمیل کنید.</p>
+      <a class="site-foot__mail" href="mailto:info@neodata.ir?subject=%D9%87%D9%85%DA%A9%D8%A7%D8%B1%DB%8C%20%D8%A8%D8%A7%20%D9%86%D8%A6%D9%88%D8%AF%DB%8C%D8%AA%D8%A7"><svg class="ico" aria-hidden="true"><use href="#i-send"/></svg>ایمیل به <span dir="ltr">info@neodata.ir</span></a>
+    </div>
+  </div>
+  <p class="site-foot__bottom">© ۱۴۰۵ نئودیتا · همه‌ی حقوق محفوظ است</p>
+</footer>
+
+<script src="assets/site.js?v=1"></script>
+<script src="assets/viz.js?v=1"></script>
+</body>
+</html>

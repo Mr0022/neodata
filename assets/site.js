@@ -380,8 +380,11 @@
     reveals.forEach((el) => io.observe(el));
   }
 
-  // صفحه‌ای که خودش یکی از پیوندهای ناوبری است (<body data-page="about">)
-  if (document.body.dataset.page) setActive(document.body.dataset.page, 'page');
+  // صفحه‌ای که خودش یکی از پیوندهای ناوبری است (<body data-page="about">)، یا صفحه‌ای درون
+  // بخشی از آن (<body data-section="articles">، مثل هر مقاله؛ پیوند «مقالات» جاری است ولی همچنان به فهرست می‌رود)
+  const { page, section } = document.body.dataset;
+  if (page) setActive(page, 'page');
+  else if (section) setActive(section, 'true');
 
   window.neodataSite = { net, setActive, closeSub: () => setSub(false), menuOpen, closeMenu };
 })();

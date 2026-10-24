@@ -1,5 +1,5 @@
 /* =========================================================
-   نئودیتا — شکل‌ها و نمودارهای تعاملی صفحه‌های خدمت
+   نئودیتا — شکل‌ها و نمودارهای تعاملی صفحه‌های خدمت و مقاله‌ها
    هر شکل یک <figure data-viz="…"> است که نسخه‌ی کامل و بی‌حرکتش در خود HTML آمده؛
    این فایل فقط تعامل و حرکت را اضافه می‌کند. همه‌ی داده‌ها نمونه‌ی نمایشی‌اند.
    ========================================================= */
@@ -89,9 +89,9 @@
     };
   }
 
-  /** دکمه‌های .seg، حالت‌های شکل‌اند؛ متن data-note هر دکمه در .viz__note می‌نشیند */
-  function modes(fig, ms, apply, start = 0) {
-    const btns = $$('.seg button', fig);
+  /** دکمه‌های .seg (یا هر گروه دکمه‌ی دیگر)، حالت‌های شکل‌اند؛ متن data-note هر دکمه در .viz__note می‌نشیند */
+  function modes(fig, ms, apply, start = 0, sel = '.seg button') {
+    const btns = $$(sel, fig);
     const note = $('.viz__note', fig);
     const set = (k) => {
       btns.forEach((b, i) => b.setAttribute('aria-pressed', String(i === k)));
@@ -243,6 +243,185 @@
     plot.addEventListener('pointerdown', point);
     // روی صفحه‌ی لمسی راهنما پس از برداشتن انگشت هم می‌ماند
     plot.addEventListener('pointerleave', (e) => { if (e.pointerType !== 'touch') plot.classList.remove('is-hover'); });
+  };
+
+  /** کارت توضیح هر حالت (.viz-panel)؛ تابعی که فقط کارت k را نشان می‌دهد */
+  const panels = (fig) => {
+    const ps = $$('.viz-panel', fig);
+    return (k) => ps.forEach((p, i) => p.classList.toggle('is-on', i === k));
+  };
+
+  /** راهنمای کوچکی که روی عنصر نشانگر می‌ایستد؛ روی صفحه‌ی لمسی پس از برداشتن انگشت هم می‌ماند */
+  function hoverTip(area, tip, pick) {
+    area.addEventListener('pointerover', (e) => {
+      const hit = pick(e.target);
+      if (!hit) return;
+      const a = area.getBoundingClientRect(), r = hit.el.getBoundingClientRect();
+      tip.textContent = hit.text;
+      const half = tip.offsetWidth / 2;
+      tip.style.left = Math.max(half, Math.min(a.width - half, r.left + r.width / 2 - a.left)) + 'px';
+      tip.style.top = (r.top - a.top) + 'px';
+      tip.classList.add('is-on');
+    });
+    area.addEventListener('pointerout', (e) => {
+      if (e.pointerType !== 'touch' && pick(e.target) && !(e.relatedTarget && pick(e.relatedTarget))) tip.classList.remove('is-on');
+    });
+  }
+
+  /* ========== مقاله‌ها ========== */
+
+  /* ---------- RAG: نمایه‌سازی یا پاسخ‌گویی ---------- */
+
+  viz.rag = (fig) => {
+    const box = $('.viz-rag', fig);
+    const paths = wires(box);
+    modes(fig, 5200, (k, btn) => {
+      box.dataset.lane = btn.dataset.lane;
+      paths.forEach((p) => p.classList.toggle('is-live', p.classList.contains('l-' + btn.dataset.lane)));
+    });
+  };
+
+  /* ---------- فضای برداری: k تکه‌ی نزدیک به پرسش ---------- */
+
+  viz.vectors = (fig) => {
+    const { points, queries } = JSON.parse(fig.dataset.space);
+    const dots = $$('.viz-vec__pt', fig);
+    const links = $('.viz-vec__links', fig);
+    const star = $('.viz-vec__q', fig);
+    const hits = $('.viz-vec__hits', fig);
+    const range = $('.viz-range input', fig), out = $('.viz-range b', fig);
+    let q = 0;
+
+    function render() {
+      const k = Number(range.value), Q = queries[q];
+      out.textContent = faNum(k);
+      star.style.transform = `translate(${Q.x}px, ${Q.y}px)`;
+      const near = points.map((p, i) => ({ i, d: Math.hypot(p.x - Q.x, p.y - Q.y) }))
+        .sort((a, b) => a.d - b.d).slice(0, k);
+      const hit = new Set(near.map((n) => n.i));
+      dots.forEach((c, i) => c.classList.toggle('is-hit', hit.has(i)));
+      links.replaceChildren(...near.map(({ i }) => {
+        const l = document.createElementNS(SVG, 'line');
+        [['x1', Q.x], ['y1', Q.y], ['x2', points[i].x], ['y2', points[i].y]].forEach(([a, v]) => l.setAttribute(a, v));
+        return l;
+      }));
+      // نزدیکی در این صفحه‌ی دوبُعدی، به‌جای شباهت کسینوسی بردارهای واقعی (همان فرمول HTML اولیه)
+      hits.replaceChildren(...near.map(({ i, d }) => {
+        const li = document.createElement('li');
+        const t = document.createElement('span'), b = document.createElement('b');
+        t.textContent = points[i].t;
+        b.textContent = faNum(Math.max(0, 1 - d / 400), 2);
+        li.append(t, b);
+        return li;
+      }));
+    }
+    range.addEventListener('input', render);
+    modes(fig, 4600, (k) => { q = k; render(); });
+
+    hoverTip($('.viz-vec__plot', fig), $('.viz-vec__tip', fig), (el) => {
+      const c = el.closest && el.closest('.viz-vec__pt');
+      return c && { el: c, text: points[Number(c.dataset.i)].t };
+    });
+  };
+
+  /* ---------- هوش تجاری: چهار سطح تحلیل ---------- */
+
+  viz.ladder = (fig) => modes(fig, 4200, panels(fig), 0, '.viz-ladder__step');
+
+  /* ---------- زنجیره‌ی داده و اجزای ایجنت: فقط سیم‌های روان ---------- */
+
+  viz.chain = viz.hub = (fig) => wires($('.wired', fig)).forEach((p) => p.classList.add('is-live'));
+
+  /* ---------- مدل ستاره‌ای: کدام بُعد و کدام ستون‌ها در هر پرسش ---------- */
+
+  viz.star = (fig) => {
+    const box = $('.viz-star', fig);
+    const paths = wires(box);
+    const sql = $('.viz-sql code', fig);
+    const cols = $$('[data-col]', box);
+    modes(fig, 5200, (k, btn) => {
+      const tables = btn.dataset.tables.split(' '), used = btn.dataset.cols.split(' ');
+      $$('[data-node]', box).forEach((n) => n.classList.toggle('is-on', n.dataset.node === 'fact' || tables.includes(n.dataset.node)));
+      paths.forEach((p) => p.classList.toggle('is-live', tables.includes(p.dataset.from)));
+      cols.forEach((c) => c.classList.toggle('is-used', used.includes(c.dataset.col)));
+      sql.textContent = btn.dataset.sql;
+    });
+  };
+
+  /* ---------- کاوش: از منطقه به شهر و برگشت ---------- */
+
+  viz.drill = (fig) => {
+    const tree = JSON.parse(fig.dataset.tree);
+    const list = $('.viz-drill__bars', fig);
+    const up = $('.viz-drill__up', fig), here = $('.viz-drill__here', fig);
+    const title = $('.viz-drill__title', fig);
+    const top = title.innerHTML;
+
+    function show(region) {
+      const items = region ? region.children : tree;
+      const max = Math.max(...items.map((x) => x.value));
+      const total = items.reduce((s, x) => s + x.value, 0);
+      list.replaceChildren(...items.map((x, k) => {
+        const li = document.createElement('li');
+        const row = document.createElement(region ? 'div' : 'button');
+        row.className = 'viz-drill__row';
+        if (!region) { row.type = 'button'; row.addEventListener('click', () => drill(k)); }
+        row.innerHTML = '<span class="viz-drill__name"></span><span class="viz-drill__track"><i></i></span><span class="viz-drill__val"></span>';
+        row.querySelector('.viz-drill__name').textContent = x.name;
+        row.querySelector('.viz-drill__val').innerHTML = `${faNum(x.value)} <small>${faNum(Math.round((x.value / total) * 100))}٪</small>`;
+        const bar = row.querySelector('i');
+        bar.style.setProperty('--v', '0');
+        requestAnimationFrame(() => requestAnimationFrame(() => bar.style.setProperty('--v', (x.value / max).toFixed(3))));
+        li.appendChild(row);
+        return li;
+      }));
+      up.disabled = !region;
+      here.textContent = region ? region.name : '';
+      if (region) title.textContent = `فروش ۱۴۰۴ منطقه‌ی ${region.name} به تفکیک شهر، میلیارد تومان`;
+      else title.innerHTML = top;
+    }
+    // دکمه‌ی زده‌شده با فهرست عوض می‌شود؛ تمرکز به دکمه‌ی بازگشت (و در بازگشت، به نخستین منطقه) می‌رود
+    function drill(k) { show(tree[k]); up.focus(); }
+    up.addEventListener('click', () => { show(null); list.querySelector('button').focus(); });
+    $$('.viz-drill__row', list).forEach((row, k) => row.addEventListener('click', () => drill(k)));
+  };
+
+  /* ---------- طیف خودکارسازی: هر سطح و توضیحش ---------- */
+
+  viz.spectrum = (fig) => {
+    const marks = $$('.viz-spec__mark', fig);
+    const panel = panels(fig);
+    modes(fig, 4600, (k) => {
+      marks.forEach((m, i) => m.classList.toggle('is-on', i === k));
+      panel(k);
+    }, 2, '.viz-spec__levels button');
+  };
+
+  /* ---------- حلقه‌ی ایجنت: گام‌به‌گام ---------- */
+
+  viz.loop = (fig) => {
+    const box = $('.viz-loop', fig);
+    const rows = $$('.viz-loop__trace li', fig);
+    const nodes = $$('.viz-loop__node', fig);
+    const arcs = $$('.viz-loop__arc', fig);
+    const count = $('.viz-loop__count', fig);
+    let cur = 0;
+    const set = (k) => {
+      cur = k;
+      const phase = rows[k].dataset.phase, prev = k ? rows[k - 1].dataset.phase : '';
+      rows.forEach((r, i) => {
+        r.classList.toggle('is-on', i === k);
+        r.classList.toggle('is-done', i < k);
+        r.classList.toggle('is-prev', i === k - 1);   // روی گوشی فقط گام قبل و گام جاری دیده می‌شوند
+      });
+      nodes.forEach((n) => n.classList.toggle('is-on', n.dataset.phase === phase));
+      arcs.forEach((a) => a.classList.toggle('is-live', a.dataset.from === prev && a.dataset.to === phase));
+      count.textContent = `گام ${faNum(k + 1)} از ${faNum(rows.length)}`;
+    };
+    box.classList.add('is-ready');
+    const play = autoplay(fig, rows.length, 2400, set);
+    $('.viz-loop__next', fig).addEventListener('click', () => play.pick((cur + 1) % rows.length));
+    $('.viz-loop__reset', fig).addEventListener('click', () => play.replay());
   };
 
   $$('figure[data-viz]').forEach((fig) => {

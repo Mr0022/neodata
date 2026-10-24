@@ -27,6 +27,7 @@
   --btn-bg-hover: #2230cf;
   --bubble: rgba(45, 59, 232, .09);
   --card-bg: #ffffff;
+  --surface-solid: #ffffff;           /* همان سطح کارت، یکدست (برای fill و stroke در SVG) */
   --card-shadow: 0 24px 60px -30px rgba(15, 26, 61, .28), 0 2px 6px rgba(15, 26, 61, .04);
   --card-edge: linear-gradient(140deg, rgba(45, 59, 232, .32), transparent 30%, transparent 70%, rgba(59, 130, 246, .28));
   --tile-shadow: 0 12px 32px -20px rgba(15, 26, 61, .22);
@@ -95,6 +96,7 @@
   --btn-bg-hover: #4d5bff;
   --bubble: rgba(122, 134, 255, .18);
   --card-bg: linear-gradient(180deg, rgba(19, 28, 49, .94), rgba(12, 18, 33, .96));
+  --surface-solid: #111a2e;
   --card-shadow: 0 40px 90px -40px rgba(0, 0, 0, .85), inset 0 1px 0 rgba(255, 255, 255, .04);
   --card-edge: linear-gradient(140deg, rgba(122, 134, 255, .55), transparent 32%, transparent 68%, rgba(95, 176, 255, .4));
   --tile-shadow: none;
@@ -1187,7 +1189,7 @@ body > .site-foot {
   width: min(1180px, calc(100% - 2 * clamp(18px, 5.5vw, 84px)));
   margin-bottom: 28px;
 }
-.site-foot__grid { display: grid; grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr)); gap: 28px; }
+.site-foot__grid { display: grid; grid-template-columns: minmax(0, 1.35fr) repeat(4, minmax(0, 1fr)); gap: 28px; }
 .site-foot__brand a { display: inline-block; }
 /* فقط اندازه؛ کدام نسخه‌ی نشان دیده شود را قاعده‌های .logo--light و .logo--dark تعیین می‌کنند */
 .site-foot__brand img { height: 28px; width: auto; }
@@ -1198,6 +1200,10 @@ body > .site-foot {
 .site-foot a:hover { color: var(--accent); }
 .site-foot__contact li { display: flex; align-items: center; gap: 8px; }
 .site-foot__contact .ico { width: 16px; height: 16px; color: var(--accent); }
+/* همکاری با ما */
+.site-foot__join p { margin: 0 0 10px; font-size: 13.5px; line-height: 1.9; color: var(--ink-mute); }
+.site-foot .site-foot__mail { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; color: var(--accent); }
+.site-foot__mail .ico { width: 16px; height: 16px; }
 .site-foot__bottom {
   margin: 24px 0 0; padding: 16px 0 0; border-top: 1px solid var(--line-soft);
   font-size: 12.5px; color: var(--ink-mute);
@@ -1421,7 +1427,7 @@ body > .site-foot {
   font-size: 11px; color: var(--ink-mute);
 }
 .viz-dash__months span { justify-self: center; white-space: nowrap; }
-.viz-dash__tip, .viz-fc__tip {
+.viz-dash__tip, .viz-fc__tip, .viz-vec__tip {
   position: absolute; z-index: 2; translate: -50% 0;
   padding: 3px 10px; border-radius: 8px;
   font-size: 12px; font-weight: 700; line-height: 1.7; white-space: nowrap;
@@ -1532,7 +1538,7 @@ body > .site-foot {
 
 /* مهندسی داده: گره‌ها روی یک بیضی، انبار داده در مرکز */
 .viz-int { position: relative; aspect-ratio: 2.1 / 1; min-height: 300px; }
-.viz-int__node { position: absolute; translate: -50% -50%; padding: 8px 12px; font-size: 13.5px; white-space: nowrap; }
+.viz-int__node { position: absolute; translate: -50% -50%; width: max-content; padding: 8px 12px; font-size: 13.5px; white-space: nowrap; }
 .viz-int__node > .ico { width: 18px; height: 18px; }
 .viz-int__hub {
   position: absolute; left: 50%; top: 50%; translate: -50% -50%; padding: 12px 16px;
@@ -1546,9 +1552,208 @@ body > .site-foot {
 .viz-int[data-state="after"] .w-after { opacity: 1; }
 .viz-int[data-state="before"] .viz-int__hub { opacity: 0; scale: .6; }
 
+/* ---------------- شکل‌های مقاله‌ها (همان assets/viz.js) ---------------- */
+
+/* RAG: مسیر نمایه‌سازی و مسیر پاسخ‌گویی، که در پایگاه برداری به هم می‌رسند */
+.viz-rag { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); column-gap: 30px; row-gap: 44px; }
+.viz-rag .node { flex-direction: column; justify-content: center; gap: 6px; padding: 12px 8px; text-align: center; font-size: 13.5px; }
+.viz-rag .node small { font-size: 11.5px; }
+.viz-rag [data-node="docs"] { grid-area: 1 / 1; }
+.viz-rag [data-node="chunk"] { grid-area: 1 / 2; }
+.viz-rag [data-node="embed"] { grid-area: 1 / 3; }
+.viz-rag [data-node="ask"] { grid-area: 2 / 1; }
+.viz-rag [data-node="qemb"] { grid-area: 2 / 2; }
+.viz-rag [data-node="db"] { grid-area: 2 / 3; }
+.viz-rag [data-node="llm"] { grid-area: 2 / 4; }
+.viz-rag [data-node="ans"] { grid-area: 2 / 5; }
+.viz-rag__db { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+.viz-rag[data-lane="index"] .node:not([data-lanes~="index"]),
+.viz-rag[data-lane="query"] .node:not([data-lanes~="query"]) { opacity: .4; }
+
+/* فضای برداری: نقطه‌ها تکه‌های اسناد، ستاره پرسش، خط‌ها k نزدیک‌ترین */
+.viz-vec { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+.viz-vec__plot { position: relative; border-radius: 14px; background: var(--surface-2); border: 1px solid var(--line-soft); }
+.viz-vec__plot svg { display: block; width: 100%; height: auto; }
+.viz-vec__label { font-size: 15px; font-weight: 700; fill: var(--ink-mute); }
+.viz-vec__pt { fill: var(--surface-solid); stroke: var(--ink-mute); stroke-width: 1.5; transition: fill .3s ease, stroke .3s ease; }
+.viz-vec__pt.is-hit { fill: var(--accent); stroke: var(--surface-solid); stroke-width: 2; }
+.viz-vec__links line { stroke: var(--accent); stroke-width: 1.5; stroke-dasharray: 4 4; animation: fade-in .45s ease; }
+.viz-vec__q { transition: transform .6s var(--ease-out); }
+.viz-vec__q path { fill: var(--accent-2); stroke: var(--surface-solid); stroke-width: 2; paint-order: stroke; }
+.viz-vec__q text { font-size: 14px; font-weight: 800; fill: var(--ink); }
+.viz-vec__tip { translate: -50% calc(-100% - 12px); }
+.viz-vec__tip.is-on { opacity: 1; }
+.viz-vec__head { margin: 0 0 8px; font-size: 13.5px; font-weight: 800; }
+.viz-vec__head small { font-weight: 500; color: var(--ink-mute); }
+.viz-vec__hits { display: grid; gap: 6px; }
+.viz-vec__hits li {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 7px 12px;
+  border-radius: 12px; background: var(--surface-2); border: 1px solid var(--line-soft);
+  font-size: 13px; line-height: 1.7; animation: fade-in .35s ease;
+}
+.viz-vec__hits b { flex: none; color: var(--accent); font-variant-numeric: tabular-nums; }
+
+/* چهار سطح تحلیل: پله‌هایی که بلندتر می‌شوند */
+.viz-ladder { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; align-items: end; height: 250px; }
+.viz-ladder__step {
+  height: calc(28% + var(--h) * 18%);
+  display: flex; flex-direction: column; justify-content: space-between; gap: 6px;
+  padding: 12px 14px; border-radius: 14px 14px 4px 4px; cursor: pointer; text-align: start;
+  color: var(--ink); background: var(--accent-soft); border: 1px solid var(--accent-line);
+  transition: background .3s ease, color .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+.viz-ladder__step span { font-size: 12.5px; font-weight: 600; line-height: 1.7; color: var(--ink-soft); }
+.viz-ladder__step b { font-size: 16px; font-weight: 800; }
+.viz-ladder__step:hover { border-color: var(--accent); }
+.viz-ladder__step[aria-pressed="true"] { color: var(--on-accent); background: var(--btn-bg); border-color: transparent; box-shadow: 0 14px 28px -16px var(--accent-glow); }
+.viz-ladder__step[aria-pressed="true"] span { color: inherit; opacity: .85; }
+.viz-ladder__axis { margin: 10px 0 0; text-align: end; font-size: 12.5px; font-weight: 700; color: var(--ink-mute); }
+
+/* توضیح هر حالت (پله‌ها، سطح‌های خودکارسازی) */
+.viz-panels { margin-top: 14px; }
+.viz-panel {
+  display: none; margin: 0; padding: 14px 18px; border-radius: 14px;
+  background: var(--surface-2); border: 1px solid var(--line);
+  font-size: 14px; line-height: 2; color: var(--ink-soft);
+}
+.viz-panel.is-on { display: block; animation: fade-in .4s ease; }
+.viz-panel b { color: var(--ink); }
+.viz-panel span { display: block; color: var(--ink-mute); }
+
+/* زنجیره‌ی داده تا داشبورد */
+.viz-chain { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 34px; }
+.viz-chain__node { flex-direction: column; justify-content: center; gap: 6px; padding: 14px 8px; text-align: center; font-size: 13.5px; }
+.viz-chain__node > .ico { width: 24px; height: 24px; }
+.viz-chain__node small { font-size: 11.5px; }
+
+/* مدل ستاره‌ای: جدول واقعیت در میان، بُعدها دو طرف */
+.viz-star {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 22px 54px; align-items: center;
+}
+.viz-star [data-node="date"] { grid-area: 1 / 1; }
+.viz-star [data-node="product"] { grid-area: 2 / 1; }
+.viz-star [data-node="fact"] { grid-area: 1 / 2 / 3 / 3; }
+.viz-star [data-node="customer"] { grid-area: 1 / 3; }
+.viz-star [data-node="store"] { grid-area: 2 / 3; }
+.viz-star [data-node]:not(.is-on) { opacity: .55; }
+.viz-table { display: block; padding: 0; overflow: hidden; font-weight: 500; }
+.viz-table.is-on { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+.viz-table__head {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0 8px;
+  margin: 0; padding: 7px 12px; background: var(--surface-2); border-bottom: 1px solid var(--line);
+}
+.viz-table__head b { font-size: 13px; }
+.viz .viz-table__head code { padding: 0; border: 0; background: none; font-size: 11.5px; color: var(--ink-mute); }
+.viz-table ul { direction: ltr; padding: 6px 0; }
+.viz-table li {
+  padding: 0 12px; text-align: left; color: var(--ink-soft);
+  font: 12.5px/1.8 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  transition: background .3s ease, color .3s ease;
+}
+.viz-table li.is-key::after { content: "key"; margin-left: 6px; padding: 0 4px; border: 1px solid var(--line); border-radius: 4px; font-size: 10px; color: var(--ink-mute); }
+.viz-table li.is-used { background: var(--accent-soft); color: var(--accent); font-weight: 700; }
+.viz .viz-sql { margin: 20px 0 0; }
+
+/* کاوش: ستون‌های افقی؛ روی منطقه بزنید تا شهرهایش بیایند */
+.viz-drill__crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0; font-size: 14px; font-weight: 800; }
+.viz-drill__up {
+  padding: 3px 12px; border-radius: 999px; cursor: pointer; font-weight: 800;
+  color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-line);
+}
+.viz-drill__up:disabled { padding-inline: 0; cursor: default; color: var(--ink); background: none; border-color: transparent; }
+.viz-drill__here:not(:empty)::before { content: "›"; margin-inline-end: 6px; color: var(--ink-mute); }
+.viz-drill__title { margin: 0 0 12px; font-size: 13.5px; font-weight: 700; color: var(--ink-soft); }
+.viz-drill__title span { font-weight: 500; color: var(--ink-mute); }
+.viz-drill__bars { display: grid; gap: 4px; }
+.viz-drill__row {
+  width: 100%; display: grid; grid-template-columns: 84px minmax(0, 1fr) 80px; align-items: center; gap: 12px;
+  padding: 6px 8px; border: 0; border-radius: 10px; background: none; color: var(--ink); text-align: start;
+  animation: fade-in .35s ease;
+}
+button.viz-drill__row { cursor: pointer; }
+button.viz-drill__row:hover { background: var(--accent-soft); }
+.viz-drill__name { font-size: 14px; font-weight: 700; }
+.viz-drill__track { height: 22px; }
+.viz-drill__track i {
+  display: block; height: 100%; width: calc(var(--v) * 100%); background: var(--series);
+  border-start-end-radius: 4px; border-end-end-radius: 4px; transition: width .6s var(--ease-out), background .2s ease;
+}
+button.viz-drill__row:hover .viz-drill__track i { background: var(--series-current); }
+.viz-drill__val { font-size: 14px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.viz-drill__val small { font-size: 12px; font-weight: 500; color: var(--ink-mute); }
+
+/* طیف خودکارسازی: انعطاف بالا می‌رود، پیش‌بینی‌پذیری پایین می‌آید */
+.viz-spec svg { display: block; width: 100%; height: auto; overflow: visible; }
+.viz-spec__grid line { stroke: var(--line-soft); stroke-width: 1; }
+.viz-spec__axis { font-size: 10px; font-weight: 700; fill: var(--ink-mute); }
+.viz-spec__lbl { font-size: 11px; font-weight: 800; fill: var(--ink-soft); }
+.viz-spec__line { fill: none; stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.viz-spec__line.viz-spec__flex { stroke: var(--accent); }
+.viz-spec__line.viz-spec__ctrl { stroke: var(--accent-2); stroke-dasharray: 7 6; }
+circle.viz-spec__flex { fill: var(--accent); stroke: var(--surface-solid); stroke-width: 2; }
+circle.viz-spec__ctrl { fill: var(--accent-2); stroke: var(--surface-solid); stroke-width: 2; }
+.viz-spec__mark { opacity: 0; transition: opacity .3s ease; }
+.viz-spec__mark.is-on { opacity: 1; }
+.viz-spec__mark line { stroke: var(--accent-line); stroke-width: 1.5; stroke-dasharray: 3 4; }
+.viz-spec__levels { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 6px 0 16px; }
+.viz-spec__levels button {
+  display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 6px; border-radius: 12px; cursor: pointer;
+  font-size: 13px; font-weight: 700; line-height: 1.6; color: var(--ink-soft);
+  background: var(--control); border: 1px solid var(--line);
+  transition: color .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+.viz-spec__levels button span {
+  display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%;
+  font-size: 12px; color: var(--ink-mute); background: var(--surface-2);
+}
+.viz-spec__levels button:hover { color: var(--ink); }
+.viz-spec__levels button[aria-pressed="true"] { color: var(--accent); border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+.viz-spec__levels button[aria-pressed="true"] span { color: var(--on-accent); background: var(--btn-bg); }
+
+/* حلقه‌ی ایجنت: فکر ← اقدام ← مشاهده، و گام‌های نمونه کنارش */
+.viz-loop__next { margin-inline-start: auto; }
+.viz-loop { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 24px; align-items: center; }
+.viz-loop__diagram { position: relative; aspect-ratio: 4 / 3; }
+.viz-loop__diagram > svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.viz-loop__arc { fill: none; stroke: var(--line); stroke-width: 2; marker-end: url(#loop-arr); transition: stroke .3s ease; }
+.viz-loop__arc.is-live { stroke: var(--accent); stroke-dasharray: 7 7; animation: wire-flow .9s linear infinite; marker-end: url(#loop-arr-on); }
+.viz-loop__head { fill: var(--line); }
+.viz-loop__head.is-on { fill: var(--accent); }
+.viz-loop__node { position: absolute; translate: -50% -50%; width: max-content; padding: 7px 12px; font-size: 13.5px; }
+.viz-loop__node > .ico { width: 18px; height: 18px; }
+.viz-loop__node.is-on { color: var(--accent); border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+.viz-loop__count {
+  position: absolute; left: 50%; top: 58%; translate: -50% -50%;
+  font-size: 12.5px; font-weight: 700; color: var(--ink-mute); white-space: nowrap;
+}
+.viz-loop__trace { display: grid; gap: 3px; }
+.viz-loop__trace li {
+  display: flex; align-items: flex-start; gap: 10px; padding: 5px 10px; border-radius: 10px;
+  font-size: 13.5px; line-height: 1.8; color: var(--ink-soft); border: 1px solid transparent;
+  transition: opacity .3s ease, background .3s ease, border-color .3s ease;
+}
+.viz-loop.is-ready .viz-loop__trace li:not(.is-on):not(.is-done) { opacity: .3; }
+.viz-loop__trace li.is-on { color: var(--ink); background: var(--accent-soft); border-color: var(--accent-line); }
+.viz-loop__chip {
+  flex: none; min-width: 54px; margin-top: 2px; padding: 0 8px; border-radius: 999px; text-align: center;
+  font-size: 11.5px; font-weight: 800; line-height: 1.9; color: var(--ink-mute);
+  background: var(--surface-2); border: 1px solid var(--line-soft);
+}
+.viz-loop__trace [data-phase="act"] .viz-loop__chip { color: var(--accent); border-color: var(--accent-line); }
+.viz-loop__trace [data-phase="goal"] .viz-loop__chip,
+.viz-loop__trace [data-phase="done"] .viz-loop__chip { color: var(--on-accent); background: var(--btn-bg); border-color: transparent; }
+.viz-loop__trace code { word-break: break-word; }
+
+/* اجزای ایجنت: مدل زبانی در میان، اجزا گردش */
+.viz-hub { aspect-ratio: 2 / 1; min-height: 340px; }
+.viz-hub .viz-int__node small { font-size: 11.5px; }
+
 /* بدون جاوااسکریپت: دکمه‌ها کاری نمی‌کنند و پنهان‌اند؛ همه‌ی صحنه‌های چت‌بات زیر هم دیده می‌شوند */
 html.no-js .seg, html.no-js .viz__replay, html.no-js .viz-range { display: none; }
 html.no-js .viz-flow__scene { display: flex; }
+html.no-js .viz-panel { display: block; }
+html.no-js .viz-panel + .viz-panel { margin-top: 8px; }
 
 /* گوشی: گره‌ها زیر هم و سیم‌ها عمودی */
 @media (max-width: 700px) {
@@ -1570,7 +1775,139 @@ html.no-js .viz-flow__scene { display: flex; }
   .viz-fc__labels span.is-minor { display: none; }
   .viz-cam text { font-size: 21px; }
   .viz-cam .cam-hud text { font-size: 18px; }
+  .viz-rag { --wire-dir: y; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 12px; row-gap: 30px; }
+  .viz-rag [data-node="docs"] { grid-area: 1 / 1; }
+  .viz-rag [data-node="ask"] { grid-area: 1 / 2; }
+  .viz-rag [data-node="chunk"] { grid-area: 2 / 1; }
+  .viz-rag [data-node="qemb"] { grid-area: 2 / 2; }
+  .viz-rag [data-node="embed"] { grid-area: 3 / 1; }
+  .viz-rag [data-node="db"] { grid-area: 4 / 1 / 5 / 3; }
+  .viz-rag [data-node="llm"] { grid-area: 5 / 1 / 6 / 3; }
+  .viz-rag [data-node="ans"] { grid-area: 6 / 1 / 7 / 3; }
+  .viz-rag [data-node="db"], .viz-rag [data-node="llm"], .viz-rag [data-node="ans"] { justify-self: center; width: 72%; }
+  .viz-vec { grid-template-columns: minmax(0, 1fr); }
+  .viz-vec__label { font-size: 21px; }
+  .viz-vec__pt { r: 9px; }
+  .viz-vec__q path { transform: scale(1.5); }
+  .viz-vec__q text { font-size: 19px; transform: translateY(-10px); }
+  .viz-ladder { height: 230px; gap: 6px; }
+  .viz-ladder__step { padding: 8px; }
+  .viz-ladder__step span { font-size: 11px; }
+  .viz-ladder__step b { font-size: 13.5px; }
+  .viz-chain { --wire-dir: y; grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  .viz-chain__node { flex-direction: row; justify-content: flex-start; padding: 10px 14px; text-align: start; }
+  .viz-star { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 12px; }
+  .viz-star [data-node="date"] { grid-area: 1 / 1; }
+  .viz-star [data-node="product"] { grid-area: 1 / 2; }
+  .viz-star [data-node="fact"] { grid-area: 2 / 1 / 3 / 3; justify-self: center; width: min(100%, 250px); }
+  .viz-star [data-node="customer"] { grid-area: 3 / 1; }
+  .viz-star [data-node="store"] { grid-area: 3 / 2; }
+  .viz-drill__row { grid-template-columns: 62px minmax(0, 1fr) 66px; gap: 8px; padding-inline: 4px; }
+  .viz-spec__axis { font-size: 19px; }
+  .viz-spec__lbl { font-size: 20px; }
+  .viz-spec__levels { gap: 4px; }
+  .viz-spec__levels button { padding: 6px 2px; font-size: 11.5px; }
+  .viz-loop { grid-template-columns: minmax(0, 1fr); }
+  .viz-loop__diagram { width: 100%; max-width: 360px; margin: 0 auto; }
+  .viz-loop.is-ready .viz-loop__trace li:not(.is-on):not(.is-prev) { display: none; }
+  .viz-hub { aspect-ratio: auto; min-height: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .viz-hub .wires { display: none; }
+  .viz-hub .viz-int__node, .viz-hub .viz-int__hub { position: static; translate: none; width: auto; white-space: normal; }
+  .viz-hub .viz-int__node > .ico { display: block; flex: none; }
+  .viz-hub .viz-int__hub { grid-column: 1 / -1; order: -1; justify-self: center; margin-bottom: 8px; }
 }
+
+/* ---------------- مقاله‌ها (articles.html و صفحه‌ی هر مقاله) ----------------
+   قاعده‌های متن فقط فرزندان مستقیم .article__body را می‌گیرند تا به درون شکل‌ها نرسند */
+
+.page > .article { width: min(860px, 100%); margin: 0 auto; padding-top: clamp(44px, 9vh, 96px); }
+.article .page-hero h1 { font-size: clamp(30px, 4.2vw, 50px); }
+.eyebrow a { color: inherit; text-decoration: none; }
+.eyebrow a:hover { text-decoration: underline; }
+.article__meta { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 20px; margin: 18px 0 0; font-size: 13.5px; color: var(--ink-mute); }
+.article__meta span { display: inline-flex; align-items: center; gap: 6px; }
+.article__meta .ico { width: 16px; height: 16px; color: var(--accent); }
+
+.toc { margin: clamp(30px, 5vh, 48px) 0 clamp(26px, 4vh, 40px); padding: 18px 22px; }
+.toc h2 { margin: 0 0 8px; font-size: 15px; font-weight: 800; }
+.toc ol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px 28px; padding-inline-start: 1.4em; list-style: persian; }
+.toc li { font-size: 14.5px; line-height: 1.95; }
+.toc li::marker { color: var(--accent); font-weight: 800; }
+.toc a { color: var(--ink-soft); text-decoration: none; }
+.toc a:hover { color: var(--accent); }
+
+.article__body > h2 { margin: 1.9em 0 .55em; font-size: clamp(21px, 2.1vw, 26px); scroll-margin-top: calc(var(--head-h) + 24px); }
+.article__body > h2:first-child { margin-top: 0; }
+.article__body > h3 { margin: 1.5em 0 .4em; font-size: 17.5px; }
+.article__body > p { margin: 0 0 1.1em; }
+.article__body > p, .article__body > ul > li, .article__body > ol > li { font-size: 16px; line-height: 2.05; color: var(--ink-soft); }
+.article__body > ul, .article__body > ol { display: grid; gap: 8px; margin: 0 0 1.2em; padding-inline-start: 1.3em; }
+.article__body > ul { list-style: disc; }
+.article__body > ol { list-style: persian; }
+.article__body > p b, .article__body > ul > li b, .article__body > ol > li b { color: var(--ink); }
+.article__body > p a, .article__body > ul > li a { color: var(--accent); font-weight: 700; }
+.article__body > .viz { margin: 28px 0 32px; }
+.article__body code {
+  direction: ltr; unicode-bidi: isolate; padding: 1px 6px; border-radius: 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .86em;
+  background: var(--surface-2); border: 1px solid var(--line-soft);
+}
+.article__body pre {
+  direction: ltr; text-align: left; overflow-x: auto; margin: 0 0 1.2em; padding: 14px 16px;
+  border-radius: 14px; background: var(--surface-2); border: 1px solid var(--line);
+  font: 13px/1.75 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--ink);
+}
+.article__body pre code { padding: 0; border: 0; background: none; font-size: inherit; }
+.article__body > .prompt { margin: 0 0 1.2em; padding: 14px 18px; border-radius: 14px; background: var(--surface-2); border-inline-start: 3px solid var(--accent); }
+.prompt p { margin: 0 0 .5em; font-size: 14.5px; line-height: 2; color: var(--ink-soft); }
+.prompt p:last-child { margin: 0; }
+.article__body > .callout {
+  margin: 1.6em 0 0; padding: 14px 18px; border-radius: 14px;
+  background: var(--accent-soft); border: 1px solid var(--accent-line); font-size: 15px;
+}
+.callout a { color: var(--accent); font-weight: 700; }
+.table-wrap { overflow-x: auto; margin: 0 0 1.2em; border-radius: 14px; border: 1px solid var(--line); background: var(--card-bg); }
+.table-wrap table { width: 100%; min-width: 520px; border-collapse: collapse; font-size: 14.5px; line-height: 1.8; }
+.table-wrap th, .table-wrap td { padding: 11px 14px; text-align: start; vertical-align: top; border-bottom: 1px solid var(--line-soft); }
+.table-wrap tr:last-child > * { border-bottom: 0; }
+.table-wrap thead th { font-weight: 800; color: var(--ink); background: var(--surface-2); }
+.table-wrap tbody th { font-weight: 700; color: var(--ink); white-space: nowrap; }
+.table-wrap td { color: var(--ink-soft); }
+.fit { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 0 0 1.2em; }
+.fit__col { padding: 16px 20px; border-radius: 16px; background: var(--card-bg); border: 1px solid var(--line); }
+.fit__col--yes { border-top: 3px solid var(--good); }
+.fit__col--no { border-top: 3px solid var(--bad); }
+.fit__col h3 { margin: 0 0 8px; font-size: 16px; }
+.fit__col ul { display: grid; gap: 6px; padding-inline-start: 1.1em; list-style: disc; }
+.fit__col li { font-size: 14.5px; line-height: 1.9; color: var(--ink-soft); }
+
+/* کارت مقاله‌ها */
+.post-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.post-cards--two { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 860px; margin: 0 auto; }
+.post-card { position: relative; display: flex; flex-direction: column; padding: 0; overflow: hidden; transition: border-color .25s ease, translate .3s var(--ease-out); }
+.post-card:hover { border-color: var(--accent-line); translate: 0 -3px; }
+.post-card:has(a:focus-visible) { outline: 2px solid var(--accent); outline-offset: 3px; }
+.post-card__art {
+  display: grid; place-items: center; height: 170px; overflow: hidden; border-bottom: 1px solid var(--line);
+  background: radial-gradient(120% 120% at 100% 0%, var(--accent-soft), transparent 70%), var(--surface-2);
+}
+.post-card__art svg { width: 190px; height: auto; }
+/* تصویر واقعی مقاله (img) کل کادر را پر می‌کند */
+.post-card__art img { width: 100%; height: 100%; object-fit: cover; }
+.pc-faint circle { fill: var(--ink-mute); opacity: .35; }
+.pc-line path { fill: none; stroke: var(--accent); stroke-width: 2; stroke-dasharray: 4 4; }
+.pc-on circle, .pc-on rect { fill: var(--accent); }
+.pc-star { fill: var(--accent-2); }
+.pc-base { stroke: var(--line); stroke-width: 2; }
+.post-card__body { flex: 1; display: flex; flex-direction: column; gap: 8px; padding: 18px 20px 20px; }
+.post-card h2, .post-card h3 { margin: 0; font-size: 19px; line-height: 1.6; }
+.post-card h2 a, .post-card h3 a { color: var(--ink); text-decoration: none; }
+.post-card h2 a::after, .post-card h3 a::after { content: ""; position: absolute; inset: 0; }
+.post-card a:focus-visible { outline: none; }
+.post-card p { margin: 0; font-size: 14px; line-height: 1.9; color: var(--ink-soft); }
+.post-card .post-card__tag { font-size: 12.5px; font-weight: 800; color: var(--accent); }
+.post-card .post-card__meta { display: inline-flex; align-items: center; gap: 6px; margin-top: auto; padding-top: 4px; font-size: 12.5px; color: var(--ink-mute); }
+.post-card__meta .ico { width: 15px; height: 15px; color: var(--accent); }
 
 /* ---------------- حریم خصوصی (privacy.html) ---------------- */
 
@@ -1610,6 +1947,9 @@ html.no-js .menu-btn, html.no-js .theme-btn, html.no-js .dots, html.no-js .pager
 
 @media (max-width: 1100px) {
   .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .post-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-foot__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .site-foot__brand { grid-column: 1 / -1; }
 }
 
 @media (max-width: 980px) {
@@ -1640,7 +1980,9 @@ html.no-js .menu-btn, html.no-js .theme-btn, html.no-js .dots, html.no-js .pager
   .features { grid-template-columns: minmax(0, 1fr); gap: 10px; margin-bottom: 20px; }
   .story, .consult, .split, .mission { grid-template-columns: minmax(0, 1fr); }
   .site-foot__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 20px; }
-  .site-foot__brand { grid-column: 1 / -1; }
+  .site-foot__brand, .site-foot__join { grid-column: 1 / -1; }
+  .post-cards, .post-cards--two { grid-template-columns: minmax(0, 1fr); max-width: 560px; margin-inline: auto; }
+  .toc ol, .fit { grid-template-columns: minmax(0, 1fr); }
   .mission { gap: 12px; }
   .faq__group { gap: 8px; }
   .assure { gap: 8px; }
